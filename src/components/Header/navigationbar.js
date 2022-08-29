@@ -168,8 +168,8 @@ const Navbar = () => {
     const [open, setOpen] = useState(false)
     const [auth, setAuth] = useState(false)
     const [displaySubItems, setDisplaySubItems] = useState(false)
-	const [title, setTitle] = useState('')
-	const [subMenuItems, setSubMenuItems] = useState([])
+	  const [title, setTitle] = useState('')
+	  const [subMenuItems, setSubMenuItems] = useState([])
 
     const ParentBoard = () =>{
       	return (
