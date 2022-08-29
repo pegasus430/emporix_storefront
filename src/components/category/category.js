@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import landing_bg from '../../assets/landing_bg.png'
 import intro from '../../assets/intro.png'
-import desk from '../../assets/products/desk.png'
-import seating from '../../assets/products/seating.png'
-import storage from '../../assets/products/storage.png'
-import printer from '../../assets/products/printer.png'
+import desk from '../../assets/category/desk.png'
+import seating from '../../assets/category/seating.png'
+import storage from '../../assets/category/storage.png'
+import printer from '../../assets/category/printer.png'
 import { PrinterIcon } from '@heroicons/react/solid'
-const EachProduct = (props) => {
+const EachCategory = (props) => {
     return (
         <div>
             <img src = {props.src} className="w-full h-[240px]" />
@@ -20,7 +20,7 @@ const EachProduct = (props) => {
     )
 }
 
-const Products = () => {
+const Category = () => {
 
   	return (
     	<div className = " bg-gradient-to-b from-[#5F8FAA] to-[#87ABBF] w-full h-[1752px] md:h-[682px]  text-white">
@@ -31,10 +31,10 @@ const Products = () => {
                 Browse our catalogue and find the right product for you
             </div>
             <div className='px-6 py-12 md:pt-8 md:py-24 grid grid-cols-1 md:grid-cols-4 md:gap-12 gap-y-16 md:px-16' >
-                <EachProduct src = {seating} title="Seating" content = "Tellus ornare at consequat ipsum,non lobortis" />
-                <EachProduct src = {desk} title="Desk and Workspaces" content = "Tellus ornare at consequat ipsum,non lobortis" />
-                <EachProduct src = {storage} title="Storage" content = "Tellus ornare at consequat ipsum,non lobortis" />
-                <EachProduct src = {printer} title="Printers, Ink and Toner" content = "Tellus ornare at consequat ipsum,non lobortis" />
+                <EachCategory src = {seating} title="Seating" content = "Tellus ornare at consequat ipsum,non lobortis" />
+                <EachCategory src = {desk} title="Desk and Workspaces" content = "Tellus ornare at consequat ipsum,non lobortis" />
+                <EachCategory src = {storage} title="Storage" content = "Tellus ornare at consequat ipsum,non lobortis" />
+                <EachCategory src = {printer} title="Printers, Ink and Toner" content = "Tellus ornare at consequat ipsum,non lobortis" />
             </div>
 
     	</div>
@@ -42,4 +42,4 @@ const Products = () => {
   	)
 }
 
-export default Products
+export default Category
