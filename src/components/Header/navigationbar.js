@@ -196,7 +196,7 @@ const Navbar = () => {
                 <div className='w-full'>
                       <ul >
                         {
-                            menu_list.map(item => <ParentMenu item = {item} />)
+                            menu_list.map((item , index) => <ParentMenu key={index} item = {item} />)
                         }
                       </ul>
                 </div>
@@ -272,7 +272,7 @@ const Navbar = () => {
 				<div className='pt-12 px-6'>
 					<ul>
 						{
-							subMenuItems.map(item => <SubMenu item = {item} />)
+							subMenuItems.map((item, index) => <SubMenu key={index} item = {item} />)
 						}
 					</ul>
 				</div>
@@ -362,7 +362,7 @@ const Navbar = () => {
             <div className={(!open) ? 'hidden' : ' text-black absolute top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto'}>
                <div className='h-10 justify-between flex' > 
                   <div className='flex'>
-                      <div><img src={logo}></img></div>
+                      <img src={logo} className="w-[37px]"></img>
                       <div className='px-4 text-[25px] font-medium items-center'><span>atom</span></div>
                   </div>
                   <div className='flex text-center pt-2' onClick={handleNavOpen}>
@@ -380,7 +380,7 @@ const Navbar = () => {
         </div>
 
         <div className='md:hidden flex text-white'>
-                <img src={logo}></img>
+                <img src={logo} ></img>
                 <p className='font-medium text-[20px] px-3 pt-1'>atom</p>
 
         </div>
