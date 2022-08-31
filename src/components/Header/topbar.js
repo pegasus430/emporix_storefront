@@ -171,7 +171,7 @@ const Topbar = () => {
 			<Navbar />
 			<div  className="hidden md:flex w-full lg:h-36 fixed z-50">
 				<div className='px-10 pt-[76px] w-full h-10 flex xl:px-24'>
-					<div><img src={logo}></img></div>
+					<div className='w-[37px]'><img src={logo}  className="w-[37px]"></img></div>
 					<div className='px-4 text-white text-[25px] font-medium items-center'><span>atom</span></div>
 					
 					<div className="dropdown flex pl-2 xl:pl-24 text-[16px]" >
@@ -269,7 +269,7 @@ const Topbar = () => {
 					</div> 
 					<div className='hidden lg:flex'>
 						<form className="nosubmit">
-							<input className="nosubmit" type="search" placeholder="Search product or category" />
+							<input className="nosubmit lg:w-[250px] xl:w-[360px]" type="search" placeholder="Search product or category" />
 						</form>
 					</div>
 				</div>
