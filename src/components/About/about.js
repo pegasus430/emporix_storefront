@@ -20,7 +20,7 @@ const About = () => {
 				</div>
 				
 			</div>
-			<img src={intro} className= " mt-[55px] hidden xl:block w-[530px] h-[818px] " />
+			<img src={intro} className= " mt-[60px] hidden xl:block w-[530px] h-[818px] " />
     	</div>
     
   	)
