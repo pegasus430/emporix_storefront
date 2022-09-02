@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {AiOutlineInstagram} from 'react-icons/ai'
-import facebook from '../../assets/facebook.png'
+import facebook from '../assets/facebook.png'
 
 const Mobile_footer = () => {
 	return (
@@ -30,8 +30,8 @@ const Mobile_footer = () => {
 
 const Dektop_footer = () => {
  return (
-	<div className='hidden  md:pt-24 w-[60%] mx-auto md:flex'>
-		<div>
+	<div className='hidden  md:pt-24 max-w-screen-xl mx-auto md:flex'>
+		<div className='mx-auto'>
 			<ul className='font-inter text-[16px] leading-[22px] text-white'>
 				<li className='text-[#FBB13C] font-bold '>About Us</li>
 				<li className=' font-light pt-4'>Who we are</li>
@@ -40,7 +40,7 @@ const Dektop_footer = () => {
 				
 			</ul>
 		</div>
-		<div className='pl-[11%]'>
+		<div className='mx-auto'>
 			<ul className='font-inter text-[16px] leading-[22px] text-white'>
 				<li className='text-[#FBB13C] font-bold '>Support</li>
 				<li className=' font-light pt-4'>Delivery</li>
@@ -50,7 +50,7 @@ const Dektop_footer = () => {
 				
 			</ul>
 		</div>
-		<div className='pl-[11%]'>
+		<div className='mx-auto'>
 			<ul className='font-inter text-[16px] leading-[22px] text-white'>
 				<li className='text-[#FBB13C] font-bold '>My Account</li>
 				<li className=' font-light pt-4'>Sign In</li>
@@ -60,7 +60,7 @@ const Dektop_footer = () => {
 				
 			</ul>
 		</div>
-		<div className='pl-[11%]'>
+		<div className='mx-auto'>
 			<ul className='font-inter text-[16px] leading-[22px] text-white'>
 				<li className='text-[#FBB13C] font-bold '>Contact</li>
 				<li className=' font-light pt-4'>Call Us: +44123645678</li>

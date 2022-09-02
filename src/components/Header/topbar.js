@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Navbar from './navigationbar'
 import logo from '../../assets/atom.png'
+import nav_bg from '../../assets/nav_bg.png'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import "./topbar.css"
 
@@ -163,11 +165,11 @@ const menu_list = [
 
 const Logo = () => {
 	return (
-		<>
+		<Link to={"/"} className="flex">
 			<div className='w-[37px]'><img src={logo}  className="w-[37px]" /></div>
 			<div className='px-4 text-white text-[25px] font-medium items-center'><span>atom</span></div>
 					
-		</>
+		</Link>
 	)
 }
 
@@ -175,7 +177,7 @@ const MegaNav = () => {
 	const [showMegaMenuContent, setShowMegaMenuContent] = useState(false)
 	const onShowMegaMenu = () => setShowMegaMenuContent(true)
 	return (
-		<div className="dropdown flex pl-2 xl:pl-24 text-[16px]" >
+		<div className="dropdown flex text-base" >
 			<button className="dropbtn flex pt-2 pr-2 md:pr-8 xl:pr-12 hover:text-[#FBB13C]" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
 				<div>Shop</div>
 				<ChevronDownIcon className="ml-2 mt-1 h-5 w-5" aria-hidden="true" />
@@ -271,29 +273,43 @@ const MegaNav = () => {
 	)
 }
 
-const TopNav = () => {
+const TopNav = ({title}) => {
+	const nav_title_condition = title !="" && title != "home" ? true : false
+
 	return (
-		<div  className="hidden md:flex w-full lg:h-36 absolute z-10">
-			<div className='px-10 pt-[76px] w-full  flex xl:px-24 '>
-				<Logo />
-				<MegaNav />
+		<div  className= { title == 'home' ?  "hidden md:flex w-full md:h-36 absolute z-10" : 
+				title == ""	? "": "hidden md:flex w-full md:h-60 absolute z-10 nav-background-title"
+		}>
+			<div className='px-10 pt-[76px] w-full  flex xl:px-24 justify-between'>
+							
+					<Logo />
+
+					<MegaNav />
+				
 				<div className='hidden lg:flex'>
 					<form className="nosubmit">
 						<input className="nosubmit lg:w-[250px] xl:w-[360px]" type="search" placeholder="Search product or category" />
 					</form>
 				</div>
 			</div>
+			{
+				nav_title_condition && (
+					<div className=' md:absolute mt-[176px] ml-24 text-white font-inter font-bold text-[32px]'>
+						{title}
+					</div>
+				)
+			}
 		</div>
 	)
 }
 
-const Topbar = () => {
-  	
+const Topbar = ({title}) => {
+	
   	return (
 
 		<div className=''>
 			<Navbar />
-			<TopNav />
+			<TopNav title = {title} />
 		</div>
        
 

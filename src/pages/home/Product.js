@@ -32,7 +32,7 @@ const EachProduct = (props) => {
                 <div className='text-left text-[12px] leading-[12px] text-[#ACAEB2]'>
                     {props.category}
                 </div>
-                <div className='mt-2 text-left w-[240px] text-base font-bold'> 
+                <div className='mt-2 text-left max-w-[240px] text-base font-bold'> 
                     {props.name}
                 </div>
             </div>
@@ -134,7 +134,7 @@ const Product = () => {
             <ProductTitle auth =  {auth} />
             
             {/* for mobile panel */}
-            <div className='pt-12 md:hidden px-6 w-full  text-black'>
+            <div className='pt-12 md:hidden px-6 w-full  text-black max-w-md mx-auto'>
                 
                 <Slider className="slider-wrapper">
                     {products.map((item, index) => (
@@ -190,7 +190,7 @@ const Product = () => {
             </div>
 
             {/* for desktop panel */}
-            <div className='hidden md:pt-9  md:px-[152px] w-full md:h-[456px] md:grid md:grid-cols-4 md:gap-x-6 text-black'>
+            <div className='hidden md:pt-9 max-w-screen-2xl mx-auto md:px-[5%] lg:px-[10%] w-full md:h-[456px] md:grid md:grid-cols-4 md:gap-x-6 text-black'>
                 {
                     products.map((item, index) => (
                             <EachProduct key={index} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}

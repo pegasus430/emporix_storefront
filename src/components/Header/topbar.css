@@ -129,3 +129,8 @@
 
     background-color: #87ABBF;
   }
+
+  .nav-background-title {
+    background: url('../../assets/nav_bg.png') no-repeat;
+    background-size: 100% 100%;
+  }
