@@ -74,6 +74,9 @@ const ProductPage = () =>  {
 
     return (
         <div className='md:pt-60 pt-20 px-4 md:pl-24'>
+            <div className={`overlay ${showSideFilterContnet ? 'visible' : '' }`} onClick={handleSideFilterContent} />
+
+            
             <SideFilterContent isOpen={showSideFilterContnet} toggleSidebar={handleSideFilterContent} />
             <div className='md:pt-24 pt-12 max-w-screen-xl'>
                     <FilterButton filtercount={4} onClick={() => {  setShowFilterContentForMobile(true)}} />

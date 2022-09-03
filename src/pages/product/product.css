@@ -48,9 +48,10 @@
   position: absolute;
   top: 0px;
   left: -1253px;
-  
   width: 360px;
-  transition: left 0.3s ease-in-out;
+  padding: 48px;
+  height: 1776px;
+  transition: left 0.2s ease-in-out;
   background-color: white;
   z-index: 30;
   
@@ -66,4 +67,22 @@
 
 .sidebarFilter.open {
   left: 0;
+
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  /* transition: opacity 0.4s; */
+}
+
+.overlay.visible {
+  right: 0;
+  bottom: 0;
+  opacity: 1;
+  transition: opacity 0.4s;
+  z-index: 30;
 }

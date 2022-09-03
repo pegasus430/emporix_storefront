@@ -73,10 +73,10 @@ const RatingFilterItem = ({rating, total}) => {
                 <input type='checkbox'  />
 
                 <label className='pl-2'> 
-                        <ReactStars size={16} value = {rating} color2 = {'#FBB13C'}/>
+                    <ReactStars size={30} value = {rating} color2 = {'#FBB13C'} edit = {false} />
                 </label>
             </div>
-            <div className='font-inter font-medium text-base text-[#D7DADE]'>
+            <div className='font-inter font-medium text-base text-[#D7DADE] pt-4'>
                 {total}
             </div>
             
