@@ -192,31 +192,31 @@ const Navbar = () => {
                             <div className='pt-3'>LOGIN | REGISTER</div>
                         </div>
                     }
-                </div>
-                <div className='w-full'>
+              </div>
+              <div className='w-full'>
                       <ul >
                         {
                             menu_list.map((item , index) => <ParentMenu key={index} item = {item} />)
                         }
                       </ul>
-                </div>
-				<div className='w-full h-[59px] border-y flex justify-between items-center mt-6 font-inter text-base'>
-					Language
-					<select className='text-[#214559] appearance-none'>
-						<option value = "Engish">English</option>
-						<option value = "Italian">Italian</option>
-						<option value = "France">France</option>
-                    
-                	</select>
+              </div>
+              <div className='w-full h-[59px] border-y flex justify-between items-center mt-6 font-inter text-base'>
+                Language
+                <select className='text-[#214559] appearance-none'>
+                  <option value = "Engish">English</option>
+                  <option value = "Italian">Italian</option>
+                  <option value = "France">France</option>
+                          
+                </select>
 
-				</div>
-				<div className='w-full h-[59px] border-y flex justify-between items-center'>
-						Currency
-						<select className='text-[#214559] appearance-none'>
-							<option value = "Euro">&euro;</option>
-							<option value = "Dollar">&#36;</option>
-                		</select>
-				</div>
+              </div>
+              <div className='w-full h-[59px] border-y flex justify-between items-center'>
+                  Currency
+                  <select className='text-[#214559] appearance-none'>
+                    <option value = "Euro">&euro;</option>
+                    <option value = "Dollar">&#36;</option>
+                  </select>
+              </div>
         	</>   
       )
     }

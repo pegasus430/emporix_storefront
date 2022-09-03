@@ -1,0 +1,69 @@
+
+  
+  .accordion {
+    list-style: none;
+  }
+  
+  .accordion_item {
+    border-bottom: 1px solid #DFE1E5;
+  }
+  
+  .button {
+    font-size: 16px;
+   
+    color: black;
+    text-align: left;
+    font-weight: 500;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0px;
+    cursor: pointer;
+    border: none;
+  }
+  
+
+  
+  .content {
+    background-color: white;
+    
+  }
+  
+  /* activate toggle */
+
+  .content_wrapper {
+    height: 0;
+    overflow: hidden;
+    transition: height ease 0.2s;
+  }
+  /* .answer_wrapper.open {
+    height: auto;
+  } */
+
+
+  .sidebarFilter {
+    
+  position: absolute;
+  top: 0px;
+  left: -1253px;
+  
+  width: 360px;
+  transition: left 0.3s ease-in-out;
+  background-color: white;
+  z-index: 30;
+  
+}
+.sidebar-toggle {
+  position: absolute;
+  top: 20%;
+  right: -60px;
+  height: 60px;
+  width: 60px;
+  
+}
+
+.sidebarFilter.open {
+  left: 0;
+}
