@@ -1,48 +1,157 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import adjust from '../../assets/adjust.png'
-import { AiOutlineClose } from 'react-icons/ai'
-import MobileFilterpanel from './MobileFilterPanel'
-import SideFilterContent from './SideFilterContent'
-import './product.css'
+import React, { useState }  from 'react'
+import { Link }             from 'react-router-dom'
+import adjust               from '../../assets/adjust.png'
+import { AiOutlineClose }   from 'react-icons/ai'
+import MobileFilterpanel    from './MobileFilterPanel'
+import SideFilterContent    from './SideFilterContent'
+import hp_laser_printer     from "../../assets/products/hp_laser_printer.png"
+import comfort_chair        from "../../assets/products/comfort_chair.png"
+import office_chair         from "../../assets/products/office_chair.png"
+import pc_stand             from "../../assets/products/pc_stand.png"
+import stapler              from "../../assets/products/stapler.png"
 
-const filterItem = [
+import './product.css'
+const categoryMenuList = [
     {
-        'title' : 'Arm Type',
+        'title': 'Office Chairs',
         'items' : [
-            'Adjustable Arms',
-            'Fixed',
-            'No Arms',
-            'With Arms',
-        ]
-    },
+            {
+                "title" : "Executive Office Chairs" ,
+                "items" : [], 
+                'total' : 23
+            },
+            {
+                "title" : "Computer Office Chairs" ,
+                "items" : [], 
+                'total' : 23
+            },
+            {
+                "title" : "Mesh Office Chairs" ,
+                "items" : [], 
+                'total' : 23
+            },
+            {
+                "title" : "Draughtsman Chairs" ,
+                "items" : [], 
+                'total' : 23
+            },
+        ],
+        'toal' : 280
+
+    } ,
     {
-        'title' : 'Brand',
+        'title': 'Meeting Chairs',
         'items' : [
-            'Equipe',
-            'Jysk',
-            'Jenson',
-            'Techly',
-            'Hermann Miller',
-            'Botth'
-        ]
-    },
+        {
+                "title" : "Meeting & Boardroom Chairs" ,
+                "items" : [], 
+                'total' : 23
+        },
+        {
+                "title" : "Occasional Seating" ,
+                "items" : [], 
+                'total' : 23
+        },
+        {
+                "title" : "Stacking Chairs" ,
+                "items" : [], 
+                'total' : 23
+        },
+        {
+                "title" : "Waiting Room Chairs" ,
+                "items" : [], 
+                'total' : 23
+        },
+        ],
+        'total' : 242
+    } ,
     {
-        'title' : 'Material',
+        'title': 'Ergonomic Chairs',
         'items' : [
-            'Leather',
-            'Fabric',
-            'Faux Leather',
-            'Mesh',
-        ]
-    },
+            {
+                "title" : "Bariatric Office Chairs" ,
+                "items" : [],
+                'total' : 25
+            },
+            {
+                "title" : "Posture Chairs" ,
+                "items" : [],
+                'total' : 25
+            },
+            {
+                "title" : "Kneeling Chairs" ,
+                "items" : [],
+                'total' : 25
+            },
+        ],
+        'total' : 343
+
+    } ,
     {
-        'title' : 'Back Height',
-        'items' : [
-            'High',
-            'Medium',
-        ]
-    },
+     'title': 'Armchairs and Stools',
+     'items' : [
+         {
+           "title" : "Armchairs" ,
+           "items" : [],
+           'total' : 25
+         },
+         {
+           "title" : "Stools" ,
+           "items" : [],
+           'total' : 25
+         },
+         {
+           "title" : "Industrial Stools" ,
+           "items" : [],
+            'total' : 25
+         },
+     ],
+     'total' : 75
+    } ,
+ ]
+
+ const category_products = [
+    {
+        stock : "Low", 
+        rating : 4, 
+        count : 8 ,
+        src : hp_laser_printer ,
+        category : "TY2-B#M74A",
+        name : "HP LaserJet 1*500-sheet Paper Feeder and Cabinet",
+        price : "341.89",
+        list_price : "389.50"
+    } ,
+   
+    {
+        stock : "In", 
+        rating : 4, 
+        count : 8 ,
+        src : pc_stand ,
+        category : "BB2-B3M987",
+        name : "RP9 Retail Compact Stand Silver PC Multimedia stand",
+        price : "84.89",
+        list_price : "94.10"
+    } ,
+    {
+        stock : "In", 
+        rating : 4, 
+        count : 8 ,
+        src : stapler ,
+        category : "BB2-B3M987",
+        name : "Zenith Plier stapler 548/E Silver",
+        price : "27.50",
+        list_price : "34.99"
+    } ,
+    {
+        stock : "Low", 
+        rating : 4, 
+        count : 8 ,
+        src : comfort_chair ,
+        category : "TY2-B#M74A",
+        name : "Comfort Ergo 2-Lever Operator Chairs",
+        price : "53.59",
+        list_price : "59.99"
+    } ,
 ]
 
 const FilterButton = (props) => {
@@ -73,12 +182,12 @@ const ProductPage = () =>  {
     }
 
     return (
-        <div className='md:pt-60 pt-20 px-4 md:pl-24'>
+        <div className='md:pt-60 pt-20 px-4 md:px-24'>
             <div className={`overlay ${showSideFilterContnet ? 'visible' : '' }`} onClick={handleSideFilterContent} />
 
             
             <SideFilterContent isOpen={showSideFilterContnet} toggleSidebar={handleSideFilterContent} />
-            <div className='md:pt-24 pt-12 max-w-screen-xl'>
+            <div className='md:pt-24 pt-12 max-w-screen-xl mx-auto'>
                     <FilterButton filtercount={4} onClick={() => {  setShowFilterContentForMobile(true)}} />
 
                     {
