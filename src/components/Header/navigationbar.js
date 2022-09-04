@@ -17,76 +17,76 @@ const menu_list = [
               'title': 'Office Chairs',
               'items' : [
                 {
-					"title" : "Executive Office Chairs" ,
-					"items" : []
-				},
-				{
-					"title" : "Computer Office Chairs" ,
-					"items" : []
-				},
-				{
-					"title" : "Mesh Office Chairs" ,
-					"items" : []
-				},
-				{
-					"title" : "Draughtsman Chairs" ,
-					"items" : []
-				},
+                  "title" : "Executive Office Chairs" ,
+                  "items" : []
+                },
+                {
+                  "title" : "Computer Office Chairs" ,
+                  "items" : []
+                },
+                {
+                  "title" : "Mesh Office Chairs" ,
+                  "items" : []
+                },
+                {
+                  "title" : "Draughtsman Chairs" ,
+                  "items" : []
+                },
               ],
              } ,
              {
               'title': 'Meeting Chairs',
               'items' : [
-				{
-					"title" : "Meeting & Boardroom Chairs" ,
-					"items" : []
-				},
-				{
-					"title" : "Occasional Seating" ,
-					"items" : []
-				},
-				{
-					"title" : "Stacking Chairs" ,
-					"items" : []
-				},
-				{
-					"title" : "Waiting Room Chairs" ,
-					"items" : []
-				},
+                {
+                  "title" : "Meeting & Boardroom Chairs" ,
+                  "items" : []
+                },
+                {
+                  "title" : "Occasional Seating" ,
+                  "items" : []
+                },
+                {
+                  "title" : "Stacking Chairs" ,
+                  "items" : []
+                },
+                {
+                  "title" : "Waiting Room Chairs" ,
+                  "items" : []
+                },
               ],
              } ,
              {
               'title': 'Ergonomic Chairs',
               'items' : [
-				{
-					"title" : "Bariatric Office Chairs" ,
-					"items" : []
-				},
-				{
-					"title" : "Posture Chairs" ,
-					"items" : []
-				},
-				{
-					"title" : "Kneeling Chairs" ,
-					"items" : []
-				},
+                  {
+                    "title" : "Bariatric Office Chairs" ,
+                    "items" : []
+                  },
+                  {
+                    "title" : "Posture Chairs" ,
+                    "items" : []
+                  },
+                  {
+                    "title" : "Kneeling Chairs" ,
+                    "items" : []
+                  },
               ],
              } ,
              {
               'title': 'Armchairs and Stools',
               'items' : [
-				{
-					"title" : "Armchairs" ,
-					"items" : []
-				},
-				{
-					"title" : "Stools" ,
-					"items" : []
-				},
-				{
-					"title" : "Industrial Stools" ,
-					"items" : []
-				},
+                  {
+                    "title" : "Armchairs" ,
+                    "items" : []
+                  },
+                  {
+                    "title" : "Stools" ,
+                    "items" : []
+                  },
+                  {
+                    "title" : "Industrial Stools" ,
+                    "items" : []
+                  },
               ],
              } ,
           ]
