@@ -229,7 +229,7 @@ const MobileFilterPanel= (props) => {
                         
                     <div className='text-2xl leading-6 font-semibold items-center'>Filters</div>
                     
-                    <div className='flex text-center' onClick={props.onClick}>
+                    <div className='flex text-center' onClick={props.closeNav}>
                         <span className = "pr-4">Close</span>              
                         <AiOutlineClose  size={25}/>
                     </div>

@@ -1,12 +1,10 @@
 import React, { useState }  from 'react'
 import { Link }             from 'react-router-dom'
 import adjust               from '../../assets/adjust.png'
-import { AiOutlineClose }   from 'react-icons/ai'
 import MobileFilterpanel    from './MobileFilterPanel'
 import SideFilterContent    from './SideFilterContent'
 import hp_laser_printer     from "../../assets/products/hp_laser_printer.png"
 import comfort_chair        from "../../assets/products/comfort_chair.png"
-import office_chair         from "../../assets/products/office_chair.png"
 import pc_stand             from "../../assets/products/pc_stand.png"
 import stapler              from "../../assets/products/stapler.png"
 
@@ -171,13 +169,20 @@ const ProductPage = () =>  {
 
     const [showFilterContentForMobile, setShowFilterContentForMobile] = useState(false)
     const [showSideFilterContnet, setShowSideFilterContent] = useState(false)
+
+    const [filterItems, setFilterItems] = useState([])
+
+    const setFilterItemFunc = data => {
+        console.log("data" ,data)
+        setFilterItems(data)
+    };
     
     const handleMobileFilterContentClose = () => {
         setShowFilterContentForMobile(false)
     }
 
     const handleSideFilterContent = () => {
-        console.log("clicked")
+        
         setShowSideFilterContent(!showSideFilterContnet)
     }
 
@@ -186,13 +191,17 @@ const ProductPage = () =>  {
             <div className={`overlay ${showSideFilterContnet ? 'visible' : '' }`} onClick={handleSideFilterContent} />
 
             
-            <SideFilterContent isOpen={showSideFilterContnet} toggleSidebar={handleSideFilterContent} />
+            <SideFilterContent 
+                isOpen={showSideFilterContnet} 
+                toggleSidebar={handleSideFilterContent} 
+                setFilterItemFunc = {setFilterItemFunc}
+            />
             <div className='md:pt-24 pt-12 max-w-screen-xl mx-auto'>
                     <FilterButton filtercount={4} onClick={() => {  setShowFilterContentForMobile(true)}} />
 
                     {
                         showFilterContentForMobile && (
-                            <MobileFilterpanel onClick={handleMobileFilterContentClose} />
+                            <MobileFilterpanel closeNav ={handleMobileFilterContentClose} />
                         )
                     }
                 <button className='hidden md:block' onClick={handleSideFilterContent}>

@@ -65,7 +65,7 @@ const ratingFilterList = [
     }
 ]
 
-const FilterItem = ({item}) => {
+const FilterItem = ({item , handleItem}) => {
 
     const title = item.title
     const selectItems = item.items
@@ -75,7 +75,7 @@ const FilterItem = ({item}) => {
             <div className='font-inter font-medium pt-4 pb-6'> {item.title} </div>
             {
                 selectItems.map((item, index) => 
-                    <SelectionFilterItem  title = {item} key = {index} />
+                    <SelectionFilterItem category = {title} title = {item} key = {index} handleItem = {handleItem} />
                 )
             }
 
@@ -83,12 +83,18 @@ const FilterItem = ({item}) => {
     )
 }
 
-const SelectionFilterItem = ({title}) => {
+const SelectionFilterItem = ({category , title , handleItem}) => {
   
+    const handleOnChange = (e) => {
+        const val = e.target.value;
+        const item = {'category' : category , 'val' : val }
+        // console.log("selected item", item)
+        handleItem(item)
+    }
     return (
         <div className='flex justify-between pb-4'>
             <div>
-                <input type="checkbox" name= {title} value= {title} />
+                <input type="checkbox" name= {title} value= {title} onChange = {handleOnChange} />
                 <label > {title}</label>
             </div>
             <div className='text-[#D7DADE] pr-2'>
@@ -170,7 +176,23 @@ const RatingFilter = () => {
 
 const SideFilterContent = (props) => {
     
-    console.log(props)
+    const [filterItems, setFilterItems] = useState([])
+
+    const handleItem = (newItem) => {
+
+        if(!filterItems.some(item => item.val == newItem.val)){
+            console.log("not included")
+            setFilterItems(prev => [...prev, newItem])
+        }
+        else{
+            console.log("included")
+            setFilterItems(filterItems.filter((item) => { return item.val != newItem.val}))
+        }
+ 
+    }
+
+    
+    
     const sidebarClass = props.isOpen ? "sidebarFilter open " : 'sidebarFilter'
     return (
         <div className={sidebarClass}>
@@ -180,7 +202,7 @@ const SideFilterContent = (props) => {
             <div className='pt-12'>
                 {
                     filterList.map((item, index) =>
-                        <FilterItem key = {index} item = {item}  />
+                        <FilterItem key = {index} item = {item} handleItem = {handleItem} />
                     )
                 }
                 <PriceRangeFilter />
@@ -188,7 +210,7 @@ const SideFilterContent = (props) => {
             </div>
 
             <div className='mt-12 font-inter font-bold'>
-                <div className="w-full h-12 bg-[#214559] text-white  flex items-center ">
+                <div className="w-full h-12 bg-[#214559] text-white  flex items-center " onClick = { () => {props.setFilterItemFunc(filterItems); props.toggleSidebar()}}>
                         <span className='text-center w-full'>DONE </span>
                 </div>
                 <div className="w-full h-12 bg-[#EFF0F2] text-white  flex items-center mt-6">
