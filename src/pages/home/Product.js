@@ -4,7 +4,6 @@ import ReactStars from 'react-stars'
 import pen from "../../assets/products/pencil.png"
 import hp_laser_printer from "../../assets/products/hp_laser_printer.png"
 import comfort_chair from "../../assets/products/comfort_chair.png"
-import office_chair from "../../assets/products/office_chair.png"
 import pc_stand from "../../assets/products/pc_stand.png"
 import stapler from "../../assets/products/stapler.png"
 
