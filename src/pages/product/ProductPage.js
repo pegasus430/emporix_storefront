@@ -7,12 +7,18 @@ import hp_laser_printer     from "../../assets/products/hp_laser_printer.png"
 import comfort_chair        from "../../assets/products/comfort_chair.png"
 import pc_stand             from "../../assets/products/pc_stand.png"
 import stapler              from "../../assets/products/stapler.png"
+import ProductList          from './ProductList'
 
 import './product.css'
 const categoryMenuList = [
     {
         'title': 'Office Chairs',
         'items' : [
+            {
+                "title" : "All" ,
+                "items" : [], 
+                'total' : 280
+            },
             {
                 "title" : "Executive Office Chairs" ,
                 "items" : [], 
@@ -154,7 +160,7 @@ const categoryMenuList = [
 
 const FilterButton = (props) => {
     return (
-        <div className="md:hidden w-[327px] h-12 mx-auto bg-[#214559] text-white flex items-center" onClick={props.onClick}>
+        <div className="lg:hidden w-[327px] mb-12 h-12 mx-auto bg-[#214559] text-white flex items-center" onClick={props.onClick}>
             <div className='mx-auto flex'>
                 <img src={adjust} className="w-4 h-4 mt-1" />
                 <span className='px-4'>Filters</span>
@@ -187,7 +193,7 @@ const ProductPage = () =>  {
     }
 
     return (
-        <div className='md:pt-60 pt-20 px-4 md:px-24'>
+        <div className='md:pt-60 pt-20 px-4 md:px-24 pb-12'>
             <div className={`overlay ${showSideFilterContnet ? 'visible' : '' }`} onClick={handleSideFilterContent} />
 
             
@@ -204,10 +210,7 @@ const ProductPage = () =>  {
                             <MobileFilterpanel closeNav ={handleMobileFilterContentClose} />
                         )
                     }
-                <button className='hidden md:block' onClick={handleSideFilterContent}>
-                    fitler
-                </button>
-                
+                <ProductList handleSideFilterContent={handleSideFilterContent} categoryMenuList = {categoryMenuList} filterItems = {filterItems} />
 
             </div>
         </div>
