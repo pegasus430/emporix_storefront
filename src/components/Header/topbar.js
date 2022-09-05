@@ -232,8 +232,8 @@ const MegaNav = () => {
 						<div>
 							<div className='pl-[72px] pt-[72px]'>
 								<ul className=' text-black text-base'>
-									<li className='pb-4 hover:text-[#FBB13C] font-bold'>Office Charis</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Executive Office Charis</li>
+									<li className='pb-4 hover:text-[#FBB13C] font-bold'>Office Chairs</li>
+									<li className='pb-4 hover:text-[#FBB13C]'>Executive Office Chairs</li>
 									<li className='pb-4 hover:text-[#FBB13C]'>Computer Office Chairs</li>
 									<li className='pb-4 hover:text-[#FBB13C]'>Mesh Office Chairs</li>
 									<li className='pb-4 hover:text-[#FBB13C]'>Draughtsman Chairs</li>
@@ -243,8 +243,8 @@ const MegaNav = () => {
 						<div>
 							<div className='pl-[72px] pt-[72px]'>
 								<ul className=' text-black text-base'>
-									<li className='pb-4 hover:text-[#FBB13C] font-bold'>Metting Charis</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Metting &#38; Boardroom Charis</li>
+									<li className='pb-4 hover:text-[#FBB13C] font-bold'>Meeting Chairs</li>
+									<li className='pb-4 hover:text-[#FBB13C]'>Metting &#38; Boardroom Chairs</li>
 									<li className='pb-4 hover:text-[#FBB13C]'>Occasional Seating</li>
 									<li className='pb-4 hover:text-[#FBB13C]'>Stacking Chairs</li>
 									<li className='pb-4 hover:text-[#FBB13C]'>Waiting Room chairs</li>

@@ -370,7 +370,7 @@ const ProductListViewSettingBar = ({changeDisplayType, product_list_count, produ
                             <div className="hidden md:block">
                                 Sort by:&nbsp;
                                 <select className='bg-[white] font-bold' >
-                                    <option value = "">Price from low to hight</option>
+                                    <option value = "">Price from low to high</option>
                                     <option value = ""></option>
                                     <option value = ""></option>
                                 </select>
