@@ -193,9 +193,16 @@ const ProductPage = () =>  {
     }
 
     return (
+        <>
+        {
+                        showFilterContentForMobile && (
+                            <MobileFilterpanel closeNav ={handleMobileFilterContentClose} />
+                        )
+        }
+        
         <div className='md:pt-60 pt-20 px-4 md:px-24 pb-12'>
             <div className={`overlay ${showSideFilterContnet ? 'visible' : '' }`} onClick={handleSideFilterContent} />
-
+            
             
             <SideFilterContent 
                 isOpen={showSideFilterContnet} 
@@ -205,15 +212,12 @@ const ProductPage = () =>  {
             <div className='md:pt-24 pt-12 max-w-screen-xl mx-auto'>
                     <FilterButton filtercount={4} onClick={() => {  setShowFilterContentForMobile(true)}} />
 
-                    {
-                        showFilterContentForMobile && (
-                            <MobileFilterpanel closeNav ={handleMobileFilterContentClose} />
-                        )
-                    }
+                    
                 <ProductList handleSideFilterContent={handleSideFilterContent} categoryMenuList = {categoryMenuList} filterItems = {filterItems} />
 
             </div>
         </div>
+        </>
     )
 }
 

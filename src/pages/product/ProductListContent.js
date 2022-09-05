@@ -6,7 +6,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 import { HiOutlineArrowLeft, HiOutlineArrowRight} from 'react-icons/hi'
 import ReactStars from 'react-stars'
 import pen from "../../assets/products/pencil.png"
-import QtyPicker from 'react-quantity-picker'
+import Quantity from "../../components/QuantitySelector/quantity"
 
 const products = [
     {
@@ -303,17 +303,15 @@ const EachProductRow = (props) => {
                     }
                 </div>
                 
-                <div className={props.stock == "Low" ? "text-[#FFA800]  font-inter font-bold text-xs pt-[90px] float-right " : props.stock == "In" ? "text-[#4BCB67] font-inter font-bold text-xs mt-[90px] float-right " : "text-[#F30303] font-inter font-bold text-xs mt-[90px] float-right "}>
+                <div className={props.stock == "Low" ? "text-[#FFA800]  font-inter font-bold text-xs lg:pt-[90px] float-right " : props.stock == "In" ? "text-[#4BCB67] font-inter font-bold text-xs mt-[90px] float-right " : "text-[#F30303] font-inter font-bold text-xs mt-[90px] float-right "}>
                     {props.stock} Stock
                 </div>
                
                 
 
-                <div className="mt-32 flex">
-                    <div className="w-[100px]">
-                        <QtyPicker value = { 1 }
-                             
-                        />
+                <div className="mt-6 lg:flex w-full float-right">
+                    <div >
+                      <Quantity />
                     </div>
                     <div className="ml-6 h-10 w-40 bg-[#214559] text-white flex items-center" >
                         <div className='mx-auto flex'>
@@ -510,7 +508,7 @@ const ProductListItems = ({auth, displayType, product_list_count, pageNumber, co
     }
     return (
         <>
-            <div className="hidden lg:block">{itemArr}</div>
+            <div className={displayType==true? "hidden lg:block": ""} >{itemArr}</div>
             <div className="lg:hidden">{ItemArrOnMobile}</div>
         </>
     )
