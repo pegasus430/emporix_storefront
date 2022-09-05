@@ -65,15 +65,16 @@
 
   .sidebarFilter {
     
-  position: absolute;
+  position: fixed;
+  overflow-y: scroll;
   top: 0px;
   left: -1253px;
   width: 360px;
   padding: 48px;
-  height: 1776px;
+  height: 100%;
   transition: left 0.2s ease-in-out;
   background-color: white;
-  z-index: 30;
+  z-index: 50;
   
 }
 .sidebar-toggle {

@@ -223,7 +223,7 @@ const RatingFilter = () => {
 const MobileFilterPanel= (props) => {
 
     return (
-            <div className='lg:hidden min-w-[375px] text-black absolute top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto z-50' >
+            <div className='lg:hidden min-w-[375px] text-black fixed top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto z-50' >
                 <div className='justify-between flex pb-12 border-b' > 
                     
                         
