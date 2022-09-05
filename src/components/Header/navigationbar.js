@@ -166,7 +166,7 @@ const menu_list = [
 
 const Navbar = () => {
     const [open, setOpen] = useState(false)
-    const [auth, setAuth] = useState(false)
+    const [auth, setAuth] = useState(true)
     const [displaySubItems, setDisplaySubItems] = useState(false)
 	  const [title, setTitle] = useState('')
 	  const [subMenuItems, setSubMenuItems] = useState([])
