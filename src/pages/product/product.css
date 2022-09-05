@@ -7,10 +7,11 @@
   .accordion_item {
     border-bottom: 1px solid #DFE1E5;
   }
+
+  
   
   .button {
     font-size: 16px;
-   
     color: black;
     text-align: left;
     font-weight: 500;
@@ -22,6 +23,25 @@
     padding: 24px 0px;
     cursor: pointer;
     border: none;
+  }
+
+  .category_pan {
+    font-size: 16px;
+    color: black;
+    text-align: left;
+    font-weight: 700;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0px;
+    cursor: pointer;
+    border: none;
+  }
+
+  .active .category_pan {
+    color: #377395
   }
   
 
