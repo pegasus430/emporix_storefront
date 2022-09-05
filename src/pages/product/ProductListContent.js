@@ -206,15 +206,15 @@ const EachProduct = (props) => {
                 </div>
             </div>
 
-            <div className='w-full block float-right lg:hidden'>
-                <div className='w-full flex h-5  float-right'>
+            <div className=' block float-right lg:hidden'>
+                <div className=' flex h-5  float-right'>
                     <ReactStars size={16} value = {props.rating} color2 = {'#FBB13C'}/>
                     ({props.total_count})
-                </div>
+                </div> 
+                <br />
                 <div className={props.stock == "Low" ? "text-[#FFA800] font-inter font-bold text-xs pt-[6px] float-right " : props.stock == "In" ? "text-[#4BCB67] font-inter font-bold text-xs pt-[6px] float-right " : "text-[#F30303] font-inter font-bold text-xs pt-[6px] float-right "}>
                     {props.stock} Stock
                 </div>
-                
             </div>
 
             <div className='pt-10 lg:w-[200px] lg:h-[260px] w-[100px] h-[140px] md:w-[150px] md:h-[200px] items-center mx-auto '>
