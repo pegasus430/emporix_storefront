@@ -205,7 +205,7 @@ const Navbar = () => {
                 <select className='text-[#214559] appearance-none'>
                   <option value = "Engish">English</option>
                   <option value = "Italian">Italian</option>
-                  <option value = "France">French</option>
+                  <option value = "French">French</option>
                           
                 </select>
 
@@ -310,7 +310,7 @@ const Navbar = () => {
                 <select className='bg-[#214559]'>
                     <option value = "Engish">English</option>
                     <option value = "Italian">Italian</option>
-                    <option value = "France">France</option>
+                    <option value = "French">French</option>
                     
                 </select>
             </div>
