@@ -11,7 +11,7 @@ const menu_list = [
 	   "title" : "Shop",
 	   "items" : [
 		  {
-			"title" : "Sitting",
+			"title" : "Seating",
 			"items" : [
 			   {
 				'title': 'Office Chairs',
@@ -218,7 +218,7 @@ const MegaNav = () => {
 						<div className='pl-[72px] pt-[72px]'>
 							<ul className=' text-white text-base font-bold'>
 
-								<li className='pb-6 hover:text-[#FBB13C]'>Sitting</li>
+								<li className='pb-6 hover:text-[#FBB13C]'>Seating</li>
 								<li className='pb-6 hover:text-[#FBB13C]'>Desk And Workspaces</li>
 								<li className='pb-6 hover:text-[#FBB13C]'>Office Storage</li>
 								<li className='pb-6 hover:text-[#FBB13C]'>Paper Envelopes &#38; Mailing</li>
