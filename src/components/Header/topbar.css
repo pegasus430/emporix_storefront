@@ -26,7 +26,7 @@
     width: 100%;
     left: 0;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 10;
   }
   
   
@@ -133,4 +133,21 @@
   .nav-background-title {
     background: url('../../assets/nav_bg.png') no-repeat;
     background-size: 100% 100%;
+  }
+
+  .overlay_topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  
+  .overlay_topbar.visible {
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    transition: opacity 0.4s;
+    z-index: 1;
   }

@@ -176,8 +176,14 @@ const Logo = () => {
 const MegaNav = () => {
 	const [showMegaMenuContent, setShowMegaMenuContent] = useState(false)
 	const onShowMegaMenu = () => setShowMegaMenuContent(true)
+
+	const handleMegaMenu = () => {
+		setShowMegaMenuContent(!showMegaMenuContent)
+	}
+
 	return (
 		<div className="dropdown flex text-base" >
+			
 			<button className="dropbtn flex pt-2 pr-2 md:pr-8 xl:pr-12 hover:text-[#FBB13C]" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
 				<div>Shop</div>
 				<ChevronDownIcon className="ml-2 mt-1 h-5 w-5" aria-hidden="true" />

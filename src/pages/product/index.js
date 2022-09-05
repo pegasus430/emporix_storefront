@@ -1,6 +1,6 @@
 import React from "react";
 import {useParams} from 'react-router-dom'
-import Topbar from "../../components/Header/Topbar";
+import Topbar from "../../components/Header/topbar";
 import Footer from "../../components/Footer";
 import ProductPage from "./ProductPage";
 

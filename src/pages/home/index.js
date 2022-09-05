@@ -1,5 +1,5 @@
 import React from "react";
-import Topbar from "../../components/Header/Topbar";
+import Topbar from "../../components/Header/topbar";
 import About from "./About"
 import Service from "./Service";
 import Category from "./Category";
