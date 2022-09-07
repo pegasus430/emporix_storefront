@@ -67,15 +67,15 @@ code {
 }
 
 .content-wrapper{
-  @apply flex lg:space-x-12
+  @apply flex lg:space-x-6
 }
 
 .left-menu-panel{
-  @apply flex-auto lg:w-[23%] hidden lg:block
+  @apply flex-auto lg:w-[calc((100%-24px)*0.23)] hidden lg:block
 }
 
 .content-panel{
-  @apply flex-auto lg:w-[77%] w-full
+  @apply flex-auto lg:w-[calc((100%-24px)*0.77+24px)] w-full border-[#E7E9EB] border-l
 }
 
 .page-wrapper{

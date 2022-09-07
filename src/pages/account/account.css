@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+li.item{
+    @apply w-full mt-6 h-[26px] font-inter text-base font-medium
+}
+
+li.first-item{
+    @apply w-full h-[26px] font-inter text-base font-medium
+}
+
+li.item-divide-line{
+    @apply h-0 border-b border-[#D7DADE] mt-6 border-solid
+}
+li.item-active{
+    @apply font-bold text-[#5F8FAA]
+}

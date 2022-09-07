@@ -1,19 +1,15 @@
 import React, { useState }  from 'react'
-import { Link, Outlet, useParams} from 'react-router-dom'
+import AccountMenu from './AccountMenu'
+import AccountSubTitle from './AccountSubTitle'
 
-const AccountMenu = () => {
-    return (
-        <>
-        </>
-    )
-}
-const AccountLayout = ({pageComponent}) => {
+const AccountLayout = ({pageComponent, page}) => {
     return (
         <div className="content-wrapper">
            <div className="account-menu-items-left-panel left-menu-panel">
-               <AccountMenu />
+               <AccountMenu page={page}/>
             </div>
-            <div className="account-page-content content-panel">
+            <div className="account-page-content content-panel pl-6">
+                <AccountSubTitle title={page}/>
                 {pageComponent}
             </div>
         </div>

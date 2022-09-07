@@ -8,6 +8,10 @@ import AccountPersonalDetails from './pages/account/AccountPersonalDetails'
 import AccountCompanyDetails from './pages/account/AccountCompanyDetails'
 import AccountMyOrders from './pages/account/AccountMyOrders'
 import AccountReplenishmentOrders from './pages/account/AccountReplenishmentOrders'
+import AccountSavedCarts from './pages/account/AccountSavedCarts'
+import AccountLocations from './pages/account/AccountLocations'
+import AccountPayments from './pages/account/AccountPayments'
+import AccountReviews from './pages/account/AccountReviews'
 
 function App() {
 	return (
@@ -21,6 +25,10 @@ function App() {
 					<Route path="company-details" element={<AccountCompanyDetails />} />
 					<Route path="my-orders" element={<AccountMyOrders />} />
 					<Route path="replenishment-orders" element={<AccountReplenishmentOrders />} />
+					<Route path="saved-carts" element={<AccountSavedCarts />} />
+					<Route path="locations" element={<AccountLocations />} />
+					<Route path="payments" element={<AccountPayments />} />
+					<Route path="reviews" element={<AccountReviews />} />
 				</Route>
 				{/*<Route path="contact" element={<Contact />} />
 				<Route path="*" element={<NoPage />} /> */}   
