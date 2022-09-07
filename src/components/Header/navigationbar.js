@@ -304,7 +304,7 @@ const Navbar = () => {
   return (
     <header className='header'>
         {/* Dektop language and currency selection */}
-        <div className='hidden md:flex font-inter text-sm text-white'>
+        <div className='desktop_only_flex font-inter text-sm text-white'>
             <div>
                 Language: 
                 <select className='bg-[#214559]'>
@@ -327,7 +327,7 @@ const Navbar = () => {
         </div>
         
         {/* Dektop navigation selection */}
-        <div className='hidden md:flex font-inter font-normal text-sm text-white'>
+        <div className='desktop_only_flex font-inter font-normal text-sm text-white'>
             {
               (!auth)?
             
@@ -354,7 +354,7 @@ const Navbar = () => {
         </div>
 
         {/* mobile menu selection */}
-        <div  className='md:hidden pl-[30.25px] flex text-white cursor-pointer'>
+        <div  className='mobile_only_flex pl-[30.25px]  text-white cursor-pointer'>
             {
                 (!open) ? <AiOutlineMenu size={27.5} onClick={handleNavOpen}/> : null
             }
@@ -379,13 +379,13 @@ const Navbar = () => {
 
         </div>
 
-        <div className='md:hidden flex text-white'>
+        <div className='mobile_only_flex text-white'>
                 <img src={logo} ></img>
-                <p className='font-medium text-[20px] px-3 pt-1'>atom</p>
+                <p className='font-medium text-xl px-3 pt-1'>atom</p>
 
         </div>
 		
-        <div className='md:hidden text-white pr-[30px]'>
+        <div className='mobile_only text-white pr-[30px]'>
             <AiOutlineSearch size={20} />
         </div>
 

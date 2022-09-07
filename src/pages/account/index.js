@@ -4,7 +4,7 @@ import Footer from "../../components/Footer"
 import AccountPage from "./AccountPage"
 
 const MyAccount = () => {
-
+    const category = "welcome"
     return (
         <div className="min-w-[375px]">
             <Topbar title={category} />

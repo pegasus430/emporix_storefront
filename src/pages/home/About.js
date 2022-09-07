@@ -15,7 +15,7 @@ const About = () => {
 					Our mission is to offer our customers outstanding service, low prices and quality products on a fast next day service.
 				</div>
 
-				<div className='pt-[78px] hidden md:block text-sm'>
+				<div className='pt-[78px] desktop_only text-sm'>
 					<button className='px-6 py-4 border border-white font-bold'>START SHOPPING</button>
 				</div>
 				
