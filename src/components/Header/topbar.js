@@ -167,8 +167,7 @@ const Logo = () => {
 	return (
 		<Link to={"/"} className="flex">
 			<div className='w-[37px]'><img src={logo}  className="w-[37px]" /></div>
-			<div className='px-4 text-white text-[25px] font-medium items-center'><span>atom</span></div>
-					
+			<div className='px-4 text-white text-[25px] font-medium items-center'><span>atom</span></div>			
 		</Link>
 	)
 }
@@ -184,27 +183,27 @@ const MegaNav = () => {
 	return (
 		<div className="dropdown flex text-base" >
 			
-			<button className="dropbtn flex pt-2 pr-2 md:pr-8 xl:pr-12 hover:text-[#FBB13C]" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
+			<button className="mega_menu_dropbtn" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
 				<div>Shop</div>
 				<ChevronDownIcon className="ml-2 mt-1 h-5 w-5" aria-hidden="true" />
 			</button>
 
-			<button className="dropbtn flex pt-2 pr-2 md:pr-8 xl:pr-12 hover:text-[#FBB13C]" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
+			<button className="mega_menu_dropbtn" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
 				<div>Services</div>
 				<ChevronDownIcon className="ml-2 mt-1 h-5 w-5" aria-hidden="true" />
 			</button>
 
-			<button className="dropbtn flex pt-2 pr-2 md:pr-8 xl:pr-12 hover:text-[#FBB13C]" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
+			<button className="mega_menu_dropbtn" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
 				<div>Brands</div>
 				<ChevronDownIcon className="ml-2 mt-1 h-5 w-5" aria-hidden="true" />
 			</button>
 
-			<button className="dropbtn flex pt-2 pr-2 md:pr-8 xl:pr-12 hover:text-[#FBB13C]" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
+			<button className="mega_menu_dropbtn" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
 				<div>About Us</div>
 				<ChevronDownIcon className="ml-2 mt-1 h-5 w-5" aria-hidden="true" />
 			</button>
 
-			<button className="dropbtn flex pt-2 pr-2 md:pr-8 xl:pr-12 hover:text-[#FBB13C]" >
+			<button className="mega_menu_dropbtn" >
 				<div>Quick Order</div>
 				
 			</button>
@@ -214,15 +213,15 @@ const MegaNav = () => {
 				<div className="dropdown-content" onMouseOver={onShowMegaMenu} onClick={() => setShowMegaMenuContent(false)} onMouseLeave={() => setShowMegaMenuContent(false)}>
 					
 					<div className="row w-full h-full flex">
-					<div className="h-full w-[24%] bg-gradient-to-b bg-[#5F8FAA] bg-[#87ABBF]">
+					<div className="h-full w-[24%] mega_content_bg">
 						<div className='pl-[72px] pt-[72px]'>
 							<ul className=' text-white text-base font-bold'>
 
-								<li className='pb-6 hover:text-[#FBB13C]'>Seating</li>
-								<li className='pb-6 hover:text-[#FBB13C]'>Desk And Workspaces</li>
-								<li className='pb-6 hover:text-[#FBB13C]'>Office Storage</li>
-								<li className='pb-6 hover:text-[#FBB13C]'>Paper Envelopes &#38; Mailing</li>
-								<li className='pb-6 hover:text-[#FBB13C]'>Printers, Ink and Toner</li>
+								<li className='mega_content_category_li'>Seating</li>
+								<li className='mega_content_category_li'>Desk And Workspaces</li>
+								<li className='mega_content_category_li'>Office Storage</li>
+								<li className='mega_content_category_li'>Paper Envelopes &#38; Mailing</li>
+								<li className='mega_content_category_li'>Printers, Ink and Toner</li>
 								
 							</ul>
 						</div>
@@ -232,42 +231,42 @@ const MegaNav = () => {
 						<div>
 							<div className='pl-[72px] pt-[72px]'>
 								<ul className=' text-black text-base'>
-									<li className='pb-4 hover:text-[#FBB13C] font-bold'>Office Chairs</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Executive Office Chairs</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Computer Office Chairs</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Mesh Office Chairs</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Draughtsman Chairs</li>
+									<li className='mega_content_sub_cat_li font-bold'>Office Chairs</li>
+									<li className='mega_content_sub_cat_li'>Executive Office Chairs</li>
+									<li className='mega_content_sub_cat_li'>Computer Office Chairs</li>
+									<li className='mega_content_sub_cat_li'>Mesh Office Chairs</li>
+									<li className='mega_content_sub_cat_li'>Draughtsman Chairs</li>
 								</ul>
 							</div>
 						</div>
 						<div>
 							<div className='pl-[72px] pt-[72px]'>
 								<ul className=' text-black text-base'>
-									<li className='pb-4 hover:text-[#FBB13C] font-bold'>Meeting Chairs</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Metting &#38; Boardroom Chairs</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Occasional Seating</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Stacking Chairs</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Waiting Room chairs</li>
+									<li className='mega_content_sub_cat_li font-bold'>Meeting Chairs</li>
+									<li className='mega_content_sub_cat_li'>Metting &#38; Boardroom Chairs</li>
+									<li className='mega_content_sub_cat_li'>Occasional Seating</li>
+									<li className='mega_content_sub_cat_li'>Stacking Chairs</li>
+									<li className='mega_content_sub_cat_li'>Waiting Room chairs</li>
 								</ul>
 							</div>
 						</div>
 						<div>
 							<div className='pl-[72px] pt-[72px]'>
 								<ul className=' text-black text-base'>
-									<li className='pb-4 hover:text-[#FBB13C] font-bold'>Ergonomic Chairs</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Bariatric Office Chairs</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Posture Chairs</li>										
-									<li className='pb-4 hover:text-[#FBB13C]'>Kneeling Chairs</li>
+									<li className='mega_content_sub_cat_li font-bold'>Ergonomic Chairs</li>
+									<li className='mega_content_sub_cat_li'>Bariatric Office Chairs</li>
+									<li className='mega_content_sub_cat_li'>Posture Chairs</li>										
+									<li className='mega_content_sub_cat_li'>Kneeling Chairs</li>
 								</ul>
 							</div>
 						</div>
 						<div>
 							<div className='pl-[72px] pt-[72px]'>
 								<ul className=' text-black text-base'>
-									<li className='pb-4 hover:text-[#FBB13C] font-bold'>Armchairs and Stools</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Armchairs</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Stools</li>
-									<li className='pb-4 hover:text-[#FBB13C]'>Industrial Stools</li>
+									<li className='mega_content_sub_cat_li font-bold'>Armchairs and Stools</li>
+									<li className='mega_content_sub_cat_li'>Armchairs</li>
+									<li className='mega_content_sub_cat_li'>Stools</li>
+									<li className='mega_content_sub_cat_li'>Industrial Stools</li>
 								</ul>
 							</div>
 						</div>
@@ -283,8 +282,8 @@ const TopNav = ({title}) => {
 	const nav_title_condition = title !="" && title != "home" ? true : false
 
 	return (
-		<div  className= { title == 'home' ?  "hidden md:flex w-full md:h-36 absolute z-10" : 
-				title == ""	? "": "hidden md:flex w-full md:h-60 absolute z-10 nav-background-title"
+		<div  className= { title == 'home' ?  "desktop_only_flex w-full md:h-36 absolute z-10" : 
+				title == ""	? "": "desktop_only_flex w-full md:h-60 absolute z-10 nav-background-title"
 		}>
 			<div className='px-10 pt-[76px] w-full  flex xl:px-24 justify-between'>
 							

@@ -151,3 +151,19 @@
     transition: opacity 0.4s;
     z-index: 1;
   }
+
+  .mega_menu_dropbtn{
+    @apply dropbtn flex pt-2 pr-2 md:pr-8 xl:pr-12 hover:text-[#FBB13C]
+  }
+
+  .mega_content_bg{
+    @apply bg-gradient-to-b bg-[#5F8FAA] bg-[#87ABBF]
+  }
+
+  .mega_content_category_li{
+    @apply pb-6 hover:text-[#FBB13C]
+  }
+
+  .mega_content_sub_cat_li{
+    @apply pb-4 hover:text-[#FBB13C]
+  }

@@ -28,10 +28,10 @@ const Category = () => {
 			<div className='desktop_only md:pt-24 font-inter font-bold text-2xl text-center'>
                 Explore our products
             </div>
-            <div className='desktop_only md:pt-4 font-inter font-normal text-[16px] leading-[32px] text-center'>
+            <div className='desktop_only md:pt-4 font-inter font-normal text-base text-center'>
                 Browse our catalogue and find the right product for you
             </div>
-            <div className='px-6 py-12 md:pt-8 md:py-24 grid grid-cols-1 md:grid-cols-4 md:gap-12 gap-y-16 md:px-16  max-w-md  md:max-w-screen-2xl mx-auto' >
+            <div className='home_cat_content' >
                 <Link to={`product/Seating`}>
                     <EachCategory src = {seating} title="Seating" content = "Tellus ornare at consequat ipsum,non lobortis" />
                 </Link>
