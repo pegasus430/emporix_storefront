@@ -57,3 +57,23 @@ code {
 .footer{
   @apply bg-[#214559] w-full h-[358px] md:h-[342px] border-t-[4px] border-[#FBB13C]
 }
+
+.content-wrapper{
+  @apply flex lg:space-x-12
+}
+
+.left-menu-panel{
+  @apply flex-auto lg:w-[23%] hidden lg:block
+}
+
+.content-panel{
+  @apply flex-auto lg:w-[77%] w-full
+}
+
+.page-wrapper{
+  @apply md:pt-60 pt-20 px-4 md:px-24 pb-12
+}
+
+.page-content{
+  @apply md:pt-12 pt-12 max-w-screen-xl mx-auto
+}
