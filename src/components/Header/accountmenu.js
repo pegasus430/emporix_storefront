@@ -33,13 +33,13 @@ export default function AccountMenu( props ) {
             <Menu.Item>
               {({ active }) => (
                 <a
-                  href="#"
+                  href="my-account"
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block px-4 py-2 text-sm'
                   )}
                 >
-                  Account settings
+                  My account
                 </a>
               )}
             </Menu.Item>
