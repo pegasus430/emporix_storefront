@@ -19,7 +19,7 @@ const Service = () => {
 	}
 
   	return (
-		<div className = "bg-[#87ABBF] w-full h-[470px] md:h-[304px] -mt-[1px] md:mt-[-28px] grid grid-cols-2 md:grid-cols-4 px-6 py-12 md:px-[100px] xl:px-[204px] md:py-[64px] gap-y-12 md:gap-[52px]">
+		<div className = "home_service">
 			
 			<div>
 				<EachService src = {Shipping} title="Free Shipping" content = "Free delivery on qualifying orders of &#163;50+" />

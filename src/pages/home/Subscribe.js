@@ -6,7 +6,7 @@ const Subscribe = () => {
 	
 
   	return (
-		<div className = " bg-gradient-to-b from-[#5F8FAA] to-[#87ABBF] w-full h-[328px] md:h-[336px] text-center text-white" >
+		<div className = "subscribe" >
 			
 			<div className='pt-12 md:pt-24 w-2/3  font-bold text-[24px] leading-[40px] md:text-[32px] md:leading-[48px] mx-auto'>
 				Subscribe to our Newsletter and get the latest news and offers
