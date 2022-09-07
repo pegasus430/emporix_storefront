@@ -24,11 +24,11 @@ const EachCategory = (props) => {
 const Category = () => {
 
   	return (
-    	<div className = " bg-gradient-to-b from-[#5F8FAA] to-[#87ABBF]  w-full h-[1752px] md:h-[682px]  text-white">
-			<div className='hidden md:block md:pt-24 font-inter font-bold text-2xl text-center'>
+    	<div className = "home_category">
+			<div className='desktop_only md:pt-24 font-inter font-bold text-2xl text-center'>
                 Explore our products
             </div>
-            <div className='hidden md:block md:pt-4 font-inter font-normal text-[16px] leading-[32px] text-center'>
+            <div className='desktop_only md:pt-4 font-inter font-normal text-[16px] leading-[32px] text-center'>
                 Browse our catalogue and find the right product for you
             </div>
             <div className='px-6 py-12 md:pt-8 md:py-24 grid grid-cols-1 md:grid-cols-4 md:gap-12 gap-y-16 md:px-16  max-w-md  md:max-w-screen-2xl mx-auto' >

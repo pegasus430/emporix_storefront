@@ -11,7 +11,7 @@ const menu_list = [
      "title" : "Shop",
      "items" : [
         {
-          "title" : "Sitting",
+          "title" : "Seating",
           "items" : [
              {
               'title': 'Office Chairs',
@@ -302,7 +302,7 @@ const Navbar = () => {
     }
 
   return (
-    <header className='w-full h-20  md:h-12 z-20 fixed  bg-[#214559] sm:px-5 md:px-7 lg:px-24 flex justify-between items-center'>
+    <header className='header'>
         {/* Dektop language and currency selection */}
         <div className='hidden md:flex font-inter text-sm text-white'>
             <div>
@@ -388,8 +388,7 @@ const Navbar = () => {
         <div className='md:hidden text-white pr-[30px]'>
             <AiOutlineSearch size={20} />
         </div>
-		
-	
+
     </header>
   )
 }

@@ -32,7 +32,7 @@ const Dektop_footer = () => {
  return (
 	<div className='hidden  md:pt-24 max-w-screen-xl mx-auto md:flex'>
 		<div className='mx-auto'>
-			<ul className='font-inter text-[16px] leading-[22px] text-white'>
+			<ul className='font-inter text-base text-white'>
 				<li className='text-[#FBB13C] font-bold '>About Us</li>
 				<li className=' font-light pt-4'>Who we are</li>
 				<li className=' font-light pt-4'>Quality in the details</li>
@@ -41,7 +41,7 @@ const Dektop_footer = () => {
 			</ul>
 		</div>
 		<div className='mx-auto'>
-			<ul className='font-inter text-[16px] leading-[22px] text-white'>
+			<ul className='font-inter text-base text-white'>
 				<li className='text-[#FBB13C] font-bold '>Support</li>
 				<li className=' font-light pt-4'>Delivery</li>
 				<li className=' font-light pt-4'>Returns</li>
@@ -51,7 +51,7 @@ const Dektop_footer = () => {
 			</ul>
 		</div>
 		<div className='mx-auto'>
-			<ul className='font-inter text-[16px] leading-[22px] text-white'>
+			<ul className='font-inter text-base text-white'>
 				<li className='text-[#FBB13C] font-bold '>My Account</li>
 				<li className=' font-light pt-4'>Sign In</li>
 				<li className=' font-light pt-4'>Register</li>
@@ -61,7 +61,7 @@ const Dektop_footer = () => {
 			</ul>
 		</div>
 		<div className='mx-auto'>
-			<ul className='font-inter text-[16px] leading-[22px] text-white'>
+			<ul className='font-inter text-base text-white'>
 				<li className='text-[#FBB13C] font-bold '>Contact</li>
 				<li className=' font-light pt-4'>Call Us: +44123645678</li>
 			</ul>
@@ -83,7 +83,7 @@ const Dektop_footer = () => {
 
 const Footer = () => {
   	return (
-		<div className = " bg-[#214559] w-full h-[358px] md:h-[342px] border-t-[4px] border-[#FBB13C]">
+		<div className = "footer">
 			<Mobile_footer />
 			<Dektop_footer />
 			
