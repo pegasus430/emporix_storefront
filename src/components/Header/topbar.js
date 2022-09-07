@@ -313,10 +313,10 @@ const Topbar = ({title}) => {
 	
   	return (
 
-		<div className=''>
+		<>
 			<Navbar />
 			<TopNav title = {title} />
-		</div>
+		</>
        
 
     

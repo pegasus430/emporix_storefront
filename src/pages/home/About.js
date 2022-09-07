@@ -5,7 +5,7 @@ import intro from '../../assets/intro.png'
 const About = () => {
 
   	return (
-    	<div style={{backgroundImage : `url(${landing_bg})`  }} className = "flex bg-[length:100%_167%] md:bg-[length:100%_100%] pt-20 md:pt-0 w-full h-[513px] md:h-[988px] justify-between text-white">
+    	<div style={{backgroundImage : `url(${landing_bg})`  }} className = "home_about">
 			<div className='px-6 md:pl-16 pt-[48px] md:pt-[363px]  '>
 				<div className='text-[40px] md:text-[56px] font-inter font-semibold leading-[48px] md:leading-[64px]'>
 					Tailored <nobr className="text-[#FBB13C]">Office Solutions</nobr><br />

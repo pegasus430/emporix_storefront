@@ -128,7 +128,7 @@ const Product = () => {
     const [auth, setAuth] = useState(true)
 
   	return (
-    	<div className = "bg-white w-full h-[704px] md:h-[746px]  text-black">
+    	<div className = "home_product">
 			
             <ProductTitle auth =  {auth} />
             
