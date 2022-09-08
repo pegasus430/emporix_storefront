@@ -6,7 +6,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 
 const savedCartsList = [
   {
@@ -89,14 +88,15 @@ const SavedCarts = () => {
                 <TableRow
                   key={index}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  className='!py-6'
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell component="th" scope="row" className='!py-6' >
                     {row.date}
                   </TableCell>
-                  <TableCell align="left">{row.name}</TableCell>
-                  <TableCell align="left">{row.items}</TableCell>
-                  <TableCell align="left">&euro; {row.total}</TableCell>
-                  <TableCell align="left">
+                  <TableCell align="left" className='!py-6'>{row.name}</TableCell>
+                  <TableCell align="left" className='!py-6'>{row.items}</TableCell>
+                  <TableCell align="left" className='!py-6'>&euro; {row.total}</TableCell>
+                  <TableCell align="left" className='!py-6'>
                     
                       <div className='flex'>
                           <div className='font-inter font-semibold text-[14px] underline'>
