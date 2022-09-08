@@ -16,3 +16,15 @@ li.item-divide-line{
 li.item-active{
     @apply font-bold text-[#5F8FAA]
 }
+
+.location_item{
+    @apply mb-6 border border-[#D7DADE] p-6 font-inter h-60 md:h-40 md:flex
+}
+
+.location-title{
+    @apply  font-medium text-base text-[#818385]
+}
+
+.location-data{
+    @apply md:font-normal text-base text-black md:pt-4
+}
