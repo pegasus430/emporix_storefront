@@ -123,4 +123,14 @@ li.item-active{
 }
 .price{
     @apply text-[20px] leading-[32px] font-bold font-inter
+.location_item{
+    @apply mb-6 border border-[#D7DADE] p-6 font-inter h-60 md:h-40 md:flex
+}
+
+.location-title{
+    @apply  font-medium text-base text-[#818385]
+}
+
+.location-data{
+    @apply md:font-normal text-base text-black md:pt-4
 }
