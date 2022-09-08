@@ -16,3 +16,111 @@ li.item-divide-line{
 li.item-active{
     @apply font-bold text-[#5F8FAA]
 }
+
+.border-bottom-gray{
+    @apply border-[#D7DADE] border-b border-solid
+}
+.personal-title, .change-password-title{
+    @apply w-[200px] gap-6
+}
+
+.personal-info-catpion, .change-password-info-catpion{
+    @apply text-[20px] leading-[30px]
+}
+
+.personal-provide-caption, .change-password-provide-caption{
+    @apply font-normal text-[14px] leading-[21px]
+}
+
+.personal-photo{
+    @apply w-24 h-24 rounded-[48px]
+}
+
+.add-new-photo{
+    @apply text-[14px] leading-[18px] text-[#0380F3] font-inter font-semibold underline
+}
+
+.personal-info-content, .change-password-info-content{
+    @apply sm:w-[650px] gap-4 w-full
+}
+
+.form-item{
+    @apply align-middle sm:flex
+}
+.form-input-item{
+    @apply h-[38px] 2xl:w-[438px] xl:w-[438px] lg:w-[250px] rounded py-[7px] px-[13px] sm:w-[200px] w-full
+}
+
+.border-gray{
+    @apply border-[#D7DADE] border border-solid
+}
+.input-label{
+    @apply align-middle pt-[7px]
+}
+.action-save-button{
+    @apply mt-6 sm:mt-0 h-12 w-full sm:w-[327px] bg-[#214559] text-[white] font-inter font-bold text-[14px] leading-[14px]
+}
+
+.action-discard-button{
+    @apply mt-6 sm:mt-0 h-12 w-full sm:w-[327px] text-[#214559] font-inter font-bold text-[14px] leading-[14px] bg-[#EFF0F2]
+}
+.account-action-bar{
+    @apply sm:flex justify-start gap-8 sm:flex-row-reverse
+}
+.personal-and-summary-content-wrapper{
+    @apply pb-12 
+}
+.account-personal-info-wrapper{
+    @apply md:w-[50%] w-full pr-6  border-[#D7DADE] border-r border-solid
+}
+.account-summary-wrapper{
+    @apply md:w-[50%] w-full pl-6
+}
+.account-personal-info, .account-summary-info {
+    @apply h-10
+}
+.account-personal-info-caption, .account-summary-caption{
+    @apply pb-[18px]
+}
+.account-profile{
+    @apply mt-6
+}
+.account-personal-caption, .account-summary-title{
+    @apply xl:text-[24px] lg:text-[20px] md:text-[18px] text-[24px] leading-[40px] lg:leading-[40px] md:leading-[30px] font-bold font-inter text-[#214559]
+}
+.account-edit-btn{
+    @apply font-inter font-semibold text-[14px] leading-[18px] text-[#0380F3]
+}
+.profile-edit-btn-arrow{
+    @apply font-black leading-[16.1px] 
+}
+.profile-items{
+    @apply text-[#818385] text-base font-normal font-inter
+}
+.profile-items > p{
+    @apply text-right
+}
+.profile-items-info{
+    @apply font-inter text-[black] font-normal text-base
+}
+.payment-title{
+    @apply font-inter text-[16px] leading-[20px] font-normal
+}
+.spent-amount{
+    @apply font-inter text-[24px] leading-[40px] font-bold
+}
+.limit-status-text{
+    @apply font-inter text-[14px] leading-[14px] font-normal font-semibold text-[#818385]
+}
+.oustanding, .refunds{
+    @apply w-[50%]
+}
+.oustanding{
+    @apply pr-[50px] border-[#D7DADE] border-r border-solid
+}
+.refunds{
+    @apply pl-[50px]
+}
+.price{
+    @apply text-[20px] leading-[32px] font-bold font-inter
+}
