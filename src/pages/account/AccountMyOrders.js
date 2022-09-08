@@ -124,7 +124,7 @@ const MyOrders = () => {
       <div className='mobile_only'>
           {
              myOdersList.map((rows, index) => 
-              <OrderItem order_number={rows.order_number} status = {rows.status} created = {rows.created} total = {rows.total} />
+              <OrderItem key={index} order_number={rows.order_number} status = {rows.status} created = {rows.created} total = {rows.total} />
             )
           }
       </div>
