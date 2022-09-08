@@ -75,7 +75,7 @@ code {
 }
 
 .content-panel{
-  @apply flex-auto lg:w-[calc((100%-24px)*0.77+24px)] w-full border-[#E7E9EB] border-l
+  @apply flex-auto lg:w-[calc((100%-24px)*0.77+24px)] w-full border-[#E7E9EB] lg:border-l
 }
 
 .page-wrapper{
