@@ -1,8 +1,128 @@
 import React, { useState }  from 'react'
 import AccountLayout from './AccountLayout'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+const savedCartsList = [
+  {
+    date : '11/05/2022' ,
+    name : 'Baseket Name',
+    items : '24' ,
+    total : '2,569.25'
+  } ,
+  {
+    date : '11/05/2022' ,
+    name : 'Baseket Name',
+    items : '17' ,
+    total : '2,569.25'
+  } ,
+  {
+    date : '11/05/2022' ,
+    name : 'Baseket Name',
+    items : '4' ,
+    total : '2,569.25'
+  } ,
+  {
+    date : '11/05/2022' ,
+    name : 'Baseket Name',
+    items : '24' ,
+    total : '2,569.25'
+  } ,
+  {
+    date : '11/05/2022' ,
+    name : 'Baseket Name',
+    items : '24' ,
+    total : '2,569.25'
+  } ,
+
+
+]
+
+const MobileCartItem = ({date, name, items , total}) => {
+    return (
+      <div className='py-6 border-t border-[#D7DADE]'>
+          <div className='flex justify-between'>
+              <span>{name}</span>
+              <div className='flex'>
+                  <div className='font-inter font-semibold text-[14px] underline'>
+                      Edit
+                  </div>
+                  <div className='font-inter font-semibold text-[14px] underline ml-6'>
+                      Cancel
+                  </div>
+              </div>
+          </div>
+          <div className='pt-2'>
+            {items} items
+          </div>
+          <div className='pt-2'>
+            {date}
+          </div>
+          <div className='font-inter font-bold pt-2'>
+            &euro; {total}
+          </div>
+      </div>
+    )
+}
 
 const SavedCarts = () => {
-  return <h1>SavedCarts</h1>;
+  return (
+    <div className='md:mt-20'> 
+      <TableContainer className='desktop_only' >
+          <Table sx={{ minWidth: 650 }}  >
+            <TableHead >
+              <TableRow >
+                <TableCell align="left" className='font-inter !font-bold text-base'>Date</TableCell>
+                <TableCell align="left" className='font-inter !font-bold text-base'>Name</TableCell>
+                <TableCell align="left" className='font-inter !font-bold text-base'>Items</TableCell>
+                <TableCell align="left" className='font-inter !font-bold text-base'>Total</TableCell>
+                <TableCell align="left" ></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {savedCartsList.map((row , index) => (
+                <TableRow
+                  key={index}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.date}
+                  </TableCell>
+                  <TableCell align="left">{row.name}</TableCell>
+                  <TableCell align="left">{row.items}</TableCell>
+                  <TableCell align="left">&euro; {row.total}</TableCell>
+                  <TableCell align="left">
+                    
+                      <div className='flex'>
+                          <div className='font-inter font-semibold text-[14px] underline'>
+                              Edit
+                          </div>
+                          <div className='font-inter font-semibold text-[14px] underline ml-6'>
+                              Cancel
+                          </div>
+                      </div>
+                    
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+      </TableContainer>
+
+      <div className='mobile_only'>
+          {
+            savedCartsList.map((rows, index) => 
+              <MobileCartItem name={rows.name} date = {rows.date} items = {rows.items} total = {rows.total} />
+            )
+          }
+      </div>
+    </div>
+  )
 };
 
 const AccountSavedCarts = () => {
