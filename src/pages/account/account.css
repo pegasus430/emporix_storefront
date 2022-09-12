@@ -16,7 +16,9 @@ li.item-divide-line{
 li.item-active{
     @apply font-bold text-[#5F8FAA]
 }
-
+li.index-item-active{
+    @apply lg:font-bold lg:text-[#5F8FAA]
+}
 .border-bottom-gray{
     @apply border-[#D7DADE] border-b border-solid
 }
@@ -71,10 +73,10 @@ li.item-active{
     @apply pb-12 
 }
 .account-personal-info-wrapper{
-    @apply md:w-[50%] w-full pr-6  border-[#D7DADE] border-r border-solid
+    @apply md:w-[50%] w-full pr-6  border-[#D7DADE] md:border-r md:border-solid pb-12 md:pb-0 md:border-b-0 border-b 
 }
 .account-summary-wrapper{
-    @apply md:w-[50%] w-full pl-6
+    @apply md:w-[50%] w-full pl-0 md:pl-6 md:mt-0 mt-12
 }
 .account-personal-info, .account-summary-info {
     @apply h-10
@@ -92,7 +94,7 @@ li.item-active{
     @apply font-inter font-semibold text-[14px] leading-[18px] text-[#0380F3]
 }
 .profile-edit-btn-arrow{
-    @apply font-black leading-[16.1px] 
+    @apply font-black leading-[16.1px]
 }
 .profile-items{
     @apply text-[#818385] text-base font-normal font-inter
@@ -123,6 +125,7 @@ li.item-active{
 }
 .price{
     @apply text-[20px] leading-[32px] font-bold font-inter
+}
 .location_item{
     @apply mb-6 border border-[#D7DADE] p-6 font-inter h-60 md:h-40 md:flex
 }
@@ -133,4 +136,48 @@ li.item-active{
 
 .location-data{
     @apply md:font-normal text-base text-black md:pt-4
+}
+.portal-wrapper{
+    @apply w-full 
+}
+.portal-title{
+    @apply text-[24px] leading-[40px] font-bold font-inter text-[#214559]
+}
+.portal-caption{
+    @apply  pb-[18px]
+}
+.portal-action-btn{
+    @apply font-inter font-semibold text-[14px] leading-[18px] text-[#0380F3]
+}
+
+.portal-caption-content {
+    @apply h-10
+}
+.SavedCarts-Mobile-Header{
+    @apply py-[5px] mb-[10px] font-inter font-bold
+}
+.label{
+    @apply text-[20px] leading-[30px]
+}
+.company-input-wrapper, .company-info-wrapper{
+    @apply  md:w-[63%] w-full
+}
+.company-input{
+    @apply w-full rounded h-[38px] py-[7px] px-[13px] font-inter font-normal
+}
+.company-label{
+    @apply md:w-[37%] w-full
+}
+.sub-label{
+    @apply font-inter font-normal text-[14px] leading-[21px]
+}
+.company-info{
+    @apply xl:w-[61%] md:w-[40%] w-full
+}
+.mobile-bar-wrapper{
+    @apply pt-20
+}
+.mobile-bar{
+    background-image: conic-gradient(from 180deg at 50% 70%, #9BB9CA, #2C5C77);
+    @apply h-[72px] w-full p-6 font-inter font-semibold text-[24px] leading-[24px] pb-6 text-white
 }
