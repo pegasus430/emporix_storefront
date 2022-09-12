@@ -6,8 +6,8 @@ import photo from '../../assets/photo.png'
 const FromInputItem = ({label}) => {
   return (
     <div className="form-item sm:justify-between">
-        <span className="input-label text-base">{label}</span>
-        <input type="text" className="form-input-item border-gray"/>
+        <span className="input-label text-base ">{label}</span>
+        <input type="text" className="mt-2 sm:mt-0 form-input-item border-gray"/>
     </div>
   )
 }
