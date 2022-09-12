@@ -16,7 +16,7 @@ const AccountMenu = ({page}) => {
         "Reviews"
     ]
     const items_link = [
-        "",
+        "account-summary",
         "personal-details",
         "company-details",
         "",
@@ -34,9 +34,13 @@ const AccountMenu = ({page}) => {
             {   items.map((value,index) => (
                     value != "" ? 
                         index == 0 ?
-                            <li key={index} className={value==page? "item-active first-item": "first-item"}>
-                                <Link to={`/my-account/${items_link[index]}`}>{value}</Link>
-                            </li>:
+                                page == "Index"?
+                                    <li key={index} className="index-item-active first-item">
+                                        <Link to={`/my-account/${items_link[index]}`}>{value}</Link>
+                                    </li>:
+                                    <li key={index} className={value==page? "item-active first-item": "first-item"}>
+                                        <Link to={`/my-account/${items_link[index]}`}>{value}</Link>
+                                    </li>:
                             <li key={index} className={value==page? "item-active item": "item"}>
                                 <Link to={`/my-account/${items_link[index]}`}>{value}</Link>
                             </li>:
