@@ -1,6 +1,7 @@
 import { CgMenuGridR } from "react-icons/cg"
 import { BiMenu } from "react-icons/bi"
 import React, { useState , useRef } from 'react'
+import {useSelector} from 'react-redux'
 import { IconContext } from "react-icons"
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { HiOutlineArrowLeft, HiOutlineArrowRight} from 'react-icons/hi'
@@ -565,7 +566,7 @@ const ProductListPagination = ({changePageNumber, countPerPage, product_list_cou
 }
 
 const ProductListContent = (props) => {
-    const [auth, setAuth] = useState(true)
+    const { user: currentUser } = useSelector((state) => state.auth);
     const product_list_counts_per_page = [6, 9, 10, 15]
     const [displayType, SetDisplayType] = useState(true)
     const [pageNumber, setPageNumber] = useState(1)
@@ -586,7 +587,7 @@ const ProductListContent = (props) => {
     return (
         <>
             <ProductListViewSettingBar displayType={displayType} changePerPageCount={changePerPageCount} changeDisplayType={changeDisplayType} product_list_count={product_list_count} product_list_counts_per_page={product_list_counts_per_page} />
-            <ProductListItems auth = {auth} displayType={displayType} product_list_count={product_list_count} pageNumber={pageNumber} countPerPage={countPerPage} />
+            <ProductListItems auth = {currentUser ? true : false} displayType={displayType} product_list_count={product_list_count} pageNumber={pageNumber} countPerPage={countPerPage} />
             <ProductListPagination changePageNumber={changePageNumber} countPerPage={countPerPage} product_list_count={product_list_count} pageNumber={pageNumber}  />
         </>
     )

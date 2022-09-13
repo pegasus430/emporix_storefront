@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { AiOutlineMenu,AiOutlineClose, AiOutlineSearch , AiOutlineMail, AiOutlineShoppingCart } from 'react-icons/ai'
-import { Link } from 'react-scroll'
+import { useSelector } from "react-redux"
 import logo from '../../assets/atom.png'
 import AccountMenu from './accountmenu'
 import { HiOutlineUserCircle } from "react-icons/hi"
@@ -165,8 +165,9 @@ const menu_list = [
 
 
 const Navbar = () => {
+    const { user: currentUser } = useSelector((state) => state.auth);
     const [open, setOpen] = useState(false)
-    const [auth, setAuth] = useState(true)
+    
     const [displaySubItems, setDisplaySubItems] = useState(false)
 	  const [title, setTitle] = useState('')
 	  const [subMenuItems, setSubMenuItems] = useState([])
@@ -176,11 +177,11 @@ const Navbar = () => {
           	<>
             	<div className='pt-12 items-center '>
                     {
-                      auth ? 
+                      currentUser ? 
                       <div className='h-[75px] border-y w-full justify-between flex text-[#565759] text-center items-center font-inter '>
                           <div className='flex'>
                               <HiOutlineUserCircle size={25} />
-                              <div className='pl-2'>Jack White</div>
+                              <div className='pl-2'>{currentUser.username}</div>
                           </div>
                           <div>
                             <AiOutlineMail size = {20} />
@@ -329,10 +330,10 @@ const Navbar = () => {
         {/* Dektop navigation selection */}
         <div className='desktop_only_flex font-inter font-normal text-sm text-white'>
             {
-              (!auth)?
+              (!currentUser)?
             
               <ul className='flex'>
-                <li className='px-2'><a className='hover:text-[#FBB13C]'>Login</a></li> |
+                <li className='px-2'><a className='hover:text-[#FBB13C]' href='/login'>Login</a></li> |
                 <li className='px-2'><a className='hover:text-[#FBB13C]'>Sign Up</a></li>
               </ul>
               :
@@ -345,7 +346,7 @@ const Navbar = () => {
                   </div>
                 </li> |
                 <li className='px-4 flex'>
-                  <AccountMenu name = "Jack White" />
+                  <AccountMenu name = {currentUser.username} />
                 </li> 
               </ul>
             

@@ -210,7 +210,7 @@ const MegaNav = () => {
 			{
 				showMegaMenuContent ?
 			
-				<div className="dropdown-content" onMouseOver={onShowMegaMenu} onClick={() => setShowMegaMenuContent(false)} onMouseLeave={() => setShowMegaMenuContent(false)}>
+				<div className="header-mega_dropdown-content" onMouseOver={onShowMegaMenu} onClick={() => setShowMegaMenuContent(false)} onMouseLeave={() => setShowMegaMenuContent(false)}>
 					
 					<div className="row w-full h-full flex">
 					<div className="h-full w-[24%] mega_content_bg">

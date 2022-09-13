@@ -3,12 +3,18 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { HiOutlineUserCircle } from "react-icons/hi";
-
+import { logout } from "../../actions/auth";
+import { useDispatch, useSelector } from "react-redux";
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function AccountMenu( props ) {
+  const dispatch = useDispatch();
+  const logOut = () => {
+		dispatch(logout());
+	};
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       
@@ -73,7 +79,7 @@ export default function AccountMenu( props ) {
               <Menu.Item>
                 {({ active }) => (
                   <button
-                    type="submit"
+                    onClick={logOut}
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                       'block w-full text-left px-4 py-2 text-sm'
