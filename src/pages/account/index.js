@@ -5,11 +5,11 @@ import AccountPage from "./AccountPage"
 import { useSelector } from "react-redux"
 import { Navigate } from 'react-router-dom'
 
-const MobileAccountBar = () => {
+const MobileAccountBar = ({title}) => {
     return (
         <div className="mobile-bar-wrapper mobile_only">
             <div className="mobile-bar" >
-                <span>Welcome Back, Jack</span>
+                <span>{title}</span>
             </div>
         </div>
     )
@@ -25,7 +25,7 @@ const Account = () => {
     return (
         <div className="min-w-[375px]">
             <Topbar title={title} />
-            <MobileAccountBar />
+            <MobileAccountBar title = {title} />
             <AccountPage page_info={title}/>
             <Footer />
         </div>

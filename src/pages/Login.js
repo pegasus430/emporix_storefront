@@ -1,12 +1,9 @@
 import React, { useState, useRef } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from 'react-router-dom';
+import { Navigate , Link } from 'react-router-dom';
 import landing_bg from '../assets/landing_bg.png'
 import login_atom from '../assets/login_atom.png'
 import { login } from "../actions/auth";
-
-
 
 const Login = (props) => {
   const form = useRef();
@@ -53,8 +50,10 @@ const Login = (props) => {
             <div className="w-[540px] mx-auto h-[740px] pt-[138px]">
                 <div className="w-full h-[110px] items-center  text-center text-white font-bold font-inter text-7xl flex">
                     <div className="mx-auto flex">
-                        <img src={login_atom} className="w-[78px] h-[86px] mr-5"  />
-                        atom
+                        <Link to={'/'} className="flex">
+                            <img src={login_atom} className="w-[78px] h-[86px] mr-5"  />
+                            atom
+                        </Link>
                     </div>
                     
                 </div>
