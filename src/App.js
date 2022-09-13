@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import Home from "./pages/home";
 import ProductList from "./pages/product";
 import Account from './pages/account';
+import Login from "./pages/Login";
+import AccountHome from './pages/account/AccountHome'
 import MyAccount from './pages/account/MyAccount'
 import AccountPersonalDetails from './pages/account/AccountPersonalDetails'
 import AccountCompanyDetails from './pages/account/AccountCompanyDetails'
@@ -39,7 +41,8 @@ function App() {
 				<Route path="product/:category" element={<ProductList />} />
 				<Route path="login" element={<Login />} />
 				<Route path="my-account" element={<Account />} >
-					<Route index element={<MyAccount />} />
+					<Route index element={<AccountHome />} />
+					<Route path="account-summary" element={<MyAccount />} />
 					<Route path="personal-details" element={<AccountPersonalDetails />} />
 					<Route path="company-details" element={<AccountCompanyDetails />} />
 					<Route path="my-orders" element={<AccountMyOrders />} />

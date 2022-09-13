@@ -73,13 +73,22 @@ code {
 .left-menu-panel{
   @apply flex-auto lg:w-[calc((100%-24px)*0.23)] hidden lg:block
 }
-
+.main-left-menu-panel{
+  @apply flex-auto lg:w-[calc((100%-24px)*0.23)] w-full
+}
+.main-content-panel{
+  @apply flex-auto lg:w-[calc((100%-24px)*0.77+24px)] lg:block hidden border-[#E7E9EB] lg:border-l
+}
 .content-panel{
   @apply flex-auto lg:w-[calc((100%-24px)*0.77+24px)] w-full border-[#E7E9EB] lg:border-l
 }
 
+.login_container{
+  @apply w-full h-[1024px] bg-[length:100%_100%]
+}
+
 .page-wrapper{
-  @apply md:pt-60 pt-20 px-4 md:px-24 pb-12
+  @apply md:pt-60 pt-0 px-4 md:px-24 pb-12
 }
 
 .page-content{

@@ -69,7 +69,7 @@ const MobileCartItem = ({date, name, items , total}) => {
     )
 }
 
-const SavedCarts = () => {
+export const SavedCarts = () => {
   return (
     <div className='md:mt-20'> 
       <TableContainer className='desktop_only' >
@@ -117,7 +117,7 @@ const SavedCarts = () => {
       <div className='mobile_only'>
           {
             savedCartsList.map((rows, index) => 
-              <MobileCartItem name={rows.name} date = {rows.date} items = {rows.items} total = {rows.total} />
+              <MobileCartItem key={index} name={rows.name} date = {rows.date} items = {rows.items} total = {rows.total} />
             )
           }
       </div>

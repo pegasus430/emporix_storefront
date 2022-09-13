@@ -6,7 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import classNames from 'classnames';
+import Status from './common'
 
 const myOdersList = [
     {
@@ -35,16 +35,6 @@ const myOdersList = [
     },
 ]
 
-const Status = ({width, height, color, title}) => {
-  return (
-    <div style = {{width : `${width}px` , height : `${height}px` ,  fontSize:'10px', backgroundColor : classNames(title =="SHIPPED" ? `rgba(255, 168 , 0, 0.2)` : `rgba(75, 203, 103, 0.2)`) ,  color: `${color}`  , padding: '8px 16px' , fontWeight: 'bold' , borderRadius: '24px' , display: 'flex' , alignItems:'center' }}>
-        <div style={{ width: "8px" , height: '8px' , marginRight : '8px',  backgroundColor: `${color}` , borderRadius: '50px' }}>
-           
-        </div>
-        {title}
-    </div>
-  )
-}
 
 const OrderItem = ({order_number, status, created,  total}) => {
   return (
@@ -75,7 +65,7 @@ const OrderItem = ({order_number, status, created,  total}) => {
   )
 }
 
-const MyOrders = () => {
+export const MyOrders = () => {
   return (
     <div className='md:mt-[60px]'> 
       <TableContainer className='desktop_only' >
