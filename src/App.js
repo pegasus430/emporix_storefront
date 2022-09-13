@@ -5,7 +5,6 @@ import Login from "./pages/Login";
 import Home from "./pages/home";
 import ProductList from "./pages/product";
 import Account from './pages/account';
-import Login from "./pages/Login";
 import AccountHome from './pages/account/AccountHome'
 import MyAccount from './pages/account/MyAccount'
 import AccountPersonalDetails from './pages/account/AccountPersonalDetails'
