@@ -6,7 +6,7 @@ const Payments = () => {
 };
 
 const AccountPayments = () => {
-    return <AccountLayout pageComponent={<Payments />} page="Payments"/>;
+    return <AccountLayout pageComponent={<Payments />} page="Payment Methods"/>;
 };
 
 export default AccountPayments;

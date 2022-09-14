@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { AiOutlineMenu,AiOutlineClose, AiOutlineSearch , AiOutlineMail, AiOutlineShoppingCart } from 'react-icons/ai'
 import { useSelector } from "react-redux"
 import logo from '../../assets/atom.png'
@@ -7,161 +8,220 @@ import { HiOutlineUserCircle } from "react-icons/hi"
 import { ChevronRightIcon , ChevronLeftIcon } from '@heroicons/react/solid'
 
 const menu_list = [
-  {
-     "title" : "Shop",
-     "items" : [
-        {
-          "title" : "Seating",
-          "items" : [
-             {
-              'title': 'Office Chairs',
-              'items' : [
-                {
-                  "title" : "Executive Office Chairs" ,
-                  "items" : []
-                },
-                {
-                  "title" : "Computer Office Chairs" ,
-                  "items" : []
-                },
-                {
-                  "title" : "Mesh Office Chairs" ,
-                  "items" : []
-                },
-                {
-                  "title" : "Draughtsman Chairs" ,
-                  "items" : []
-                },
-              ],
-             } ,
-             {
-              'title': 'Meeting Chairs',
-              'items' : [
-                {
-                  "title" : "Meeting & Boardroom Chairs" ,
-                  "items" : []
-                },
-                {
-                  "title" : "Occasional Seating" ,
-                  "items" : []
-                },
-                {
-                  "title" : "Stacking Chairs" ,
-                  "items" : []
-                },
-                {
-                  "title" : "Waiting Room Chairs" ,
-                  "items" : []
-                },
-              ],
-             } ,
-             {
-              'title': 'Ergonomic Chairs',
-              'items' : [
-                  {
-                    "title" : "Bariatric Office Chairs" ,
-                    "items" : []
-                  },
-                  {
-                    "title" : "Posture Chairs" ,
-                    "items" : []
-                  },
-                  {
-                    "title" : "Kneeling Chairs" ,
-                    "items" : []
-                  },
-              ],
-             } ,
-             {
-              'title': 'Armchairs and Stools',
-              'items' : [
-                  {
-                    "title" : "Armchairs" ,
-                    "items" : []
-                  },
-                  {
-                    "title" : "Stools" ,
-                    "items" : []
-                  },
-                  {
-                    "title" : "Industrial Stools" ,
-                    "items" : []
-                  },
-              ],
-             } ,
-          ]
-        },
-        {
-          "title" : "Desk And Workspaces",
-          "items" : [
-			{
-				"title" : "title" ,
-				"items" : []
-			}
-		  ]
-        },
-        {
-          "title" : "Office Storage",
-          "items" : [
-			{
-				"title" : "title" ,
-				"items" : []
-			}
-		  ]
-        },
-        {
-          "title" : "Paper Envelopes & Mailing",
-          "items" : [
-			{
-				"title" : "title" ,
-				"items" : []
-			}
-		  ]
-        },
-        {
-          "title" : "Printers, Ink and Toner",
-          "items" : [
-			{
-				"title" : "title" ,
-				"items" : []
-			}
-		  ]
-        },
-     ]
-     
-  },
-  {
-    "title"  : "Services" ,
-    "items" : [
-      {
-        "title" : "title"  , 
-        "items" : []
-      }
-    ]
-  } ,
-  {
-    "title"  : "Brands" ,
-    "items" : [
-      {
-        "title" : "title"  , 
-        "items" : []
-      }
-    ]
-  } ,
-  {
-    "title"  : "About Us" ,
-    "items" : [
-      {
-        "title" : "title"  , 
-        "items" : []
-      }
-    ]
-  } ,
-  {
-    "title"  : "Quick Order" ,
-    "items" : []
-  } 
-]
+	{
+	   "title" : "Shop",
+	   "items" : [
+		  {
+			"title" : "Seating",
+			"items" : [
+			   {
+				'title': 'Office Chairs',
+				'items' : [
+				  {
+					  "title" : "Executive Office Chairs" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				  {
+					  "title" : "Computer Office Chairs" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				  {
+					  "title" : "Mesh Office Chairs" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				  {
+					  "title" : "Draughtsman Chairs" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				],
+				'url' : '/product/seating'
+			   } ,
+			   {
+				'title': 'Meeting Chairs',
+				'items' : [
+				  {
+					  "title" : "Meeting & Boardroom Chairs" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				  {
+					  "title" : "Occasional Seating" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				  {
+					  "title" : "Stacking Chairs" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				  {
+					  "title" : "Waiting Room Chairs" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				],
+				'url' : '/product/seating'
+			   } ,
+			   {
+				'title': 'Ergonomic Chairs',
+				'items' : [
+				  {
+					  "title" : "Bariatric Office Chairs" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				  {
+					  "title" : "Posture Chairs" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				  {
+					  "title" : "Kneeling Chairs" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				],
+				'url' : '/product/seating'
+			   } ,
+			   {
+				'title': 'Armchairs and Stools',
+				'items' : [
+				  {
+					  "title" : "Armchairs" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				  {
+					  "title" : "Stools" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				  {
+					  "title" : "Industrial Stools" ,
+					  "items" : [],
+					  'url' : '/product/seating'
+				  },
+				],
+				'url' : '/product/seating'
+			   } ,
+			],
+			'url' : '/product/seating'
+		  },
+		  {
+			"title" : "Desk And Workspaces",
+			"items" : [
+			  {
+				  "title" : "title" ,
+				  "items" : []
+			  }
+			],
+			'url' : '/product/desk_workspace'
+		  },
+		  {
+			"title" : "Office Storage",
+			"items" : [
+			  {
+				  "title" : "title" ,
+				  "items" : []
+			  }
+			],
+			'url' : '/product/storage'
+		  },
+		  {
+			"title" : "Paper Envelopes & Mailing",
+			"items" : [
+			  {
+				  "title" : "title" ,
+				  "items" : []
+			  }
+			],
+			'url' : '/product/paper_mail'
+		  },
+		  {
+			"title" : "Printers, Ink and Toner",
+			"items" : [
+			  {
+				  "title" : "title" ,
+				  "items" : []
+			  }
+			],
+			'url' : '/product/printer_ink_toner'
+		  },
+	   ]
+	   
+	},
+	{
+	  "title"  : "Services" ,
+	  "items" : [
+		{
+		  "title" : "service1"  , 
+		  "items" : []
+		},
+		{
+			"title" : "service2"  , 
+			"items" : []
+		  },
+		  {
+			"title" : "service3"  , 
+			"items" : []
+		  },
+		  {
+			"title" : "service4"  , 
+			"items" : []
+		  },
+	  ]
+	} ,
+	{
+	  "title"  : "Brands" ,
+	  "items" : [
+		{
+		  "title" : "Brands1"  , 
+		  "items" : []
+		},
+		{
+			"title" : "Brands2"  , 
+			"items" : []
+		},
+		{
+			"title" : "Brands3"  , 
+			"items" : []
+		  },
+		  {
+			"title" : "Brands4"  , 
+			"items" : []
+		  },
+	  ]
+	} ,
+	{
+	  "title"  : "About Us" ,
+	  "items" : [
+		{
+		  "title" : "title1"  , 
+		  "items" : []
+		},
+		{
+			"title" : "title2"  , 
+			"items" : []
+		},
+		{
+			"title" : "title3"  , 
+			"items" : []
+		},
+		{
+			"title" : "title4"  , 
+			"items" : []
+		},
+	  ]
+	} ,
+	{
+	  "title"  : "Quick Order" ,
+	  "items" : []
+	} 
+  ]
 
 
 const Navbar = () => {
@@ -245,15 +305,30 @@ const Navbar = () => {
 		const item = props.item
 		return (
 			<>
-			  <li 
-				  key = {item.title} 
-				  className=" flex justify-between pb-4  text-base text-slate-400"
-				  onClick = {() => parentMenuClicked(item.title, item.items)}
-			  >
-				 {item.title}
-				 
-				 <ChevronRightIcon className =  {item.items.length? 'h-8 w-8' : 'hidden' } />
-			  </li>
+      {
+        !item.items.length? 
+        <Link to={`${item.url}`}>
+          <li 
+            key = {item.title} 
+            className=" flex justify-between pb-4  text-base text-slate-400"
+            onClick = {() => parentMenuClicked(item.title, item.items)}
+          >
+            {item.title}
+          
+       
+          </li>
+        </Link>:
+          <li 
+          key = {item.title} 
+          className=" flex justify-between pb-4  text-base text-slate-400"
+          onClick = {() => parentMenuClicked(item.title, item.items)}
+          >
+            {item.title}
+        
+          <ChevronRightIcon className =  { 'h-8 w-8'  } />
+          </li>
+      }
+			  
 		
 			</>
 		  )
@@ -283,14 +358,12 @@ const Navbar = () => {
 
     const parentMenuClicked = (title, items) => {
       
-	  if (items.length){
-		setTitle(title)
-		setDisplaySubItems(true)
-		setSubMenuItems([...items])
-	  }
+      if (items.length){
+        setTitle(title)
+        setDisplaySubItems(true)
+        setSubMenuItems([...items])
+      }
 
-	 	
-		
     }
     // create a function for toggle mobile nav
     const handleNavOpen = () =>{
@@ -363,8 +436,10 @@ const Navbar = () => {
             <div className={(!open) ? 'hidden' : ' text-black absolute top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto'}>
                <div className='h-10 justify-between flex' > 
                   <div className='flex'>
+                    <Link to=  "/" className='flex' >
                       <img src={logo} className="w-[37px]"></img>
                       <div className='px-4 text-[25px] font-medium items-center'><span>atom</span></div>
+                    </Link>
                   </div>
                   <div className='flex text-center pt-2' onClick={handleNavOpen}>
                       <span className = "pr-4">Close</span>              
@@ -381,9 +456,10 @@ const Navbar = () => {
         </div>
 
         <div className='mobile_only_flex text-white'>
+            <Link to="/" className='flex'>
                 <img src={logo} ></img>
                 <p className='font-medium text-xl px-3 pt-1'>atom</p>
-
+             </Link>
         </div>
 		
         <div className='mobile_only text-white pr-[30px]'>
