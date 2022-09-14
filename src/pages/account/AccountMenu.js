@@ -11,7 +11,7 @@ const AccountMenu = ({page}) => {
         "Saved Carts",
         "",
         "Locations",
-        "Payments",
+        "Payment Methods",
         "",
         "Reviews"
     ]
@@ -32,16 +32,16 @@ const AccountMenu = ({page}) => {
     return (
         <ul className="">
             {   items.map((value,index) => (
-                    value != "" ? 
-                        index == 0 ?
-                                page == "Index"?
+                    value !== "" ? 
+                        index === 0 ?
+                                page === "Index"?
                                     <li key={index} className="index-item-active first-item">
                                         <Link to={`/my-account/${items_link[index]}`}>{value}</Link>
                                     </li>:
-                                    <li key={index} className={value==page? "item-active first-item": "first-item"}>
+                                    <li key={index} className={value===page? "item-active first-item": "first-item"}>
                                         <Link to={`/my-account/${items_link[index]}`}>{value}</Link>
                                     </li>:
-                            <li key={index} className={value==page? "item-active item": "item"}>
+                            <li key={index} className={value===page? "item-active item": "item"}>
                                 <Link to={`/my-account/${items_link[index]}`}>{value}</Link>
                             </li>:
                         <li key={index} className="item-divide-line" />
