@@ -18,78 +18,97 @@ const menu_list = [
 				'items' : [
 				  {
 					  "title" : "Executive Office Chairs" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				  {
 					  "title" : "Computer Office Chairs" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				  {
 					  "title" : "Mesh Office Chairs" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				  {
 					  "title" : "Draughtsman Chairs" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				],
+				'url' : '/product/seating'
 			   } ,
 			   {
 				'title': 'Meeting Chairs',
 				'items' : [
 				  {
 					  "title" : "Meeting & Boardroom Chairs" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				  {
 					  "title" : "Occasional Seating" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				  {
 					  "title" : "Stacking Chairs" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				  {
 					  "title" : "Waiting Room Chairs" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				],
+				'url' : '/product/seating'
 			   } ,
 			   {
 				'title': 'Ergonomic Chairs',
 				'items' : [
 				  {
 					  "title" : "Bariatric Office Chairs" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				  {
 					  "title" : "Posture Chairs" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				  {
 					  "title" : "Kneeling Chairs" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				],
+				'url' : '/product/seating'
 			   } ,
 			   {
 				'title': 'Armchairs and Stools',
 				'items' : [
 				  {
 					  "title" : "Armchairs" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				  {
 					  "title" : "Stools" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				  {
 					  "title" : "Industrial Stools" ,
-					  "items" : []
+					  "items" : [],
+					  'url' : '/product/seating'
 				  },
 				],
+				'url' : '/product/seating'
 			   } ,
-			]
+			],
+			'url' : '/product/seating'
 		  },
 		  {
 			"title" : "Desk And Workspaces",
@@ -98,7 +117,8 @@ const menu_list = [
 				  "title" : "title" ,
 				  "items" : []
 			  }
-			]
+			],
+			'url' : '/product/desk_workspace'
 		  },
 		  {
 			"title" : "Office Storage",
@@ -107,7 +127,8 @@ const menu_list = [
 				  "title" : "title" ,
 				  "items" : []
 			  }
-			]
+			],
+			'url' : '/product/storage'
 		  },
 		  {
 			"title" : "Paper Envelopes & Mailing",
@@ -116,7 +137,8 @@ const menu_list = [
 				  "title" : "title" ,
 				  "items" : []
 			  }
-			]
+			],
+			'url' : '/product/paper_mail'
 		  },
 		  {
 			"title" : "Printers, Ink and Toner",
@@ -125,7 +147,8 @@ const menu_list = [
 				  "title" : "title" ,
 				  "items" : []
 			  }
-			]
+			],
+			'url' : '/product/printer_ink_toner'
 		  },
 	   ]
 	   
@@ -134,27 +157,63 @@ const menu_list = [
 	  "title"  : "Services" ,
 	  "items" : [
 		{
-		  "title" : "title"  , 
+		  "title" : "service1"  , 
 		  "items" : []
-		}
+		},
+		{
+			"title" : "service2"  , 
+			"items" : []
+		  },
+		  {
+			"title" : "service3"  , 
+			"items" : []
+		  },
+		  {
+			"title" : "service4"  , 
+			"items" : []
+		  },
 	  ]
 	} ,
 	{
 	  "title"  : "Brands" ,
 	  "items" : [
 		{
-		  "title" : "title"  , 
+		  "title" : "Brands1"  , 
 		  "items" : []
-		}
+		},
+		{
+			"title" : "Brands2"  , 
+			"items" : []
+		},
+		{
+			"title" : "Brands3"  , 
+			"items" : []
+		  },
+		  {
+			"title" : "Brands4"  , 
+			"items" : []
+		  },
 	  ]
 	} ,
 	{
 	  "title"  : "About Us" ,
 	  "items" : [
 		{
-		  "title" : "title"  , 
+		  "title" : "title1"  , 
 		  "items" : []
-		}
+		},
+		{
+			"title" : "title2"  , 
+			"items" : []
+		},
+		{
+			"title" : "title3"  , 
+			"items" : []
+		},
+		{
+			"title" : "title4"  , 
+			"items" : []
+		},
 	  ]
 	} ,
 	{
@@ -174,103 +233,76 @@ const Logo = () => {
 
 const MegaNav = () => {
 	const [showMegaMenuContent, setShowMegaMenuContent] = useState(false)
+	const [subMenuItems, setSubMenuItems] = useState([])
+	const [showMegaMenuRightContent, setShowMegaMenuRightContent] = useState(false)
+	const [subMenuMegaContent, setSubMenuMegaContent] = useState([])
 	const onShowMegaMenu = () => setShowMegaMenuContent(true)
-
+	const overMenuItem = (items) => {
+		setSubMenuItems(items)
+		setShowMegaMenuContent(true)
+	}
 	const handleMegaMenu = () => {
 		setShowMegaMenuContent(!showMegaMenuContent)
 	}
 
 	return (
 		<div className="dropdown flex text-base" >
-			
-			<button className="mega_menu_dropbtn" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
-				<div>Shop</div>
-				<ChevronDownIcon className="ml-2 mt-1 h-5 w-5" aria-hidden="true" />
-			</button>
-
-			<button className="mega_menu_dropbtn" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
-				<div>Services</div>
-				<ChevronDownIcon className="ml-2 mt-1 h-5 w-5" aria-hidden="true" />
-			</button>
-
-			<button className="mega_menu_dropbtn" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
-				<div>Brands</div>
-				<ChevronDownIcon className="ml-2 mt-1 h-5 w-5" aria-hidden="true" />
-			</button>
-
-			<button className="mega_menu_dropbtn" onMouseOver={onShowMegaMenu} onMouseOut={() =>setShowMegaMenuContent(false)}>
-				<div>About Us</div>
-				<ChevronDownIcon className="ml-2 mt-1 h-5 w-5" aria-hidden="true" />
-			</button>
-
-			<button className="mega_menu_dropbtn" >
-				<div>Quick Order</div>
-				
-			</button>
+			{
+				menu_list.map((item, index) => 
+				<button key = {index} className="mega_menu_dropbtn" onMouseOver={() => overMenuItem(item.items)} onMouseOut={() => {setSubMenuMegaContent([]); setShowMegaMenuContent(false)}}>
+					<div>{item.title}</div>
+					<ChevronDownIcon className="ml-2 mt-1 h-5 w-5" aria-hidden="true" />
+					</button>
+				)
+			}
 			{
 				showMegaMenuContent ?
 			
 				<div className="header-mega_dropdown-content" onMouseOver={onShowMegaMenu} onClick={() => setShowMegaMenuContent(false)} onMouseLeave={() => setShowMegaMenuContent(false)}>
 					
 					<div className="row w-full h-full flex">
-					<div className="h-full w-[24%] mega_content_bg">
-						<div className='pl-[72px] pt-[72px]'>
-							<ul className=' text-white text-base font-bold'>
+						<div className="h-full w-[24%] mega_content_bg">
+							<div className='pl-[72px] pt-[72px]'>
+								<ul className=' text-white text-base font-bold'>
 
-								<li className='mega_content_category_li'>Seating</li>
-								<li className='mega_content_category_li'>Desk And Workspaces</li>
-								<li className='mega_content_category_li'>Office Storage</li>
-								<li className='mega_content_category_li'>Paper Envelopes &#38; Mailing</li>
-								<li className='mega_content_category_li'>Printers, Ink and Toner</li>
-								
-							</ul>
+								{
+									subMenuItems.map((item, index) => 
+										<Link to={`${item.url}`}>
+											<li key = {index} className='mega_content_category_li' onMouseOver = {() => {setSubMenuMegaContent(item.items); setShowMegaMenuRightContent(true)}} onMouseLeave = {() => {  setShowMegaMenuRightContent(false)} }>{item.title}</li>
+										</Link>
+										
+										
+									)
+								}
+
+									
+								</ul>
+							</div>
+							
 						</div>
+						<div className="h-full w-[76%] grid grid-cols-4" onMouseOver={() => setShowMegaMenuRightContent(true)}>
+							{
+								showMegaMenuRightContent ?
+								subMenuMegaContent.map((item, index) => 
+									<div key = {index} className='pl-[72px] pt-[72px]'>
+										<ul className=' text-black text-base'>
+											<li className='mega_content_sub_cat_li font-bold'>{item.title}</li>
+											{
+												item.items.map((eachItem, index) => 
+													<Link to={`${eachItem.url}`}>
+														<li key={index} className='mega_content_sub_cat_li'>{eachItem.title}</li>
+													</Link>
+													
+												)
+											}
+											
+										</ul>
+									</div>
+								): null
+
+							}
 						
-					</div>
-					<div className="h-full w-[76%] grid grid-cols-4">
-						<div>
-							<div className='pl-[72px] pt-[72px]'>
-								<ul className=' text-black text-base'>
-									<li className='mega_content_sub_cat_li font-bold'>Office Chairs</li>
-									<li className='mega_content_sub_cat_li'>Executive Office Chairs</li>
-									<li className='mega_content_sub_cat_li'>Computer Office Chairs</li>
-									<li className='mega_content_sub_cat_li'>Mesh Office Chairs</li>
-									<li className='mega_content_sub_cat_li'>Draughtsman Chairs</li>
-								</ul>
-							</div>
 						</div>
-						<div>
-							<div className='pl-[72px] pt-[72px]'>
-								<ul className=' text-black text-base'>
-									<li className='mega_content_sub_cat_li font-bold'>Meeting Chairs</li>
-									<li className='mega_content_sub_cat_li'>Metting &#38; Boardroom Chairs</li>
-									<li className='mega_content_sub_cat_li'>Occasional Seating</li>
-									<li className='mega_content_sub_cat_li'>Stacking Chairs</li>
-									<li className='mega_content_sub_cat_li'>Waiting Room chairs</li>
-								</ul>
-							</div>
-						</div>
-						<div>
-							<div className='pl-[72px] pt-[72px]'>
-								<ul className=' text-black text-base'>
-									<li className='mega_content_sub_cat_li font-bold'>Ergonomic Chairs</li>
-									<li className='mega_content_sub_cat_li'>Bariatric Office Chairs</li>
-									<li className='mega_content_sub_cat_li'>Posture Chairs</li>										
-									<li className='mega_content_sub_cat_li'>Kneeling Chairs</li>
-								</ul>
-							</div>
-						</div>
-						<div>
-							<div className='pl-[72px] pt-[72px]'>
-								<ul className=' text-black text-base'>
-									<li className='mega_content_sub_cat_li font-bold'>Armchairs and Stools</li>
-									<li className='mega_content_sub_cat_li'>Armchairs</li>
-									<li className='mega_content_sub_cat_li'>Stools</li>
-									<li className='mega_content_sub_cat_li'>Industrial Stools</li>
-								</ul>
-							</div>
-						</div>
-					</div>
 					</div>
 				</div> : null
 			}
