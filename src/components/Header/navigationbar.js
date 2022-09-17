@@ -400,71 +400,71 @@ const Navbar = () => {
             
         </div>
         
-        
-      
-      {/* Dektop navigation selection */}
-      <div className='desktop_only_flex font-inter font-normal text-sm text-white'>
-          {
-            (!currentUser)?
-          
-            <ul className='flex'>
-              <li className='px-2'><a className='hover:text-[#FBB13C]' href='/login'>Login</a></li> |
-              <li className='px-2'><a className='hover:text-[#FBB13C]'>Sign Up</a></li>
-            </ul>
-            :
-            <ul className='flex'>
-              <li className='px-4'><AiOutlineMail size={20} /></li> |
-              <li className='px-4 flex'>
-                <AiOutlineShoppingCart size = {20} />
-                <div className='pl-[17.5px] text-white flex'>
-                    &euro; 768.47
-                </div>
-              </li> |
-              <li className='px-4 flex'>
-                <AccountMenu name = {currentUser.username} />
-              </li> 
-            </ul>
-          
-          }
-          
-      </div>
+        {/* Dektop navigation selection */}
+        <div className='desktop_only_flex font-inter font-normal text-sm text-white'>
+            {
+              (!currentUser)?
+            
+              <ul className='flex'>
+                <li className='px-2'><a className='hover:text-[#FBB13C]' href='/login'>Login</a></li> |
+                <li className='px-2'><a className='hover:text-[#FBB13C]'>Sign Up</a></li>
+              </ul>
+              :
+              <ul className='flex'>
+                <li className='px-4'><AiOutlineMail size={20} /></li> |
+                <li className='px-4 flex'>
+                  <AiOutlineShoppingCart size = {20} />
+                  <div className='pl-[17.5px] text-white flex'>
+                      &euro; 768.47
+                  </div>
+                </li> |
+                <li className='px-4 flex'>
+                  <AccountMenu name = {currentUser.username} />
+                </li> 
+              </ul>
+            
+            }
+            
+        </div>
 
-      {/* mobile menu selection */}
-      <div  className='mobile_only_flex pl-[30.25px]  text-white cursor-pointer'>
-          {
-              (!open) ? <AiOutlineMenu size={27.5} onClick={handleNavOpen}/> : null
-          }
-          {/* absolut mobile navigation */}
-          <div className={(!open) ? 'hidden' : ' text-black absolute top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto'}>
-              <div className='h-10 justify-between flex' > 
-                <div className='flex'>
-                  <Link to=  "/" className='flex' >
-                    <img src={logo} className="w-[37px]"></img>
-                    <div className='px-4 text-[25px] font-medium items-center'><span>atom</span></div>
-                  </Link>
-                </div>
-                <div className='flex text-center pt-2' onClick={handleNavOpen}>
-                    <span className = "pr-4">Close</span>              
-                    <AiOutlineClose  size={25}/>
-                </div>
-                
-              </div>
-              {
-              !displaySubItems ? <ParentBoard />: <SubBoard />
-              }
-              
-          </div>
+        {/* mobile menu selection */}
+        <div  className='mobile_only_flex pl-[30.25px]  text-white cursor-pointer'>
+            {
+                (!open) ? <AiOutlineMenu size={27.5} onClick={handleNavOpen}/> : null
+            }
+            {/* absolut mobile navigation */}
+            <div className={(!open) ? 'hidden' : ' text-black absolute top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto'}>
+               <div className='h-10 justify-between flex' > 
+                  <div className='flex'>
+                    <Link to=  "/" className='flex' >
+                      <img src={logo} className="w-[37px]"></img>
+                      <div className='px-4 text-[25px] font-medium items-center'><span>atom</span></div>
+                    </Link>
+                  </div>
+                  <div className='flex text-center pt-2' onClick={handleNavOpen}>
+                      <span className = "pr-4">Close</span>              
+                      <AiOutlineClose  size={25}/>
+                  </div>
+                  
+               </div>
+               {
+                !displaySubItems ? <ParentBoard />: <SubBoard />
+               }
+               
+            </div>
 
-      <div className='mobile_only_flex text-white'>
-          <Link to="/" className='flex'>
-              <img src={logo} ></img>
-              <p className='font-medium text-xl px-3 pt-1'>atom</p>
-            </Link>
-      </div>
-  
-      <div className='mobile_only text-white pr-[30px]'>
-          <AiOutlineSearch size={20} />
-      </div>
+        </div>
+
+        <div className='mobile_only_flex text-white'>
+            <Link to="/" className='flex'>
+                <img src={logo} ></img>
+                <p className='font-medium text-xl px-3 pt-1'>atom</p>
+             </Link>
+        </div>
+		
+        <div className='mobile_only text-white pr-[30px]'>
+            <AiOutlineSearch size={20} />
+        </div>
 
     </header>
   )
