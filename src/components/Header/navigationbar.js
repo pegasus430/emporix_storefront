@@ -5,6 +5,7 @@ import logo from '../../assets/atom.png'
 import AccountMenu from './accountmenu'
 import { HiOutlineUserCircle } from "react-icons/hi"
 import { ChevronRightIcon , ChevronLeftIcon } from '@heroicons/react/solid'
+import Drawer from '../Utilities/drawer/drawer'
 
 const menu_list = [
   {
@@ -302,94 +303,101 @@ const Navbar = () => {
     }
 
   return (
-    <header className='header'>
-        {/* Dektop language and currency selection */}
-        <div className='desktop_only_flex font-inter text-sm text-white'>
-            <div>
-                Language: 
-                <select className='bg-[#214559]'>
-                    <option value = "Engish">English</option>
-                    <option value = "Italian">Italian</option>
-                    <option value = "French">French</option>
+    <>
+       <header className='header'>
+          {/* Dektop language and currency selection */}
+          <div className='desktop_only_flex font-inter text-sm text-white'>
+              <div>
+                  Language: 
+                  <select className='bg-[#214559]'>
+                      <option value = "Engish">English</option>
+                      <option value = "Italian">Italian</option>
+                      <option value = "French">French</option>
+                      
+                  </select>
+              </div>
+              <div className='ml-[22px]'>
+                  Currency: 
+                  <select className='bg-[#214559]'>
+                      <option value = "Euro">&euro;</option>
+                      <option value = "Dollar">&#36;</option>
+                      
+                      
+                  </select>
+              </div>
+              
+          </div>
+          
+          {/* Dektop navigation selection */}
+          <div className='desktop_only_flex font-inter font-normal text-sm text-white'>
+              {
+                (!auth)?
+              
+                <ul className='flex'>
+                  <li className='px-2'><a className='hover:text-[#FBB13C]'>Login</a></li> |
+                  <li className='px-2'><a className='hover:text-[#FBB13C]'>Sign Up</a></li>
+                </ul>
+                :
+                <ul className='flex'>
+                  <li className='px-4'><AiOutlineMail size={20} /></li> |
+                  <li className='px-4 flex'>
+                    <AiOutlineShoppingCart size = {20} />
                     
-                </select>
-            </div>
-            <div className='ml-[22px]'>
-                Currency: 
-                <select className='bg-[#214559]'>
-                    <option value = "Euro">&euro;</option>
-                    <option value = "Dollar">&#36;</option>
+                    <div className='pl-[17.5px] text-white flex'>
+                        &euro; 768.47
+                    </div>
+                  </li> |
+                  <li className='px-4 flex'>
+                    <AccountMenu name = "Jack White" />
+                  </li> 
+                </ul>
+              
+              }
+              
+          </div>
+
+          {/* mobile menu selection */}
+          <div  className='mobile_only_flex pl-[30.25px]  text-white cursor-pointer'>
+              {
+                  (!open) ? <AiOutlineMenu size={27.5} onClick={handleNavOpen}/> : null
+              }
+              {/* absolut mobile navigation */}
+              <div className={(!open) ? 'hidden' : ' text-black absolute top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto'}>
+                <div className='h-10 justify-between flex' > 
+                    <div className='flex'>
+                        <img src={logo} className="w-[37px]"></img>
+                        <div className='px-4 text-[25px] font-medium items-center'><span>atom</span></div>
+                    </div>
+                    <div className='flex text-center pt-2' onClick={handleNavOpen}>
+                        <span className = "pr-4">Close</span>              
+                        <AiOutlineClose  size={25}/>
+                    </div>
                     
-                    
-                </select>
-            </div>
-            
-        </div>
-        
-        {/* Dektop navigation selection */}
-        <div className='desktop_only_flex font-inter font-normal text-sm text-white'>
-            {
-              (!auth)?
-            
-              <ul className='flex'>
-                <li className='px-2'><a className='hover:text-[#FBB13C]'>Login</a></li> |
-                <li className='px-2'><a className='hover:text-[#FBB13C]'>Sign Up</a></li>
-              </ul>
-              :
-              <ul className='flex'>
-                <li className='px-4'><AiOutlineMail size={20} /></li> |
-                <li className='px-4 flex'>
-                  <AiOutlineShoppingCart size = {20} />
-                  <div className='pl-[17.5px] text-white flex'>
-                      &euro; 768.47
-                  </div>
-                </li> |
-                <li className='px-4 flex'>
-                  <AccountMenu name = "Jack White" />
-                </li> 
-              </ul>
-            
-            }
-            
-        </div>
+                </div>
+                {
+                  !displaySubItems ? <ParentBoard />: <SubBoard />
+                }
+                
+              </div>
 
-        {/* mobile menu selection */}
-        <div  className='mobile_only_flex pl-[30.25px]  text-white cursor-pointer'>
-            {
-                (!open) ? <AiOutlineMenu size={27.5} onClick={handleNavOpen}/> : null
-            }
-            {/* absolut mobile navigation */}
-            <div className={(!open) ? 'hidden' : ' text-black absolute top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto'}>
-               <div className='h-10 justify-between flex' > 
-                  <div className='flex'>
-                      <img src={logo} className="w-[37px]"></img>
-                      <div className='px-4 text-[25px] font-medium items-center'><span>atom</span></div>
-                  </div>
-                  <div className='flex text-center pt-2' onClick={handleNavOpen}>
-                      <span className = "pr-4">Close</span>              
-                      <AiOutlineClose  size={25}/>
-                  </div>
-                  
-               </div>
-               {
-                !displaySubItems ? <ParentBoard />: <SubBoard />
-               }
-               
-            </div>
+          </div>
 
-        </div>
+          <div className='mobile_only_flex text-white'>
+                  <img src={logo} ></img>
+                  <p className='font-medium text-xl px-3 pt-1'>atom</p>
 
-        <div className='mobile_only_flex text-white'>
-                <img src={logo} ></img>
-                <p className='font-medium text-xl px-3 pt-1'>atom</p>
-
-        </div>
-		
-        <div className='mobile_only text-white pr-[30px]'>
-            <AiOutlineSearch size={20} />
-        </div>
-
-    </header>
+          </div>
+      
+          <div className='mobile_only text-white pr-[30px]'>
+              <AiOutlineSearch size={20} />
+          </div>
+          
+          <Drawer >
+          </Drawer>
+      </header>
+      
+    </>
+   
   )
 }
 

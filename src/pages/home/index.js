@@ -7,6 +7,7 @@ import Product from "./Product";
 import Subscribe from "./Subscribe"
 import Footer from "../../components/Footer";
 
+
 const Home = () => {
     return (
         <>

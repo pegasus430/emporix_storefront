@@ -11,6 +11,8 @@ const ProductList = ({handleSideFilterContent , categoryMenuList ,filterItems })
             <div className="flex-auto lg:w-[77%] w-full">
                 <ProductListContent />
             </div>
+            
+
         </div>
     )
 }
