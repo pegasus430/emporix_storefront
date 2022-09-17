@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {useSelector} from 'react-redux'
 import Slider from "react-animated-slider"
 import ReactStars from 'react-stars'
 import pen from "../../assets/products/pencil.png"
@@ -6,7 +7,6 @@ import hp_laser_printer from "../../assets/products/hp_laser_printer.png"
 import comfort_chair from "../../assets/products/comfort_chair.png"
 import pc_stand from "../../assets/products/pc_stand.png"
 import stapler from "../../assets/products/stapler.png"
-
 import "react-animated-slider/build/horizontal.css";
 import './slider-animation.css'
 import './product.css'
@@ -125,12 +125,13 @@ const ProductTitle = (props) => {
 
 const Product = () => {
 
-    const [auth, setAuth] = useState(true)
+    const { user:currentUser } = useSelector((state) => state.auth)
+    const auth = currentUser ? true : false
 
   	return (
     	<div className = "home_product">
 			
-            <ProductTitle auth =  {auth} />
+            <ProductTitle auth =  {currentUser ? true: false} />
             
             {/* for mobile panel */}
             <div className='pt-12 mobile_only px-6 w-full  text-black max-w-md mx-auto'>

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import Login from "./pages/Login";
 import Home from "./pages/home";
 import ProductList,{ProductDetails} from "./pages/product";
 import Account from './pages/account';
-import Login from "./pages/Login";
 import AccountHome from './pages/account/AccountHome'
 import MyAccount from './pages/account/MyAccount'
 import AccountPersonalDetails from './pages/account/AccountPersonalDetails'
@@ -14,8 +15,24 @@ import AccountSavedCarts from './pages/account/AccountSavedCarts'
 import AccountLocations from './pages/account/AccountLocations'
 import AccountPayments from './pages/account/AccountPayments'
 import AccountReviews from './pages/account/AccountReviews'
+import { history } from "./helpers/history";
+import { logout } from "./actions/auth";
+import { clearMessage } from "./actions/message";
 
 function App() {
+
+	const { user: currentUser } = useSelector((state) => state.auth);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		history.listen((location) => {
+		  dispatch(clearMessage()); // clear message when changing location
+		});
+	  }, [dispatch]);
+
+	  const logOut = () => {
+		dispatch(logout());
+	  };
+
 	return (
 		<Router>
 			<Routes>
@@ -34,7 +51,9 @@ function App() {
 					<Route path="locations" element={<AccountLocations />} />
 					<Route path="payments" element={<AccountPayments />} />
 					<Route path="reviews" element={<AccountReviews />} />
+					
 				</Route>
+				
 				{/*<Route path="contact" element={<Contact />} />
 				<Route path="*" element={<NoPage />} /> */}   
 				

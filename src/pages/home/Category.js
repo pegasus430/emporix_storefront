@@ -32,13 +32,19 @@ const Category = () => {
                 Browse our catalogue and find the right product for you
             </div>
             <div className='home_cat_content' >
-                <Link to={`product/Seating`}>
+                <Link to={`product/seating`}>
                     <EachCategory src = {seating} title="Seating" content = "Tellus ornare at consequat ipsum,non lobortis" />
                 </Link>
+                <Link to={`product/desk_workspaces`}>
+                    <EachCategory src = {desk} title="Desk and Workspaces" content = "Tellus ornare at consequat ipsum,non lobortis" />
+                </Link>
+                <Link to={`product/storage`}>
+                    <EachCategory src = {storage} title="Storage" content = "Tellus ornare at consequat ipsum,non lobortis" />
+                </Link>
+                <Link to={`product/printer_ink_toner`}>
+                    <EachCategory src = {printer} title="Printers, Ink and Toner" content = "Tellus ornare at consequat ipsum,non lobortis" />
+                </Link>
                 
-                <EachCategory src = {desk} title="Desk and Workspaces" content = "Tellus ornare at consequat ipsum,non lobortis" />
-                <EachCategory src = {storage} title="Storage" content = "Tellus ornare at consequat ipsum,non lobortis" />
-                <EachCategory src = {printer} title="Printers, Ink and Toner" content = "Tellus ornare at consequat ipsum,non lobortis" />
             </div>
 
     	</div>
