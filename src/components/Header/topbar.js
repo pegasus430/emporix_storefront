@@ -315,7 +315,7 @@ const TopNav = ({title}) => {
 
 	return (
 		<div  className= { title == 'home' ?  "desktop_only_flex w-full md:h-36 absolute z-10" : 
-				title == ""	? "": "desktop_only_flex w-full md:h-60 absolute z-10 nav-background-title"
+				title == ""	? "nav-background-title desktop_only_flex h-36": "desktop_only_flex w-full md:h-60 absolute z-10 nav-background-title"
 		}>
 			<div className='px-10 pt-[76px] w-full  flex xl:px-24 justify-between'>
 							

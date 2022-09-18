@@ -8,9 +8,13 @@ import { HiOutlineArrowLeft, HiOutlineArrowRight} from 'react-icons/hi'
 import ReactStars from 'react-stars'
 import pen from "../../assets/products/pencil.png"
 import Quantity from "../../components/QuantitySelector/quantity"
+import { useNavigate } from "react-router-dom";
+
+
 
 const products = [
     {
+        id : 1,
         stock : "Low", 
         rating : 4, 
         count : 8 ,
@@ -21,6 +25,7 @@ const products = [
         list_price : "109.99"
     } ,
     {
+        id : 2,
         stock : "In", 
         rating : 4, 
         count : 8 ,
@@ -31,6 +36,7 @@ const products = [
         list_price : "99.99"
     } ,   
     {
+        id : 3,
         stock : "Low", 
         rating : 4, 
         count : 8 ,
@@ -41,6 +47,7 @@ const products = [
         list_price : "64.50"
     } ,
     {
+        id : 4,
         stock : "In", 
         rating : 4, 
         count : 8 ,
@@ -51,6 +58,7 @@ const products = [
         list_price : "159.99"
     } ,
     {
+        id : 5,
         stock : "Low", 
         rating : 4, 
         count : 8 ,
@@ -61,6 +69,7 @@ const products = [
         list_price : "149.99"
     } ,
     {
+        id : 6,
         stock : "Ouf Of", 
         rating : 4, 
         count : 8 ,
@@ -71,6 +80,7 @@ const products = [
         list_price : "159.99"
     } ,
     {
+        id : 7,
         stock : "Low", 
         rating : 4, 
         count : 8 ,
@@ -81,6 +91,7 @@ const products = [
         list_price : "59.99"
     } ,
     {
+        id : 8,
         stock : "In", 
         rating : 4, 
         count : 8 ,
@@ -91,6 +102,7 @@ const products = [
         list_price : "72.50"
     } ,
     {
+        id : 9,
         stock : "In", 
         rating : 4, 
         count : 8 ,
@@ -101,6 +113,7 @@ const products = [
         list_price : "92.00"
     } ,
     {
+        id : 10,
         stock : "Low", 
         rating : 4, 
         count : 8 ,
@@ -111,6 +124,7 @@ const products = [
         list_price : "109.99"
     } ,
     {
+        id : 11,
         stock : "In", 
         rating : 4, 
         count : 8 ,
@@ -121,6 +135,7 @@ const products = [
         list_price : "99.99"
     } ,   
     {
+        id : 12,
         stock : "Low", 
         rating : 4, 
         count : 8 ,
@@ -131,6 +146,7 @@ const products = [
         list_price : "64.50"
     } ,
     {
+        id : 13,
         stock : "In", 
         rating : 4, 
         count : 8 ,
@@ -141,6 +157,7 @@ const products = [
         list_price : "159.99"
     } ,
     {
+        id : 14,
         stock : "Low", 
         rating : 4, 
         count : 8 ,
@@ -151,6 +168,7 @@ const products = [
         list_price : "149.99"
     } ,
     {
+        id : 15,
         stock : "Ouf Of", 
         rating : 4, 
         count : 8 ,
@@ -161,6 +179,7 @@ const products = [
         list_price : "159.99"
     } ,
     {
+        id : 16,
         stock : "Low", 
         rating : 4, 
         count : 8 ,
@@ -171,6 +190,7 @@ const products = [
         list_price : "59.99"
     } ,
     {
+        id : 17,
         stock : "In", 
         rating : 4, 
         count : 8 ,
@@ -181,6 +201,7 @@ const products = [
         list_price : "72.50"
     } ,
     {
+        id : 18,
         stock : "In", 
         rating : 4, 
         count : 8 ,
@@ -194,9 +215,12 @@ const products = [
 ]
 
 const EachProduct = (props) => {
-    
+    const navigate = useNavigate();
+    const HandleProductDetail = () => {
+        navigate(`/product/details/${props.item_id}`)
+    }
     return (
-        <>
+        <div className="" onClick={HandleProductDetail}>
             <div className='w-full h-3  justify-between hidden lg:flex'>
                 <div className={props.stock == "Low" ? "text-[#FFA800] float-right lg:float-none font-inter font-bold text-xs pt-[6px]" : props.stock == "In" ? "text-[#4BCB67] font-inter font-bold text-xs pt-[6px] float-right lg:float-none" : "text-[#F30303] font-inter font-bold text-xs pt-[6px] float-right lg:float-none"}>
                     {props.stock} Stock
@@ -253,7 +277,7 @@ const EachProduct = (props) => {
                     )
                 }
             </div>
-        </>
+        </div>
     )
 }
 
@@ -404,21 +428,21 @@ const ProductListItems = ({auth, displayType, product_list_count, pageNumber, co
                 switch((i -startIndex + 1) % 3){
                     case 1:
                         subItemArr.push(<div key={i} className="w-1/3 p-6 ">
-                            <EachProduct key={i} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
+                            <EachProduct item_id={item.id} key={i} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
                                 category = {item.category} name={item.name} 
                                 price = {item.price} list_price = {item.list_price}  />
                         </div>)
                         break
                     case 2:
                         subItemArr.push(<div key={i}  className="w-1/3  p-6 border-l border-[#DFE1E5] border-solid">
-                            <EachProduct key={i} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
+                            <EachProduct item_id={item.id} key={i} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
                                 category = {item.category} name={item.name} 
                                 price = {item.price} list_price = {item.list_price}  />
                         </div>)
                         break
                     default:
                         subItemArr.push(<div key={i}  className="w-1/3 p-6 border-l border-[#DFE1E5] border-solid">
-                            <EachProduct key={i} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
+                            <EachProduct item_id={item.id} key={i} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
                                 category = {item.category} name={item.name} 
                                 price = {item.price} list_price = {item.list_price}  />
                         </div>)
@@ -453,14 +477,14 @@ const ProductListItems = ({auth, displayType, product_list_count, pageNumber, co
                 switch((i -startIndex + 1) % 2){
                     case 1:
                         subItemArr.push(<div key={i} className="w-1/2 p-2">
-                            <EachProduct key={i} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
+                            <EachProduct item_id={item.id} key={i} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
                                 category = {item.category} name={item.name} 
                                 price = {item.price} list_price = {item.list_price}  />
                         </div>)
                         break
                     default:
                         subItemArr.push(<div key={i}  className="w-1/2  p-2 border-l border-[#DFE1E5] border-solid">
-                            <EachProduct key={i} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
+                            <EachProduct item_id={item.id} key={i} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
                                 category = {item.category} name={item.name} 
                                 price = {item.price} list_price = {item.list_price}  />
                         </div>)

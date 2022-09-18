@@ -28,7 +28,7 @@ const  Quantity  = () => {
           <button className="quantity-input__modifier quantity-input__modifier--left" onClick={decrement}>
           &mdash;
           </button>
-          <input className="quantity-input__screen" type="text" value={val} readonly />
+          <input className="quantity-input__screen" type="text" value={val} readOnly />
           <button className="quantity-input__modifier quantity-input__modifier--right" onClick={increment}>
           &#xff0b;
           </button>  

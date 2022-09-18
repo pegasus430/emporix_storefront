@@ -2,6 +2,7 @@ import React, { useState , useRef } from 'react'
 import adjust               from '../../assets/adjust-2.png'
 import deleteFilter         from '../../assets/del_filter.png'
 import { ChevronUpIcon , ChevronDownIcon } from '@heroicons/react/solid'
+import { CAccordionBody } from '@coreui/react'
 
 // const filterItems = [
 //     {
