@@ -29,9 +29,10 @@
     "react-simple-star-rating": "^4.0.5",
     "react-slick": "^0.29.0",
     "react-stars": "^2.2.5",
-    "slick-carousel": "^1.8.1",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
+    "slick-carousel": "^1.8.1",
+    "uuid": "^9.0.0",
     "validator": "^13.7.0",
     "web-vitals": "^2.1.4"
   },
