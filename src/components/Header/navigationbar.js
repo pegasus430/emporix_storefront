@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineMenu,AiOutlineClose, AiOutlineSearch , AiOutlineMail, AiOutlineShoppingCart } from 'react-icons/ai'
 import { useSelector } from "react-redux"
@@ -6,6 +6,7 @@ import logo from '../../assets/atom.png'
 import AccountMenu from './accountmenu'
 import { HiOutlineUserCircle } from "react-icons/hi"
 import { ChevronRightIcon , ChevronLeftIcon } from '@heroicons/react/solid'
+import CartContext from '../../pages/context'
 
 const menu_list = [
 	{
@@ -232,6 +233,8 @@ const Navbar = () => {
 	  const [title, setTitle] = useState('')
 	  const [subMenuItems, setSubMenuItems] = useState([])
 
+	const {isOpen, setIsOpen} = useContext(CartContext)
+
     const ParentBoard = () =>{
       	return (
           	<>
@@ -365,6 +368,10 @@ const Navbar = () => {
       }
 
     }
+	const handleOpenCart = () => {
+		
+		setIsOpen(true)
+	}
     // create a function for toggle mobile nav
     const handleNavOpen = () =>{
         setOpen(!open)
@@ -413,7 +420,7 @@ const Navbar = () => {
               <ul className='flex'>
                 <li className='px-4'><AiOutlineMail size={20} /></li> |
                 <li className='px-4 flex'>
-                  <AiOutlineShoppingCart size = {20} />
+                  <AiOutlineShoppingCart size = {20} onClick={handleOpenCart}/>
                   <div className='pl-[17.5px] text-white flex'>
                       &euro; 768.47
                   </div>
