@@ -1,0 +1,7 @@
+.shipping_method{
+    @apply w-full md:flex bg-white border border-[#DFE1E5] p-4 mb-2  font-inter
+}
+
+.shipping_method_selected {
+    @apply w-full p-4 md:flex bg-[#F5F8FA] border-[#214559] border mb-2 font-inter
+}
