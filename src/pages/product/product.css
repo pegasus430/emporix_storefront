@@ -135,7 +135,7 @@
   @apply lg:w-[calc((100%-48px)*0.59)]
 } 
 .product-detail-sub-images{
-  @apply grid grid-cols-3 gap-6 col-span-3 mt-6
+  @apply lg:grid lg:grid-cols-3 gap-6 col-span-3 mt-6 hidden
 }
 .product-detail-sub-image-item{
   @apply border border-[#DFE1E5] p-[10px]
@@ -261,7 +261,7 @@
   @apply text-[20px] leading-[32px] font-medium
 }
 .product-discount-wrapper{
-  @apply grid grid-cols-1
+  @apply lg:grid lg:grid-cols-1 hidden
 }
 .discount-row{
   @apply flex gap-12

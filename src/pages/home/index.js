@@ -1,25 +1,20 @@
-import React from "react";
-import Topbar from "../../components/Header/topbar";
+import React, { useState, createContext, useContext} from "react";
 import About from "./About"
 import Service from "./Service";
 import Category from "./Category";
 import Product from "./Product";
 import Subscribe from "./Subscribe"
-import Footer from "../../components/Footer";
-
+import PageTemplate from "../pageTemplate";
 
 const Home = () => {
     return (
-        <>
-            <Topbar title={'home'} />
+        <PageTemplate title={'home'}>
             <About />
             <Service />
             <Category />
             <Product />
             <Subscribe />
-            <Footer />
-        </>
-        
+        </PageTemplate>
     )
 }
 

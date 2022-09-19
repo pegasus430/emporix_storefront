@@ -1,0 +1,25 @@
+.cart-page-wrapper{
+    @apply w-full md:pt-60 pt-24 md:px-24 px-[16.5px] md:pb-24 pb-12 font-inter
+}
+.cart-page-content{
+    @apply max-w-screen-xl mx-auto grid grid-cols-1 md:gap-12 gap-6 md:pt-24 pt-6
+}
+.cart-action-content{
+    @apply gap-6 text-[14px] leading-[18px] font-semibold text-[#818385]
+}
+.cart-head-item{
+    @apply font-inter !font-bold !text-[14px] !leading-[20px]
+}
+.cart-row-item{
+    @apply !font-bold !py-6 
+}
+
+.quantity-wrapper{
+    @apply w-[68px]
+}
+.cart-product-info-wrapper{
+    @apply !w-[356px]
+}
+.cart-action-panel-wrapper{
+    @apply md:w-[384px] w-full
+}

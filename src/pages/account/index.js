@@ -1,9 +1,8 @@
 import React from "react"
-import Topbar from "../../components/Header/topbar"
-import Footer from "../../components/Footer"
 import AccountPage from "./AccountPage"
 import { useSelector } from "react-redux"
 import { Navigate } from 'react-router-dom'
+import PageTemplate from "../pageTemplate";
 
 const MobileAccountBar = ({title}) => {
     return (
@@ -23,12 +22,10 @@ const Account = () => {
 
     const title = "Welcome Back, " + currentUser.username
     return (
-        <div className="min-w-[375px]">
-            <Topbar title={title} />
+        <PageTemplate title={title}>
             <MobileAccountBar title = {title} />
             <AccountPage page_info={title}/>
-            <Footer />
-        </div>
+        </PageTemplate>
         
     )
 }
