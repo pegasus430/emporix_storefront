@@ -1,20 +1,18 @@
-import React from "react";
+import React , { useState, createContext, useContext} from "react";
 import {useParams} from 'react-router-dom'
-import Topbar from "../../components/Header/topbar";
-import Footer from "../../components/Footer";
+
 import ProductPage from "./ProductPage";
 import ProductDetailPage from './ProductDetailPage';
+import PageTemplate from "../pageTemplate";
+import products from './products'
 
 const ProductList = () => {
     const {category } = useParams()
-    // console.log( category)
+
     return (
-        <div className="min-w-[375px]">
-            <Topbar title={category} />
+        <PageTemplate title={category}>
             <ProductPage />
-            <Footer />
-        </div>
-        
+        </PageTemplate>
     )
 }
 
@@ -22,11 +20,9 @@ export const ProductDetails = () => {
     const {product_id} = useParams()
 
     return(
-        <div className="min-w-[375px]">
-            <Topbar title='' />
-            <ProductDetailPage />
-            <Footer />
-        </div>
+        <PageTemplate title={""}>
+            <ProductDetailPage product={products[product_id-1]}/>
+        </PageTemplate>
     )
 }
 
