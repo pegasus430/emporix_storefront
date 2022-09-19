@@ -1,6 +1,7 @@
 import axios from "axios";
 import {v4 as uuidv4} from 'uuid'
-const API_URL = process.env.NODE_ENV === "development" ? process.env.REACT_APP_API_URL_STAGE :process.env.REACT_APP_API_URL_PRODUCTION ;
+// const API_URL = process.env.NODE_ENV === "development" ? process.env.REACT_APP_API_URL_STAGE :process.env.REACT_APP_API_URL_PRODUCTION ;
+const API_URL =  process.env.REACT_APP_API_URL_STAGE
 const tenant = process.env.REACT_APP_TENANT_STAGE
 const session_id = uuidv4()
 
