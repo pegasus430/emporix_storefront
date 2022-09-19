@@ -3,23 +3,27 @@ import { Container } from "../common"
 
 import './progressbar.css'
 
-const ProgressBarContent = () => {
+const ProgressBarContent = ({barstyle, mobilestyle}) => {
     return (
-        <>
+        <div className="w-full">
             <div className="w-full main-bar"></div>
-            <div className="w-full "></div>
-        </>
+            <div style={barstyle} className="progress-bar md:block hidden"></div>
+            <div style={mobilestyle} className="progress-bar md:hidden"></div>
+        </div>
     )
 }
 export const ProgressBar = ({children, active, className}) => {
     const status = children.map((node) => node.props.status)
-    
+    const active_index = status.indexOf(active) >= 0 ? (status.indexOf(active) + 0.5 ) / status.length  : 0
+    const barstyle = {width: active_index ? `calc(27px + (100% - 48px)*${active_index})`: ''}
+    const mobilestyle = {width: active_index ? `calc(3px + 100% * ${active_index})`: ''}
+
     return (
         <>
             <Container className="progress-container">
                 {children}
             </Container>
-            <ProgressBarContent />
+            <ProgressBarContent mobilestyle = {mobilestyle} barstyle={ barstyle}/>
         </>
     )
 }

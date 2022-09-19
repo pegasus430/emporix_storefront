@@ -1,6 +1,6 @@
 .progress-container{
-    z-index: 100 !important;
-    @apply px-[24px] 
+    z-index: 6 !important;
+    @apply md:px-[24px] px-0 
 }
 .progress-bar-item{
     @apply h-[33px] text-center w-full text-[16px] leading-[22px]
@@ -10,4 +10,7 @@
 }
 .main-bar{
     @apply bg-[#DFE1E5] h-[2px] mt-[-4px]
+}
+.progress-bar{
+    @apply bg-[#2C5C77] h-[2px] mt-[-2px]
 }

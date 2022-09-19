@@ -7,7 +7,7 @@ const CheckoutCotent = () => {
     return (
         <div className="checkout-content-wrapper">
             <GridLayout className="">
-                <ProgressBar active="" className="">
+                <ProgressBar active="shipping" className="">
                     <ProgressBarItem status="shipping" title="Shipping"/>
                     <ProgressBarItem status="payment" title="Payment"/>
                     <ProgressBarItem status="review_order" title="Review Order"/>
