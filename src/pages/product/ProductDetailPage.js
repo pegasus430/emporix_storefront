@@ -1,10 +1,10 @@
-import React, { useState }  from 'react'
+import React, { useState ,createContext, useContext}  from 'react'
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import Select from "react-dropdown-select";
 import ReactStars from 'react-stars'
-import Quantity from "../../components/QuantitySelector/quantity"
+import Quantity from "../../components/Utilities/quantity/quantity"
 import Product from "../../components/Product/product"
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -16,8 +16,10 @@ import hp_laser_printer from "../../assets/products/hp_laser_printer.png"
 import comfort_chair from "../../assets/products/comfort_chair.png"
 import pc_stand from "../../assets/products/pc_stand.png"
 import stapler from "../../assets/products/stapler.png"
+import HandleProductAddToCart from './HandleProductAddToCart'
+import CartContext from '../context'
 
-
+const ProductContext = createContext()
 
 const ProductDetailCategoryCaptionBar = () => {
  
@@ -167,14 +169,18 @@ const ProductFormantAndWarranty = () => {
     )
 }
 const PrdouctAddToCart = () => {
+    const product = useContext(ProductContext)
+    const {isOpen, setIsOpen} = useContext(CartContext)
+    const [quantitiy, setQuantity] = useState(1)
+
     return (
         <div className="product-add-to-cart-wrapper py-12">
             <div className="quantity">
                 Quantity
-                <Quantity />
+                <Quantity value={quantitiy} action={setQuantity} />
             </div>
             <div className="">
-                <button className="product-add-to-cart-btn">ADD TO CART</button>
+                <button className="product-add-to-cart-btn" onClick={()=> HandleProductAddToCart(product,setIsOpen, quantitiy)}>ADD TO CART</button>
             </div>
         </div>
     )
@@ -214,25 +220,26 @@ const ProductInfo = ({product}) => {
         </>
     )
 }
-const ProductContent = () => {
+
+const ProductContent = ({product}) => {
     
-    const product = {
-        stock : "Low", 
-        rating : 4, 
-        product_count: 16,
-        count : 8 ,
-        src : "/img/products/hp_printer.png" ,
-        category : "ICA-CT 073BK",
-        name : "HP LaserJet 500 color Series Printer Cabinet",
-        price : "93.50",
-        sku: "CF085A",
-        estimated_delivery: "23.05.2022",
-        list_price : "109.99",
-        sub_images: ["/img/products/hp_printer_sub1.png", "/img/products/hp_printer_sub2.png", "/img/products/hp_printer_sub3.png"]
-    }
+    // const product = {
+    //     stock : "Low", 
+    //     rating : 4, 
+    //     product_count: 16,
+    //     count : 8 ,
+    //     src : "/img/products/hp_printer.png" ,
+    //     category : "ICA-CT 073BK",
+    //     name : "HP LaserJet 500 color Series Printer Cabinet",
+    //     price : "93.50",
+    //     list_price : "109.99",
+    //     sku: "CF085A",
+    //     estimated_delivery: "23.05.2022",
+    //     sub_images: ["/img/products/hp_printer_sub1.png", "/img/products/hp_printer_sub2.png", "/img/products/hp_printer_sub3.png"]
+    // }
 
     return (
-        <>
+        <ProductContext.Provider value={product}>
             <div className="product-content-wrapper">
                 <div className="mobile-lg">
                     <ProductSkuAndReview product={product}/>
@@ -248,7 +255,7 @@ const ProductContent = () => {
                     <ProductInfo product={product}/>
                 </div>
             </div>
-        </>
+        </ProductContext.Provider>
     )
 }
 
@@ -496,12 +503,12 @@ const ProductMatchItems = () => {
         </div>
     )
 }
-const ProductDetailPage = () => {
+const ProductDetailPage = ({product}) => {
     return (
         <div className="product-detail-page-wrapper ">
             <div className="product-detail-page-content">
                 <ProductDetailCategoryCaptionBar /> 
-                <ProductContent />
+                <ProductContent product={product}/>
                 <ProductDetailInfo />
                 <ProductMatchItems />
             </div>
