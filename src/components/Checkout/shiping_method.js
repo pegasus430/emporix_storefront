@@ -3,12 +3,14 @@ import BpRadio from './radio'
 import './checkout.css'
 
 const ShippingMethod = ({active, shippingmode, date, price}) => {
+
+    const [shipingActive, setShippingActive] = useState(active)
     return (
         
-            <div className={active ? 'shipping_method_selected' : 'shipping_method'} >
+            <div className={shipingActive ? 'shipping_method_selected' : 'shipping_method'} >
                 <div className='flex justify-between w-full'>
                     <div className='flex'>
-                        <BpRadio />
+                        <BpRadio onClick={() => setShippingActive(!shipingActive)} />
                         <div className='pt-2 md:pt-0'>
                             <div className=' font-bold text-base '>
                                 {shippingmode} <span className='underline font-semibold text-[14px]'>+info</span>
