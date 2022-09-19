@@ -11,7 +11,7 @@ const CartPage = () => {
     CartProductList = CartProductList == null? {}: JSON.parse(CartProductList)
 
     const products = Object.values(CartProductList)
-    const subtotalWithoutVat = products.map(product => product.price * product.buy_count).reduce((a,b)=> a + b)
+    const subtotalWithoutVat = products.length? products.map(product => product.price * product.buy_count).reduce((a,b)=> a + b): 0
     
     return (
         <div className="cart-page-wrapper ">
