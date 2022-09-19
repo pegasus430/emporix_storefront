@@ -3,7 +3,7 @@ import React from 'react'
 import AccountLayout from './AccountLayout'
 
 const AccountHome = () => {
-    return <AccountLayout pageComponent={<MyAccountContent />} page="Index"/>;
+    return <AccountLayout page="Index"> <MyAccountContent /> </AccountLayout>;
 }
 
 export default AccountHome

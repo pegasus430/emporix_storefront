@@ -21,12 +21,12 @@ const Account = () => {
     }
 
     const title = "Welcome Back, " + currentUser.username
+    
     return (
         <PageTemplate title={title}>
             <MobileAccountBar title = {title} />
             <AccountPage page_info={title}/>
         </PageTemplate>
-        
     )
 }
 

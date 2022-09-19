@@ -1,5 +1,7 @@
 import React, { useState }  from 'react'
 import AccountLayout from './AccountLayout'
+import { useSelector } from "react-redux"
+import { Navigate } from 'react-router-dom'
 
 const CompanyInfoItem = ({caption,content}) => {
   return (
@@ -13,13 +15,17 @@ const CompanyInfoItem = ({caption,content}) => {
     </div>
   )
 }
-const CompanyDetails = () => {
+const CompanyDetails = ({value}) => {
+  const [company, setCompany] = useState(value)
+  
+  
+  
   return (
     <>
       <div className="w-full md:py-12 py-5 md:flex md:justify-between border-bottom-gray">
         <div className="font-inter font-bold company-label label">Company Name</div>
         <div className="company-input-wrapper mt-2 md:mt-0">
-          <input type="text" className="mt-2 sm:mt-0 company-input border-gray" />
+          <input type="text" onChange={(e)=> setCompany(e.target.value)} className="mt-2 sm:mt-0 company-input border-gray" value={company}/>
         </div>
       </div>
       <div className="w-full md:pt-12 pt-6 md:flex md:justify-between">
@@ -42,7 +48,11 @@ const CompanyDetails = () => {
 }
 
 const AccountCompanyDetails = () => {
-    return <AccountLayout pageComponent={<CompanyDetails />} page="Company Details"/>
+    const { user: currentUser } = useSelector((state) => state.auth);
+    if (!currentUser) {
+      return <Navigate  to="/login" />;
+  }
+    return <AccountLayout page="Company Details"><CompanyDetails  value = {currentUser.company}/></AccountLayout>
 }
 
 

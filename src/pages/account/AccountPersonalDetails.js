@@ -1,18 +1,20 @@
-import React, { useState }  from 'react'
-import { Link, Outlet, useParams} from 'react-router-dom'
+import React, { useState}  from 'react'
+import { Link, Outlet, useParams, Navigate} from 'react-router-dom'
+import { useSelector } from "react-redux"
 import AccountLayout from './AccountLayout'
 import photo from '../../assets/photo.png'
 
-const FromInputItem = ({label}) => {
+const FromInputItem = ({label, value}) => {
+  const [val, setVal] = useState(value)
   return (
     <div className="form-item sm:justify-between">
         <span className="input-label text-base ">{label}</span>
-        <input type="text" className="mt-2 sm:mt-0 form-input-item border-gray"/>
+        <input type="text" onChange={(e)=>{setVal(e.target.value)}} className="mt-2 sm:mt-0 form-input-item border-gray" value={val}/>
     </div>
   )
 }
 
-const PersonalInfo =() => {
+const PersonalInfo =({user}) => {
   return (
     <div className="personal-info mt-12 pb-12 sm:flex justify-between border-bottom-gray ">
         <div className="personal-title-wrapper">
@@ -33,10 +35,10 @@ const PersonalInfo =() => {
         <div className="personal-info-content mt-6 sm:mt-0">
          
           <div className="personal-info-content-wrapper grid grid-cols-1 gap-4">
-            <FromInputItem label="Name"/>
-            <FromInputItem label="Last Name"/>
-            <FromInputItem label="Email Address"/>
-            <FromInputItem label="Mobile Number"/>
+            <FromInputItem label="Name" value={user.username}/>
+            <FromInputItem label="Last Name" value={user.lastName}/>
+            <FromInputItem label="Email Address" value={user.contactEmail}/>
+            <FromInputItem label="Mobile Number" value={user.contactPhone}/>
           </div>
         </div>
       </div>
@@ -89,9 +91,14 @@ const ActionDiscardButton = ({caption}) => {
 }
 
 const PersonalDetails = () => {
+  const { user: currentUser } = useSelector((state) => state.auth);
+  if (!currentUser) {
+      return <Navigate  to="/login" />;
+  }
+console.log(currentUser)
   return (
     <>
-      <PersonalInfo />
+      <PersonalInfo user={currentUser}/>
       <ChangePasswordContent />
       <AccountPersonalSave />
     </>
@@ -99,7 +106,7 @@ const PersonalDetails = () => {
 };
 
 const AccountPersonalDetails = () => {
-    return <AccountLayout pageComponent={<PersonalDetails />} page="Personal Details"/>;
+    return <AccountLayout page="Personal Details"> <PersonalDetails /> </AccountLayout>;
 };
 
 

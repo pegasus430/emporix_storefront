@@ -123,7 +123,7 @@ export const MyOrders = () => {
 };
 
 const AccountMyOrders = () => {
-    return <AccountLayout pageComponent={<MyOrders />} page="My Orders"/>;
+    return <AccountLayout page="My Orders"><MyOrders /> </AccountLayout>;
 };
 
 export default AccountMyOrders;

@@ -126,7 +126,7 @@ export const SavedCarts = () => {
 };
 
 const AccountSavedCarts = () => {
-    return <AccountLayout pageComponent={<SavedCarts />} page="Saved Carts"/>;
+    return <AccountLayout page="Saved Carts"> <SavedCarts /> </AccountLayout>;
 };
 
 export default AccountSavedCarts;
