@@ -4,8 +4,15 @@ import AccountLayout from './AccountLayout'
 import photo from '../../assets/photo.png'
 import {MyOrders} from './common'
 import {SavedCarts} from './common'
+import { useSelector } from "react-redux"
+import { Navigate } from 'react-router-dom'
 
 const AccountPersonalInfo = () => {
+    const { user: currentUser } = useSelector((state) => state.auth);
+    if (!currentUser) {
+        return <Navigate  to="/login" />;
+    }
+
     return (
         <div className="account-personal-info-wrapper">
             <div className="account-personal-info-caption border-bottom-gray">
@@ -27,10 +34,10 @@ const AccountPersonalInfo = () => {
                             <p>Email</p>
                         </div>
                         <div className="profile-items-info gap-2 flex flex-col justify-items-start">
-                            <p className="font-bold">Jack White</p>
-                            <p>Medit Gbmh</p>
-                            <p>+49 30 901820</p>
-                            <p>jack.white@medit.com</p>
+                            <p className="font-bold">{currentUser.username}</p>
+                            <p>{currentUser.company}</p>
+                            <p>{currentUser.contactPhone}</p>
+                            <p>{currentUser.contactEmail}</p>
                         </div>
                     </div>
                 </div>
@@ -152,7 +159,7 @@ export const MyAccountContent = () => {
   )
 }
 const MyAccount = () => {
-    return <AccountLayout pageComponent={<MyAccountContent />} page="My Account"/>;
+    return <AccountLayout page="My Account"> <MyAccountContent /> </AccountLayout>;
 }
 
 export default MyAccount

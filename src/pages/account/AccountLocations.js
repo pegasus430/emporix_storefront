@@ -127,7 +127,7 @@ const Locations = () => {
 };
 
 const AccountLocations = () => {
-    return <AccountLayout pageComponent={<Locations />} page="Locations"/>;
+    return <AccountLayout page="Locations"> <Locations /></AccountLayout>;
 };
 
 export default AccountLocations;

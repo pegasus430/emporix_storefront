@@ -136,7 +136,7 @@ const ReplenishmentOrders = () => {
 };
 
 const AccountReplenishmentOrders = () => {
-    return <AccountLayout pageComponent={<ReplenishmentOrders />} page="Replenishment Orders"/>;
+    return <AccountLayout page="Replenishment Orders"> <ReplenishmentOrders /></AccountLayout>;
 };
 
 export default AccountReplenishmentOrders;

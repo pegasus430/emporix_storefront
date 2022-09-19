@@ -6,7 +6,7 @@ const Reviews = () => {
 };
 
 const AccountReviews = () => {
-    return <AccountLayout pageComponent={<Reviews />} page="Reviews"/>;
+    return <AccountLayout  page="Reviews"> <Reviews /></AccountLayout>;
 };
 
 export default AccountReviews;
