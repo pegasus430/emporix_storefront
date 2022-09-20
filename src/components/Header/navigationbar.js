@@ -233,7 +233,7 @@ const Navbar = () => {
 	  const [title, setTitle] = useState('')
 	  const [subMenuItems, setSubMenuItems] = useState([])
 
-	const {isOpen, setIsOpen} = useContext(CartContext)
+	const {showCart, setShowCart} = useContext(CartContext)
 
     const ParentBoard = () =>{
       	return (
@@ -370,7 +370,7 @@ const Navbar = () => {
     }
 	const handleOpenCart = () => {
 		
-		setIsOpen(true)
+		setShowCart(true)
 	}
     // create a function for toggle mobile nav
     const handleNavOpen = () =>{
