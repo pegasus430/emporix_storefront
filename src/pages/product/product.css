@@ -174,7 +174,7 @@
   @apply border-b border-[#D7DADE] pb-12
 }
 .product-format-and-warranty{
-  @apply border-b border-[#D7DADE] grid grid-cols-1 gap-6
+  @apply border-b border-[#D7DADE] grid grid-cols-1 gap-6 lg:!w-[240px] w-full
 }
 .product-add-to-cart-wrapper{
   @apply lg:border-b lg:border-[#D7DADE] lg:flex lg:justify-between
@@ -190,7 +190,7 @@
 }
 .react-dropdown-select{
   border-radius: 1px !important;
-  @apply lg:!w-[240px] !px-3 !py-2 w-full
+  @apply !px-3 !py-2 w-full
 }
 .react-dropdown-select[aria-expanded="true"]{
   border-color: #0380F3 !important;
