@@ -1,16 +1,16 @@
-import React, { useState }  from 'react'
-import BpRadio from './radio'
+import React, { useState, useContext}  from 'react'
+import {RadioItem} from '../Utilities/radio'
+import { RadioContext } from '../Utilities/radio'
 import './checkout.css'
 
-const ShippingMethod = ({active, shippingmode, date, price}) => {
-
-    const [shipingActive, setShippingActive] = useState(active)
+const ShippingMethod = ({radioKey, shippingmode, date, price}) => {
+    const {radioActive,setRadioActive} = useContext(RadioContext)
     return (
         
-            <div className={shipingActive ? 'shipping_method_selected' : 'shipping_method'} >
+            <div className={radioActive ==radioKey? 'shipping_method_selected' : 'shipping_method'} >
                 <div className='flex justify-between w-full'>
                     <div className='flex'>
-                        <BpRadio onClick={() => setShippingActive(!shipingActive)} />
+                        <RadioItem radioKey={radioKey} />
                         <div className='pt-2 md:pt-0'>
                             <div className=' font-bold text-base '>
                                 {shippingmode} <span className='underline font-semibold text-[14px]'>+info</span>
@@ -29,11 +29,7 @@ const ShippingMethod = ({active, shippingmode, date, price}) => {
                 <div className='mobile_only font-normal color-[#818385] pt-2'>
                     Expected arrival on: {date}
                 </div>
-            </div>
-
-            
-        
-        
+            </div>   
     )
 }
 

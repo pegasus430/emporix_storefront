@@ -24,3 +24,35 @@ export const Container = ({children, className}) => {
         </div>
     )
 }
+export const MobileMDContainer = ({children}) => {
+    return (
+        <div className="md:hidden">{children}</div>
+    )
+}
+export const DesktopMDContainer = ({children}) => {
+    return (
+        <div className="md:block hidden">{children}</div>
+    )
+}
+
+export const MobileLGContainer = ({children}) => {
+    return (
+        <div className="lg:hidden">{children}</div>
+    )
+}
+export const DesktopLGContainer = ({children}) => {
+    return (
+        <div className="lg:block hidden">{children}</div>
+    )
+}
+
+export const MobileXLContainer = ({children}) => {
+    return (
+        <div className="xl:hidden">{children}</div>
+    )
+}
+export const DesktopXLContainer = ({children}) => {
+    return (
+        <div className="xl:block hidden">{children}</div>
+    )
+}
