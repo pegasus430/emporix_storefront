@@ -163,6 +163,7 @@ const ProductFormantAndWarranty = () => {
     ]
     return (
         <div className="product-format-and-warranty py-12">
+            
             <ProductSelectComponent label="Format" options={format_options} />
             <ProductSelectComponent label="Warranty" options={warranty_options} />
         </div>
