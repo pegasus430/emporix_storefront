@@ -4,17 +4,17 @@ import Service from "./Service";
 import Category from "./Category";
 import Product from "./Product";
 import Subscribe from "./Subscribe"
-import PageTemplate from "../pageTemplate";
+import Layout from "../Layout";
 
 const Home = () => {
     return (
-        <PageTemplate title={'home'}>
+        <Layout title={'home'}>
             <About />
             <Service />
             <Category />
             <Product />
             <Subscribe />
-        </PageTemplate>
+        </Layout>
     )
 }
 

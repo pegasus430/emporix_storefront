@@ -2,7 +2,7 @@ import React from "react"
 import AccountPage from "./AccountPage"
 import { useSelector } from "react-redux"
 import { Navigate } from 'react-router-dom'
-import PageTemplate from "../pageTemplate";
+import Layout from "../Layout";
 
 const MobileAccountBar = ({title}) => {
     return (
@@ -23,10 +23,10 @@ const Account = () => {
     const title = "Welcome Back, " + currentUser.username
     
     return (
-        <PageTemplate title={title}>
+        <Layout title={title}>
             <MobileAccountBar title = {title} />
             <AccountPage page_info={title}/>
-        </PageTemplate>
+        </Layout>
     )
 }
 

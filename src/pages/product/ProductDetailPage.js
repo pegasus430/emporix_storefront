@@ -33,7 +33,7 @@ const ProductDetailCategoryCaptionBar = () => {
         <div className="product-detail-category-caption-bar">
             <Breadcrumbs className="lg:block hidden" separator="|" aria-label="breadcrumb">
                 { category_tree.map((row,index) => {
-                    return row.link == "" ? 
+                    return row.link === "" ? 
                         <Typography key={index} className="breadcrumb-item" color="text.primary">{row.caption}</Typography>:
                         <Link key={index} className="breadcrumb-item" underline="hover" color="inherit" href="/">
                             {row.caption}
@@ -42,7 +42,7 @@ const ProductDetailCategoryCaptionBar = () => {
             </Breadcrumbs>
             <Breadcrumbs className="lg:hidden md:block hidden" separator="|" aria-label="breadcrumb">
                 { category_tree.map((row,index) => {
-                    return row.link == "" ? 
+                    return row.link === "" ? 
                         "":
                         <Link key={index} className="breadcrumb-item" underline="hover" color={index === category_tree.length - 2 ?"text.primary": "inherit"} href="/">
                             {row.caption}
@@ -67,12 +67,12 @@ const ProductImage = ({product}) => {
     return (
         <div className="product-detail-image-content">
             <div className="product-detail-main-image rounded">
-                <img src={`${product.src}`} className="w-full"/>
+                <img src={`${product.src}`} alt="product" className="w-full"/>
             </div>
             <div className="product-detail-sub-images">
                 {product.sub_images.map((link, index) => {
                     return <div key={index} className="rounded product-detail-sub-image-item">
-                                <img src={`${link}`} className="w-full m-auto items-center"/>
+                                <img src={`${link}`} alt="product_" className="w-full m-auto items-center"/>
                             </div>
                 })}
             </div>
@@ -170,7 +170,7 @@ const ProductFormantAndWarranty = () => {
 }
 const PrdouctAddToCart = () => {
     const product = useContext(ProductContext)
-    const {isOpen, setIsOpen} = useContext(CartContext)
+    const {showCart, setShowCart} = useContext(CartContext)
     const [quantitiy, setQuantity] = useState(1)
 
     return (
@@ -180,7 +180,7 @@ const PrdouctAddToCart = () => {
                 <Quantity value={quantitiy} action={setQuantity} />
             </div>
             <div className="">
-                <button className="product-add-to-cart-btn" onClick={()=> HandleProductAddToCart(product,setIsOpen, quantitiy)}>ADD TO CART</button>
+                <button className="product-add-to-cart-btn" onClick={()=> HandleProductAddToCart(product,setShowCart, quantitiy)}>ADD TO CART</button>
             </div>
         </div>
     )

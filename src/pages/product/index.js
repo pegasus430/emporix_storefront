@@ -3,16 +3,16 @@ import {useParams} from 'react-router-dom'
 
 import ProductPage from "./ProductPage";
 import ProductDetailPage from './ProductDetailPage';
-import PageTemplate from "../pageTemplate";
+import Layout from "../Layout";
 import products from './products'
 
 const ProductList = () => {
     const {category } = useParams()
 
     return (
-        <PageTemplate title={category}>
+        <Layout title={category}>
             <ProductPage />
-        </PageTemplate>
+        </Layout>
     )
 }
 
@@ -20,9 +20,9 @@ export const ProductDetails = () => {
     const {product_id} = useParams()
 
     return(
-        <PageTemplate title={""}>
+        <Layout title={""}>
             <ProductDetailPage product={products[product_id-1]}/>
-        </PageTemplate>
+        </Layout>
     )
 }
 

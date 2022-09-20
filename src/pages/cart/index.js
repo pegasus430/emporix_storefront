@@ -1,14 +1,14 @@
 import React, { useState }  from 'react'
 import {useParams} from 'react-router-dom'
 import CartPage from './CartPage'
-import PageTemplate from "../pageTemplate";
+import Layout from "../Layout";
 
 const Cart = () => {
     const title = `Shopping Cart`
     return (
-        <PageTemplate title={title}>
+        <Layout title={title}>
             <CartPage />
-        </PageTemplate>
+        </Layout>
     )
 }
 export default Cart
