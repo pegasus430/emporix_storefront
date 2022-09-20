@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from './navigationbar'
 import logo from '../../assets/atom.png'
-import nav_bg from '../../assets/nav_bg.png'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import "./topbar.css"
 
@@ -218,14 +217,15 @@ const menu_list = [
 	} ,
 	{
 	  "title"  : "Quick Order" ,
-	  "items" : []
+	  "items" : [],
+	  'url': 'quick_order'
 	} 
   ]
 
 const Logo = () => {
 	return (
 		<Link to={"/"} className="flex">
-			<div className='w-[37px]'><img src={logo}  className="w-[37px]" /></div>
+			<div className='w-[37px]'><img src={logo} alt={"Logo"} className="w-[37px]" /></div>
 			<div className='px-4 text-white text-[25px] font-medium items-center'><span>atom</span></div>			
 		</Link>
 	)
@@ -241,17 +241,19 @@ const MegaNav = () => {
 		setSubMenuItems(items)
 		setShowMegaMenuContent(true)
 	}
-	const handleMegaMenu = () => {
-		setShowMegaMenuContent(!showMegaMenuContent)
-	}
+	
 
 	return (
 		<div className="dropdown flex text-base" >
 			{
 				menu_list.map((item, index) => 
-				<button key = {index} className="mega_menu_dropbtn" onMouseOver={() => overMenuItem(item.items)} onMouseOut={() => {setSubMenuMegaContent([]); setShowMegaMenuContent(false)}}>
-					<div>{item.title}</div>
-					<ChevronDownIcon className="ml-2 mt-1 h-5 w-5" aria-hidden="true" />
+				<button key = {index} className="mega_menu_dropbtn"   onMouseOver={item.items.length? () => overMenuItem(item.items) : null } onMouseOut={() => {setSubMenuMegaContent([]); setShowMegaMenuContent(false)}} >
+					<Link to={!item.items.length ? `/${item.url}` : '/'}>
+
+						<div>{item.title}</div>
+					</Link>
+					
+					<ChevronDownIcon className={ item.items.length ? "ml-2 mt-1 h-5 w-5": 'hidden'} aria-hidden="true" />
 					</button>
 				)
 			}
@@ -311,11 +313,11 @@ const MegaNav = () => {
 }
 
 const TopNav = ({title}) => {
-	const nav_title_condition = title !="" && title != "home" ? true : false
+	const nav_title_condition = title !=="" && title !== "home" ? true : false
 
 	return (
-		<div  className= { title == 'home' ?  "desktop_only_flex w-full md:h-36 absolute z-10" : 
-				title == ""	? "nav-background-title desktop_only_flex h-36": "desktop_only_flex w-full md:h-60 absolute z-10 nav-background-title"
+		<div  className= { title === 'home' ?  "desktop_only_flex w-full md:h-36 absolute z-10" : 
+				title === ""	? "nav-background-title desktop_only_flex h-36": "desktop_only_flex w-full md:h-60 absolute z-10 nav-background-title"
 		}>
 			<div className='px-10 pt-[76px] w-full  flex xl:px-24 justify-between h-36'>
 							

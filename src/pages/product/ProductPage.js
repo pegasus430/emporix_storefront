@@ -202,8 +202,6 @@ const ProductPage = () =>  {
         
         <div className='md:pt-60 pt-20 px-4 md:px-24 pb-12'>
             <div className={`overlay ${showSideFilterContnet ? 'visible' : '' }`} onClick={handleSideFilterContent} />
-            
-            
             <SideFilterContent 
                 isOpen={showSideFilterContnet} 
                 toggleSidebar={handleSideFilterContent} 

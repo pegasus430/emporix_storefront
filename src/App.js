@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Login from "./pages/Login";
 import Home from "./pages/home";
 import Cart from './pages/cart';
+import QuickOrder from './pages/quickorder'
 import Checkout from './pages/checkout';
 import ProductList,{ProductDetails} from "./pages/product";
 import Account from './pages/account';
@@ -57,7 +58,7 @@ function App() {
 					<Route path="reviews" element={<AccountReviews />} />
 					
 				</Route>
-				
+				<Route path='quick_order' element = {<QuickOrder />} />
 				{/*<Route path="contact" element={<Contact />} />
 				<Route path="*" element={<NoPage />} /> */}   
 				
