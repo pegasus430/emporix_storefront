@@ -11,7 +11,7 @@ const ShippingMethod = ({radioKey, shippingmode, date, price}) => {
                 <div className='flex justify-between w-full'>
                     <div className='flex'>
                         <RadioItem radioKey={radioKey} />
-                        <div className='pt-2 md:pt-0'>
+                        <div className='pt-2 md:pt-0 pl-3'>
                             <div className=' font-bold text-base '>
                                 {shippingmode} <span className='underline font-semibold text-[14px]'>+info</span>
                             </div>
