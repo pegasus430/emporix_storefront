@@ -101,3 +101,6 @@ code {
 .login_container{
   @apply w-full h-[1024px] bg-[length:100%_100%]
 }
+.border-grey-bottom{
+  @apply border-b border-[#D7DADE]
+}

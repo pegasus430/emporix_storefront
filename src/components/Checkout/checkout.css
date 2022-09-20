@@ -5,3 +5,18 @@
 .shipping_method_selected {
     @apply w-full p-4 md:flex bg-[#F5F8FA] border-[#214559] border mb-2 font-inter
 }
+.payment-method-item-wrapper{
+    @apply lg:w-[492px] w-full p-6 border border-[#DFE1E5] bg-white
+}
+.payment-method-item-wrapper.active{
+    @apply !border-[#214559] !bg-[#F5F8FA]
+}
+.brand-blue{
+    @apply text-[#214559]
+}
+.brand-gray{
+    @apply text-[#DFE1E5]
+}
+.MuiButtonBase-root{
+    @apply !p-0
+}
