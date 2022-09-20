@@ -19,12 +19,12 @@ export const ProgressBar = ({children, active, className}) => {
     const mobilestyle = {width: active_index ? `calc(3px + 100% * ${active_index})`: ''}
 
     return (
-        <>
+        <div className="progressbar">
             <Container className="progress-container">
                 {children}
             </Container>
             <ProgressBarContent mobilestyle = {mobilestyle} barstyle={ barstyle}/>
-        </>
+        </div>
     )
 }
 
