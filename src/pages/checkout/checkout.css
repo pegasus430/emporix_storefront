@@ -5,8 +5,20 @@
     @apply max-w-screen-xl mx-auto grid grid-cols-1 md:gap-12 gap-6 md:pt-24 pt-6
 }
 .checkout-content-wrapper{
-    @apply w-[calc((100%-48px)*0.68)]
+    @apply xl:w-[calc((100%-48px)*0.68)] lg:w-[calc((100%-48px)*0.6)] w-full
 }
 .checkout-action-panel-wrapper{
-    @apply w-[calc((100%-48px)*0.32)]
+    @apply xl:w-[calc((100%-48px)*0.32)] lg:w-[calc((100%-48px)*0.4)] w-full
+}
+.location-info, .address-info{
+    @apply pl-6 border-l border-[#D7DADE]
+}
+.address-dropdown-wrapper{
+    @apply lg:w-[465px] w-full
+}
+.property-wrapper{
+    @apply w-[168px]
+}
+.checkout-product-image{
+    @apply w-[52px] h-[74px]
 }

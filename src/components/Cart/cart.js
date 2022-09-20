@@ -227,7 +227,7 @@ const CartOpenCart = () => {
         </Link>
     )
 }
-export const CartActionPanel = ({subtotalWithoutVat}) => {
+export const CartActionPanel = ({subtotalWithoutVat, action}) => {
     return (
         <div className="cart-action-panel">
             <GridLayout className="gap-4">
@@ -254,18 +254,20 @@ export const CartActionPanel = ({subtotalWithoutVat}) => {
                         <CartShipingCost />
                     </LayoutBetween>
                 </CartActionRow>
-
-                <CartActionRow>
-                    <div className="cart-total-price-wrapper">
-                        <LayoutBetween>
-                            <CartTotalPrice value={subtotalWithoutVat}/>
-                        </LayoutBetween>
-                    </div>
-                        
-                    <CartOpenCart />
-                    <CartGoCheckout />
-                </CartActionRow>
-
+                {action == undefined || action == true ? 
+                    <CartActionRow>
+                        <div className="cart-total-price-wrapper">
+                            <LayoutBetween>
+                                <CartTotalPrice value={subtotalWithoutVat}/>
+                            </LayoutBetween>
+                        </div>
+                            
+                        <CartOpenCart />
+                        <CartGoCheckout />
+                    </CartActionRow>:
+                    <></>
+                }
+                
             </GridLayout>
         </div>
     )
