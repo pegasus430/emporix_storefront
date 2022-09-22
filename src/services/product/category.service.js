@@ -1,10 +1,11 @@
 import {category_api} from '../service.config'
 import ApiRequest from '../index'
+import ServiceAccessToken from '../user/serviceAccessToken'
 
 const CategoryService = () => {
     const getAllCategories = () => {
-        console.log('a')
-        console.log(ApiRequest(category_api, {}))
+
+        ApiRequest(category_api, {})
     }
 
     return {

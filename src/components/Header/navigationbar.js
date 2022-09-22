@@ -7,6 +7,7 @@ import AccountMenu from './accountmenu'
 import { HiOutlineUserCircle } from "react-icons/hi"
 import { ChevronRightIcon , ChevronLeftIcon } from '@heroicons/react/solid'
 import CartContext from '../../pages/context'
+import ServiceAccessToken from '../../services/user/serviceAccessToken'
 
 const menu_list = [
 	{
@@ -225,7 +226,7 @@ const menu_list = [
   ]
 
 
-const Navbar = () => {
+const Navbar =() => {
     const { user: currentUser } = useSelector((state) => state.auth);
     const [open, setOpen] = useState(false)
     
@@ -381,7 +382,8 @@ const Navbar = () => {
     const handleNavClose = () =>{
         setOpen(false)
     }
-
+	// ServiceAccessToken()
+	
   return (
     <header className='header'>
         {/* Dektop language and currency selection */}
