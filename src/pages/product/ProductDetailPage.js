@@ -18,6 +18,7 @@ import pc_stand from "../../assets/products/pc_stand.png"
 import stapler from "../../assets/products/stapler.png"
 import HandleProductAddToCart from './HandleProductAddToCart'
 import CartContext from '../context'
+import CategoryService from '../../services/product/category.service'
 
 const ProductContext = createContext()
 
@@ -505,6 +506,7 @@ const ProductMatchItems = () => {
     )
 }
 const ProductDetailPage = ({product}) => {
+    CategoryService.getAllCategories()
     return (
         <div className="product-detail-page-wrapper ">
             <div className="product-detail-page-content">
