@@ -343,7 +343,7 @@ const TopNav = ({title}) => {
 }
 
 const Topbar = ({title}) => {
-	
+	console.log('nav')
   	return (
 
 		<>
