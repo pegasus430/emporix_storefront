@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
+import './services/boot.service'
 import Login from "./pages/Login";
 import Home from "./pages/home";
 import Cart from './pages/cart';

@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./user/auth-header";
 
-const ApiRequest = (url, type, data) => {
+const ApiRequest = (url, type, data, headers) => {
     let Request;
     switch(type){
         case 'post':
@@ -11,11 +11,7 @@ const ApiRequest = (url, type, data) => {
         default:
             Request =  axios.put; break;
     }
-    // authHeader['X-Version'] = 'v2'
-    console.log(authHeader())
-    console.log('aaa')
-    return Request(url, authHeader())
+    return Request(url, data, {headers})
 }
-
 
 export default ApiRequest

@@ -506,7 +506,7 @@ const ProductMatchItems = () => {
     )
 }
 const ProductDetailPage = ({product}) => {
-    CategoryService.getAllCategories()
+    // CategoryService.getAllCategories()
     return (
         <div className="product-detail-page-wrapper ">
             <div className="product-detail-page-content">
