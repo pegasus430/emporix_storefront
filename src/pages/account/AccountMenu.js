@@ -11,9 +11,7 @@ const AccountMenu = ({page}) => {
         "Saved Carts",
         "",
         "Locations",
-        "Payment Methods",
-        "",
-        "Reviews"
+        "Payment Methods"
     ]
     const items_link = [
         "account-summary",
@@ -25,9 +23,7 @@ const AccountMenu = ({page}) => {
         "saved-carts",
         "",
         "locations",
-        "payments",
-        "",
-        "reviews"
+        "payments"
     ]
     return (
         <ul className="">
