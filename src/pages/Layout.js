@@ -4,19 +4,20 @@ import Footer from "../components/Footer";
 import Drawer from "../components/Utilities/drawer/drawer";
 import Cart from "../components/Cart/cart"
 import CartContext from "./context";
+import { GridLayout } from "../components/Utilities/common";
 
 const Layout = ({children, title}) => {
     const [showCart, setShowCart] = useState(false)
     return (
         <CartContext.Provider value={{showCart, setShowCart}}>
-            <div className="min-w-[375px]">
+            <GridLayout className="min-w-[375px] font-inter">
                 <Topbar title={title} />
                 <Drawer>
                     <Cart />
                 </Drawer>
-                {children}
+                    {children}
                 <Footer />
-            </div>
+            </GridLayout>
         </CartContext.Provider>
     )
 }
