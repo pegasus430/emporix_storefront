@@ -99,7 +99,7 @@ code {
   @apply px-6 py-12 md:pt-8 md:py-24 grid grid-cols-1 md:grid-cols-4 md:gap-12 gap-y-16 md:px-16  max-w-md  md:max-w-screen-2xl mx-auto
 }
 .login_container{
-  @apply w-full h-[1024px] bg-[length:100%_100%]
+  @apply w-full h-[1024px] bg-[length:100%_100%] bg-[url('./assets/landing_bg.png')]
 }
 .border-grey-bottom{
   @apply border-b border-[#D7DADE]

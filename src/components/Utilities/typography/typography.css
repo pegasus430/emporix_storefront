@@ -1,3 +1,6 @@
+.heading2{
+    @apply text-[32px] leading-[48px] font-bold
+}
 .heading3{
     @apply text-[24px] leading-[40px] font-bold
 }

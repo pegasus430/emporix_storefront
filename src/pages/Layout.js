@@ -7,6 +7,7 @@ import LayoutContext from "./context";
 import {LoadingCircleProgress} from '../components/Utilities/progress'
 import CategoryService from '../services/product/category.service'
 import { menu_list } from '../components/Header/menu.config'
+import { GridLayout } from "../components/Utilities/common";
 
 const Layout = ({children, title}) => {
     const [showCart, setShowCart] = useState(false)
@@ -27,14 +28,14 @@ const Layout = ({children, title}) => {
     return (
         <LayoutContext.Provider value={{showCart, setShowCart, menuList}}>
             {loading ? <LoadingCircleProgress />: 
-                <div className="min-w-[375px]">
+                <GridLayout className="min-w-[375px]">
                     <Topbar title={title} />
                     <Drawer>
                         <Cart />
                     </Drawer>
                     {children}
                     <Footer />
-                </div>
+                </GridLayout>
             }
         </LayoutContext.Provider>
     )
