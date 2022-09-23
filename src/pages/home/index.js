@@ -7,6 +7,7 @@ import Subscribe from "./Subscribe"
 import Layout from "../Layout";
 
 const Home = () => {
+    
     return (
         <Layout title={'home'}>
             <About />

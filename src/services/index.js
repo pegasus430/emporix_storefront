@@ -1,17 +1,17 @@
 import axios from "axios";
-import authHeader from "./user/auth-header";
 
-const ApiRequest = (url, type, data, headers) => {
+const ApiRequest = async (url, type, data, headers) => {
     let Request;
     switch(type){
         case 'post':
             Request = axios.post; break;
         case 'get':
-            Request = axios.get; break;
+            Request = axios.get; 
+            return await Request(url, {headers})
         default:
             Request =  axios.put; break;
     }
-    return Request(url, data, {headers})
+    return await Request(url, data, {headers})
 }
 
 export default ApiRequest

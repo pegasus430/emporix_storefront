@@ -16,12 +16,13 @@ const payload = {
 }
 const GetServiceTokenFromServer = async () => {
     const res = await ApiRequest(service_token_api, 'post', qs.stringify(payload), headers)
-    localStorage.setItem(service_token_key, res['data']['access_token'])
-
+    const serviceToken = res['data']['access_token']
+    localStorage.setItem(service_token_key, serviceToken)
+    return serviceToken
 }
-const ServiceAccessToken = () => {
-    GetServiceTokenFromServer()
-    console.log('aaa')
+const ServiceAccessToken = async () => {
+    const res = await GetServiceTokenFromServer()
+    return res
 }
 
 export default ServiceAccessToken
