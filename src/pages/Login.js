@@ -1,7 +1,6 @@
 import React, { useState, useRef , useEffect, Fragment} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate , Link } from 'react-router-dom';
-import landing_bg from '../assets/landing_bg.png'
 import login_atom from '../assets/login_atom.png'
 import { login } from "../actions/auth";
 import Snackbar from '@mui/material/Snackbar';
@@ -10,7 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {  SET_MESSAGE } from "../actions/types";
 import { LayoutBetween , GridLayout, Container } from "../components/Utilities/common";
 import { Heading2, Heading4 } from "../components/Utilities/typography";
-import { Grid } from "@mui/material";
+import  Box  from "@mui/material/Box";
 
 const Login = (props) => {
   const form = useRef();
@@ -85,7 +84,7 @@ const Login = (props) => {
   }
 
   return (
-        <div className="login_container" style={{backgroundImage : `url(${landing_bg})`  }} >
+        <GridLayout className="login_container">
             <Snackbar
                 open={openNotification}
                 autoHideDuration={3000}
@@ -96,7 +95,7 @@ const Login = (props) => {
                     {message}
                 </Alert>
             </Snackbar>
-            <div className="w-[540px] mx-auto h-[740px] pt-[138px]">
+            <GridLayout className="w-[540px] mx-auto h-[740px] pt-[138px]">
                 <Container className="w-full h-[110px] items-center  text-center text-white font-bold  text-7xl ">
                     <Container className="mx-auto">
                         <Link to={'/'} className="flex">
@@ -112,19 +111,19 @@ const Login = (props) => {
                         <Heading4 className="text-[#818385] pt-6" >Welcome back! Please enter your details</Heading4>
                     </GridLayout>
                     <form onSubmit={handleLogin} className="display: block m-0">
-                        <div className="pt-12 text-black text-base">
+                        <Box className="!pt-12 text-black text-base">
                             <label className="pb-2">E-mail address</label><br />
                             <input placeholder="Placeholder" onChange={onChangeUserEmail} value={userEmail} type="email" required className="border w-full px-3 py-2"/>
                             {
                                 emailMessage && 
                                 <h6 style={{color: 'red'}}>{emailMessage}</h6>
                             }
-                        </div>
-                        <div className="pt-6 w-full text-black text-base">
+                        </Box>
+                        <Box className="!pt-6 w-full text-black text-base">
                             <label className="pb-2">Password</label><br />
                             <input placeholder="Placeholder" onChange={onChangePassword} value={password} type="password" required className="border w-full px-3 py-2"/>
 
-                        </div>
+                        </Box>
                         <LayoutBetween className="pt-6 text-black text-base">
                             <div className="flex">
                                 <input type="checkbox" /> 
@@ -134,26 +133,29 @@ const Login = (props) => {
                         </LayoutBetween>
                        
 
-                        <div className="w-full pt-12">
+                        <Box className="w-full !pt-12">
                             <button className="w-full text-white bg-[#214559] h-12 hover:bg-[#377395]" type="submit">
                                 {
                                     loading ?  <CircularProgress color="secondary" /> : "LOG IN"
                                 }
                                 
                             </button>
-                        </div>
+                        </Box>
                     </form>
                     
                     <GridLayout className="pt-12 w-full  items-center text-center text-base">
-                        <div className="mx-auto">
+                        <Box className="mx-auto">
                             <span className="font-medium text-[#818385]">Don't have an account?</span>
-                            <span className="pl-2 font-semibold text-[#0380F3] underline hover:cursor-pointer hover:text-[#44ec85]">Sign Up</span>
-                        </div>
+                            <Link to={'/signup'}>
+                                <span className="pl-2 font-semibold text-[#0380F3] underline hover:cursor-pointer hover:text-[#44ec85]">Sign Up</span>
+                            </Link>
+                            
+                        </Box>
                         
                     </GridLayout>
                 </GridLayout>
-            </div>
-        </div>
+            </GridLayout>
+        </GridLayout>
   );
 };
 export default Login;
