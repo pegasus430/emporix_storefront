@@ -1,4 +1,4 @@
-import React, { useState, useRef , useEffect} from "react";
+import React, { useState, useRef , useEffect, Fragment} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate , Link } from 'react-router-dom';
 import landing_bg from '../assets/landing_bg.png'
@@ -8,6 +8,9 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 import {  SET_MESSAGE } from "../actions/types";
+import { LayoutBetween , GridLayout, Container } from "../components/Utilities/common";
+import { Heading2, Heading4 } from "../components/Utilities/typography";
+import { Grid } from "@mui/material";
 
 const Login = (props) => {
   const form = useRef();
@@ -17,16 +20,9 @@ const Login = (props) => {
   const [openNotification , setOpenNotification] = useState(false)
   const [password, setPassword] = useState("");
   const [emailMessage, setEmailMessage] = useState("")
-
   const { isLoggedIn } = useSelector(state => state.auth);
-  
   const dispatch = useDispatch();
   const { message } = useSelector(state => state.message);
-
-//   useEffect(() => {
-//     if (message)
-//         setOpenNotification(true)
-//   }, [message]);
 
 
   function isValidEmail(email) {
@@ -77,6 +73,9 @@ const Login = (props) => {
             setLoading(false)
         });
     }
+    else{
+
+    }
     
   };
 
@@ -98,57 +97,61 @@ const Login = (props) => {
                 </Alert>
             </Snackbar>
             <div className="w-[540px] mx-auto h-[740px] pt-[138px]">
-                <div className="w-full h-[110px] items-center  text-center text-white font-bold font-inter text-7xl flex">
-                    <div className="mx-auto flex">
+                <Container className="w-full h-[110px] items-center  text-center text-white font-bold  text-7xl ">
+                    <Container className="mx-auto">
                         <Link to={'/'} className="flex">
                             <img src={login_atom} className="w-[78px] h-[86px] mr-5"  />
                             atom
                         </Link>
-                    </div>
+                    </Container>
                     
-                </div>
-                <div className="w-full bg-white p-12  shadow-2xl">
-                    <div className="pt-12 text-center">
-                        <div className="font-inter font-bold text-3xl text-[#377395]">Log in to your account</div>
-                        <div className="text-xl font-inter font-medium text-[#818385] pt-6">Welcome back! Please enter your details</div>
-                    </div>
-                    <div className="pt-12 w-full text-black text-base">
-
-                        <label className="pb-2">E-mail address</label><br />
-                        <input placeholder="Placeholder" onChange={onChangeUserEmail} value={userEmail} type="email" required className="border w-full px-3 py-2"/>
-                        {
-                            emailMessage && 
-                            <h6 style={{color: 'red'}}>{emailMessage}</h6>
-                        }
-                    </div>
-                    <div className="pt-6 w-full text-black text-base">
-                        <label className="pb-2">Password</label><br />
-                        <input placeholder="Placeholder" onChange={onChangePassword} value={password} type="password" required className="border w-full px-3 py-2"/>
-
-                    </div>
-                    <div className="pt-6 w-full text-black text-base flex justify-between">
-                        <div className="flex">
-                            <input type="checkbox" /> 
-                            <label className="pl-2">Remember me</label>
-                        </div>
-                        <a className="underline text-[#214559] font-semibold">Forgot Password</a>
-                    </div>
-                    <div className="w-full pt-12">
-                        <button className="w-full text-white bg-[#214559] h-12 hover:bg-[#377395]" onClick={handleLogin}>
+                </Container>
+                <GridLayout className="w-full bg-white p-12  shadow-2xl">
+                    <GridLayout className="text-center">
+                        <Heading2 className="text-[#377395]">Log in to your account</Heading2>
+                        <Heading4 className="text-[#818385] pt-6" >Welcome back! Please enter your details</Heading4>
+                    </GridLayout>
+                    <form onSubmit={handleLogin} className="display: block m-0">
+                        <div className="pt-12 text-black text-base">
+                            <label className="pb-2">E-mail address</label><br />
+                            <input placeholder="Placeholder" onChange={onChangeUserEmail} value={userEmail} type="email" required className="border w-full px-3 py-2"/>
                             {
-                                loading ?  <CircularProgress color="secondary" /> : "LOG IN"
+                                emailMessage && 
+                                <h6 style={{color: 'red'}}>{emailMessage}</h6>
                             }
-                            
-                        </button>
-                    </div>
-                    <div className="pt-12 w-full  items-center text-center font-inter text-base">
+                        </div>
+                        <div className="pt-6 w-full text-black text-base">
+                            <label className="pb-2">Password</label><br />
+                            <input placeholder="Placeholder" onChange={onChangePassword} value={password} type="password" required className="border w-full px-3 py-2"/>
+
+                        </div>
+                        <LayoutBetween className="pt-6 text-black text-base">
+                            <div className="flex">
+                                <input type="checkbox" /> 
+                                <label className="pl-2">Remember me</label>
+                            </div>
+                            <a className="underline text-[#214559] font-semibold">Forgot Password</a>
+                        </LayoutBetween>
+                       
+
+                        <div className="w-full pt-12">
+                            <button className="w-full text-white bg-[#214559] h-12 hover:bg-[#377395]" type="submit">
+                                {
+                                    loading ?  <CircularProgress color="secondary" /> : "LOG IN"
+                                }
+                                
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <GridLayout className="pt-12 w-full  items-center text-center text-base">
                         <div className="mx-auto">
                             <span className="font-medium text-[#818385]">Don't have an account?</span>
-                            <span className="pl-2 font-semibold text-[#0380F3] underline">Sign Up</span>
+                            <span className="pl-2 font-semibold text-[#0380F3] underline hover:cursor-pointer hover:text-[#44ec85]">Sign Up</span>
                         </div>
                         
-                    </div>
-                </div>
+                    </GridLayout>
+                </GridLayout>
             </div>
         </div>
   );
