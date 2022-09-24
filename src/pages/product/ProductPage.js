@@ -10,111 +10,8 @@ import stapler              from "../../assets/products/stapler.png"
 import ProductList          from './ProductList'
 
 import './product.css'
-const categoryMenuList = [
-    {
-        'title': 'Office Chairs',
-        'items' : [
-            {
-                "title" : "All" ,
-                "items" : [], 
-                'total' : 280
-            },
-            {
-                "title" : "Executive Office Chairs" ,
-                "items" : [], 
-                'total' : 23
-            },
-            {
-                "title" : "Computer Office Chairs" ,
-                "items" : [], 
-                'total' : 23
-            },
-            {
-                "title" : "Mesh Office Chairs" ,
-                "items" : [], 
-                'total' : 23
-            },
-            {
-                "title" : "Draughtsman Chairs" ,
-                "items" : [], 
-                'total' : 23
-            },
-        ],
-        'toal' : 280
 
-    } ,
-    {
-        'title': 'Meeting Chairs',
-        'items' : [
-        {
-                "title" : "Meeting & Boardroom Chairs" ,
-                "items" : [], 
-                'total' : 23
-        },
-        {
-                "title" : "Occasional Seating" ,
-                "items" : [], 
-                'total' : 23
-        },
-        {
-                "title" : "Stacking Chairs" ,
-                "items" : [], 
-                'total' : 23
-        },
-        {
-                "title" : "Waiting Room Chairs" ,
-                "items" : [], 
-                'total' : 23
-        },
-        ],
-        'total' : 242
-    } ,
-    {
-        'title': 'Ergonomic Chairs',
-        'items' : [
-            {
-                "title" : "Bariatric Office Chairs" ,
-                "items" : [],
-                'total' : 25
-            },
-            {
-                "title" : "Posture Chairs" ,
-                "items" : [],
-                'total' : 25
-            },
-            {
-                "title" : "Kneeling Chairs" ,
-                "items" : [],
-                'total' : 25
-            },
-        ],
-        'total' : 343
-
-    } ,
-    {
-     'title': 'Armchairs and Stools',
-     'items' : [
-         {
-           "title" : "Armchairs" ,
-           "items" : [],
-           'total' : 25
-         },
-         {
-           "title" : "Stools" ,
-           "items" : [],
-           'total' : 25
-         },
-         {
-           "title" : "Industrial Stools" ,
-           "items" : [],
-            'total' : 25
-         },
-     ],
-     'total' : 75
-    } ,
- ]
-
- const category_products = [
+const category_products = [
     {
         stock : "Low", 
         rating : 4, 
@@ -171,7 +68,7 @@ const FilterButton = (props) => {
     )
 }
 
-const ProductPage = () =>  {
+const ProductPage = ({categoryMenuList}) =>  {
 
     const [showFilterContentForMobile, setShowFilterContentForMobile] = useState(false)
     const [showSideFilterContnet, setShowSideFilterContent] = useState(false)
@@ -195,9 +92,9 @@ const ProductPage = () =>  {
     return (
         <>
         {
-                        showFilterContentForMobile && (
-                            <MobileFilterpanel closeNav ={handleMobileFilterContentClose} />
-                        )
+            showFilterContentForMobile && (
+                <MobileFilterpanel closeNav ={handleMobileFilterContentClose} />
+            )
         }
         
         <div className='md:pt-60 pt-20 px-4 md:px-24 pb-12'>

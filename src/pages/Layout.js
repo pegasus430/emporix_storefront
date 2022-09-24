@@ -5,24 +5,31 @@ import Drawer from "../components/Utilities/drawer/drawer";
 import Cart from "../components/Cart/cart"
 import LayoutContext from "./context";
 import {LoadingCircleProgress} from '../components/Utilities/progress'
-import CategoryService from '../services/product/category.service'
-import { menu_list } from '../components/Header/menu.config'
 import { GridLayout } from "../components/Utilities/common";
+import PageInitialize from "../services/init.service";
+import {product_list_page} from '../constants/page'
 
-const Layout = ({children, title}) => {
+const Layout = ({children, title, page, data, actions}) => {
     const [showCart, setShowCart] = useState(false)
     const [loading, setLoading] = useState(true)
     const [menuList, setMenuList] = useState([])
 
     useEffect(()=> {
-		const GetCategory = async () => {
-            menu_list[0]['items'] = await CategoryService.getProductCategory()
-            setMenuList(menu_list)
-            console.log(menu_list)
+        const layout_init = async () => {
+            const {category_menu_list, category_details} = await PageInitialize(page, data)
+            setMenuList(category_menu_list)
             setLoading(false)
-		}
-		GetCategory()
-
+            console.log(category_details)
+            switch(page){
+                case product_list_page:
+                    actions.setTitle(category_details.title)
+                    actions.setCategoryMenuList(category_details.categories)
+                    break;
+                default:
+                    break;
+            }
+        }
+        layout_init()
 	}, [])
 
     return (

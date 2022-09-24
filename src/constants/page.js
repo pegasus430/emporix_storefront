@@ -1,0 +1,1 @@
+export const product_list_page = 'product-list'
