@@ -73,13 +73,14 @@ const MegaNav = () => {
 								subMenuMegaContent.map((item, index) => 
 									<div key = {index} className='pl-[72px] pt-[72px]'>
 										<ul className=' text-black text-base'>
-											<li className='mega_content_sub_cat_li font-bold'>{item.title}</li>
+											<Link to={`${item.url}`}>
+												<li className='mega_content_sub_cat_li font-bold'>{item.title}</li>
+											</Link>
 											{
 												item.items.map((eachItem, index) => 
 													<Link key={index} to={`${eachItem.url}`}>
 														<li  className='mega_content_sub_cat_li'>{eachItem.title}</li>
-													</Link>
-													
+													</Link>	
 												)
 											}
 											
