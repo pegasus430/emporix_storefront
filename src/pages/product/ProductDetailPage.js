@@ -17,7 +17,7 @@ import comfort_chair from "../../assets/products/comfort_chair.png"
 import pc_stand from "../../assets/products/pc_stand.png"
 import stapler from "../../assets/products/stapler.png"
 import HandleProductAddToCart from './HandleProductAddToCart'
-import CartContext from '../context'
+import LayoutContext from '../context'
 import CategoryService from '../../services/product/category.service'
 
 const ProductContext = createContext()
@@ -172,7 +172,7 @@ const ProductFormantAndWarranty = () => {
 }
 const PrdouctAddToCart = () => {
     const product = useContext(ProductContext)
-    const {showCart, setShowCart} = useContext(CartContext)
+    const {showCart, setShowCart} = useContext(LayoutContext)
     const [quantitiy, setQuantity] = useState(1)
 
     return (

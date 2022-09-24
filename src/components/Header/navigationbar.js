@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react'
+import React, { useState, useContext, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineMenu,AiOutlineClose, AiOutlineSearch , AiOutlineMail, AiOutlineShoppingCart } from 'react-icons/ai'
 import { useSelector } from "react-redux"
@@ -6,236 +6,19 @@ import logo from '../../assets/atom.png'
 import AccountMenu from './accountmenu'
 import { HiOutlineUserCircle } from "react-icons/hi"
 import { ChevronRightIcon , ChevronLeftIcon } from '@heroicons/react/solid'
-import CartContext from '../../pages/context'
-import ServiceAccessToken from '../../services/user/serviceAccessToken'
-
-const menu_list = [
-	{
-	   "title" : "Shop",
-	   "items" : [
-		  {
-			"title" : "Seating",
-			"items" : [
-			   {
-				'title': 'Office Chairs',
-				'items' : [
-				  {
-					  "title" : "Executive Office Chairs" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				  {
-					  "title" : "Computer Office Chairs" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				  {
-					  "title" : "Mesh Office Chairs" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				  {
-					  "title" : "Draughtsman Chairs" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				],
-				'url' : '/product/seating'
-			   } ,
-			   {
-				'title': 'Meeting Chairs',
-				'items' : [
-				  {
-					  "title" : "Meeting & Boardroom Chairs" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				  {
-					  "title" : "Occasional Seating" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				  {
-					  "title" : "Stacking Chairs" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				  {
-					  "title" : "Waiting Room Chairs" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				],
-				'url' : '/product/seating'
-			   } ,
-			   {
-				'title': 'Ergonomic Chairs',
-				'items' : [
-				  {
-					  "title" : "Bariatric Office Chairs" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				  {
-					  "title" : "Posture Chairs" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				  {
-					  "title" : "Kneeling Chairs" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				],
-				'url' : '/product/seating'
-			   } ,
-			   {
-				'title': 'Armchairs and Stools',
-				'items' : [
-				  {
-					  "title" : "Armchairs" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				  {
-					  "title" : "Stools" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				  {
-					  "title" : "Industrial Stools" ,
-					  "items" : [],
-					  'url' : '/product/seating'
-				  },
-				],
-				'url' : '/product/seating'
-			   } ,
-			],
-			'url' : '/product/seating'
-		  },
-		  {
-			"title" : "Desk And Workspaces",
-			"items" : [
-			  {
-				  "title" : "title" ,
-				  "items" : []
-			  }
-			],
-			'url' : '/product/desk_workspace'
-		  },
-		  {
-			"title" : "Office Storage",
-			"items" : [
-			  {
-				  "title" : "title" ,
-				  "items" : []
-			  }
-			],
-			'url' : '/product/storage'
-		  },
-		  {
-			"title" : "Paper Envelopes & Mailing",
-			"items" : [
-			  {
-				  "title" : "title" ,
-				  "items" : []
-			  }
-			],
-			'url' : '/product/paper_mail'
-		  },
-		  {
-			"title" : "Printers, Ink and Toner",
-			"items" : [
-			  {
-				  "title" : "title" ,
-				  "items" : []
-			  }
-			],
-			'url' : '/product/printer_ink_toner'
-		  },
-	   ]
-	   
-	},
-	{
-	  "title"  : "Services" ,
-	  "items" : [
-		{
-		  "title" : "service1"  , 
-		  "items" : []
-		},
-		{
-			"title" : "service2"  , 
-			"items" : []
-		  },
-		  {
-			"title" : "service3"  , 
-			"items" : []
-		  },
-		  {
-			"title" : "service4"  , 
-			"items" : []
-		  },
-	  ]
-	} ,
-	{
-	  "title"  : "Brands" ,
-	  "items" : [
-		{
-		  "title" : "Brands1"  , 
-		  "items" : []
-		},
-		{
-			"title" : "Brands2"  , 
-			"items" : []
-		},
-		{
-			"title" : "Brands3"  , 
-			"items" : []
-		  },
-		  {
-			"title" : "Brands4"  , 
-			"items" : []
-		  },
-	  ]
-	} ,
-	{
-	  "title"  : "About Us" ,
-	  "items" : [
-		{
-		  "title" : "title1"  , 
-		  "items" : []
-		},
-		{
-			"title" : "title2"  , 
-			"items" : []
-		},
-		{
-			"title" : "title3"  , 
-			"items" : []
-		},
-		{
-			"title" : "title4"  , 
-			"items" : []
-		},
-	  ]
-	} ,
-	{
-	  "title"  : "Quick Order" ,
-	  "items" : []
-	} 
-  ]
+import LayoutContext from '../../pages/context'
 
 
-const Navbar =() => {
-    const { user: currentUser } = useSelector((state) => state.auth);
-    const [open, setOpen] = useState(false)
+const Navbar = () => {
+	
+	const { user: currentUser } = useSelector((state) => state.auth);
+  const [open, setOpen] = useState(false)
     
-    const [displaySubItems, setDisplaySubItems] = useState(false)
-	  const [title, setTitle] = useState('')
-	  const [subMenuItems, setSubMenuItems] = useState([])
+  const [displaySubItems, setDisplaySubItems] = useState(false)
+	const [title, setTitle] = useState('')
+	const [subMenuItems, setSubMenuItems] = useState([])
 
-	const {showCart, setShowCart} = useContext(CartContext)
-
+	const {showCart, setShowCart, menuList} = useContext(LayoutContext)
     const ParentBoard = () =>{
       	return (
           	<>
@@ -261,7 +44,7 @@ const Navbar =() => {
               <div className='w-full'>
                       <ul >
                         {
-                            menu_list.map((item , index) => <ParentMenu key={index} item = {item} />)
+                            menuList.map((item , index) => <ParentMenu key={index} item = {item} />)
                         }
                       </ul>
               </div>
@@ -382,7 +165,6 @@ const Navbar =() => {
     const handleNavClose = () =>{
         setOpen(false)
     }
-	// ServiceAccessToken()
 	
   return (
     <header className='header'>

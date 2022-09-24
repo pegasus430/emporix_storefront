@@ -1,4 +1,4 @@
 import React, { useState, createContext, useContext} from "react";
-const CartContext = createContext()
+const LayoutContext = createContext()
 
-export default CartContext
+export default LayoutContext
