@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
-import './services/boot.service'
 import Login from "./pages/Login";
 import Home from "./pages/home";
 import Cart from './pages/cart';
@@ -41,7 +40,9 @@ function App() {
 		<Router>
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="product/:category" element={<ProductList />} />
+				<Route path="product/:maincategory" element={<ProductList />} />
+				<Route path="product/:maincategory/:subcategory/" element={<ProductList />} />
+				<Route path="product/:maincategory/:subcategory/:category" element={<ProductList />} />
 				<Route path="product/details/:product_id" element={<ProductDetails />} />
 				<Route path="login" element={<Login />} />
 				<Route path="cart" element={<Cart />} />
