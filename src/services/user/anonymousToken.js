@@ -2,17 +2,24 @@ import axios from "axios";
 import {v4 as uuidv4} from 'uuid'
 // const API_URL = process.env.NODE_ENV === "development" ? process.env.REACT_APP_API_URL_STAGE :process.env.REACT_APP_API_URL_PRODUCTION ;
 const API_URL =  process.env.REACT_APP_API_URL_STAGE
-const tenant = process.env.REACT_APP_TENANT_STAGE
+const _tenant = process.env.REACT_APP_TENANT_STAGE
 const session_id = uuidv4()
 
-const getAnonymousToken = async () => {
+const getAnonymousToken = async (tenant = null) => {
+  let tenantName
+  if(tenant === null){
+     tenantName = _tenant
+  }
+  else{
+    tenantName = tenant
+  }
   return await axios.get(API_URL + `/customerlogin/auth/anonymous/login`, 
-    
+        
         {
             params : {
-            "tenant": tenant,
-            "session-id": session_id,
-            "client_id": process.env.REACT_APP_STOREFRONT_CLIENT_ID_STAGE,
+              "tenant": tenantName,
+              "session-id": session_id,
+              "client_id": process.env.REACT_APP_STOREFRONT_CLIENT_ID_STAGE,
             }
         }
     )
