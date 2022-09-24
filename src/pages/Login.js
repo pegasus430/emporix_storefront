@@ -95,7 +95,7 @@ const Login = (props) => {
                     {message}
                 </Alert>
             </Snackbar>
-            <GridLayout className="w-[540px] mx-auto h-[740px] pt-[138px]">
+            <GridLayout className="md:w-[540px] w-[95%] mx-auto h-[740px] md:pt-[138px] pt-10">
                 <Container className="w-full h-[110px] items-center  text-center text-white font-bold  text-7xl ">
                     <Container className="mx-auto">
                         <Link to={'/'} className="flex">

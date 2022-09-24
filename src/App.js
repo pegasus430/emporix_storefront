@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Home from "./pages/home";
 import Cart from './pages/cart';
 import QuickOrder from './pages/quickorder'
@@ -45,6 +46,7 @@ function App() {
 				<Route path="product/:maincategory/:subcategory/:category" element={<ProductList />} />
 				<Route path="product/details/:product_id" element={<ProductDetails />} />
 				<Route path="login" element={<Login />} />
+				<Route path="signup" element={<Signup />} />
 				<Route path="cart" element={<Cart />} />
 				<Route path="checkout" element={<Checkout />} />
 				<Route path="my-account" element={<Account />} >

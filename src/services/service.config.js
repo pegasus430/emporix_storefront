@@ -6,6 +6,7 @@ export const grant_type = "client_credentials"
 
 export const service_token_api = `${API_URL}/oauth/token`
 export const category_api = `${API_URL}/category/${tenant}/category-trees`
+export const signup_api = `${API_URL}/customer/${tenant}/signup`
 
 export const retriev_resource_api = (categoryId) => `${API_URL}/category/${tenant}/categories/${categoryId}/assignments`
 
