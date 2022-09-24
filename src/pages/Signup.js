@@ -1,0 +1,188 @@
+import React, { useState, useRef , useEffect, Fragment} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate , Link } from 'react-router-dom';
+import login_atom from '../assets/login_atom.png'
+import ReactPhoneInput from 'react-phone-input-material-ui';
+import { TextField , withStyles } from "@mui/material";
+import { login } from "../actions/auth";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import {  SET_MESSAGE } from "../actions/types";
+import { GridLayout, Container } from "../components/Utilities/common";
+import { Heading2, Heading4 } from "../components/Utilities/typography";
+import  Box  from "@mui/material/Box";
+
+const Signup = (props) => {
+ 
+  const [loading, setLoading] = useState(false)
+  const [userEmail, setUserEmail] = useState("");
+  const [openNotification , setOpenNotification] = useState(false)
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [company, setCompany] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState("")
+  const [emailMessage, setEmailMessage] = useState("")
+  const { isLoggedIn } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const { message } = useSelector(state => state.message);
+
+  const styles = theme => ({
+    field: {
+      margin: '10px 0',
+    },
+    countryList: {
+      ...theme.typography.body1,
+    },
+  });
+
+  function isValidEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenNotification(false);
+  };
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const onChangeUserEmail = (e) => {
+    if (!isValidEmail(e.target.value)){
+        setEmailMessage("Email is invalid")
+    }
+    else{
+        setEmailMessage(null)
+        
+    }
+    setUserEmail(e.target.value);
+    
+  };
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+   
+    if (userEmail && password){
+        setLoading(true)
+        dispatch(login(userEmail, password))
+        .then(() => {
+            props.history.push("/");
+            window.location.reload();
+            setOpenNotification(true)
+            setLoading(false)
+        })
+        .catch(() => {
+            setOpenNotification(true)
+            setLoading(false)
+        });
+    }
+    else{
+
+    }
+    
+  };
+
+
+  if (isLoggedIn) {
+    return <Navigate  to="/" />;
+  }
+
+  return (
+        <GridLayout className="signup_container">
+            <Snackbar
+                open={openNotification}
+                autoHideDuration={3000}
+                onClose={handleClose}
+                anchorOrigin = {{vertical:"top", horizontal: "right"}}
+            >
+                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                    {message}
+                </Alert>
+            </Snackbar>
+            <GridLayout className="md:w-[540px] w-[95%] mx-auto h-[740px] md:pt-[138px] pt-10">
+                <Container className="w-full h-[110px] items-center  text-center text-white font-bold  text-7xl ">
+                    <Container className="mx-auto">
+                        <Link to={'/'} className="flex">
+                            <img src={login_atom} className="w-[78px] h-[86px] mr-5"  />
+                            atom
+                        </Link>
+                    </Container>
+                    
+                </Container>
+                <GridLayout className="w-full bg-white p-12  shadow-2xl">
+                    <GridLayout className="text-center">
+                        <Heading2 className="text-[#377395]">Register as a New User</Heading2>
+                        <Heading4 className="text-[#818385] pt-6" >Welcome! Please enter your details</Heading4>
+                    </GridLayout>
+                    <form onSubmit={handleLogin} className="display: block m-0">
+                        <Box className="!pt-12 text-black text-base">
+                            <label className="pb-2">E-mail address</label><br />
+                            <input placeholder="Placeholder" onChange={onChangeUserEmail} value={userEmail} type="email" required className="border w-full px-3 py-2"/>
+                            {
+                                emailMessage && 
+                                <h6 style={{color: 'red'}}>{emailMessage}</h6>
+                            }
+                        </Box>
+                        <Box className="!pt-6 w-full text-black text-base">
+                            <label className="pb-2">Password</label><br />
+                            <input placeholder="Placeholder" onChange={onChangePassword} value={password} type="password" required className="border w-full px-3 py-2"/>
+                        </Box>
+
+                        <Box className="!pt-6 w-full text-black text-base">
+                            <label className="pb-2">Confirm Password</label><br />
+                            <input placeholder="Placeholder" onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} type="password" required className="border w-full px-3 py-2"/>
+                        </Box>
+
+                        <Box className="!pt-6 w-full text-black text-base">
+                            <label className="pb-2">First Name</label><br />
+                            <input placeholder="Placeholder" onChange={(e) => setFirstName(e.target.value)} value={firstName} type="text" className="border w-full px-3 py-2"/>
+                        </Box>
+
+                        <Box className="!pt-6 w-full text-black text-base">
+                            <label className="pb-2">Last Name</label><br />
+                            <input placeholder="Placeholder" onChange={(e) => setLastName(e.target.value)} value={lastName} type="text" className="border w-full px-3 py-2"/>
+                        </Box>
+
+                        <Box className="!pt-6 w-full text-black text-base">
+                            <label className="pb-2">Company</label><br />
+                            <input placeholder="Placeholder" onChange={(e) => setCompany(e.target.value)} value={company} type="text" className="border w-full px-3 py-2"/>
+                        </Box>
+                       
+                        <Box className="!pt-6 w-full text-black text-base">
+                            <label className="pb-2">Phone Number</label><br />
+                            <ReactPhoneInput
+                                value={phoneNumber}
+                                onChange={() => setPhoneNumber(phoneNumber)} // passed function receives the phone value
+                                component={TextField}
+                                defaultCountry={'gb'}
+                            />
+                        </Box>
+                        
+                        <Box className="w-full !pt-12">
+                            <button className="w-full text-white bg-[#214559] h-12 hover:bg-[#377395]" type="submit">
+                                {
+                                    loading ?  <CircularProgress color="secondary" /> : "Sign Up"
+                                }
+                                
+                            </button>
+                        </Box>
+                    </form>
+                    
+                    
+                </GridLayout>
+            </GridLayout>
+        </GridLayout>
+  );
+};
+export default Signup;
