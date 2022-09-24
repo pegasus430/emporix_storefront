@@ -7,6 +7,7 @@ import AccountMenu from './accountmenu'
 import { HiOutlineUserCircle } from "react-icons/hi"
 import { ChevronRightIcon , ChevronLeftIcon } from '@heroicons/react/solid'
 import CartContext from '../../pages/context'
+import { LargePrimaryButton } from '../Utilities/button'
 import ServiceAccessToken from '../../services/user/serviceAccessToken'
 
 const menu_list = [
@@ -254,7 +255,9 @@ const Navbar =() => {
                       : 
                       
                         <div className='bg-[#214559] w-full h-12 text-sm  text-center items-center text-white'>
-                            <div className='pt-3'>LOGIN | REGISTER</div>
+                            <Link to={'/login'}>
+								<LargePrimaryButton className='' title = "LOGIN | REGISTER"></LargePrimaryButton>
+							</Link>
                         </div>
                     }
               </div>
@@ -416,7 +419,7 @@ const Navbar =() => {
             
               <ul className='flex'>
                 <li className='px-2'><a className='hover:text-[#FBB13C]' href='/login'>Login</a></li> |
-                <li className='px-2'><a className='hover:text-[#FBB13C]'>Sign Up</a></li>
+                <li className='px-2'><a className='hover:text-[#FBB13C]' href='/signup'>Sign Up</a></li>
               </ul>
               :
               <ul className='flex'>
