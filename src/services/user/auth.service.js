@@ -1,19 +1,55 @@
 import axios from "axios";
 import anonymous from './anonymousToken'
+import { signup_api } from '../service.config'
+import ApiRequest from "..";
 import {
     
     SET_MESSAGE,
   } from "../../actions/types";
-// const API_URL = process.env.NODE_ENV === "development" ? process.env.REACT_APP_API_URL_STAGE :process.env.REACT_APP_API_URL_PRODUCTION ;
+
 const API_URL = process.env.REACT_APP_API_URL_STAGE
 const tenant = process.env.REACT_APP_TENANT_STAGE
 
-const register = (username, email, password) => {
-  return axios.post(API_URL + "signup", {
-    username,
-    email,
-    password,
-  });
+const register = async (email, password , firstName , lastName, tenantName , company , phoneNumber) => {
+	let response
+	await anonymous.getAnonymousToken(tenantName).then(
+		async (data) =>{
+			
+			let headers = {
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer ' + data
+			}
+
+			const payload = {
+				email : email,
+				password: password,
+				customerDetails: {
+					firstName: firstName,
+					lastName: lastName,
+					contactPhone : phoneNumber,
+					company : company,
+					contactEmail : email
+
+				},
+				signup : {
+					email : email,
+					password : password
+				}
+			}
+			response = await ApiRequest(signup_api, 'post', payload, headers)
+			
+			
+
+
+			
+		},
+		(error) => {
+			console.log("error from anonymous", error)
+			
+		}
+	);
+
+	return response
 };
 
 const  login = async (username, password) => {
@@ -56,7 +92,7 @@ const  login = async (username, password) => {
 							.then((response) => {
 								if(response.data.firstName)
 								{
-									console.log("resonse data from get profile ",response.data)
+									
 									response_data = response.data
 								}
 								})

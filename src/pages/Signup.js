@@ -2,13 +2,11 @@ import React, { useState, useRef , useEffect, Fragment} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate , Link } from 'react-router-dom';
 import login_atom from '../assets/login_atom.png'
-import ReactPhoneInput from 'react-phone-input-material-ui';
-import { TextField , withStyles } from "@mui/material";
-import { login } from "../actions/auth";
+import { login, register } from "../actions/auth";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import PhoneField from "../components/Utilities/phoneinput/PhoneField";
 import {  SET_MESSAGE } from "../actions/types";
 import { GridLayout, Container } from "../components/Utilities/common";
 import { Heading2, Heading4 } from "../components/Utilities/typography";
@@ -25,19 +23,11 @@ const Signup = (props) => {
   const [lastName, setLastName] = useState("")
   const [company, setCompany] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
+  const [tenantName, setTenantName] = useState("")
   const [emailMessage, setEmailMessage] = useState("")
   const { isLoggedIn } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const { message } = useSelector(state => state.message);
-
-  const styles = theme => ({
-    field: {
-      margin: '10px 0',
-    },
-    countryList: {
-      ...theme.typography.body1,
-    },
-  });
 
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
@@ -70,26 +60,61 @@ const Signup = (props) => {
     setPassword(password);
   };
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-   
-    if (userEmail && password){
-        setLoading(true)
-        dispatch(login(userEmail, password))
-        .then(() => {
-            props.history.push("/");
-            window.location.reload();
-            setOpenNotification(true)
-            setLoading(false)
+
+    if((password.length) < 6){
+        dispatch({
+            type: SET_MESSAGE,
+            payload: "password must have at least 6 characters!",
         })
-        .catch(() => {
-            setOpenNotification(true)
-            setLoading(false)
-        });
+        setOpenNotification(true)
     }
     else{
-
+        if (userEmail && password && confirmPassword)
+        {
+            if( password === confirmPassword)
+            {
+                
+                setLoading(true)
+                dispatch(register(userEmail, password , firstName , lastName , tenantName , company, phoneNumber))
+                .then(() => {
+                    
+                    dispatch(login(userEmail, password))
+                        .then(() => {
+                            props.history.push("/");
+                            window.location.reload();
+                            setOpenNotification(true)
+                            setLoading(false)
+                        })
+                        .catch(() => {
+                            setOpenNotification(true)
+                            setLoading(false)
+                        });
+                })
+                .catch(() => {
+                    setOpenNotification(true)
+                    setLoading(false)
+                });
+            }else{
+                dispatch({
+                    type: SET_MESSAGE,
+                    payload: "Confirm password is incorrect!",
+                })
+                setOpenNotification(true)
+            }
+        }
+        else{
+            dispatch({
+                type: SET_MESSAGE,
+                payload: "Please enter at least useremail and password",
+            })
+            setOpenNotification(true)
+    
+        }
     }
+   
+    
     
   };
 
@@ -125,7 +150,7 @@ const Signup = (props) => {
                         <Heading2 className="text-[#377395]">Register as a New User</Heading2>
                         <Heading4 className="text-[#818385] pt-6" >Welcome! Please enter your details</Heading4>
                     </GridLayout>
-                    <form onSubmit={handleLogin} className="display: block m-0">
+                    <form onSubmit={handleSignup} className="display: block m-0">
                         <Box className="!pt-12 text-black text-base">
                             <label className="pb-2">E-mail address</label><br />
                             <input placeholder="Placeholder" onChange={onChangeUserEmail} value={userEmail} type="email" required className="border w-full px-3 py-2"/>
@@ -155,19 +180,24 @@ const Signup = (props) => {
                         </Box>
 
                         <Box className="!pt-6 w-full text-black text-base">
+                            <label className="pb-2">Tenant Name</label><br />
+                            <input placeholder="Placeholder" onChange={(e) => setTenantName(e.target.value)} required value={tenantName} type="text" className="border w-full px-3 py-2"/>
+                        </Box>
+
+                        <Box className="!pt-6 w-full text-black text-base">
                             <label className="pb-2">Company</label><br />
                             <input placeholder="Placeholder" onChange={(e) => setCompany(e.target.value)} value={company} type="text" className="border w-full px-3 py-2"/>
                         </Box>
                        
                         <Box className="!pt-6 w-full text-black text-base">
-                            <label className="pb-2">Phone Number</label><br />
-                            <ReactPhoneInput
-                                value={phoneNumber}
-                                onChange={() => setPhoneNumber(phoneNumber)} // passed function receives the phone value
-                                component={TextField}
-                                defaultCountry={'gb'}
+                            
+                            <PhoneField 
+                                value={phoneNumber} 
+                                onChange={(value) => setPhoneNumber(value)} 
                             />
                         </Box>
+
+                       
                         
                         <Box className="w-full !pt-12">
                             <button className="w-full text-white bg-[#214559] h-12 hover:bg-[#377395]" type="submit">
