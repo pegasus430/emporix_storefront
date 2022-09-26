@@ -13,13 +13,14 @@ const Layout = ({children, title, page, data, actions}) => {
     const [showCart, setShowCart] = useState(false)
     const [loading, setLoading] = useState(true)
     const [menuList, setMenuList] = useState([])
-
+    
     useEffect(()=> {
+        
         const layout_init = async () => {
             const {category_menu_list, category_details} = await PageInitialize(page, data)
             setMenuList(category_menu_list)
             setLoading(false)
-            console.log(category_details)
+
             switch(page){
                 case product_list_page:
                     actions.setTitle(category_details.title)
@@ -30,8 +31,10 @@ const Layout = ({children, title, page, data, actions}) => {
             }
         }
         layout_init()
-	}, [])
-
+        console.log('Layout initialized.')
+	},[])
+    
+    
     return (
         <LayoutContext.Provider value={{showCart, setShowCart, menuList}}>
             {loading ? <LoadingCircleProgress />: 

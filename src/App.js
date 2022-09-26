@@ -41,9 +41,9 @@ function App() {
 		<Router>
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="product/:maincategory" element={<ProductList />} />
-				<Route path="product/:maincategory/:subcategory/" element={<ProductList />} />
-				<Route path="product/:maincategory/:subcategory/:category" element={<ProductList />} />
+				<Route path="product/:maincategory" exact  element={<ProductList />} />
+				<Route path="product/:maincategory/:subcategory/" exact element={<ProductList />} />
+				<Route path="product/:maincategory/:subcategory/:category" exact element={<ProductList />} />
 				<Route path="product/details/:product_id" element={<ProductDetails />} />
 				<Route path="login" element={<Login />} />
 				<Route path="signup" element={<Signup />} />

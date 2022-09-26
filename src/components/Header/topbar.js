@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext} from 'react'
 import { Link } from 'react-router-dom'
+
 import Navbar from './navigationbar'
 import logo from '../../assets/atom.png'
 import { ChevronDownIcon } from '@heroicons/react/solid'
@@ -54,7 +55,7 @@ const MegaNav = () => {
 
 								{
 									subMenuItems.map((item, index) => 
-										<Link key = {index} to={`${item.url}`}>
+										<Link replace key = {index} to={`${item.url}`} >
 											<li className='mega_content_category_li' onMouseOver = {() => {setSubMenuMegaContent(item.items); setShowMegaMenuRightContent(true)}} onMouseLeave = {() => {  setShowMegaMenuRightContent(false)} }>{item.title}</li>
 										</Link>
 										

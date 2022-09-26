@@ -2,7 +2,7 @@ import CategoryService from './product/category.service'
 import { menu_list } from '../components/Header/menu.config'
 import {product_list_page} from '../constants/page'
 
-const GetCategory = async () => {
+const GetCategory = async (is_real) => {
     menu_list[0]['items'] = await CategoryService.getProductCategoryTrees()
     return menu_list
 }
@@ -12,7 +12,7 @@ const PageInitialize = async (page, data) => {
     let category_details = {}
     switch(page){
         case product_list_page:
-            category_details = CategoryService.getProductCategoryDetail(data.maincategory, data.subcategory, data.category)
+            category_details = await CategoryService.getProductCategoryDetail(data.maincategory, data.subcategory, data.category)
             break;
         default:
             break;
