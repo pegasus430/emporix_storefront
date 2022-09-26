@@ -8,7 +8,7 @@ import { HiOutlineUserCircle } from "react-icons/hi"
 import { ChevronRightIcon , ChevronLeftIcon } from '@heroicons/react/solid'
 import LayoutContext from '../../pages/context'
 import { LargePrimaryButton } from '../Utilities/button'
-
+import {pageMenuSelector} from "../../redux/slices/pageReducer"
 
 const Navbar = () => {
 	
@@ -19,7 +19,9 @@ const Navbar = () => {
 	const [title, setTitle] = useState('')
 	const [subMenuItems, setSubMenuItems] = useState([])
 
-	const {showCart, setShowCart, menuList} = useContext(LayoutContext)
+	const {showCart, setShowCart} = useContext(LayoutContext)
+  const menuList = useSelector(pageMenuSelector)
+
     const ParentBoard = () =>{
       	return (
           	<>
