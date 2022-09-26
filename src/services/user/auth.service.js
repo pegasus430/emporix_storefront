@@ -2,10 +2,6 @@ import axios from "axios";
 import anonymous from './anonymousToken'
 import { signup_api } from '../service.config'
 import ApiRequest from "..";
-import {
-    
-    SET_MESSAGE,
-  } from "../../actions/types";
 
 const API_URL = process.env.REACT_APP_API_URL_STAGE
 const tenant = process.env.REACT_APP_TENANT_STAGE
@@ -37,11 +33,7 @@ const register = async (email, password , firstName , lastName, tenantName , com
 				}
 			}
 			response = await ApiRequest(signup_api, 'post', payload, headers)
-			
-			
 
-
-			
 		},
 		(error) => {
 			console.log("error from anonymous", error)
