@@ -20,8 +20,9 @@ import AccountLocations from './pages/account/AccountLocations'
 import AccountPayments from './pages/account/AccountPayments'
 import AccountReviews from './pages/account/AccountReviews'
 import { history } from "./helpers/history";
-import { logout } from "./actions/auth";
-import { clearMessage } from "./actions/message";
+
+import { logout } from "./redux/slices/authReducer";
+import { clearMessage } from "./redux/slices/messageReducer";
 
 function App() {
 
