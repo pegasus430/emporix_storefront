@@ -2,12 +2,12 @@ import React, { useState, useRef , useEffect, Fragment} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate , Link } from 'react-router-dom';
 import login_atom from '../assets/login_atom.png'
-import { login, register } from "../actions/auth";
+import { login, register } from "../redux/slices/authReducer"
+import {setMessage, clearMessage} from '../redux/slices/messageReducer'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 import PhoneField from "../components/Utilities/phoneinput/PhoneField";
-import {  SET_MESSAGE } from "../actions/types";
 import { GridLayout, Container } from "../components/Utilities/common";
 import { Heading2, Heading4 } from "../components/Utilities/typography";
 import  Box  from "@mui/material/Box";
@@ -64,10 +64,7 @@ const Signup = (props) => {
     e.preventDefault();
 
     if((password.length) < 6){
-        dispatch({
-            type: SET_MESSAGE,
-            payload: "password must have at least 6 characters!",
-        })
+        dispatch(setMessage("password must have at least 6 characters!"))
         setOpenNotification(true)
     }
     else{
@@ -97,18 +94,12 @@ const Signup = (props) => {
                     setLoading(false)
                 });
             }else{
-                dispatch({
-                    type: SET_MESSAGE,
-                    payload: "Confirm password is incorrect!",
-                })
+                dispatch(setMessage("Confirm password is incorrect!"))
                 setOpenNotification(true)
             }
         }
         else{
-            dispatch({
-                type: SET_MESSAGE,
-                payload: "Please enter at least useremail and password",
-            })
+            dispatch(setMessage("Please enter at least useremail and password"))
             setOpenNotification(true)
     
         }

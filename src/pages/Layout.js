@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext, useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import Topbar from "../components/Header/topbar";
 import Footer from "../components/Footer";
 import Drawer from "../components/Utilities/drawer/drawer";
@@ -6,37 +6,30 @@ import Cart from "../components/Cart/cart"
 import LayoutContext from "./context";
 import {LoadingCircleProgress} from '../components/Utilities/progress'
 import { GridLayout } from "../components/Utilities/common";
-import PageInitialize from "../services/init.service";
-import {product_list_page} from '../constants/page'
+import { useDispatch, useSelector } from "react-redux"
+import { categoryLoadingSelector, GetCategory, categoryDataSelector } from "../redux/slices/categoryReducer";
+import {putShopItems} from "../redux/slices/pageReducer"
 
-const Layout = ({children, title, page, data, actions}) => {
+const Layout = ({children, title}) => {
     const [showCart, setShowCart] = useState(false)
-    const [loading, setLoading] = useState(true)
-    const [menuList, setMenuList] = useState([])
-    
-    useEffect(()=> {
-        
-        const layout_init = async () => {
-            const {category_menu_list, category_details} = await PageInitialize(page, data)
-            setMenuList(category_menu_list)
-            setLoading(false)
 
-            switch(page){
-                case product_list_page:
-                    actions.setTitle(category_details.title)
-                    actions.setCategoryMenuList(category_details.categories)
-                    break;
-                default:
-                    break;
-            }
+    const loading = useSelector(categoryLoadingSelector)
+    const dispatch = useDispatch()
+    const categoryData = useSelector(categoryDataSelector)
+    useEffect(()=> {
+        const layout_init = async () => {
+            dispatch(GetCategory())
         }
         layout_init()
         console.log('Layout initialized.')
 	},[])
     
+    useEffect(() => {
+        if(categoryData != []) dispatch(putShopItems(categoryData))
+    }, [loading])
     
     return (
-        <LayoutContext.Provider value={{showCart, setShowCart, menuList}}>
+        <LayoutContext.Provider value={{showCart, setShowCart}}>
             {loading ? <LoadingCircleProgress />: 
                 <GridLayout className="min-w-[375px]">
                     <Topbar title={title} />

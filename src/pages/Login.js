@@ -2,11 +2,10 @@ import React, { useState, useRef , useEffect, Fragment} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate , Link } from 'react-router-dom';
 import login_atom from '../assets/login_atom.png'
-import { login } from "../actions/auth";
+import { login } from "../redux/slices/authReducer";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
-import {  SET_MESSAGE } from "../actions/types";
 import { LayoutBetween , GridLayout, Container } from "../components/Utilities/common";
 import { Heading2, Heading4 } from "../components/Utilities/typography";
 import  Box  from "@mui/material/Box";
