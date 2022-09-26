@@ -8,7 +8,6 @@ import comfort_chair        from "../../assets/products/comfort_chair.png"
 import pc_stand             from "../../assets/products/pc_stand.png"
 import stapler              from "../../assets/products/stapler.png"
 import ProductList          from './ProductList'
-
 import './product.css'
 
 const category_products = [
@@ -68,11 +67,11 @@ const FilterButton = (props) => {
     )
 }
 
-const ProductPage = ({categoryMenuList}) =>  {
-
+const ProductPage = () =>  {
     const [showFilterContentForMobile, setShowFilterContentForMobile] = useState(false)
     const [showSideFilterContnet, setShowSideFilterContent] = useState(false)
-
+    
+    
     const [filterItems, setFilterItems] = useState([])
 
     const setFilterItemFunc = data => {
@@ -108,7 +107,7 @@ const ProductPage = ({categoryMenuList}) =>  {
                     <FilterButton filtercount={4} onClick={() => {  setShowFilterContentForMobile(true)}} />
 
                     
-                <ProductList handleSideFilterContent={handleSideFilterContent} categoryMenuList = {categoryMenuList} filterItems = {filterItems} />
+                <ProductList handleSideFilterContent={handleSideFilterContent}  filterItems = {filterItems} />
 
             </div>
         </div>

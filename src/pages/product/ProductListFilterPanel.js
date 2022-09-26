@@ -1,8 +1,14 @@
-import React, { useState , useRef } from 'react'
+import React, { useState , useRef, useEffect } from 'react'
 import adjust               from '../../assets/adjust-2.png'
 import deleteFilter         from '../../assets/del_filter.png'
 import { ChevronUpIcon , ChevronDownIcon } from '@heroicons/react/solid'
 import { CAccordionBody } from '@coreui/react'
+import {useParams} from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux"
+import {LoadingCircleProgress1} from '../../components/Utilities/progress'
+import { categoryLoadingSelector, categoryDataSelector} from "../../redux/slices/categoryReducer"
+import CategoryService from '../../services/product/category.service'
+import {setProductIds, setLoadingStatus} from '../../redux/slices/productReducer'
 
 // const filterItems = [
 //     {
@@ -117,23 +123,63 @@ const FilterListPanel = ({filterItems , handleSideFilterContent}) => {
     )
 }
 
-const CategoryPanel = ({categoryMenuList}) => {
+const CategoryPanel = ({categoryLoading, categoryMenuList}) => {
+    
     return (
-        
-            <ul className="category_accordion pr-6">
-                {categoryMenuList.map((item, index) => (
-                    <Category key={index} item={item} />
-                ))}
-                
-            </ul>
+        <>
+            {categoryLoading?<LoadingCircleProgress1 />:
+                <ul className="category_accordion pr-6">
+                    {categoryMenuList.map((item, index) => (
+                        <Category key={index} item={item} />
+                    ))}
+                </ul>
+            }
+        </>
     )
 }
 
-const ProductListFilterPanel = ({handleSideFilterContent , categoryMenuList  , filterItems }) => {
+const ProductListFilterPanel = ({handleSideFilterContent, filterItems }) => {
+    const [categoryMenuList, setCategoryMenuList] = useState([])
+    const {maincategory, subcategory, category} = useParams()
+    const loading = useSelector(categoryLoadingSelector)
+    const categoryData = useSelector(categoryDataSelector)
+    const [categoryLoading, setCategoryLoading] = useState(true)
+    const [categoryInfo, setCategoryInfo] = useState('')    
+
+    const newCategoryInfo = `${maincategory}/${subcategory}/${category}`
+    const dispatch = useDispatch()
+
+    const getCategory = async () => {
+        if(loading) return    
+        setCategoryLoading(true)
+        dispatch(setLoadingStatus(true))
+        const {title, categories,category_id, productIds} = await CategoryService.getProductCategoryDetail(maincategory, subcategory, category)
+        
+        dispatch(setProductIds(productIds))
+        setCategoryMenuList(categories)
+        setCategoryLoading(false)
+        
+    }
+    // if(newCategoryInfo != categoryInfo){
+    //     setCategoryInfo(newCategoryInfo)
+    //     getCategory()
+    // }
+    
+    useEffect(() => {
+        getCategory()
+    }, [loading])
+
+    useEffect(() => {
+        if(newCategoryInfo != categoryInfo){
+            setCategoryInfo(newCategoryInfo)
+            getCategory()
+        }
+    })
+
     return (
         <div className='border-r'>
             <FilterListPanel filterItems ={filterItems} handleSideFilterContent ={handleSideFilterContent} />
-            <CategoryPanel categoryMenuList = {categoryMenuList} />
+            <CategoryPanel categoryLoading={categoryLoading} categoryMenuList = {categoryMenuList} />
         </div>
     )
 }
