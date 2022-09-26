@@ -3,7 +3,8 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { HiOutlineUserCircle } from "react-icons/hi";
-import { logout } from "../../actions/auth";
+import { logout } from "../../redux/slices/authReducer";
+
 import { useDispatch, useSelector } from "react-redux";
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')

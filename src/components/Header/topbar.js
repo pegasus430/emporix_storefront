@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useContext} from 'react'
 import { Link } from 'react-router-dom'
+
 import Navbar from './navigationbar'
 import logo from '../../assets/atom.png'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import LayoutContext from '../../pages/context'
+import { useSelector } from "react-redux"
+import {pageMenuSelector} from "../../redux/slices/pageReducer"
 import "./topbar.css"
 
 const Logo = () => {
@@ -25,8 +28,8 @@ const MegaNav = () => {
 		setSubMenuItems(items)
 		setShowMegaMenuContent(true)
 	}
-	const {menuList} = useContext(LayoutContext)
-
+	const menuList = useSelector(pageMenuSelector)
+	
 	return (
 		<div className="dropdown flex text-base" >
 
@@ -54,7 +57,7 @@ const MegaNav = () => {
 
 								{
 									subMenuItems.map((item, index) => 
-										<Link key = {index} to={`${item.url}`}>
+										<Link replace key = {index} to={`${item.url}`} >
 											<li className='mega_content_category_li' onMouseOver = {() => {setSubMenuMegaContent(item.items); setShowMegaMenuRightContent(true)}} onMouseLeave = {() => {  setShowMegaMenuRightContent(false)} }>{item.title}</li>
 										</Link>
 										

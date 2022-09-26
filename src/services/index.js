@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const ApiRequest = async (url, type, data, headers) => {
+const ApiRequest = async (url, type, data, headers, params={}) => {
     let Request;
     switch(type){
         case 'post':
             Request = axios.post; break;
         case 'get':
             Request = axios.get; 
-            return await Request(url, {headers})
+            return await Request(url, {headers, params})
         default:
             Request =  axios.put; break;
     }
