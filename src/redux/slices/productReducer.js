@@ -15,9 +15,9 @@ const ProductReducer = createSlice({
     initialState,
     reducers: {
         setProductDataSuccess: (state, action) => {
-            state.loading = false
             state.products = action.payload.products
             state.total = action.payload.total
+            state.loading = false
         },
         setLoadingStatusSuccess: (state, action) => {
             state.loading = action.payload
@@ -37,11 +37,9 @@ export const {
 } = ProductReducer.actions
 
 export const getProductData = (productIds, total, pageNumber, itemsPerPage) => async (dispatch) => {
-    dispatch(setLoadingStatusSuccess(true)) 
     const products = await productService.getProductsWithIds(productIds.slice(itemsPerPage * (pageNumber - 1), itemsPerPage * pageNumber))
+    
     dispatch(setProductDataSuccess({products: products.data, total: total}))
-    dispatch(setLoadingStatusSuccess(false))
-
 }
 export const setProductIds = (productIds) => (dispatch) => {
     dispatch(setProductIdsSucess(productIds))
