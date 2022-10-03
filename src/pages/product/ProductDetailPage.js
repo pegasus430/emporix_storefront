@@ -72,7 +72,7 @@ const ProductImage = ({product}) => {
             </div>
             <div className="product-detail-sub-images">
                 {product.sub_images.map((link, index) => {
-                    return <div key={index} className="rounded product-detail-sub-image-item">
+                    return <div key={index} className="rounded product-detail-sub-image-item flex items-center">
                                 <img src={`${link}`} alt="product_" className="w-full m-auto items-center"/>
                             </div>
                 })}
@@ -83,7 +83,7 @@ const ProductImage = ({product}) => {
 const ProductSkuAndReview = ({product}) => {
     return (
         <div className="flex justify-between items-end">
-                <div className="sku-info">SKU:&nbsp;&nbsp;<span className="sku">{product.sku}</span></div>
+                <div className="sku-info">SKU:&nbsp;&nbsp;<span className="sku">{product.code}</span></div>
                 <div className="reviews-info">
                     <div className="lg:flex">
                         <div className="flex float-right lg:float-left lg:pb-0 pb-4">
@@ -436,7 +436,7 @@ const products = [
         rating : 4, 
         count : 8 ,
         src : hp_laser_printer ,
-        category : "TY2-B#M74A",
+        code : "TY2-B#M74A",
         name : "HP LaserJet 1*500-sheet Paper Feeder and Cabinet",
         price : "341.89",
         list_price : "389.50"
@@ -447,7 +447,7 @@ const products = [
         rating : 4, 
         count : 8 ,
         src : pc_stand ,
-        category : "BB2-B3M987",
+        code : "BB2-B3M987",
         name : "RP9 Retail Compact Stand Silver PC Multimedia stand",
         price : "84.89",
         list_price : "94.10"
@@ -457,7 +457,7 @@ const products = [
         rating : 4, 
         count : 8 ,
         src : stapler ,
-        category : "BB2-B3M987",
+        code : "BB2-B3M987",
         name : "Zenith Plier stapler 548/E Silver",
         price : "27.50",
         list_price : "34.99"
@@ -467,7 +467,7 @@ const products = [
         rating : 4, 
         count : 8 ,
         src : comfort_chair ,
-        category : "TY2-B#M74A",
+        code : "TY2-B#M74A",
         name : "Comfort Ergo 2-Lever Operator Chairs",
         price : "53.59",
         list_price : "59.99"
@@ -477,7 +477,7 @@ const products = [
         rating : 4, 
         count : 8 ,
         src : comfort_chair ,
-        category : "TY2-B#M74A",
+        code : "TY2-B#M74A",
         name : "Comfort Ergo 2-Lever Operator Chairs",
         price : "53.59",
         list_price : "59.99"
@@ -495,7 +495,7 @@ const ProductMatchItems = () => {
                     {
                         products.map((item, index) => (
                                 <Product key={index} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
-                                    category = {item.category} name={item.name} 
+                                    code = {item.code} name={item.name} 
                                     price = {item.price} list_price = {item.list_price} />
                             )
                         )
@@ -506,7 +506,7 @@ const ProductMatchItems = () => {
     )
 }
 const ProductDetailPage = ({product}) => {
-    // CategoryService.getAllCategories()
+
     return (
         <div className="product-detail-page-wrapper ">
             <div className="product-detail-page-content">
