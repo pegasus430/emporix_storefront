@@ -10,31 +10,31 @@ import TableRow from '@mui/material/TableRow';
 const savedCartsList = [
   {
     date : '11/05/2022' ,
-    name : 'Baseket Name',
+    name : 'Basket Name',
     items : '24' ,
     total : '2,569.25'
   } ,
   {
     date : '11/05/2022' ,
-    name : 'Baseket Name',
+    name : 'Basket Name',
     items : '17' ,
     total : '2,569.25'
   } ,
   {
     date : '11/05/2022' ,
-    name : 'Baseket Name',
+    name : 'Basket Name',
     items : '4' ,
     total : '2,569.25'
   } ,
   {
     date : '11/05/2022' ,
-    name : 'Baseket Name',
+    name : 'Basket Name',
     items : '24' ,
     total : '2,569.25'
   } ,
   {
     date : '11/05/2022' ,
-    name : 'Baseket Name',
+    name : 'Basket Name',
     items : '24' ,
     total : '2,569.25'
   } ,
