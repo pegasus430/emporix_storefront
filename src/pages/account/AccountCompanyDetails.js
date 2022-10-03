@@ -34,7 +34,7 @@ const CompanyDetails = ({value}) => {
           <div className="mt-2 sub-label">Provide your Personal Info</div>
         </div>
         <div className="company-info-wrapper md:flex md:gap-4 flex-col my-3 md:my-0">
-          <CompanyInfoItem caption="Legal Name" content="Company Legal Name" />
+          <CompanyInfoItem caption="Legal Name" content={company} />
           <CompanyInfoItem caption="Tax Registration Number" content="1605492" />
           <CompanyInfoItem caption="Country Of Registration" content="Germany" />
           <CompanyInfoItem caption="Registration Agency" content="Input Text" />
