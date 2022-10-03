@@ -57,11 +57,10 @@ const MegaNav = () => {
 
 								{
 									subMenuItems.map((item, index) => 
-										<Link replace key = {index} to={`${item.url}`} >
+										<Link onClick={() => console.log('clicked')} replace key = {index} to={`${item.url}`} >
 											<li className='mega_content_category_li' onMouseOver = {() => {setSubMenuMegaContent(item.items); setShowMegaMenuRightContent(true)}} onMouseLeave = {() => {  setShowMegaMenuRightContent(false)} }>{item.title}</li>
 										</Link>
-										
-										
+											
 									)
 								}
 

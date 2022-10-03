@@ -8,29 +8,34 @@ import {LoadingCircleProgress} from '../components/Utilities/progress'
 import { GridLayout } from "../components/Utilities/common";
 import { useDispatch, useSelector } from "react-redux"
 import { categoryLoadingSelector, GetCategory, categoryDataSelector } from "../redux/slices/categoryReducer";
+import {availabilityLoadingSelector, GetAvailability} from '../redux/slices/availabilityReducer'
+
 import {putShopItems} from "../redux/slices/pageReducer"
 
 const Layout = ({children, title}) => {
     const [showCart, setShowCart] = useState(false)
 
     const loading = useSelector(categoryLoadingSelector)
+    const availabilityLoading = useSelector(availabilityLoadingSelector)
+
     const dispatch = useDispatch()
     const categoryData = useSelector(categoryDataSelector)
     useEffect(()=> {
         const layout_init = async () => {
             dispatch(GetCategory())
+            dispatch(GetAvailability())
         }
         layout_init()
         console.log('Layout initialized.')
 	},[])
     
     useEffect(() => {
-        if(categoryData != []) dispatch(putShopItems(categoryData))
+        if(loading == false) dispatch(putShopItems(categoryData))
     }, [loading])
     
     return (
         <LayoutContext.Provider value={{showCart, setShowCart}}>
-            {loading ? <LoadingCircleProgress />: 
+            {loading || availabilityLoading? <LoadingCircleProgress />: 
                 <GridLayout className="min-w-[375px]">
                     <Topbar title={title} />
                     <Drawer>
