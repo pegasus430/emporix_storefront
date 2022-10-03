@@ -4,6 +4,7 @@ import messageReducer from "./slices/messageReducer"
 import categoryReducer from "./slices/categoryReducer"
 import pageReducer from "./slices/pageReducer"
 import productReducer from "./slices/productReducer"
+import availabilityReducer from "./slices/availabilityReducer"
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
     auth: authReducer,
     category: categoryReducer,
     page: pageReducer,
-    product: productReducer
+    product: productReducer,
+    availability: availabilityReducer
   }
 });
 

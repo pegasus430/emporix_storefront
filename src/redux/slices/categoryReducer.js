@@ -12,7 +12,9 @@ const categorySlice = createSlice({
     initialState,
     reducers: {
         setCategory:(state, action) => {
-            state.data = action.payload
+            // set category while loading...
+            if(state.loading === true) 
+                state.data = action.payload
         },
         setLoading: (state, action) => {
             state.loading = action.payload

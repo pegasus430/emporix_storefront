@@ -20,7 +20,7 @@ const Product = (props) => {
             </div>
             <div className='mt-11 w-full font-inter'>
                 <div className='text-left text-[12px] leading-[12px] text-[#ACAEB2]'>
-                    {props.category}
+                    {props.code}
                 </div>
                 <div className='mt-2 text-left max-w-[240px] text-base font-bold'> 
                     {props.name}
