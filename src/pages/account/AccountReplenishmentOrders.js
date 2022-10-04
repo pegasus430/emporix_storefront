@@ -6,6 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { Link } from 'react-router-dom';
 
 const repleishmentOrdersList = [
   {
@@ -72,10 +73,11 @@ const RepleOrderItem = ({order_number, po, start_on , frequency , next_order_dat
 const ReplenishmentOrders = () => {
   return (
     <div>
-        <div className="w-[278px]  h-12 bg-[#214559] text-white  flex items-center my-12 md:mx-0 mx-auto">
-            <span className='text-center  w-full'>NEW REPLENISHMENT ORDER</span>
-        </div>
-
+        <Link to="/my-account/replenishment-orders/add">
+          <div className="w-[278px]  h-12 bg-[#214559] text-white  flex items-center my-12 md:mx-0 mx-auto">
+              <span className='text-center  w-full'>NEW REPLENISHMENT ORDER</span>
+          </div>
+        </Link>
         <TableContainer className='desktop_only' >
           <Table sx={{ minWidth: 650 }}  >
             <TableHead >

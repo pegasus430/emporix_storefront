@@ -15,6 +15,7 @@ import AccountPersonalDetails from './pages/account/AccountPersonalDetails'
 import AccountCompanyDetails from './pages/account/AccountCompanyDetails'
 import AccountMyOrders from './pages/account/AccountMyOrders'
 import AccountReplenishmentOrders from './pages/account/AccountReplenishmentOrders'
+import AccountReplenishmentAddOrders from './pages/account/AccountReplenishmentAddOrders'
 import AccountSavedCarts from './pages/account/AccountSavedCarts'
 import AccountLocations from './pages/account/AccountLocations'
 import AccountPayments from './pages/account/AccountPayments'
@@ -56,7 +57,8 @@ function App() {
 					<Route path="personal-details" element={<AccountPersonalDetails />} />
 					<Route path="company-details" element={<AccountCompanyDetails />} />
 					<Route path="my-orders" element={<AccountMyOrders />} />
-					<Route path="replenishment-orders" element={<AccountReplenishmentOrders />} />
+					<Route path="replenishment-orders" exact element={<AccountReplenishmentOrders />} />
+					<Route path="replenishment-orders/add" exact element={<AccountReplenishmentAddOrders />} />
 					<Route path="saved-carts" element={<AccountSavedCarts />} />
 					<Route path="locations" element={<AccountLocations />} />
 					<Route path="payments" element={<AccountPayments />} />

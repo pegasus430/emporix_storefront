@@ -1,3 +1,6 @@
 .large-primary-btn{
     @apply h-12 px-6 bg-[#214559] text-[#FFFFFF] font-bold text-[14px] leading-[14px] tracking-[1px] hover:bg-[#377395] active:bg-[#2C5C77] w-full
 }
+.medium-primary-btn{
+    @apply h-10 px-6 bg-[#214559] text-[#FFFFFF] font-bold text-[14px] leading-[14px] tracking-[1px] hover:bg-[#377395] active:bg-[#2C5C77] w-full
+}
