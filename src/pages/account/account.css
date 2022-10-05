@@ -181,3 +181,24 @@ li.index-item-active{
     background-image: conic-gradient(from 180deg at 50% 70%, #9BB9CA, #2C5C77);
     @apply h-[72px] w-full p-6 font-inter font-semibold text-[24px] leading-[24px] pb-6 text-white
 }
+.switch-item{
+    @apply !p-0 !w-[45px] !h-[24px] !rounded-[12px] !border border-[#ACAEB2]
+}
+.switch-item .MuiButtonBase-root{
+    @apply !p-0 !w-4 !h-4 !bg-[#D7DADE] !rounded-[12px]
+}
+.switch-item .MuiSwitch-thumb{
+    @apply !p-0 !w-4 !h-4 bg-[#D7DADE] !rounded-[12px]
+}
+.switch-item .MuiSwitch-track{
+    @apply hidden
+}
+.switch-item .MuiButtonBase-root{
+    @apply m-[3px]
+}
+.switch-item .Mui-checked .MuiSwitch-thumb{
+    @apply !bg-[#377395]
+}
+.switch-item:has(.Mui-checked){
+    @apply !bg-[#D7E3EA] !border-[#377395]
+}

@@ -11,3 +11,10 @@ export const MediumPrimaryButton = ({title, onClick, className}) => {
         <button className={"medium-primary-btn " + (className?className:"")} onClick={onClick}>{title}</button>
     )   
 }
+
+
+export const MediumSecondaryButton = ({title, onClick, className}) => {
+    return (
+        <button className={"medium-secondary-btn " + (className?className:"")} onClick={onClick}>{title}</button>
+    )   
+}

@@ -17,6 +17,6 @@
 .brand-gray{
     @apply text-[#DFE1E5]
 }
-.MuiButtonBase-root{
+/* .MuiButtonBase-root{
     @apply !p-0
-}
+} */

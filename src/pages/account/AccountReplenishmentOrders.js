@@ -111,9 +111,11 @@ const ReplenishmentOrders = () => {
                   <TableCell align="left" className='!py-6'>
                     
                       <div className='flex'>
-                          <div className='font-inter font-semibold text-[14px] underline'>
-                              Edit
-                          </div>
+                          <Link to="/my-account/replenishment-orders/edit">
+                            <div className='font-inter font-semibold text-[14px] underline'>
+                                Edit
+                            </div>
+                          </Link>
                           <div className='font-inter font-semibold text-[14px] underline ml-6'>
                               Cancel
                           </div>

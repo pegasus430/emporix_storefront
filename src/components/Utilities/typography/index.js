@@ -56,6 +56,21 @@ export const TextBold6 = ({children, className}) => {
         <div className={"text-bold-6 " + (className? className: "")}>{children}</div>
     )
 }
+export const TextBold7 = ({children, className}) => {
+    return (
+        <div className={"text-bold-7 " + (className? className: "")}>{children}</div>
+    )
+}
+export const TextBold8 = ({children, className}) => {
+    return (
+        <div className={"text-bold-8 " + (className? className: "")}>{children}</div>
+    )
+}
+export const TextBold9 = ({children, className}) => {
+    return (
+        <div className={"text-bold-9 " + (className? className: "")}>{children}</div>
+    )
+}
 export const TextRegular2 = ({children, className}) => {
     return (
         <div className={"text-regular-2 " + (className? className: "")}>{children}</div>
@@ -63,7 +78,17 @@ export const TextRegular2 = ({children, className}) => {
 }
 export const TextRegular4 = ({children, className}) => {
     return (
+        <div className= {"text-regular-5 " + (className? className: "")}>{children}</div>
+    )
+}
+export const TextRegular5 = ({children, className}) => {
+    return (
         <div className= {"text-regular-4 " + (className? className: "")}>{children}</div>
+    )
+}
+export const TextRegular6 = ({children, className}) => {
+    return (
+        <div className= {"text-regular-6 " + (className? className: "")}>{children}</div>
     )
 }
 export const TextRegular3 = ({children, className}) => {

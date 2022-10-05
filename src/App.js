@@ -16,10 +16,13 @@ import AccountCompanyDetails from './pages/account/AccountCompanyDetails'
 import AccountMyOrders from './pages/account/AccountMyOrders'
 import AccountReplenishmentOrders from './pages/account/AccountReplenishmentOrders'
 import AccountReplenishmentAddOrders from './pages/account/AccountReplenishmentAddOrders'
+import AccountReplenishmentEditOrders from './pages/account/AccountReplenishmentEditOrders'
 import AccountSavedCarts from './pages/account/AccountSavedCarts'
 import AccountLocations from './pages/account/AccountLocations'
+import AccountAddLocations from './pages/account/AccountAddLocations'
 import AccountPayments from './pages/account/AccountPayments'
 import AccountReviews from './pages/account/AccountReviews'
+import AccountPaymentsEditCardDetails from './pages/account/AccountPaymentsEditCardDetails'
 import { history } from "./helpers/history";
 
 import { logout } from "./redux/slices/authReducer";
@@ -59,9 +62,13 @@ function App() {
 					<Route path="my-orders" element={<AccountMyOrders />} />
 					<Route path="replenishment-orders" exact element={<AccountReplenishmentOrders />} />
 					<Route path="replenishment-orders/add" exact element={<AccountReplenishmentAddOrders />} />
+					<Route path="replenishment-orders/edit" exact element={<AccountReplenishmentEditOrders />} />
 					<Route path="saved-carts" element={<AccountSavedCarts />} />
-					<Route path="locations" element={<AccountLocations />} />
-					<Route path="payments" element={<AccountPayments />} />
+					<Route path="locations" exact element={<AccountLocations />} />
+					<Route path="locations/add" exact element={<AccountAddLocations />} />
+					<Route path="payments" exact element={<AccountPayments />} />
+					<Route path="payments/edit_card_details" element={<AccountPaymentsEditCardDetails />} />
+					
 					<Route path="reviews" element={<AccountReviews />} />
 					
 				</Route>

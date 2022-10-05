@@ -10,6 +10,12 @@
 .heading5{
     @apply text-[16px] leading-[24px] font-medium
 }
+.text-bold-8{
+    @apply text-[16px] leading-[20px] font-medium
+}
+.text-bold-9{
+    @apply text-[12px] leading-[20px] font-medium
+}
 .text-regular-3{
     @apply text-[16px] leading-[22px] font-normal
 }
@@ -40,8 +46,17 @@
 .text-regular-4{
     @apply text-[12px] leading-[16px] font-normal
 }
+.text-regular-5{
+    @apply text-[24px] leading-[40px] font-normal
+}
+.text-regular-6{
+    @apply text-[16px] leading-[20px] font-normal
+}
 .text-bold-6{
     @apply text-[12px] leading-[16px] font-bold
+}
+.text-bold-7{
+    @apply text-[12px] leading-[20px] font-bold
 }
 .underline-normal-text{
     @apply underline underline-offset-4
