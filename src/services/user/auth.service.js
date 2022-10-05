@@ -1,6 +1,7 @@
 import axios from "axios";
 import anonymous from './anonymousToken'
-import { signup_api } from '../service.config'
+// import { signup_api } from '../service.config'
+import tenant_lists from '../../tenant.config'
 import ApiRequest from "..";
 
 const API_URL = process.env.REACT_APP_API_URL_STAGE
@@ -32,6 +33,7 @@ const register = async (email, password , firstName , lastName, tenantName , com
 					password : password
 				}
 			}
+			const signup_api = `${API_URL}/customer/${tenantName}/signup`
 			response = await ApiRequest(signup_api, 'post', payload, headers)
 
 		},
@@ -44,12 +46,15 @@ const register = async (email, password , firstName , lastName, tenantName , com
 	return response
 };
 
-const  login = async (username, password) => {
+const  login = async (username, password, userTenant) => {
 	let response_data = null
-	await anonymous.getAnonymousToken().then(
+	let user_tenant = userTenant
+	if(tenant_lists[user_tenant] == undefined) user_tenant = tenant
+
+	await anonymous.getAnonymousToken(user_tenant).then(
 		async (data) =>{
 				await axios
-				.post(API_URL + `/customer/${tenant}/login`, 
+				.post(API_URL + `/customer/${user_tenant}/login`, 
 					{
 						
 							"email" : username,
@@ -71,7 +76,7 @@ const  login = async (username, password) => {
 						
 							await axios.get
 							(
-								API_URL + `/customer/${tenant}/me?expand=addresses`, 
+								API_URL + `/customer/${user_tenant}/me?expand=addresses`, 
 								{
 									headers:
 									{

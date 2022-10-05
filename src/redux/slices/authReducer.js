@@ -68,13 +68,13 @@ export const register = (email, password , firstName , lastName, tenantName , co
   );
 };
 
-export const login =  (username, password) => (dispatch) => {
-  return  AuthService.login(username, password).then(
+export const login =  (username, password, userTenant) => (dispatch) => {
+  return  AuthService.login(username, password, userTenant).then(
     (data) => {
       
       if(data)
       {
-          let userdata = {...data,  username : data.firstName + " " +data.lastName }
+          let userdata = {...data,  userTenant: userTenant, username : data.firstName + " " +data.lastName }
           
           localStorage.setItem("user", JSON.stringify(userdata));
           dispatch(loginSuccess({ user: userdata }));

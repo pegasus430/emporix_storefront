@@ -13,7 +13,7 @@ const ProductService = () => {
         const params = {
             'q': 'id:(' + (ids.join(','))+')'
         }
-        const res = await ApiRequest(product_api, 'get', {},headers, params)
+        const res = await ApiRequest(product_api(), 'get', {},headers, params)
         return res
     }
     return {

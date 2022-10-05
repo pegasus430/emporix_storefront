@@ -9,6 +9,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { LayoutBetween , GridLayout, Container } from "../components/Utilities/common";
 import { Heading2, Heading4 } from "../components/Utilities/typography";
 import  Box  from "@mui/material/Box";
+import { DropdownWithLabel } from "../components/Utilities/dropdown";
+import tenant_lists from '../tenant.config'
 
 const Login = (props) => {
   const form = useRef();
@@ -21,7 +23,7 @@ const Login = (props) => {
   const { isLoggedIn } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const { message } = useSelector(state => state.message);
-
+  const [userTenant, setUserTenant] = useState("")
 
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
@@ -37,7 +39,10 @@ const Login = (props) => {
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-
+  
+  const onChangeUserTenant = (e) => {
+      setUserTenant(e.target.value)
+  }
   const onChangeUserEmail = (e) => {
     if (!isValidEmail(e.target.value)){
         setEmailMessage("Email is invalid")
@@ -59,7 +64,7 @@ const Login = (props) => {
    
     if (userEmail && password){
         setLoading(true)
-        dispatch(login(userEmail, password))
+        dispatch(login(userEmail, password, userTenant))
         .then(() => {
             props.history.push("/");
             window.location.reload();
@@ -110,7 +115,13 @@ const Login = (props) => {
                         <Heading4 className="text-[#818385] pt-6" >Welcome back! Please enter your details</Heading4>
                     </GridLayout>
                     <form onSubmit={handleLogin} className="display: block m-0">
+                        
                         <Box className="!pt-12 text-black text-base">
+                            <label className="pb-2">Tenane Name</label><br />
+                            <input placeholder="Placeholder"  value={userTenant} onChange={onChangeUserTenant} type="text" required className="border w-full px-3 py-2"/>
+                            
+                        </Box>
+                        <Box className="!pt-6 text-black text-base">
                             <label className="pb-2">E-mail address</label><br />
                             <input placeholder="Placeholder" onChange={onChangeUserEmail} value={userEmail} type="email" required className="border w-full px-3 py-2"/>
                             {

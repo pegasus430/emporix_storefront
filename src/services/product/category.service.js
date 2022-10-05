@@ -12,7 +12,7 @@ const CategoryService = () => {
             "Authorization": `Bearer ${token}`,
             "Accept-Language": "en"
         }
-        const res = await ApiRequest(category_api, 'get', {},headers)
+        const res = await ApiRequest(category_api(), 'get', {},headers)
         return res
     }
     const getCategoryTree = (categories, layer, parenturl='/product') => {

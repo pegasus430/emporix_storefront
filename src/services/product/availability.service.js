@@ -14,7 +14,8 @@ const AvailabilityService = () => {
         const params = {
             'site': service_site_name
         }
-        const res = await ApiRequest(availability_api, 'get', {},headers, params)
+
+        const res = await ApiRequest(availability_api(), 'get', {},headers, params)
         let availability = {}
         res.data.map(row => {
             availability[`k${row.productId}`] = row

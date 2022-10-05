@@ -77,7 +77,7 @@ const Signup = (props) => {
                 dispatch(register(userEmail, password , firstName , lastName , tenantName , company, phoneNumber))
                 .then(() => {
                     
-                    dispatch(login(userEmail, password))
+                    dispatch(login(userEmail, password, tenantName))
                         .then(() => {
                             props.history.push("/");
                             window.location.reload();
