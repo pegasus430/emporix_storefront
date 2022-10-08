@@ -117,7 +117,7 @@ const Login = (props) => {
                     <form onSubmit={handleLogin} className="display: block m-0">
                         
                         <Box className="!pt-12 text-black text-base">
-                            <label className="pb-2">Tenane Name</label><br />
+                            <label className="pb-2">Tenant Name</label><br />
                             <input placeholder="Placeholder"  value={userTenant} onChange={onChangeUserTenant} type="text" required className="border w-full px-3 py-2"/>
                             
                         </Box>
