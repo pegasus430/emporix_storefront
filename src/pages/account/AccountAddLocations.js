@@ -7,10 +7,15 @@ import { TextInput } from '../../components/Utilities/input';
 import { Link } from 'react-router-dom';
 
 const AddLocations = () => {
-  return (
+    const locationTypeOptions = [
+        {'value':'Headquarter','label':'Headquarter'},
+        {'value':'Office','label':'Office'},
+        {'value':'Warehouse','label':'Warehouse'}
+    ]
+    return (
       <GridLayout className="mt-12 justify-center gap-12">
             <GridLayout className="md:w-[65%] w-full gap-2 m-auto">
-                <DropdownWithLabel label="Location Type" placeholder="Please select" options={[{'value':'location', 'label':'label'}]}/>
+                <DropdownWithLabel label="Location Type" placeholder="Please select" options={locationTypeOptions}/>
                 <TextInput label="Country" placeholder="placeholder" value=""/>
                 <TextInput label="Address Line1" placeholder="placeholder" value=""/>
                 <TextInput label="Address Line2" placeholder="placeholder" value=""/>
