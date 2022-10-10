@@ -9,24 +9,27 @@ import { useSelector } from "react-redux"
 import {pageMenuSelector} from "../../redux/slices/pageReducer"
 import "./topbar.css"
 
-const Logo = () => {
+const Logo = ({onMouseOver}) => {
 	return (
-		<Link to={"/"} className="flex">
+		<Link to={"/"} className="flex" onMouseOver={onMouseOver}>
 			<div className='w-[37px]'><img src={logo} alt={"Logo"} className="w-[37px]" /></div>
 			<div className='px-4 text-white text-[25px] font-medium items-center'><span>atom</span></div>			
 		</Link>
 	)
 }
 
-const MegaNav = () => {
-	const [showMegaMenuContent, setShowMegaMenuContent] = useState(false)
+const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
+	
 	const [subMenuItems, setSubMenuItems] = useState([])
 	const [showMegaMenuRightContent, setShowMegaMenuRightContent] = useState(false)
 	const [subMenuMegaContent, setSubMenuMegaContent] = useState([])
 	const onShowMegaMenu = () => setShowMegaMenuContent(true)
 	const overMenuItem = (items) => {
 		setSubMenuItems(items)
-		setShowMegaMenuContent(true)
+		if(!showMegaMenuContent) setShowMegaMenuContent(true)
+	}
+	const hideMegaMenuContent = () => {
+		setShowMegaMenuContent(false)
 	}
 	const menuList = useSelector(pageMenuSelector)
 	
@@ -35,7 +38,8 @@ const MegaNav = () => {
 
 			{
 				menuList.map((item, index) => 
-				<button key = {index} className="mega_menu_dropbtn"   onMouseOver={item.items.length? () => overMenuItem(item.items) : null } onMouseOut={() => {setSubMenuMegaContent([]); setShowMegaMenuContent()}} >
+				<button key = {index} className="mega_menu_dropbtn"   onMouseOver={() => item.items.length !== 0?  overMenuItem(item.items) : hideMegaMenuContent() }  > 
+					{/* onMouseOut={() => {setSubMenuMegaContent([]); setShowMegaMenuContent(false)}} */}
 					<Link to={!item.items.length ? `/${item.url}` : '/'}>
 
 						<div>{item.title}</div>
@@ -48,8 +52,8 @@ const MegaNav = () => {
 			{
 				showMegaMenuContent ?
 			
-				<div className="header-mega_dropdown-content" onMouseOver={onShowMegaMenu} onClick={() => setShowMegaMenuContent(false)} onMouseLeave={() => setShowMegaMenuContent(false)}>
-					
+				<div className="header-mega_dropdown-content" onMouseEnter={onShowMegaMenu} onClick={() => setShowMegaMenuContent(false)} >
+					{/* onMouseLeave={() => setShowMegaMenuContent(false)} */}
 					<div className="row w-full h-full flex">
 						<div className="h-full w-[24%] mega_content_bg">
 							<div className='pl-[72px] pt-[72px] overflow-y-auto max-h-full'>
@@ -102,21 +106,25 @@ const MegaNav = () => {
 
 const TopNav = ({title}) => {
 	const nav_title_condition = title !=="" && title !== "home" ? true : false
+	const [showMegaMenuContent, setShowMegaMenuContent] = useState(false)
 
 	return (
 		<div  className= { title === 'home' ?  "desktop_only_flex w-full md:h-36 absolute z-10" : 
 				title === ""	? "nav-background-title desktop_only_flex h-36": "desktop_only_flex w-full md:h-60 absolute z-10 nav-background-title"
 		}>
-			<div className='px-10 pt-[76px] w-full  flex xl:px-24 justify-between h-36'>
-							
-					<Logo />
+			<div className='px-10 pt-[76px] w-full  flex xl:px-24  h-36'>
+				<div className="menu-wrapper flex w-full" onMouseLeave = {() => {  setShowMegaMenuContent(false)} }>
+					<div className="flex justify-between w-full h-10">
+						<Logo onMouseOver={() => setShowMegaMenuContent(false)}/>
 
-					<MegaNav />
-				
-				<div className='hidden lg:flex'>
-					<form className="nosubmit">
-						<input className="nosubmit lg:w-[250px] xl:w-[360px]" type="search" placeholder="Search product or category" />
-					</form>
+						<MegaNav showMegaMenuContent={showMegaMenuContent} setShowMegaMenuContent={setShowMegaMenuContent}/>
+						
+						<div className='hidden lg:flex' onMouseOver={() => setShowMegaMenuContent(false)}>
+							<form className="nosubmit">
+								<input className="nosubmit lg:w-[250px] xl:w-[360px]" type="search" placeholder="Search product or category" />
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
 			{
