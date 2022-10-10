@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom'
 import {DropdownWithLabel} from '../../components/Utilities/dropdown'
 import {TextInput} from '../../components/Utilities/input'
 import { Divider } from '@mui/material'
+import {frequencyOptions} from './config'
 
 const ReplenishmentEditOrders = () => {
     const product = [
@@ -32,6 +33,7 @@ const ReplenishmentEditOrders = () => {
             "buy_count": 1
         }
     ]
+    
     return (
         <GridLayout className="mt-12 gap-12">
             <GridLayout className="gap-10">
@@ -40,7 +42,7 @@ const ReplenishmentEditOrders = () => {
                         <TextInput label="PO Number" placeholder="Placeholder" value=""/>
                     </Item> 
                     <Item className="lg:w-1/4 w-full">
-                        <DropdownWithLabel label="Frequency" placeholder="Weekly" options={[{value:'Weekly', label:'Weekly'}]}/>
+                        <DropdownWithLabel label="Frequency" placeholder="Weekly" options={frequencyOptions}/>
                     </Item>    
                     
                     <Item className="xl:w-1/2 lg:w-1/3 w-full">
