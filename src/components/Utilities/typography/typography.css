@@ -46,11 +46,15 @@
 .text-regular-4{
     @apply text-[12px] leading-[16px] font-normal
 }
+
 .text-regular-5{
     @apply text-[24px] leading-[40px] font-normal
 }
 .text-regular-6{
     @apply text-[16px] leading-[20px] font-normal
+}
+.text-regular-7{
+    @apply text-[14px] leading-[16px] font-normal
 }
 .text-bold-6{
     @apply text-[12px] leading-[16px] font-bold

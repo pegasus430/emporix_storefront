@@ -43,7 +43,7 @@ const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
 				menuList.map((item, index) => 
 				<button key = {index} className="mega_menu_dropbtn"   onMouseOver={() => item.items.length !== 0?  overMenuItem(item.items) : hideMegaMenuContent() }  > 
 					{/* onMouseOut={() => {setSubMenuMegaContent([]); setShowMegaMenuContent(false)}} */}
-					<Link to={!item.items.length ? `/${tenant}/${item.url}` : `/${tenant}`}>
+					<Link to={!item.items.length? `/${tenant}/${item.url}` : `/${tenant}`}>
 
 						<div>{item.title}</div>
 					</Link>

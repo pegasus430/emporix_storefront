@@ -37,3 +37,4 @@ export const availability_api = () => {
     return `${API_URL}/availability/${get_tenant()}/availability`
 }
 export const anonymous_token_api = `${API_URL}/customerlogin/auth/anonymous/login`
+export const brand_api = `${API_URL}/brand/brands`

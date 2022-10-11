@@ -12,7 +12,8 @@ export const initialState = {
         } ,
         {
             "title"  : "Brands" ,
-            "items" : []
+            "items" : [],
+            "url" : "brand"
         } ,
         {
             "title"  : "About Us" ,

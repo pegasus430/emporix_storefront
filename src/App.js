@@ -19,6 +19,7 @@ import AccountReplenishmentAddOrders from './pages/account/AccountReplenishmentA
 import AccountReplenishmentEditOrders from './pages/account/AccountReplenishmentEditOrders'
 import AccountSavedCarts from './pages/account/AccountSavedCarts'
 import AccountLocations from './pages/account/AccountLocations'
+import Brand from './pages/brand'
 import AccountAddLocations from './pages/account/AccountAddLocations'
 import AccountPayments from './pages/account/AccountPayments'
 import AccountReviews from './pages/account/AccountReviews'
@@ -54,6 +55,7 @@ function App() {
 					<Route path="product/details/:product_id" element={<ProductDetails />} />
 					<Route path="login" exact element={<Login />} />
 					<Route path="signup" exact element={<Signup />} />
+					<Route path="brand" exact element={<Brand />} />
 					<Route path="cart" exact element={<Cart />} />
 					<Route path="checkout" exact element={<Checkout />} />
 					<Route path="my-account" element={<Account />} >

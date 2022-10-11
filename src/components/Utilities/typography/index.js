@@ -26,6 +26,11 @@ export const TextRegular1 = ({children, className}) => {
         <div className= { "text-regular-1 " + (className? className: "")}>{children}</div>
     )
 }
+export const TextRegular7 = ({children, className}) => {
+    return (
+        <div className= { "text-regular-7 " + (className? className: "")}>{children}</div>
+    )
+}
 export const TextRegular = ({children, className}) => {
     return (
         <div className= { "text-regular " + (className? className: "")}>{children}</div>
