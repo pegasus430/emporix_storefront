@@ -5,8 +5,10 @@ import CheckoutActionPanel from './CheckoutActionPanel'
 import {Link} from 'react-router-dom'
 
 import './checkout.css'
+import { tenant_key } from '../../constants/localstorage'
 
 const FinalCheckout = ({setFinal}) => {
+    const tenant = localStorage.getItem(tenant_key)
     return (
         <div className='font-inter'>
             <div className='border-b pb-12'>
@@ -62,7 +64,7 @@ const FinalCheckout = ({setFinal}) => {
             </div>
             <div className='pt-12 w-full'>
                 <div className=' mx-auto md:w-60  w-full'>
-                    <Link to= {`/`} >
+                    <Link to= {`/${tenant}`} >
                         <button onClick={()=> setFinal(false)} className='bg-[#214559] text-[white] px-6 py-0 h-12 file:text-[14px] leading-[14px] md:w-60 w-full'>BACK TO HOME PAGE</button>
                     </Link>
                 </div>

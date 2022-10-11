@@ -3,6 +3,7 @@ import AccountPage from "./AccountPage"
 import { useSelector } from "react-redux"
 import { Navigate } from 'react-router-dom'
 import Layout from "../Layout";
+import { tenant_key } from "../../constants/localstorage";
 
 const MobileAccountBar = ({title}) => {
     return (
@@ -16,8 +17,9 @@ const MobileAccountBar = ({title}) => {
 const Account = () => {
 
     const { user: currentUser } = useSelector((state) => state.auth);
+    const tenant = localStorage.getItem(tenant_key)
     if (!currentUser) {
-        return <Navigate  to="/login" />;
+        return <Navigate  to={`/${tenant}/login`} />;
     }
 
     const title = "Welcome Back, " + currentUser.username

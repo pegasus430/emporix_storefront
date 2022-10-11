@@ -2,6 +2,7 @@ import React, { useState }  from 'react'
 import AccountLayout from './AccountLayout'
 import { useSelector } from "react-redux"
 import { Navigate } from 'react-router-dom'
+import { tenant_key } from '../../constants/localstorage'
 
 const CompanyInfoItem = ({caption,content}) => {
   return (
@@ -49,8 +50,9 @@ const CompanyDetails = ({value}) => {
 
 const AccountCompanyDetails = () => {
     const { user: currentUser } = useSelector((state) => state.auth);
+    const tenant = localStorage.getItem(tenant_key)
     if (!currentUser) {
-      return <Navigate  to="/login" />;
+      return <Navigate  to={`/${tenant}login`} />;
   }
     return <AccountLayout page="Company Details"><CompanyDetails  value = {currentUser.company}/></AccountLayout>
 }

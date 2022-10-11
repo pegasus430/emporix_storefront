@@ -4,6 +4,7 @@ import '../index.css'
 import { Link } from 'react-router-dom'
 import {LayoutBetween, GridLayout} from '../Utilities/common'
 import Quantity from '../Utilities/quantity/quantity'
+import { tenant_key } from '../../constants/localstorage'
 
 const CartProductContent = ({children}) => {
     return (
@@ -212,15 +213,17 @@ const CartTotalPrice = ({value}) => {
     )
 }
 const CartGoCheckout = () => {
+    const tenant = localStorage.getItem(tenant_key)
     return (
-        <Link to="/checkout" className="w-full">
+        <Link to={`/${tenant}/checkout`} className="w-full">
             <button className="cart-go-checkout-btn">GO TO CHECKOUT</button>
         </Link>
     )
 }
 const CartOpenCart = () => {
+    const tenant = localStorage.getItem(tenant_key)
     return (
-        <Link to="/cart" className="w-full">
+        <Link to={`/${tenant}/cart`} className="w-full">
             <button className="cart-open-cart-btn">
                 OPEN CART
             </button>
