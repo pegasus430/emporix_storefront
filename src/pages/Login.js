@@ -11,6 +11,7 @@ import { Heading2, Heading4 } from "../components/Utilities/typography";
 import  Box  from "@mui/material/Box";
 import { DropdownWithLabel } from "../components/Utilities/dropdown";
 import tenant_lists from '../tenant.config'
+import { tenant_key } from "../constants/localstorage";
 
 const Login = (props) => {
   const form = useRef();
@@ -23,7 +24,6 @@ const Login = (props) => {
   const { isLoggedIn } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const { message } = useSelector(state => state.message);
-  const [userTenant, setUserTenant] = useState("")
 
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
@@ -39,10 +39,6 @@ const Login = (props) => {
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-  
-  const onChangeUserTenant = (e) => {
-      setUserTenant(e.target.value)
-  }
   const onChangeUserEmail = (e) => {
     if (!isValidEmail(e.target.value)){
         setEmailMessage("Email is invalid")
@@ -58,15 +54,16 @@ const Login = (props) => {
     const password = e.target.value;
     setPassword(password);
   };
+  const userTenant = localStorage.getItem(tenant_key)
 
   const handleLogin = (e) => {
     e.preventDefault();
-   
+    
     if (userEmail && password){
         setLoading(true)
         dispatch(login(userEmail, password, userTenant))
         .then(() => {
-            props.history.push("/");
+            props.history.push(`/${userTenant}`);
             window.location.reload();
             setOpenNotification(true)
             setLoading(false)
@@ -84,7 +81,7 @@ const Login = (props) => {
 
 
   if (isLoggedIn) {
-    return <Navigate  to="/" />;
+    return <Navigate  to={`/${userTenant}`} />;
   }
 
   return (
@@ -102,7 +99,7 @@ const Login = (props) => {
             <GridLayout className="md:w-[540px] w-[95%] mx-auto h-[740px] md:pt-[138px] pt-10">
                 <Container className="w-full h-[110px] items-center  text-center text-white font-bold  text-7xl ">
                     <Container className="mx-auto">
-                        <Link to={'/'} className="flex">
+                        <Link to={`/${userTenant}`} className="flex">
                             <img src={login_atom} className="w-[78px] h-[86px] mr-5"  />
                             atom
                         </Link>
@@ -117,11 +114,6 @@ const Login = (props) => {
                     <form onSubmit={handleLogin} className="display: block m-0">
                         
                         <Box className="!pt-12 text-black text-base">
-                            <label className="pb-2">Tenant Name</label><br />
-                            <input placeholder="Placeholder"  value={userTenant} onChange={onChangeUserTenant} type="text" required className="border w-full px-3 py-2"/>
-                            
-                        </Box>
-                        <Box className="!pt-6 text-black text-base">
                             <label className="pb-2">E-mail address</label><br />
                             <input placeholder="Placeholder" onChange={onChangeUserEmail} value={userEmail} type="email" required className="border w-full px-3 py-2"/>
                             {
@@ -156,7 +148,7 @@ const Login = (props) => {
                     <GridLayout className="pt-12 w-full  items-center text-center text-base">
                         <Box className="mx-auto">
                             <span className="font-medium text-[#818385]">Don't have an account?</span>
-                            <Link to={'/signup'}>
+                            <Link to={`/${userTenant}/signup`}>
                                 <span className="pl-2 font-semibold text-[#0380F3] underline hover:cursor-pointer hover:text-[#44ec85]">Sign Up</span>
                             </Link>
                             

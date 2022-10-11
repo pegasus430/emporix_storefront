@@ -3,7 +3,9 @@ import AuthService from "../../services/user/auth.service";
 import { setMessage } from './messageReducer';
 
 const user = JSON.parse(localStorage.getItem("user"));
-export const initialState = user? { isLoggedIn: true, user } : { isLoggedIn: false, user: null };
+export const initialState = user? 
+                { isLoggedIn: true, user, tenant: "", accessToken: ""} : 
+                { isLoggedIn: false, user: null, tenant: "", accessToken: ""};
 
 const authSlice = createSlice({
   name: 'auth',
@@ -23,6 +25,12 @@ const authSlice = createSlice({
       state.isLoggedIn = false
       state.user = null
     },
+    tenantSuccess: (state, action) => {
+      state.tenant = action.payload
+    },
+    accessTokenSuccess: (state, action) => {
+      state.accessToken = action.payload
+    },
     logoutSuccess: (state, action) => {
       state.isLoggedIn = false
       state.user = null
@@ -37,7 +45,9 @@ export const {
   registerFail,
   loginSuccess,
   loginFail,
-  logoutSuccess
+  logoutSuccess,
+  tenantSuccess,
+  accessTokenSuccess
 } = authSlice.actions
 
 export const register = (email, password , firstName , lastName, tenantName , company , phoneNumber) => (dispatch) => {
@@ -101,7 +111,18 @@ export const login =  (username, password, userTenant) => (dispatch) => {
   
 };
 
+export const setTenant = (tenant) => (dispatch) => {
+    dispatch(tenantSuccess(tenant))
+}
+
+export const setAccessToken = (token) => (dispatch) => {
+  dispatch(accessTokenSuccess(token))
+}
+
 export const logout = () => (dispatch) => {
   AuthService.logout();
   dispatch(logoutSuccess());
 };
+// Selector
+export const tenantSelector = (state) => state.auth.tenant
+export const accessTokenSelector = (state) => state.auth.accessToken

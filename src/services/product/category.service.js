@@ -1,7 +1,6 @@
 import {category_api, retriev_resource_api} from '../service.config'
 import ApiRequest from '../index'
-import ServiceAccessToken from '../user/serviceAccessToken'
-import {product_category_trees_key} from '../../constants/localstorage'
+import {product_category_trees_key, acess_token_key} from '../../constants/localstorage'
 import {max_category_resource_batch_count} from '../../constants/service'
 
 const CategoryService = () => {
@@ -32,9 +31,9 @@ const CategoryService = () => {
         })
     }
     const getProductCategoryTrees = async () => {
-        // return JSON.parse(localStorage.getItem(product_category_trees_key))
-        const service_token = await ServiceAccessToken()
-        const categories = (await getAllCategories(service_token)).data
+
+        const access_token = localStorage.getItem(acess_token_key)
+        const categories = (await getAllCategories(access_token)).data
         const categorytrees = getCategoryTree(categories, 1)
         localStorage.setItem(product_category_trees_key, JSON.stringify(categorytrees))
         return categorytrees
@@ -117,10 +116,11 @@ const CategoryService = () => {
     
     const retrievResourceAssignedToCategory = async (categoryId) => {
         
-        const service_token = await ServiceAccessToken()
+        const access_token = localStorage.getItem(acess_token_key)
+
         const headers = {
             "X-Version": 'v2',
-            "Authorization": `Bearer ${service_token}`,
+            "Authorization": `Bearer ${access_token}`,
             "X-Total-Count": true,
             "Accept-Language": "en"
         }

@@ -1,13 +1,13 @@
 import ApiRequest from '../index'
-import ServiceAccessToken from '../user/serviceAccessToken'
 import {product_api} from '../service.config'
+import {acess_token_key} from '../../constants/localstorage'
 
 const ProductService = () => {
     const getProductsWithIds = async (ids = []) => {
-        const service_token = await ServiceAccessToken()
+        const access_token = localStorage.getItem(acess_token_key)
         const headers = {
             "X-Version": 'v2',
-            "Authorization": `Bearer ${service_token}`,
+            "Authorization": `Bearer ${access_token}`,
             "Accept-Language": "en"
         }
         const params = {

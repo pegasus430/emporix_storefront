@@ -32,7 +32,6 @@ import InvalidTenant from './pages/InvalidTenant'
 
 function App() {
 
-	const { user: currentUser } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		history.listen((location) => {
@@ -85,5 +84,4 @@ function App() {
 		</Router>
 	)
 }
-
 export default App;

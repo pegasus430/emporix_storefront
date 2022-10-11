@@ -8,10 +8,13 @@ import LayoutContext from '../../pages/context'
 import { useSelector } from "react-redux"
 import {pageMenuSelector} from "../../redux/slices/pageReducer"
 import "./topbar.css"
+import { tenant_key } from '../../constants/localstorage'
+
+const tenant = localStorage.getItem(tenant_key)
 
 const Logo = ({onMouseOver}) => {
 	return (
-		<Link to={"/"} className="flex" onMouseOver={onMouseOver}>
+		<Link to={`/${tenant}`} className="flex" onMouseOver={onMouseOver}>
 			<div className='w-[37px]'><img src={logo} alt={"Logo"} className="w-[37px]" /></div>
 			<div className='px-4 text-white text-[25px] font-medium items-center'><span>atom</span></div>			
 		</Link>
@@ -40,7 +43,7 @@ const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
 				menuList.map((item, index) => 
 				<button key = {index} className="mega_menu_dropbtn"   onMouseOver={() => item.items.length !== 0?  overMenuItem(item.items) : hideMegaMenuContent() }  > 
 					{/* onMouseOut={() => {setSubMenuMegaContent([]); setShowMegaMenuContent(false)}} */}
-					<Link to={!item.items.length ? `/${item.url}` : '/'}>
+					<Link to={!item.items.length ? `/${tenant}/${item.url}` : `/${tenant}`}>
 
 						<div>{item.title}</div>
 					</Link>
@@ -61,7 +64,7 @@ const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
 
 								{
 									subMenuItems.map((item, index) => 
-										<Link onClick={() => console.log('clicked')} replace key = {index} to={`${item.url}`} >
+										<Link onClick={() => console.log('clicked')} replace key = {index} to={`/${tenant}${item.url}`} >
 											<li className='mega_content_category_li' onMouseOver = {() => {setSubMenuMegaContent(item.items); setShowMegaMenuRightContent(true)}} onMouseLeave = {() => {  setShowMegaMenuRightContent(false)} }>{item.title}</li>
 										</Link>
 											
@@ -79,12 +82,12 @@ const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
 								subMenuMegaContent.map((item, index) => 
 									<div key = {index} className='pl-[72px] pt-[72px]'>
 										<ul className=' text-black text-base'>
-											<Link to={`${item.url}`}>
+											<Link to={`/${tenant}${item.url}`}>
 												<li className='mega_content_sub_cat_li font-bold'>{item.title}</li>
 											</Link>
 											{
 												item.items.map((eachItem, index) => 
-													<Link key={index} to={`${eachItem.url}`}>
+													<Link key={index} to={`/${tenant}${eachItem.url}`}>
 														<li  className='mega_content_sub_cat_li'>{eachItem.title}</li>
 													</Link>	
 												)

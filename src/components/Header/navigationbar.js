@@ -9,6 +9,7 @@ import { ChevronRightIcon , ChevronLeftIcon } from '@heroicons/react/solid'
 import LayoutContext from '../../pages/context'
 import { LargePrimaryButton } from '../Utilities/button'
 import {pageMenuSelector} from "../../redux/slices/pageReducer"
+import { tenantSelector } from '../../redux/slices/authReducer'
 
 const Navbar = () => {
 	
@@ -21,6 +22,7 @@ const Navbar = () => {
 
 	const {showCart, setShowCart} = useContext(LayoutContext)
   const menuList = useSelector(pageMenuSelector)
+  const tenant = useSelector(tenantSelector)
 
     const ParentBoard = () =>{
       	return (
@@ -40,7 +42,7 @@ const Navbar = () => {
                       : 
                       
                         <div className='bg-[#214559] w-full h-12 text-sm  text-center items-center text-white'>
-                            <Link to={'/login'}>
+                            <Link to={`/${tenant}/login`}>
 								<LargePrimaryButton className='' title = "LOGIN | REGISTER"></LargePrimaryButton>
 							</Link>
                         </div>
@@ -99,7 +101,7 @@ const Navbar = () => {
 			<>
       {
         !item.items.length? 
-        <Link to={`${item.url}`}>
+        <Link to={`/${tenant}${item.url}`}>
           <li 
             key = {item.title} 
             className=" flex justify-between pb-4  text-base text-slate-400"
@@ -203,8 +205,8 @@ const Navbar = () => {
               (!currentUser)?
             
               <ul className='flex'>
-                <li className='px-2'><a className='hover:text-[#FBB13C]' href='/login'>Login</a></li> |
-                <li className='px-2'><a className='hover:text-[#FBB13C]' href='/signup'>Sign Up</a></li>
+                <li className='px-2'><a className='hover:text-[#FBB13C]' href={`/${tenant}/login`}>Login</a></li> |
+                <li className='px-2'><a className='hover:text-[#FBB13C]' href={`/${tenant}/signup`}>Sign Up</a></li>
               </ul>
               :
               <ul className='flex'>
@@ -233,7 +235,7 @@ const Navbar = () => {
             <div className={(!open) ? 'hidden' : ' text-black absolute top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto'}>
                <div className='h-10 justify-between flex' > 
                   <div className='flex'>
-                    <Link to=  "/" className='flex' >
+                    <Link to={`/${tenant}/login`} className='flex' >
                       <img src={logo} className="w-[37px]"></img>
                       <div className='px-4 text-[25px] font-medium items-center'><span>atom</span></div>
                     </Link>
@@ -253,7 +255,7 @@ const Navbar = () => {
         </div>
 
         <div className='mobile_only_flex text-white'>
-            <Link to="/" className='flex'>
+            <Link to={`/${tenant}`} className='flex'>
                 <img src={logo} ></img>
                 <p className='font-medium text-xl px-3 pt-1'>atom</p>
              </Link>

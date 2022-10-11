@@ -2,13 +2,14 @@ import ApiRequest from '../index'
 import ServiceAccessToken from '../user/serviceAccessToken'
 import {availability_api} from '../service.config'
 import {service_site_name} from '../../constants/service'
+import {acess_token_key} from '../../constants/localstorage'
 
 const AvailabilityService = () => {
     const getAllAvailability = async () => {
-        const service_token = await ServiceAccessToken()
+        const access_token = localStorage.getItem(acess_token_key)
         const headers = {
             "X-Version": 'v2',
-            "Authorization": `Bearer ${service_token}`,
+            "Authorization": `Bearer ${access_token}`,
             "Accept-Language": "en"
         }
         const params = {

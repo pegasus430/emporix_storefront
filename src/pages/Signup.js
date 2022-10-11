@@ -11,6 +11,7 @@ import PhoneField from "../components/Utilities/phoneinput/PhoneField";
 import { GridLayout, Container } from "../components/Utilities/common";
 import { Heading2, Heading4 } from "../components/Utilities/typography";
 import  Box  from "@mui/material/Box";
+import { tenant_key } from "../constants/localstorage";
 
 const Signup = (props) => {
  
@@ -23,7 +24,6 @@ const Signup = (props) => {
   const [lastName, setLastName] = useState("")
   const [company, setCompany] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
-  const [tenantName, setTenantName] = useState("")
   const [emailMessage, setEmailMessage] = useState("")
   const { isLoggedIn } = useSelector(state => state.auth);
   const dispatch = useDispatch();
@@ -44,6 +44,7 @@ const Signup = (props) => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
+  const tenant = localStorage.getItem(tenant_key)
   const onChangeUserEmail = (e) => {
     if (!isValidEmail(e.target.value)){
         setEmailMessage("Email is invalid")
@@ -74,12 +75,12 @@ const Signup = (props) => {
             {
                 
                 setLoading(true)
-                dispatch(register(userEmail, password , firstName , lastName , tenantName , company, phoneNumber))
+                dispatch(register(userEmail, password , firstName , lastName , tenant , company, phoneNumber))
                 .then(() => {
                     
-                    dispatch(login(userEmail, password, tenantName))
+                    dispatch(login(userEmail, password, tenant))
                         .then(() => {
-                            props.history.push("/");
+                            props.history.push(`/${tenant}`);
                             window.location.reload();
                             setOpenNotification(true)
                             setLoading(false)
@@ -111,7 +112,7 @@ const Signup = (props) => {
 
 
   if (isLoggedIn) {
-    return <Navigate  to="/" />;
+    return <Navigate  to={`/${tenant}`} />;
   }
 
   return (
@@ -129,7 +130,7 @@ const Signup = (props) => {
             <GridLayout className="md:w-[540px] w-[95%] mx-auto h-[740px] md:pt-[138px] pt-10">
                 <Container className="w-full h-[110px] items-center  text-center text-white font-bold  text-7xl ">
                     <Container className="mx-auto">
-                        <Link to={'/'} className="flex">
+                        <Link to={`/${tenant}`} className="flex">
                             <img src={login_atom} className="w-[78px] h-[86px] mr-5"  />
                             atom
                         </Link>
@@ -168,11 +169,6 @@ const Signup = (props) => {
                         <Box className="!pt-6 w-full text-black text-base">
                             <label className="pb-2">Last Name</label><br />
                             <input placeholder="Placeholder" onChange={(e) => setLastName(e.target.value)} value={lastName} type="text" className="border w-full px-3 py-2"/>
-                        </Box>
-
-                        <Box className="!pt-6 w-full text-black text-base">
-                            <label className="pb-2">Tenant Name</label><br />
-                            <input placeholder="Placeholder" onChange={(e) => setTenantName(e.target.value)} required value={tenantName} type="text" className="border w-full px-3 py-2"/>
                         </Box>
 
                         <Box className="!pt-6 w-full text-black text-base">

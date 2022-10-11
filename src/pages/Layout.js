@@ -13,6 +13,10 @@ import {availabilityLoadingSelector, GetAvailability} from '../redux/slices/avai
 import {putShopItems} from "../redux/slices/pageReducer"
 import tenant_lists from "../tenant.config"
 import InvalidTenant from './InvalidTenant'
+import {tenantSelector, setTenant, accessTokenSelector, setAccessToken} from '../redux/slices/authReducer'
+import AccessToken from '../services/user/accessToken'
+
+import { useTheme } from "@emotion/react"
 
 const Layout = ({children, title}) => {
     const [showCart, setShowCart] = useState(false)
@@ -21,16 +25,31 @@ const Layout = ({children, title}) => {
     const dispatch = useDispatch()
     const categoryData = useSelector(categoryDataSelector)
     const {tenant} = useParams()
-    
+    const userTenant = useSelector(tenantSelector)
+    const accessToken_ = useSelector(accessTokenSelector)
 
+    useEffect(() => {
+        dispatch(setTenant(tenant))
+    }, []);
+
+    useEffect(() => {
+        const getAccessToken = async() => {
+            if(userTenant === "") return
+            const token = await AccessToken(userTenant)
+            dispatch(setAccessToken(token))
+        }
+        getAccessToken()
+    }, [userTenant])
     useEffect(()=> {
         const layout_init = async () => {
+            if(accessToken_ === "") return
             dispatch(GetCategory())
             dispatch(GetAvailability())
+            console.log('Layout initialized.')
         }
         layout_init()
-        console.log('Layout initialized.')
-	},[])
+	},[accessToken_])
+    
     
     useEffect(() => {
         if(loading == false) dispatch(putShopItems(categoryData))
