@@ -119,3 +119,6 @@ code {
   border-radius: 20px;
   border: transparent;
 }
+.invalid-tenant-page{
+  @apply w-full text-[#a9a4a4] items-center h-screen items-center text-center font-inter
+}
