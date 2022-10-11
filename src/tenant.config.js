@@ -5,6 +5,10 @@ const tenant_lists = {
         emporix_secret: "7GQZiaevKQBS7L0R",
         storefront_client_id: "HRUvHjClGa1QXSptPPvWIUkTsjpvmKTK",
         storefront_secret: "dXWG5HPGWxjhGclR"
+    },
+    ensargroupstage:{
+        tenant: "ensargroupstage",
+        storefront_client_id: "mDq5Cc8aK5BrVcXzq5WviC8uG31dUQvj"
     }
 }
 export default tenant_lists

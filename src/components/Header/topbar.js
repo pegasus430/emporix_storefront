@@ -10,9 +10,10 @@ import {pageMenuSelector} from "../../redux/slices/pageReducer"
 import "./topbar.css"
 import { tenant_key } from '../../constants/localstorage'
 
-const tenant = localStorage.getItem(tenant_key)
 
-const Logo = ({onMouseOver}) => {
+
+const Logo = ({onMouseOver, tenant}) => {
+	
 	return (
 		<Link to={`/${tenant}`} className="flex" onMouseOver={onMouseOver}>
 			<div className='w-[37px]'><img src={logo} alt={"Logo"} className="w-[37px]" /></div>
@@ -21,7 +22,7 @@ const Logo = ({onMouseOver}) => {
 	)
 }
 
-const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
+const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent, tenant}) => {
 	
 	const [subMenuItems, setSubMenuItems] = useState([])
 	const [showMegaMenuRightContent, setShowMegaMenuRightContent] = useState(false)
@@ -110,6 +111,7 @@ const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
 const TopNav = ({title}) => {
 	const nav_title_condition = title !=="" && title !== "home" ? true : false
 	const [showMegaMenuContent, setShowMegaMenuContent] = useState(false)
+	const tenant = localStorage.getItem(tenant_key)
 
 	return (
 		<div  className= { title === 'home' ?  "desktop_only_flex w-full md:h-36 absolute z-10" : 
@@ -118,9 +120,9 @@ const TopNav = ({title}) => {
 			<div className='px-10 pt-[76px] w-full  flex xl:px-24  h-36'>
 				<div className="menu-wrapper flex w-full" onMouseLeave = {() => {  setShowMegaMenuContent(false)} }>
 					<div className="flex justify-between w-full h-10">
-						<Logo onMouseOver={() => setShowMegaMenuContent(false)}/>
+						<Logo tenant={tenant} onMouseOver={() => setShowMegaMenuContent(false)}/>
 
-						<MegaNav showMegaMenuContent={showMegaMenuContent} setShowMegaMenuContent={setShowMegaMenuContent}/>
+						<MegaNav tenant={tenant} showMegaMenuContent={showMegaMenuContent} setShowMegaMenuContent={setShowMegaMenuContent}/>
 						
 						<div className='hidden lg:flex' onMouseOver={() => setShowMegaMenuContent(false)}>
 							<form className="nosubmit">
