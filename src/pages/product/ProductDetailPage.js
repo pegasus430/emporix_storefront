@@ -19,25 +19,35 @@ import stapler from "../../assets/products/stapler.png"
 import HandleProductAddToCart from './HandleProductAddToCart'
 import LayoutContext from '../context'
 import CategoryService from '../../services/product/category.service'
+import {product_url} from '../../services/service.config'
 
 const ProductContext = createContext()
 
-const ProductDetailCategoryCaptionBar = () => {
+const B = ({children}) => {
+    return (
+        <div className="font-bold">
+            {children}
+        </div>
+    )
+}
+const ProductDetailCategoryCaptionBar = ({category}) => {
  
     const category_tree = [
-        {"caption": "Home", "link": "#"}, 
-        {"caption": "Printers and Scanners", "link": "#"}, 
-        {"caption": "Cabinet Printers", "link": "#"}, 
-        {"caption": "HP LaserJet 500 color Series Printer Cabinet", "link": ""}
+        {"caption": "Home", "link": product_url}
     ]
+    let lnk = product_url
+    for(let c in category){
+        lnk = `${lnk}/${category[c].toLowerCase().replaceAll(' ', '_')}`
+        category_tree.push({"caption":category[c], "link":lnk})
+    }
     return (
         <div className="product-detail-category-caption-bar">
             <Breadcrumbs className="lg:block hidden" separator="|" aria-label="breadcrumb">
                 { category_tree.map((row,index) => {
                     return row.link === "" ? 
                         <Typography key={index} className="breadcrumb-item" color="text.primary">{row.caption}</Typography>:
-                        <Link key={index} className="breadcrumb-item" underline="hover" color="inherit" href="/">
-                            {row.caption}
+                        <Link key={index} className="breadcrumb-item" underline="hover" color="inherit" href={row.link}>
+                            {index!==category_tree.length - 1 ? row.caption:<B>{row.caption}</B>}
                         </Link>
                 })}
             </Breadcrumbs>
@@ -283,7 +293,7 @@ function TabPanel(props) {
 
 
 
-  const ProductDetailsTabContent = () => {
+  const ProductDetailsTabContent = ({product}) => {
     const design_items = [
         {"property": "Product colour", "value": "Grey"},
         {"property": "CompatibilityHP", "value": "HP LaserJet 500"},
@@ -315,21 +325,64 @@ function TabPanel(props) {
         {"property": "Layers per pallet", "value": "4 pc(s)"},
         {"property": "Pallet gross weight", "value": "205.7 g"}
     ]
-
+    const getFeatureName = (str) => {
+        let loop = 0
+        let res = ""
+        let flg = false
+        while(loop < str.length){
+            if(loop == 0) res += str[loop].toUpperCase()
+            else{
+                if(!isNaN(str[loop] * 1))
+                    res += str[loop]
+                else{
+                    if(str[loop] === '_') flg = true
+                    else{
+                        if(flg === true || str[loop] === str[loop].toUpperCase()) res += " "+ str[loop].toUpperCase()
+                        else res += str[loop]
+                        flg = false
+                    }
+                }
+            }
+            loop++
+        }
+        return res
+    }
+    const getAttributes = (items) => {
+        let res = []
+        Object.keys(items).map((key) => {
+            let value = items[key]
+            let caption = getFeatureName(key)
+            if(typeof value !== "object") value = value
+            else if("value" in value && "uom" in value) value = value['value'] + " " + value['uom']
+            else value = ""
+            res.push({"property": caption, "value": value})
+        })
+        return res
+    }
     return (
         <div className="product-details-tab-content-wrapper">
             <div className="grid grid-cols-1 gap-12">
-                <ProductInfoPortal key="1" caption="Design" items={design_items}/>
+                {
+                    
+                    Object.keys(product.mixins).map((key) => {
+                        
+                        return (
+                            <ProductInfoPortal key={key} caption={getFeatureName(key)} items={getAttributes(product.mixins[key])}/>
+                        ) 
+                    })
+                }
+                
+                {/* <ProductInfoPortal key="1" caption="Design" items={design_items}/>
                 <ProductInfoPortal key="2" caption="Weight & dimensions" items={dimension_items}/>
                 <ProductInfoPortal key="3" caption="Packaging data" items={packaging_items}/>
                 <ProductInfoPortal key="4" caption="Technical details" items={technical_details_items}/>
-                <ProductInfoPortal key="5" caption="Weight & dimensions" items={techincal_dimension_items}/>
+                <ProductInfoPortal key="5" caption="Weight & dimensions" items={techincal_dimension_items}/> */}
             </div>
         </div>
     )
 }
 
-const ProductDetailTabContent = () => {
+const ProductDetailTabContent = ({product}) => {
     const [tab, setTab] = React.useState(0);
 
     const handleChange = (event, tab) => {
@@ -370,7 +423,7 @@ const ProductDetailTabContent = () => {
                 </Tabs>
             </Box>
             <TabPanel value={tab} index={0}>
-                <ProductDetailsTabContent /> 
+                <ProductDetailsTabContent product={product}/> 
             </TabPanel>
             <TabPanel value={tab} index={1}>
                 Additional Information
@@ -387,34 +440,36 @@ const ProductInfoPortal = ({caption, items}) => {
             <div className="information-caption">
                 {caption}
             </div>
-            <div className="information-content grid grid-cols-2">
-                <div className="information-properties pl-6 grid grid-cols-1 gap-2">
-                    {items.map((row,index) => (
-                        <span key={index}>{row.property}</span>
-                    ))}
-                </div>
-                <div className="information-values pl-6 grid grid-cols-1 gap-2">
-                    {items.map((row,index) => (
-                        <span key={index}>{row.value}</span>
-                    ))}
-                </div>
+            <div className="information-content grid grid-cols-1 gap-[6px]">
+                {items.map((row,index) => (
+                    <div className="grid grid-cols-2 gap-2">
+                        <div className="information-properties pl-6 grid grid-cols-1">
+                            <span key={index}>{row.property}</span>
+                        </div>
+                        <div className="information-values pl-6 grid grid-cols-1 ">
+                            <span key={index}>{row.value}</span>
+                        </div>
+                    </div>
+                ))}
+                
+                
             </div>
         </div>
     )
 }
     
 
-const ProductDetailInfo = () => {
+const ProductDetailInfo = ({product}) => {
     return (
         <div className="product-detail-page-info-wrapper lg:py-12 pb-12">
             <div className="product-detail-content">
                 <div className="desktop-lg">
-                    <ProductDetailTabContent />
+                    <ProductDetailTabContent product={product}/>
                 </div>
                 <div className="mobile-lg">
                     <Accordion>
                         <AccordionItem index={0} title='Details'>
-                            <ProductDetailsTabContent /> 
+                            <ProductDetailsTabContent product={product}/> 
                         </AccordionItem>
                         <AccordionItem index={1} title='Additional Information'>
                             Additional Information
@@ -506,13 +561,12 @@ const ProductMatchItems = () => {
     )
 }
 const ProductDetailPage = ({product}) => {
-
     return (
         <div className="product-detail-page-wrapper ">
             <div className="product-detail-page-content">
-                <ProductDetailCategoryCaptionBar /> 
+                <ProductDetailCategoryCaptionBar category={product.category}/> 
                 <ProductContent product={product}/>
-                <ProductDetailInfo />
+                <ProductDetailInfo product={product}/>
                 <ProductMatchItems />
             </div>
         </div>

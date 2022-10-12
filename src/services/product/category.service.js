@@ -1,4 +1,4 @@
-import {category_api, retriev_resource_api} from '../service.config'
+import {category_api, retriev_resource_api, resource_reference_api, parent_categories_api} from '../service.config'
 import ApiRequest from '../index'
 import {product_category_trees_key, acess_token_key} from '../../constants/localstorage'
 import {max_category_resource_batch_count} from '../../constants/service'
@@ -127,11 +127,44 @@ const CategoryService = () => {
         const resources = await ApiRequest(resource_api, 'get', {}, headers)
         return resources.data
     }
+    const getRetrieveAllCategoriesWithResoureceId = async (resourceId) => {
+        const access_token = localStorage.getItem(acess_token_key)
+
+        const headers = {
+            "X-Version": "v2",
+            "Authorization": `Bearer ${access_token}`,
+            "Accept-Language": "en"
+        }
+        const params = {
+            "X-Total-Count": true
+        }
+        const api = `${resource_reference_api}/${resourceId}`
+        const categories = await ApiRequest(api, 'get', {}, headers, params)
+        return categories
+    }
+
+    const getAllParentCategories = async (categoryId) => {
+        const access_token = localStorage.getItem(acess_token_key)
+
+        const headers = {
+            "X-Version": "v2",
+            "Authorization": `Bearer ${access_token}`,
+            "Accept-Language": "en",
+            "X-Total-Count": true,
+        }
+        
+        const api = `${parent_categories_api}/${categoryId}/parents`
+        const categories = await ApiRequest(api, 'get', {}, headers)
+        return categories
+    }
+
     return {
         getAllCategories,
         getProductCategoryTrees,
         getProductCategoryDetail,
-        retrievResourceAssignedToCategory
+        retrievResourceAssignedToCategory,
+        getRetrieveAllCategoriesWithResoureceId,
+        getAllParentCategories
     }
 }
 export default CategoryService()

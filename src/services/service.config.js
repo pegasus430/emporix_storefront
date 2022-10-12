@@ -37,7 +37,8 @@ export const availability_api = () => {
 }
 export const anonymous_token_api = `${API_URL}/customerlogin/auth/anonymous/login`
 export const brand_api = `${API_URL}/brand/brands`
-
+export const resource_reference_api = `${API_URL}/category/${get_tenant()}/assignments/references`
+export const parent_categories_api = `${API_URL}/category/${get_tenant()}/categories`
 // URLS
 export const add_location_url = `/${get_tenant()}/my-account/locations/add`
 export const my_account_location_url = `/${get_tenant()}/my-account/locations`
@@ -51,6 +52,7 @@ export const cart_url = `/${get_tenant()}/cart`
 export const login_url = `/${get_tenant()}/login`
 export const home_url = `/${get_tenant()}`
 export const signup_url = `/${get_tenant()}/signup`
+export const product_url = `/${get_tenant()}/product`
 
 export const add_tenant_to_url = (url) => {
     return  `/${get_tenant()}/${url}`
