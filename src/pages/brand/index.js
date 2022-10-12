@@ -83,7 +83,7 @@ const BrandPage = () => {
                                     <input type="checkbox"  className="w-5 h-5"/>
                                 </Item>
                                 <Item className="w-[56px]">
-                                    <img src={b.image} className="w-10 h-8"/>
+                                    <img src={b.image} className="w-10"/>
                                 </Item>
                                 <Item className="px-6 py-2 w-[calc(100%-204px)] text-left">
                                     <TextRegular7>{b.name}</TextRegular7>

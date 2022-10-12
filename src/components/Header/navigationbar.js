@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect} from 'react'
+import React, { useState, useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineMenu,AiOutlineClose, AiOutlineSearch , AiOutlineMail, AiOutlineShoppingCart } from 'react-icons/ai'
 import { useSelector } from "react-redux"
@@ -10,6 +10,7 @@ import LayoutContext from '../../pages/context'
 import { LargePrimaryButton } from '../Utilities/button'
 import {pageMenuSelector} from "../../redux/slices/pageReducer"
 import { tenantSelector } from '../../redux/slices/authReducer'
+import {login_url, home_url, add_tenant_to_url} from '../../services/service.config'
 
 const Navbar = () => {
 	
@@ -20,7 +21,7 @@ const Navbar = () => {
 	const [title, setTitle] = useState('')
 	const [subMenuItems, setSubMenuItems] = useState([])
 
-	const {showCart, setShowCart} = useContext(LayoutContext)
+	const {setShowCart} = useContext(LayoutContext)
   const menuList = useSelector(pageMenuSelector)
   const tenant = useSelector(tenantSelector)
 
@@ -42,7 +43,7 @@ const Navbar = () => {
                       : 
                       
                         <div className='bg-[#214559] w-full h-12 text-sm  text-center items-center text-white'>
-                            <Link to={`/${tenant}/login`}>
+                            <Link to={login_url}>
 								<LargePrimaryButton className='' title = "LOGIN | REGISTER"></LargePrimaryButton>
 							</Link>
                         </div>
@@ -101,7 +102,7 @@ const Navbar = () => {
 			<>
       {
         !item.items.length? 
-        <Link to={`/${tenant}${item.url}`}>
+        <Link to={add_tenant_to_url(item.url)}>
           <li 
             key = {item.title} 
             className=" flex justify-between pb-4  text-base text-slate-400"
@@ -235,7 +236,7 @@ const Navbar = () => {
             <div className={(!open) ? 'hidden' : ' text-black absolute top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto'}>
                <div className='h-10 justify-between flex' > 
                   <div className='flex'>
-                    <Link to={`/${tenant}/login`} className='flex' >
+                    <Link to={login_url} className='flex' >
                       <img src={logo} className="w-[37px]"></img>
                       <div className='px-4 text-[25px] font-medium items-center'><span>atom</span></div>
                     </Link>
@@ -255,7 +256,7 @@ const Navbar = () => {
         </div>
 
         <div className='mobile_only_flex text-white'>
-            <Link to={`/${tenant}`} className='flex'>
+            <Link to={home_url} className='flex'>
                 <img src={logo} ></img>
                 <p className='font-medium text-xl px-3 pt-1'>atom</p>
              </Link>

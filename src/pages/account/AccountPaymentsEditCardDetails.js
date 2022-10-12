@@ -5,6 +5,7 @@ import AccountLayout from './AccountLayout'
 import { DropdownWithLabel } from '../../components/Utilities/dropdown';
 import { TextInput } from '../../components/Utilities/input';
 import { Link } from 'react-router-dom';
+import {my_account_payment_url} from '../../services/service.config'
 
 const PaymentsEditCardDetails = () => {
   return (
@@ -21,7 +22,7 @@ const PaymentsEditCardDetails = () => {
                 </div>
             </GridLayout>
             <Container className="text-center w-full">
-                <Link to="/my-account/payments" className="w-60 m-auto">
+                <Link to={my_account_payment_url} className="w-60 m-auto">
                     <MediumPrimaryButton title="SAVE NEW CARD DETAIL" />
                 </Link>
                     

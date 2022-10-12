@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import landing_bg from '../../assets/landing_bg.png'
-import intro from '../../assets/intro.png'
 import desk from '../../assets/category/desk.png'
 import seating from '../../assets/category/seating.png'
 import storage from '../../assets/category/storage.png'
 import printer from '../../assets/category/printer.png'
-import { PrinterIcon } from '@heroicons/react/solid'
+import { add_tenant_to_url } from '../../services/service.config'
+
 const EachCategory = (props) => {
     return (
         <div>
@@ -32,16 +31,16 @@ const Category = () => {
                 Browse our catalogue and find the right product for you
             </div>
             <div className='home_cat_content' >
-                <Link to={`product/domestic_appliances`}>
+                <Link to={add_tenant_to_url(`product/domestic_appliances`)}>
                     <EachCategory src = {seating} title="Seating" content = "Tellus ornare at consequat ipsum,non lobortis" />
                 </Link>
-                <Link to={`product/domestic_appliances`}>
+                <Link to={add_tenant_to_url(`product/domestic_appliances`)}>
                     <EachCategory src = {desk} title="Desk and Workspaces" content = "Tellus ornare at consequat ipsum,non lobortis" />
                 </Link>
-                <Link to={`product/entertainment_&_hobby`}>
+                <Link to={add_tenant_to_url(`product/entertainment_&_hobby`)}>
                     <EachCategory src = {storage} title="Storage" content = "Tellus ornare at consequat ipsum,non lobortis" />
                 </Link>
-                <Link to={`product/toys`}>
+                <Link to={add_tenant_to_url(`product/toys`)}>
                     <EachCategory src = {printer} title="Printers, Ink and Toner" content = "Tellus ornare at consequat ipsum,non lobortis" />
                 </Link>
                 

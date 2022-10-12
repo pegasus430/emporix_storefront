@@ -1,9 +1,9 @@
-import React, { useState, useRef , useEffect, Fragment} from "react";
+import React, { useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate , Link } from 'react-router-dom';
 import login_atom from '../assets/login_atom.png'
 import { login, register } from "../redux/slices/authReducer"
-import {setMessage, clearMessage} from '../redux/slices/messageReducer'
+import {setMessage} from '../redux/slices/messageReducer'
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -12,6 +12,7 @@ import { GridLayout, Container } from "../components/Utilities/common";
 import { Heading2, Heading4 } from "../components/Utilities/typography";
 import  Box  from "@mui/material/Box";
 import { tenant_key } from "../constants/localstorage";
+import {home_url} from '../services/service.config'
 
 const Signup = (props) => {
  
@@ -112,7 +113,7 @@ const Signup = (props) => {
 
 
   if (isLoggedIn) {
-    return <Navigate  to={`/${tenant}`} />;
+    return <Navigate  to={home_url} />;
   }
 
   return (
@@ -130,7 +131,7 @@ const Signup = (props) => {
             <GridLayout className="md:w-[540px] w-[95%] mx-auto h-[740px] md:pt-[138px] pt-10">
                 <Container className="w-full h-[110px] items-center  text-center text-white font-bold  text-7xl ">
                     <Container className="mx-auto">
-                        <Link to={`/${tenant}`} className="flex">
+                        <Link to={home_url} className="flex">
                             <img src={login_atom} className="w-[78px] h-[86px] mr-5"  />
                             atom
                         </Link>

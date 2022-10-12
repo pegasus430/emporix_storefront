@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import masterCardLogo from '../../assets/mastercard.svg'
 import { TextBold2, TextBold7, Underline, TextRegular6, TextBold8, TextBold9} from '../../components/Utilities/typography';
 import './account.css'
+import {payment_edit_card_detail_url} from '../../services/service.config'
+
 const PayItem = ({title, itemKey, className, children, logo}) => {
   const [active, setActive] = useState(false)
   return (
@@ -43,7 +45,7 @@ const Payments = () => {
               <TextBold8 className="text-[#377395]"> Joe W</TextBold8>
             </Container>
             <TextBold9 className="justify-end flex">
-                <Link to="/my-account/payments/edit_card_details">
+                <Link to={payment_edit_card_detail_url}>
                   <Underline className="text-[#0380F3]">Edit Card Detail</Underline>
                 </Link>
               </TextBold9>

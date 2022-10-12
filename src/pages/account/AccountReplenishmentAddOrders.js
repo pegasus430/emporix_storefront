@@ -1,14 +1,14 @@
-import React, { useState }  from 'react'
+import React from 'react'
 import AccountLayout from './AccountLayout'
-import {GridLayout, Container,Item} from '../../components/Utilities/common'
+import {GridLayout, Item} from '../../components/Utilities/common'
 import CartTable from '../cart/CartTable'
 import CartMobileContent from '../cart/CartMobileContent'
 import {MediumPrimaryButton} from '../../components/Utilities/button'
 import {Link} from 'react-router-dom'
 import {DropdownWithLabel} from '../../components/Utilities/dropdown'
 import {TextInput} from '../../components/Utilities/input'
-import { Divider } from '@mui/material'
 import {frequencyOptions} from './config'
+import {my_account_replenishment_orders_url} from '../../services/service.config'
 
 const ReplenishmentAddOrders = () => {
     const product = [
@@ -60,7 +60,7 @@ const ReplenishmentAddOrders = () => {
 
                 </div>
                 <div className="w-60 p-2">
-                    <Link to="/my-account/replenishment-orders">
+                    <Link to={my_account_replenishment_orders_url}>
                         <MediumPrimaryButton title="SAVE ORDER"/>
                     </Link>
                 </div>

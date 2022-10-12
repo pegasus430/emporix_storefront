@@ -9,13 +9,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { LayoutBetween , GridLayout, Container } from "../components/Utilities/common";
 import { Heading2, Heading4 } from "../components/Utilities/typography";
 import  Box  from "@mui/material/Box";
-import { DropdownWithLabel } from "../components/Utilities/dropdown";
-import tenant_lists from '../tenant.config'
-import { tenant_key } from "../constants/localstorage";
+import {home_url, signup_url} from '../services/service.config'
+import {tenant_key} from '../constants/localstorage'
 
 const Login = (props) => {
-  const form = useRef();
-  const checkBtn = useRef();
   const [loading, setLoading] = useState(false)
   const [userEmail, setUserEmail] = useState("");
   const [openNotification , setOpenNotification] = useState(false)
@@ -81,7 +78,7 @@ const Login = (props) => {
 
 
   if (isLoggedIn) {
-    return <Navigate  to={`/${userTenant}`} />;
+    return <Navigate  to={home_url} />;
   }
 
   return (
@@ -99,7 +96,7 @@ const Login = (props) => {
             <GridLayout className="md:w-[540px] w-[95%] mx-auto h-[740px] md:pt-[138px] pt-10">
                 <Container className="w-full h-[110px] items-center  text-center text-white font-bold  text-7xl ">
                     <Container className="mx-auto">
-                        <Link to={`/${userTenant}`} className="flex">
+                        <Link to={home_url} className="flex">
                             <img src={login_atom} className="w-[78px] h-[86px] mr-5"  />
                             atom
                         </Link>
@@ -148,7 +145,7 @@ const Login = (props) => {
                     <GridLayout className="pt-12 w-full  items-center text-center text-base">
                         <Box className="mx-auto">
                             <span className="font-medium text-[#818385]">Don't have an account?</span>
-                            <Link to={`/${userTenant}/signup`}>
+                            <Link to={signup_url}>
                                 <span className="pl-2 font-semibold text-[#0380F3] underline hover:cursor-pointer hover:text-[#44ec85]">Sign Up</span>
                             </Link>
                             

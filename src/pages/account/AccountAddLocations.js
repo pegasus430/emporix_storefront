@@ -5,10 +5,11 @@ import AccountLayout from './AccountLayout'
 import { DropdownWithLabel } from '../../components/Utilities/dropdown';
 import { TextInput } from '../../components/Utilities/input';
 import { Link } from 'react-router-dom';
+import {my_account_location_url} from '../../services/service.config'
 
 const AddLocations = () => {
     const locationTypeOptions = [
-        {'value':'Headquarter','label':'Headquarter'},
+        {'value':'Headquarters','label':'Headquarters'},
         {'value':'Office','label':'Office'},
         {'value':'Warehouse','label':'Warehouse'}
     ]
@@ -28,7 +29,7 @@ const AddLocations = () => {
                 </div>
             </GridLayout>
             <Container className="text-center w-full">
-                <Link to="/my-account/locations" className="w-60 m-auto">
+                <Link to={my_account_location_url} className="w-60 m-auto">
                     <MediumPrimaryButton title="SAVE NEW LOCATION" />
                 </Link>
                     

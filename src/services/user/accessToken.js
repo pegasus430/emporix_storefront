@@ -16,11 +16,11 @@ const AccessToken = async (tenant) => {
     let now = Date.now()
     let old_tenant = localStorage.getItem(tenant_key)
 
-    if(tenant == old_tenant){
+    if(tenant === old_tenant){
         // about customer token
         const customer_token_expires_in = localStorage.getItem(customer_token_expires_in_key)
         // if customer token is not expired yet, get it from localstorage.
-        if(customer_token_expires_in != undefined && now < parseInt(customer_token_expires_in)){
+        if(customer_token_expires_in !== undefined && now < parseInt(customer_token_expires_in)){
             localStorage.setItem(acess_token_key, localStorage.getItem(customer_token_key))
             return localStorage.getItem(customer_token_key)
         }
@@ -28,7 +28,7 @@ const AccessToken = async (tenant) => {
         // about anonymous token
         const anonymous_token_expires_in = localStorage.getItem(anonymous_token_expires_in_key)
         // if customer token is not expired yet, get it from localstorage.
-        if(anonymous_token_expires_in != undefined && now < parseInt(anonymous_token_expires_in)){
+        if(anonymous_token_expires_in !== undefined && now < parseInt(anonymous_token_expires_in)){
             localStorage.setItem(acess_token_key, localStorage.getItem(anonymous_token_key))
             return localStorage.getItem(anonymous_token_key)
         }

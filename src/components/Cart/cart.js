@@ -1,10 +1,11 @@
-import React, { useState, createContext, useContext}  from 'react'
+import React from 'react'
 import './cart.css'
 import '../index.css'
 import { Link } from 'react-router-dom'
 import {LayoutBetween, GridLayout} from '../Utilities/common'
 import Quantity from '../Utilities/quantity/quantity'
-import { tenant_key } from '../../constants/localstorage'
+import {cart_url, checkout_url} from '../../services/service.config'
+
 
 const CartProductContent = ({children}) => {
     return (
@@ -213,17 +214,16 @@ const CartTotalPrice = ({value}) => {
     )
 }
 const CartGoCheckout = () => {
-    const tenant = localStorage.getItem(tenant_key)
+   
     return (
-        <Link to={`/${tenant}/checkout`} className="w-full">
+        <Link to={checkout_url} className="w-full">
             <button className="cart-go-checkout-btn">GO TO CHECKOUT</button>
         </Link>
     )
 }
 const CartOpenCart = () => {
-    const tenant = localStorage.getItem(tenant_key)
     return (
-        <Link to={`/${tenant}/cart`} className="w-full">
+        <Link to={cart_url} className="w-full">
             <button className="cart-open-cart-btn">
                 OPEN CART
             </button>

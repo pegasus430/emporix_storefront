@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Link } from 'react-router-dom';
+import {add_replenishment_orders_url, edit_replenishment_orders_url} from '../../services/service.config'
 
 const repleishmentOrdersList = [
   {
@@ -73,7 +74,7 @@ const RepleOrderItem = ({order_number, po, start_on , frequency , next_order_dat
 const ReplenishmentOrders = () => {
   return (
     <div>
-        <Link to="/my-account/replenishment-orders/add">
+        <Link to={add_replenishment_orders_url}>
           <div className="w-[278px]  h-12 bg-[#214559] text-white  flex items-center my-12 md:mx-0 mx-auto">
               <span className='text-center  w-full'>NEW REPLENISHMENT ORDER</span>
           </div>
@@ -111,7 +112,7 @@ const ReplenishmentOrders = () => {
                   <TableCell align="left" className='!py-6'>
                     
                       <div className='flex'>
-                          <Link to="/my-account/replenishment-orders/edit">
+                          <Link to={edit_replenishment_orders_url}>
                             <div className='font-inter font-semibold text-[14px] underline'>
                                 Edit
                             </div>

@@ -1,14 +1,13 @@
 import React, { useState }  from 'react'
-import { Container, GridLayout } from '../../components/Utilities/common'
 import CheckoutCotent from './CheckoutContent'
 import CheckoutActionPanel from './CheckoutActionPanel'
 import {Link} from 'react-router-dom'
 
 import './checkout.css'
-import { tenant_key } from '../../constants/localstorage'
+
+import { home_url } from '../../services/service.config'
 
 const FinalCheckout = ({setFinal}) => {
-    const tenant = localStorage.getItem(tenant_key)
     return (
         <div className='font-inter'>
             <div className='border-b pb-12'>
@@ -64,7 +63,7 @@ const FinalCheckout = ({setFinal}) => {
             </div>
             <div className='pt-12 w-full'>
                 <div className=' mx-auto md:w-60  w-full'>
-                    <Link to= {`/${tenant}`} >
+                    <Link to= {home_url} >
                         <button onClick={()=> setFinal(false)} className='bg-[#214559] text-[white] px-6 py-0 h-12 file:text-[14px] leading-[14px] md:w-60 w-full'>BACK TO HOME PAGE</button>
                     </Link>
                 </div>
@@ -82,7 +81,7 @@ const CheckoutPage = () => {
             <div className="checkout-page-content">
                 <div className="gap-12 lg:flex grid grid-cols-1">
                     
-                    {final==false?
+                    {final===false?
                         <>
                             <CheckoutCotent status={status}/>
                             <CheckoutActionPanel status={status} setStatus={setStatus} setFinal={setFinal}/>

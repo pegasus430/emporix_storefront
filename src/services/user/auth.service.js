@@ -1,12 +1,8 @@
 import axios from "axios";
-import anonymous from './anonymousToken'
-// import { signup_api } from '../service.config'
-import tenant_lists from '../../tenant.config'
 import ApiRequest from "..";
 import { anonymous_token_key, customer_token_expires_in_key, customer_token_key } from "../../constants/localstorage";
 
 const API_URL = process.env.REACT_APP_API_URL_STAGE
-const tenant = process.env.REACT_APP_TENANT_STAGE
 
 const register = async (email, password , firstName , lastName, tenantName , company , phoneNumber) => {
 	let response
@@ -105,9 +101,9 @@ const logout = () => {
   	localStorage.removeItem(customer_token_expires_in_key)
 
 };
-
-export default {
-  register,
-  login,
-  logout,
-};
+const auth_services = {
+	register,
+	login,
+	logout,
+  };
+export default auth_services
