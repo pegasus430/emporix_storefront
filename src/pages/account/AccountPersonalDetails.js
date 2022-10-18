@@ -1,8 +1,9 @@
 import React, { useState}  from 'react'
-import { Link, Outlet, useParams, Navigate} from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 import { useSelector } from "react-redux"
 import AccountLayout from './AccountLayout'
 import photo from '../../assets/photo.png'
+import { login_url } from '../../services/service.config'
 
 const FromInputItem = ({label, value}) => {
   const [val, setVal] = useState(value)
@@ -93,7 +94,7 @@ const ActionDiscardButton = ({caption}) => {
 const PersonalDetails = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
   if (!currentUser) {
-      return <Navigate  to="/login" />;
+      return <Navigate  to={login_url}/>;
   }
 console.log(currentUser)
   return (

@@ -17,6 +17,14 @@ export const GridLayout = ({children, className}) => {
     )
 }
 
+export const Item = ({children, className}) => {
+    return (
+        <div className={className}>
+            {children}
+        </div>
+    )
+}
+
 export const Container = ({children, className}) => {
     return (
         <div className={'flex ' + (className? className: "")}>

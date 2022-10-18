@@ -6,6 +6,7 @@ import { HiOutlineUserCircle } from "react-icons/hi";
 import { logout } from "../../redux/slices/authReducer";
 
 import { useDispatch, useSelector } from "react-redux";
+import { tenant_key } from '../../constants/localstorage';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -15,7 +16,7 @@ export default function AccountMenu( props ) {
   const logOut = () => {
 		dispatch(logout());
 	};
-
+  const tenant = localStorage.getItem(tenant_key)
   return (
     <Menu as="div" className="relative inline-block text-left">
       
@@ -40,7 +41,7 @@ export default function AccountMenu( props ) {
             <Menu.Item>
               {({ active }) => (
                 <a
-                  href="/my-account"
+                  href={`/${tenant}/my-account`}
                   className={classNames(
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                     'block px-4 py-2 text-sm'

@@ -16,11 +16,13 @@ import {max_product_description_length, min_product_in_stock_count} from '../../
 import {availabilityDataSelector} from '../../redux/slices/availabilityReducer'
 
 import parse from 'html-react-parser'
+import { tenant_key } from "../../constants/localstorage"
 
 const EachProduct = (props) => {
+    const tenant = localStorage.getItem(tenant_key)
     const navigate = useNavigate();
     const HandleProductDetail = () => {
-        navigate(`/product/details/${props.item_id}`)
+        navigate(`/${tenant}/product/details/${props.item_id}`)
     }
     return (
         <div className="" onClick={HandleProductDetail}>

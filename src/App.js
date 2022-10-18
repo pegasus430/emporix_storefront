@@ -15,18 +15,24 @@ import AccountPersonalDetails from './pages/account/AccountPersonalDetails'
 import AccountCompanyDetails from './pages/account/AccountCompanyDetails'
 import AccountMyOrders from './pages/account/AccountMyOrders'
 import AccountReplenishmentOrders from './pages/account/AccountReplenishmentOrders'
+import AccountReplenishmentAddOrders from './pages/account/AccountReplenishmentAddOrders'
+import AccountReplenishmentEditOrders from './pages/account/AccountReplenishmentEditOrders'
 import AccountSavedCarts from './pages/account/AccountSavedCarts'
 import AccountLocations from './pages/account/AccountLocations'
+import Brand from './pages/brand'
+import AccountAddLocations from './pages/account/AccountAddLocations'
 import AccountPayments from './pages/account/AccountPayments'
 import AccountReviews from './pages/account/AccountReviews'
+import AccountPaymentsEditCardDetails from './pages/account/AccountPaymentsEditCardDetails'
+import NoPage from './pages/NoPage'
 import { history } from "./helpers/history";
 
 import { logout } from "./redux/slices/authReducer";
 import { clearMessage } from "./redux/slices/messageReducer";
+import InvalidTenant from './pages/InvalidTenant'
 
 function App() {
 
-	const { user: currentUser } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		history.listen((location) => {
@@ -41,39 +47,43 @@ function App() {
 	return (
 		<Router>
 			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="product/:maincategory" exact  element={<ProductList />} />
-				<Route path="product/:maincategory/:subcategory/" exact element={<ProductList />} />
-				<Route path="product/:maincategory/:subcategory/:category" exact element={<ProductList />} />
-				<Route path="product/details/:product_id" element={<ProductDetails />} />
-				<Route path="login" element={<Login />} />
-				<Route path="signup" element={<Signup />} />
-				<Route path="cart" element={<Cart />} />
-				<Route path="checkout" element={<Checkout />} />
-				<Route path="my-account" element={<Account />} >
-					<Route index element={<AccountHome />} />
-					<Route path="account-summary" element={<MyAccount />} />
-					<Route path="personal-details" element={<AccountPersonalDetails />} />
-					<Route path="company-details" element={<AccountCompanyDetails />} />
-					<Route path="my-orders" element={<AccountMyOrders />} />
-					<Route path="replenishment-orders" element={<AccountReplenishmentOrders />} />
-					<Route path="saved-carts" element={<AccountSavedCarts />} />
-					<Route path="locations" element={<AccountLocations />} />
-					<Route path="payments" element={<AccountPayments />} />
-					<Route path="reviews" element={<AccountReviews />} />
+				<Route path="/:tenant">
+					<Route index exact element={<Home />} />
+					<Route path="product/:maincategory" exact  element={<ProductList />} />
+					<Route path="product/:maincategory/:subcategory/" exact element={<ProductList />} />
+					<Route path="product/:maincategory/:subcategory/:category" exact element={<ProductList />} />
+					<Route path="product/details/:product_id" element={<ProductDetails />} />
+					<Route path="login" exact element={<Login />} />
+					<Route path="signup" exact element={<Signup />} />
+					<Route path="brand" exact element={<Brand />} />
+					<Route path="cart" exact element={<Cart />} />
+					<Route path="checkout" exact element={<Checkout />} />
+					<Route path="my-account" element={<Account />} >
+						<Route index element={<AccountHome />} />
+						<Route path="account-summary" element={<MyAccount />} />
+						<Route path="personal-details" element={<AccountPersonalDetails />} />
+						<Route path="company-details" element={<AccountCompanyDetails />} />
+						<Route path="my-orders" element={<AccountMyOrders />} />
+						<Route path="replenishment-orders" exact element={<AccountReplenishmentOrders />} />
+						<Route path="replenishment-orders/add" exact element={<AccountReplenishmentAddOrders />} />
+						<Route path="replenishment-orders/edit" exact element={<AccountReplenishmentEditOrders />} />
+						<Route path="saved-carts" element={<AccountSavedCarts />} />
+						<Route path="locations" exact element={<AccountLocations />} />
+						<Route path="locations/add" exact element={<AccountAddLocations />} />
+						<Route path="payments" exact element={<AccountPayments />} />
+						<Route path="payments/edit_card_details" element={<AccountPaymentsEditCardDetails />} />
+						
+						<Route path="reviews" element={<AccountReviews />} />
+						
+					</Route>
+					<Route path='quick_order' element = {<QuickOrder />} />
 					
+					{/* <Route path="contact" element={<Contact />} /> */}
+					<Route path="*" element={<NoPage />} /> 
 				</Route>
-				<Route path='quick_order' element = {<QuickOrder />} />
-				{/*<Route path="contact" element={<Contact />} />
-				<Route path="*" element={<NoPage />} /> */}   
-				
+				<Route path="*" element={<InvalidTenant />} /> 
 			</Routes>
 		</Router>
-
-		
-		
-		
 	)
 }
-
 export default App;

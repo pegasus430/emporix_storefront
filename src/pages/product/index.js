@@ -9,6 +9,7 @@ import productService from '../../services/product/product.service'
 import {availabilityDataSelector} from '../../redux/slices/availabilityReducer'
 import {useSelector} from 'react-redux'
 import {min_product_in_stock_count} from '../../constants/page'
+import categoryService from "../../services/product/category.service";
 
 const ProductList = () => {
     
@@ -31,8 +32,31 @@ export const ProductDetails = () => {
         
         const getProduct = async (product_id) => {
             let res = await productService.getProductsWithIds([product_id])
-            res = res.data[0]
+            const category= await categoryService.getRetrieveAllCategoriesWithResoureceId(product_id)
             
+            let categoies = await categoryService.getAllParentCategories(category.data[0]['id'])
+            categoies = categoies.data
+            categoies.push(category.data[0])
+            let root_category, sub_category
+            let child_categories = {}
+            
+            for(let c in categoies){
+                if(categoies[c].parentId === undefined) root_category = categoies[c]
+                else child_categories[categoies[c].parentId] = categoies[c]
+            }
+            let product_category = []
+            product_category.push(root_category.name)
+            
+            let loop = 0
+            while(loop < 2){
+                sub_category = child_categories[root_category.id]
+                if(sub_category === undefined) return
+                root_category = sub_category
+                product_category.push(sub_category.name)
+                loop++
+            }
+
+            res = res.data[0]
             res.src = (res.media[0]==undefined?"":res.media[0]['url'])
             
             let stock, stockLevel = 0
@@ -43,7 +67,7 @@ export const ProductDetails = () => {
                 else stock = "In"
             }
                 
-
+            res.category = product_category
             res.stock = stock
             res.estimated_delivery = "23.05.2022"
             res.price = "127.50"
@@ -64,7 +88,7 @@ export const ProductDetails = () => {
         }
         getProduct(product_id)
     },[])
-
+    
     return(
         <Layout title={""}>
             {product.loading?
