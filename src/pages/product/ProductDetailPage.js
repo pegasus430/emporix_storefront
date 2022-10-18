@@ -365,7 +365,7 @@ function TabPanel(props) {
                 {
                     
                     Object.keys(product.mixins).map((key) => {
-                        
+                        console.log(key)
                         return (
                             <ProductInfoPortal key={key} caption={getFeatureName(key)} items={getAttributes(product.mixins[key])}/>
                         ) 
@@ -442,7 +442,7 @@ const ProductInfoPortal = ({caption, items}) => {
             </div>
             <div className="information-content grid grid-cols-1 gap-[6px]">
                 {items.map((row,index) => (
-                    <div className="grid grid-cols-2 gap-2">
+                    <div key = {index} className="grid grid-cols-2 gap-2">
                         <div className="information-properties pl-6 grid grid-cols-1">
                             <span key={index}>{row.property}</span>
                         </div>
