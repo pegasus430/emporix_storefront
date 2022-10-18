@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import {LayoutBetween, GridLayout} from '../Utilities/common'
 import Quantity from '../Utilities/quantity/quantity'
 import {cart_url, checkout_url} from '../../services/service.config'
-
+import { cart_product_key } from '../../constants/localstorage'
 
 const CartProductContent = ({children}) => {
     return (
@@ -321,7 +321,7 @@ const Cart = () => {
 
     // ]
 
-    let CartProductList = localStorage.getItem('CartProductList')
+    let CartProductList = localStorage.getItem(cart_product_key)
 
     CartProductList = CartProductList === null? {}: JSON.parse(CartProductList)
 
