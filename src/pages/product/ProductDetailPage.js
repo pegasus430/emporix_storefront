@@ -165,12 +165,13 @@ const DropdownComponent = ({options}) => (
         </>
     )}/>
   )
-const ProductFormantAndWarranty = () => {
+const ProductFormantAndWarranty = ({product}) => {
+    console.log(product)
     const format_options = [
-        {value: "Paper A4", label: "Paper A4"}
+        // {value: "Paper A4", label: "Paper A4"}
     ]
     const warranty_options = [
-        {value: "1 year - extandable", label: "1 year - extandable"}
+        // {value: "1 year - extandable", label: "1 year - extandable"}
     ]
     return (
         <div className="product-format-and-warranty py-12">
@@ -226,7 +227,7 @@ const ProductInfo = ({product}) => {
     return (
         <>
             <ProductBasicInfo product={product}/>
-            <ProductFormantAndWarranty />
+            <ProductFormantAndWarranty product={product}/>
             <PrdouctAddToCart /> 
             <ProductDiscount />
         </>
@@ -365,7 +366,6 @@ function TabPanel(props) {
                 {
                     
                     Object.keys(product.mixins).map((key) => {
-                        console.log(key)
                         return (
                             <ProductInfoPortal key={key} caption={getFeatureName(key)} items={getAttributes(product.mixins[key])}/>
                         ) 
