@@ -1,5 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
+import tenant_lists from '../../tenant.config'
+import {tenant_list_key} from '../../constants/localstorage'
 
+let tenantListFromLocalStorage = localStorage.getItem(tenant_list_key)
+tenantListFromLocalStorage = (tenantListFromLocalStorage === null? {}: JSON.parse(tenantListFromLocalStorage))
+
+const tenantLists = {
+    ...tenantListFromLocalStorage,
+    ...tenant_lists
+}
 export const initialState = {
     menu: [
         {
@@ -21,9 +30,11 @@ export const initialState = {
         } ,
         {
             "title"  : "Quick Order" ,
-            "items" : []
+            "items" : [],
+            "url" : "quick_order"
         }
-    ]
+    ],
+    tenantList: tenantLists
 }
 
 const pageSlice = createSlice({
@@ -32,6 +43,9 @@ const pageSlice = createSlice({
     reducers: {
         setShopItems: (state, action) => {
             state.menu[0]['items'] = action.payload
+        },
+        setTenantList: (state, action) => {
+            state.tenantList[action.payload.tenant] = action.payload.tenant
         }
     }
 })
@@ -39,7 +53,8 @@ const pageSlice = createSlice({
 export default pageSlice.reducer
 // The Page Actions.
 export const {
-    setShopItems
+    setShopItems,
+    setTenantList
 } = pageSlice.actions
 
 export const putShopItems = (items) => async (dispatch) => {
@@ -47,3 +62,4 @@ export const putShopItems = (items) => async (dispatch) => {
 }
 // The Page Selector
 export const pageMenuSelector = (state) => state.page.menu
+export const tenantListSelector = (state) => state.page.tenantList

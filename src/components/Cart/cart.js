@@ -323,7 +323,7 @@ const Cart = () => {
 
     let CartProductList = localStorage.getItem('CartProductList')
 
-    CartProductList = CartProductList == null? {}: JSON.parse(CartProductList)
+    CartProductList = CartProductList === null? {}: JSON.parse(CartProductList)
 
     const products = Object.values(CartProductList)
 

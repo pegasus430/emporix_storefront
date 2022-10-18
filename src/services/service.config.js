@@ -1,4 +1,4 @@
-import tenant_lists from '../tenant.config'
+import {tenantLists} from '../tenant.config'
 import { tenant_key } from '../constants/localstorage'
 export const grant_type = "client_credentials"
 
@@ -12,13 +12,13 @@ const get_tenant = () => {
 }
 export const client_id = () => {
     const user_tenant = get_tenant()
-    if(tenant_lists[user_tenant] === undefined) return default_client_id
-    return tenant_lists[user_tenant]['emporix_client_id']
+    if(tenantLists[user_tenant] === undefined) return default_client_id
+    return tenantLists[user_tenant]['emporix_client_id']
 }
 export const client_secret = () => {
     const user_tenant = get_tenant()
-    if(tenant_lists[user_tenant] === undefined) return default_client_secret
-    return tenant_lists[user_tenant]['emporix_secret']
+    if(tenantLists[user_tenant] === undefined) return default_client_secret
+    return tenantLists[user_tenant]['emporix_secret']
 }
 
 

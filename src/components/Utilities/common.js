@@ -25,6 +25,15 @@ export const Item = ({children, className}) => {
     )
 }
 
+export const Center = ({children, className}) => {
+    return (
+        <div className={"text-center grid "+(className)}>
+            {children}
+        </div>
+    )
+}
+
+
 export const Container = ({children, className}) => {
     return (
         <div className={'flex ' + (className? className: "")}>

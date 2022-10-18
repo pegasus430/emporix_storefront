@@ -7,7 +7,7 @@ import {
     acess_token_key
 } from '../../constants/localstorage'
 
-import tenant_lists from '../../tenant.config'
+import {tenantLists} from '../../tenant.config'
 import {anonymous_token_api} from '../service.config'
 import ApiRequest  from '..'
 import {v4 as uuidv4} from 'uuid'
@@ -38,7 +38,7 @@ const AccessToken = async (tenant) => {
     localStorage.setItem(tenant_key, tenant)
     const session_id = uuidv4()
     const params = {
-        'client_id': tenant_lists[tenant]['storefront_client_id'],
+        'client_id': tenantLists[tenant]['storefront_client_id'],
         'hybris-tenant': tenant,
         'hybris-session-id': session_id
     }
