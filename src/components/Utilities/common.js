@@ -32,6 +32,14 @@ export const Center = ({children, className}) => {
         </div>
     )
 }
+export const Right = ({children, className}) => {
+    return (
+        <div className={"text-right grid "+(className)}>
+            {children}
+        </div>
+    )
+}
+
 
 
 export const Container = ({children, className}) => {

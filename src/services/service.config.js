@@ -50,6 +50,7 @@ export const my_account_replenishment_orders_url = `/${get_tenant()}/my-account/
 export const add_replenishment_orders_url = `/${get_tenant()}/my-account/replenishment-orders/add`
 export const edit_replenishment_orders_url = `/${get_tenant()}/my-account/replenishment-orders/edit`
 export const my_account_my_orders_view_url = `/${get_tenant()}/my-account/my-orders/view/`
+export const my_account_my_orders_invoice_url = `/${get_tenant()}/my-account/my-orders/invoice/`
 export const checkout_url = `/${get_tenant()}/checkout`
 export const cart_url = `/${get_tenant()}/cart`
 export const login_url = `/${get_tenant()}/login`

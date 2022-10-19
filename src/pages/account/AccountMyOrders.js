@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Status from './common'
-import {my_account_my_orders_view_url} from '../../services/service.config'
+import {my_account_my_orders_view_url, my_account_my_orders_invoice_url} from '../../services/service.config'
 import { Link } from 'react-router-dom';
 
 const myOdersList = [
@@ -48,7 +48,7 @@ const OrderItem = ({order_number, status, created,  total}) => {
                   <Link to={`${my_account_my_orders_view_url}${order_number}`}>View</Link>
                 </div>
                 <div className='font-inter font-semibold text-[14px] underline ml-6'>
-                    <Link to="/">Invoice</Link>
+                    <Link to={`${my_account_my_orders_invoice_url}${order_number}`}>Invoice</Link>
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@ export const MyOrders = () => {
                             <Link to={`${my_account_my_orders_view_url}${row.order_number}`}>View</Link>
                           </div>
                           <div className='font-inter font-semibold text-[14px] underline ml-6'>
-                            <Link to="/">Invoice</Link>
+                            <Link to={`${my_account_my_orders_invoice_url}${row.order_number}`}>Invoice</Link>
                           </div>
                       </div>
                     

@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React from 'react'
 import AccountLayout from './AccountLayout'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -38,8 +38,6 @@ const savedCartsList = [
     items : '24' ,
     total : '2,569.25'
   } ,
-
-
 ]
 
 const MobileCartItem = ({date, name, items , total}) => {
