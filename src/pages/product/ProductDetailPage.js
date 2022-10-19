@@ -227,7 +227,7 @@ const ProductInfo = ({product}) => {
     return (
         <>
             <ProductBasicInfo product={product}/>
-            <ProductFormantAndWarranty product={product}/>
+            {/* <ProductFormantAndWarranty product={product}/> */}
             <PrdouctAddToCart /> 
             <ProductDiscount />
         </>

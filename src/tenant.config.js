@@ -8,12 +8,15 @@ const tenant_lists = {
     
 }
 
-let tenantListFromLocalStorage = localStorage.getItem(tenant_list_key)
-tenantListFromLocalStorage = (tenantListFromLocalStorage === null? {}: JSON.parse(tenantListFromLocalStorage))
 
-export const tenantLists = {
-    ...tenantListFromLocalStorage,
-    ...tenant_lists
+export const getTenantLists = () =>  {
+    let tenantListFromLocalStorage = localStorage.getItem(tenant_list_key)
+    tenantListFromLocalStorage = (tenantListFromLocalStorage === null? {}: JSON.parse(tenantListFromLocalStorage))
+
+    return {
+        ...tenantListFromLocalStorage,
+        ...tenant_lists
+    }
 }
 
 export default tenant_lists

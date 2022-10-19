@@ -1,6 +1,6 @@
 import axios from "axios";
 import {v4 as uuidv4} from 'uuid'
-import {tenantLists} from '../../tenant.config'
+import {getTenantLists} from '../../tenant.config'
 
 // const API_URL = process.env.NODE_ENV === "development" ? process.env.REACT_APP_API_URL_STAGE :process.env.REACT_APP_API_URL_PRODUCTION ;
 const API_URL =  process.env.REACT_APP_API_URL_STAGE
@@ -10,6 +10,7 @@ const session_id = uuidv4()
 const getAnonymousToken = async (tenant = null) => {
   let tenantName
   let client_id = process.env.REACT_APP_STOREFRONT_CLIENT_ID_STAGE
+  const tenantLists = getTenantLists()
   if(tenant === null){
      tenantName = _tenant
   }

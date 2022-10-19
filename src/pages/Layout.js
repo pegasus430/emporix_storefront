@@ -35,8 +35,9 @@ const Layout = ({children, title}) => {
         const getAccessToken = async() => {
             if(userTenant === "") return
             if(tenant_lists[tenant] === undefined) return
-
+            console.log(userTenant)
             const token = await AccessToken(userTenant)
+            console.log(token)
             dispatch(setAccessToken(token))
         }
         getAccessToken()
