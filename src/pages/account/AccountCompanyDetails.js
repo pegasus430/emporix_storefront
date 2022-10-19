@@ -38,7 +38,7 @@ const CompanyDetails = ({value}) => {
           <CompanyInfoItem caption="Legal Name" content={company} />
           <CompanyInfoItem caption="Tax Registration Number" content="1605492" />
           <CompanyInfoItem caption="Country Of Registration" content="Germany" />
-          <CompanyInfoItem caption="Registration Agency" content="Input Text" />
+          <CompanyInfoItem caption="Registration Agency" content="Handelsregister" />
           <CompanyInfoItem caption="Registration Date" content="DD/MM/YYYY" />
           <CompanyInfoItem caption="Registration ID" content="064464" />
 
