@@ -16,10 +16,12 @@ import hp_laser_printer from "../../assets/products/hp_laser_printer.png"
 import comfort_chair from "../../assets/products/comfort_chair.png"
 import pc_stand from "../../assets/products/pc_stand.png"
 import stapler from "../../assets/products/stapler.png"
-import HandleProductAddToCart from './HandleProductAddToCart'
+// import HandleProductAddToCart from './HandleProductAddToCart'
 import LayoutContext from '../context'
 import CategoryService from '../../services/product/category.service'
 import {product_url} from '../../services/service.config'
+import { useDispatch } from 'react-redux';
+import { putCartProduct } from '../../redux/slices/cartReducer';
 
 const ProductContext = createContext()
 
@@ -166,7 +168,6 @@ const DropdownComponent = ({options}) => (
     )}/>
   )
 const ProductFormantAndWarranty = ({product}) => {
-    console.log(product)
     const format_options = [
         // {value: "Paper A4", label: "Paper A4"}
     ]
@@ -185,6 +186,14 @@ const PrdouctAddToCart = () => {
     const product = useContext(ProductContext)
     const {showCart, setShowCart} = useContext(LayoutContext)
     const [quantitiy, setQuantity] = useState(1)
+    const dispatch = useDispatch()
+
+    const HandleProductAddToCart1 = (product, action, quantitiy) => {
+        let new_produt = {...product}
+        new_produt.buy_count = quantitiy
+        dispatch(putCartProduct(new_produt))
+        action(true)
+    }
 
     return (
         <div className="product-add-to-cart-wrapper py-12">
@@ -193,7 +202,7 @@ const PrdouctAddToCart = () => {
                 <Quantity value={quantitiy} action={setQuantity} />
             </div>
             <div className="">
-                <button className="product-add-to-cart-btn" onClick={()=> HandleProductAddToCart(product,setShowCart, quantitiy)}>ADD TO CART</button>
+                <button className="product-add-to-cart-btn" onClick={()=> HandleProductAddToCart1(product,setShowCart, quantitiy)}>ADD TO CART</button>
             </div>
         </div>
     )

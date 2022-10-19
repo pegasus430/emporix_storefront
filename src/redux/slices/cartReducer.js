@@ -4,7 +4,7 @@ import {cart_product_key} from '../../constants/localstorage'
 let cartProductList = localStorage.getItem(cart_product_key)
 cartProductList = (cartProductList === null? {}: JSON.parse(cartProductList))
 export const initialState = {
-    cartProductList: cartProductList
+    cartProductList: cartProductList,
 }
 
 const cartSlicer = createSlice({
@@ -18,6 +18,7 @@ const cartSlicer = createSlice({
                 ...state.cartProductList,
                 ...obj
             }
+            console.log(state.cartProductList)
             localStorage.setItem(cart_product_key, JSON.stringify(state.cartProductList))
         },
         clearCart: (state) => {
