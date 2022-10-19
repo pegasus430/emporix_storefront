@@ -7,28 +7,30 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Status from './common'
+import {my_account_my_orders_view_url} from '../../services/service.config'
+import { Link } from 'react-router-dom';
 
 const myOdersList = [
     {
-      order_number : '#CMD-2022-0119-001' ,
+      order_number : 'CMD-2022-0119-001' ,
       status : 'SHIPPED' ,
       total : '2,569.25' ,
       created : '19 Jan. 2022'
     },
     {
-      order_number : '#CMD-2022-0119-002' ,
+      order_number : 'CMD-2022-0119-002' ,
       status : 'DELIVERED' ,
       total : '2,569.25' ,
       created : '19 Jan. 2022'
     },
     {
-      order_number : '#CMD-2022-0119-003' ,
+      order_number : 'CMD-2022-0119-003' ,
       status : 'SHIPPED' ,
       total : '2,569.25' ,
       created : '19 Jan. 2022'
     },
     {
-      order_number : '#CMD-2022-0119-004' ,
+      order_number : 'CMD-2022-0119-004' ,
       status : 'SHIPPED' ,
       total : '2,569.25' ,
       created : '19 Jan. 2022'
@@ -43,10 +45,10 @@ const OrderItem = ({order_number, status, created,  total}) => {
           <Status width={108} height = {24} title = {status} color={ status == "SHIPPED" ?'#FFA800' : '#4BCB67'} />
             <div className='flex'>
                 <div className='font-inter font-semibold text-[14px] underline'>
-                    View
+                  <Link to={`${my_account_my_orders_view_url}${order_number}`}>View</Link>
                 </div>
                 <div className='font-inter font-semibold text-[14px] underline ml-6'>
-                    Invoice
+                    <Link to="/">Invoice</Link>
                 </div>
             </div>
         </div>
@@ -97,10 +99,10 @@ export const MyOrders = () => {
                     
                       <div className='flex'>
                           <div className='font-inter font-semibold text-[14px] underline'>
-                              View
+                            <Link to={`${my_account_my_orders_view_url}${row.order_number}`}>View</Link>
                           </div>
                           <div className='font-inter font-semibold text-[14px] underline ml-6'>
-                              Invoice
+                            <Link to="/">Invoice</Link>
                           </div>
                       </div>
                     

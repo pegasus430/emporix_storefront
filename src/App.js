@@ -14,6 +14,7 @@ import MyAccount from './pages/account/MyAccount'
 import AccountPersonalDetails from './pages/account/AccountPersonalDetails'
 import AccountCompanyDetails from './pages/account/AccountCompanyDetails'
 import AccountMyOrders from './pages/account/AccountMyOrders'
+import AccountMyOrdersView from './pages/account/AccountMyOrdersView'
 import AccountReplenishmentOrders from './pages/account/AccountReplenishmentOrders'
 import AccountReplenishmentAddOrders from './pages/account/AccountReplenishmentAddOrders'
 import AccountReplenishmentEditOrders from './pages/account/AccountReplenishmentEditOrders'
@@ -63,7 +64,9 @@ function App() {
 						<Route path="account-summary" element={<MyAccount />} />
 						<Route path="personal-details" element={<AccountPersonalDetails />} />
 						<Route path="company-details" element={<AccountCompanyDetails />} />
-						<Route path="my-orders" element={<AccountMyOrders />} />
+						<Route path="my-orders" exact element={<AccountMyOrders />} />
+						<Route path="my-orders/view/:order_id" exact element={<AccountMyOrdersView />} />
+												
 						<Route path="replenishment-orders" exact element={<AccountReplenishmentOrders />} />
 						<Route path="replenishment-orders/add" exact element={<AccountReplenishmentAddOrders />} />
 						<Route path="replenishment-orders/edit" exact element={<AccountReplenishmentEditOrders />} />
