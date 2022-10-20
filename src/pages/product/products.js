@@ -77,7 +77,7 @@ const products = [
     } ,
     {
         id : 6,
-        stock : "Ouf Of", 
+        stock : "Out Of", 
         rating : 4, 
         count : 8 ,
         product_count: 13,
@@ -212,7 +212,7 @@ const products = [
     } ,
     {
         id : 15,
-        stock : "Ouf Of", 
+        stock : "Out Of", 
         rating : 4, 
         count : 8 ,
         src : "/img/products/chair6.png" ,
