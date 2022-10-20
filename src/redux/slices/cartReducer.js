@@ -21,6 +21,10 @@ const cartSlicer = createSlice({
             console.log(state.cartProductList)
             localStorage.setItem(cart_product_key, JSON.stringify(state.cartProductList))
         },
+        removeCartProduct: (state, action) => {
+            delete(state.cartProductList[`Cart${action.payload}`])
+            localStorage.setItem(cart_product_key, JSON.stringify(state.cartProductList))
+        },
         clearCart: (state) => {
             state.cartProductList = {}
             localStorage.setItem(cart_product_key, JSON.stringify(state.cartProductList))
@@ -32,11 +36,15 @@ export default cartSlicer.reducer
 // The Cart Actions.
 export const {
     addCartProduct,
-    clearCart
+    clearCart,
+    removeCartProduct
 } = cartSlicer.actions
 
 export const putCartProduct = (product) => async (dispatch) => {
     dispatch(addCartProduct(product))
+}
+export const deleteCart = (code) => async (dispatch) => {
+    dispatch(removeCartProduct(code))
 }
 // The Cart Selector
 export const cartProductSelector = (state) => state.cart.cartProductList
