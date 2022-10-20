@@ -10,12 +10,12 @@ import './account.css'
 import {payment_edit_card_detail_url} from '../../services/service.config'
 
 const PayItem = ({title, itemKey, className, children, logo}) => {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(true)
   return (
     <GridLayout className={"p-6 gap-4 border border-[#DFE1E5] " + (active?"bg-[#F5F8FA] border-[#214559]":"") }>
       <LayoutBetween>
         <Container className="gap-6 items-center"> 
-          <Switch className="switch-item" onClick={()=> setActive(!active)}/>
+          <Switch className="switch-item" defaultChecked  onClick={()=> setActive(!active)}/>
           <TextBold2 className="text-[#214559]">{title}</TextBold2>
         </Container>
         {logo!==undefined?<img src={logo} className="w-[60px]"/>:<></>
