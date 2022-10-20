@@ -6,7 +6,7 @@ import {MyOrders} from './common'
 import {SavedCarts} from './common'
 import { useSelector } from "react-redux"
 import { Navigate } from 'react-router-dom'
-
+import { my_account_my_orders_view_url } from '../../services/service.config'
 const AccountPersonalInfo = () => {
     const { user: currentUser } = useSelector((state) => state.auth);
     if (!currentUser) {
@@ -116,7 +116,7 @@ const PortalCaptionBar = ({title,action_title}) => {
   )
 }
 const RecentOrders = () => {
-  const actions = [{'title':'View'}]
+  const actions = [{'title':'View', 'link': my_account_my_orders_view_url}]
   return (
     <div className="account-recent-orders-wrapper portal-wrapper">
       <PortalCaptionBar title="Recent Orders" action_title="View All"/>

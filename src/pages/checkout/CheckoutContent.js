@@ -73,8 +73,8 @@ const PaymentContent = () => {
                 <RadioGroup active="radio1">
                     <GridLayout className="gap-4">
                         <PaymentInvoiceItem radioKey="radio1"/>
-                        <PaymentMethodItem radioKey="radio2" title="Trevipay"/>
-                        <PaymentMethodItem radioKey="radio3" title="Pre Payment (Bank Transfer)"/>
+                        {/* <PaymentMethodItem radioKey="radio2" title="Trevipay"/>
+                        <PaymentMethodItem radioKey="radio3" title="Pre Payment (Bank Transfer)"/> */}
                         <PaymentMethodItem radioKey="radio4" title="Credit / Debit Card"/>
                     </GridLayout>
                     

@@ -4,9 +4,9 @@ import CartActionBar from './CartActionBar'
 import CartTable from './CartTable'
 import CartMobileContent from './CartMobileContent'
 import {CartActionPanel} from '../../components/Cart/cart'
-
+import { cart_product_key } from '../../constants/localstorage'
 const CartPage = () => {
-    let CartProductList = localStorage.getItem('CartProductList')
+    let CartProductList = localStorage.getItem(cart_product_key)
 
     CartProductList = CartProductList == null? {}: JSON.parse(CartProductList)
 

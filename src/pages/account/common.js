@@ -5,28 +5,29 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { Link } from 'react-router-dom';
 
 const myOdersList = [
   {
-    order_number : '#CMD-2022-0119-001' ,
+    order_number : 'CMD-2022-0119-001' ,
     status : 'SHIPPED' ,
     total : '2,569.25' ,
     created : '19 Jan. 2022'
   },
   {
-    order_number : '#CMD-2022-0119-002' ,
+    order_number : 'CMD-2022-0119-002' ,
     status : 'DELIVERED' ,
     total : '2,569.25' ,
     created : '19 Jan. 2022'
   },
   {
-    order_number : '#CMD-2022-0119-003' ,
+    order_number : 'CMD-2022-0119-003' ,
     status : 'SHIPPED' ,
     total : '2,569.25' ,
     created : '19 Jan. 2022'
   },
   {
-    order_number : '#CMD-2022-0119-004' ,
+    order_number : 'CMD-2022-0119-004' ,
     status : 'SHIPPED' ,
     total : '2,569.25' ,
     created : '19 Jan. 2022'
@@ -89,9 +90,9 @@ export const MyOrders = ({actions}) => {
                   <TableCell align="left" className='!py-6'>
                     
                       <div className='flex'>
-                          {actions.map((row,index) => (
+                          {actions.map((row_,index) => (
                             <div key={index} className={index > 0 ? 'font-inter font-semibold text-[14px] underline ml-6':'font-inter font-semibold text-[14px] underline'}>
-                                {row.title}
+                                <Link to={`${row_.link}${row.order_number}`}>{row_.title}</Link>
                             </div>
                           ))
 

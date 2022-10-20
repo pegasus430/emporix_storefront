@@ -1,4 +1,4 @@
-import tenant_lists from '../tenant.config'
+import {getTenantLists} from '../tenant.config'
 import { tenant_key } from '../constants/localstorage'
 export const grant_type = "client_credentials"
 
@@ -12,13 +12,15 @@ const get_tenant = () => {
 }
 export const client_id = () => {
     const user_tenant = get_tenant()
-    if(tenant_lists[user_tenant] === undefined) return default_client_id
-    return tenant_lists[user_tenant]['emporix_client_id']
+    const tenantLists = getTenantLists()
+    if(tenantLists[user_tenant] === undefined) return default_client_id
+    return tenantLists[user_tenant]['emporix_client_id']
 }
 export const client_secret = () => {
     const user_tenant = get_tenant()
-    if(tenant_lists[user_tenant] === undefined) return default_client_secret
-    return tenant_lists[user_tenant]['emporix_secret']
+    const tenantLists = getTenantLists()
+    if(tenantLists[user_tenant] === undefined) return default_client_secret
+    return tenantLists[user_tenant]['emporix_secret']
 }
 
 
@@ -47,6 +49,8 @@ export const my_account_payment_url = `/${get_tenant()}/my-account/payments`
 export const my_account_replenishment_orders_url = `/${get_tenant()}/my-account/replenishment-orders`
 export const add_replenishment_orders_url = `/${get_tenant()}/my-account/replenishment-orders/add`
 export const edit_replenishment_orders_url = `/${get_tenant()}/my-account/replenishment-orders/edit`
+export const my_account_my_orders_view_url = `/${get_tenant()}/my-account/my-orders/view/`
+export const my_account_my_orders_invoice_url = `/${get_tenant()}/my-account/my-orders/invoice/`
 export const checkout_url = `/${get_tenant()}/checkout`
 export const cart_url = `/${get_tenant()}/cart`
 export const login_url = `/${get_tenant()}/login`

@@ -5,6 +5,7 @@ import categoryReducer from "./slices/categoryReducer"
 import pageReducer from "./slices/pageReducer"
 import productReducer from "./slices/productReducer"
 import availabilityReducer from "./slices/availabilityReducer"
+import cartReducer from "./slices/cartReducer"
 
 const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
     category: categoryReducer,
     page: pageReducer,
     product: productReducer,
-    availability: availabilityReducer
+    availability: availabilityReducer,
+    cart: cartReducer
   }
 });
 

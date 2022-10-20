@@ -32,6 +32,8 @@ export const ProductDetails = () => {
         
         const getProduct = async (product_id) => {
             let res = await productService.getProductsWithIds([product_id])
+            
+            /* Add Category Infromation */
             const category= await categoryService.getRetrieveAllCategoriesWithResoureceId(product_id)
             
             let categoies = await categoryService.getAllParentCategories(category.data[0]['id'])
@@ -50,7 +52,7 @@ export const ProductDetails = () => {
             let loop = 0
             while(loop < 2){
                 sub_category = child_categories[root_category.id]
-                if(sub_category === undefined) return
+                if(sub_category === undefined) break
                 root_category = sub_category
                 product_category.push(sub_category.name)
                 loop++
@@ -81,10 +83,12 @@ export const ProductDetails = () => {
                 res.sub_images.push(row['url'])
                 return
             })
+            
             setProduct({
                 loading: false,
                 data: res
             })
+            
         }
         getProduct(product_id)
     },[])

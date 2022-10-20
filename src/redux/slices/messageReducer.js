@@ -29,3 +29,5 @@ export const {
 
 export const setMessage = (message) => (dispatch) => (dispatch(setMessageAction(message)));
 export const clearMessage = () => (dispatch) => (dispatch(clearMessageAction()));
+// Selector
+export const messageSelector = (state) => state.message.message

@@ -1,11 +1,20 @@
-import React , { useState, createContext, useContext} from "react";
+import React , { useState} from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import {TextInputOnlyWithEnterKey, TextInputOnly} from '../../components/Utilities/input'
+import {cartProductSelector, putCartProduct, clearCart} from '../../redux/slices/cartReducer'
+import {messageSelector, setMessage} from '../../redux/slices/messageReducer'
+import {availabilityDataSelector} from '../../redux/slices/availabilityReducer'
+import productService from "../../services/product/product.service";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import {min_product_in_stock_count} from '../../constants/page'
 import './quickorder.css'
+import { useDispatch, useSelector } from "react-redux";
 const list = [
     {
         code : '01-460-05860',
@@ -29,20 +38,128 @@ const list = [
         total : ''
     }
 ]
+const CartItem = ({item, handleCodeChange, handleQuantityChange, feature}) => {
+    return (
+        <TableRow
+            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            className = 'text-base'
+        >
+            <TableCell component="th" scope="row" className=' !py-6'>
+                {
+                    feature==="action"?
+                        <TextInputOnly value={item.code} action={handleCodeChange}  placeholder="Enter Code" className = 'border max-w-[160px]' />:
+                        <TextInputOnlyWithEnterKey value={item.code} action={handleCodeChange}  placeholder="Enter Code" className = 'border max-w-[160px]' />
+                }
+            </TableCell>
+            <TableCell align="left" className='!py-6 !font-bold w-[250px]'>
+                {item.name}
+            </TableCell>
+            <TableCell align="left" className='!py-6'>
+                {
+                    feature==="action"?
+                        <TextInputOnly value =  {item.buy_count} action = {(value) => handleQuantityChange(value, item)} className = 'border max-w-[56px] ' />:
+                        <TextInputOnlyWithEnterKey value =  {item.buy_count} action = {(value) => handleQuantityChange(value, item)} className = 'border max-w-[56px] ' />
+                }
+                    
+            </TableCell>
+            <TableCell align="left" className='!py-6'>
+                {item.list_price ? "€ " + item.list_price: null}
+            </TableCell>
+            <TableCell align="left" className='!py-6'>
+                    {item.list_price ? "€ " + Math.trunc(item.list_price * item.buy_count * 100) / 100: null}
+            </TableCell>
+            <TableCell align="left" className='!py-6'>
+                {
+                    item.code?
+                    <span className="underline font-bold">
+                        X
+                    </span> : null
+                }
+                
+            </TableCell>
+        </TableRow>
+    )
+}
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const DesktopContent = () => {
    
-    const [quickOrderList , setQuickOrderList ] = useState(list)
+    const cartProductList = useSelector(cartProductSelector)
+    const [code, setCode] = useState("")
+    const [quantity, setQuantity] = useState(1)
+    const [openNotification , setOpenNotification] = useState(false)
+    const message = useSelector(messageSelector);
+    const dispatch = useDispatch()
+    const handleClose = () => {
+        setOpenNotification(false);
+    };
+    const availability = useSelector(availabilityDataSelector)
+
+    const addList =  {
+        code : code,
+        name : '',
+        buy_count : quantity,
+        unitPrice: '',
+        total : ''
+    }
+    const clearCartAction = () => {
+        dispatch(clearCart())
+        dispatch(setMessage(`All carts are removed succesfully.`))
+        setOpenNotification(true);
+    }
     const handleCodeChange = () => {
 
     }
-    const handleQuantityChange = () => {
+    const handleQuantityChange = (value, item) => {
+        let new_item = {...item}
+        new_item['buy_count'] = value
+        dispatch(putCartProduct(new_item))
+    }
+    const addCartProduct = async () => {
+        let res = await productService.getProductsWithIds([code])
 
+        if(res.data.length === 0){
+            dispatch(setMessage(`The product is not existed.`))
+            setOpenNotification(true);
+            return
+        }
+        // Get first product
+        res = res.data[0]
+        res.src = (res.media[0]==undefined?"":res.media[0]['url'])
+        res.price = "149.99"
+        res.list_price = "149.99"
+        res.buy_count = quantity
+        
+        let stock, stockLevel = 0
+        if(availability['k'+res.id] === undefined) stock = "Ouf Of"
+        else{
+            stockLevel = parseInt(availability['k'+res.id]['stockLevel'])
+            if(stockLevel < min_product_in_stock_count) stock = "Low"
+            else stock = "In"
+        }
+        res.stock = stock
+        res.estimated_delivery = "23.05.2022"
+        res.product_count = stockLevel
+        res.rating = 4
+
+        dispatch(putCartProduct(res))
     }
     return (
         <div className="desktop_only">
+            <Snackbar
+                open={openNotification}
+                autoHideDuration={3000}
+                onClose={handleClose}
+                anchorOrigin = {{vertical:"top", horizontal: "right"}}
+            >
+                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                    {message}
+                </Alert>
+            </Snackbar>
             <div className="float-right underline text-base font-medium text-[#377395]">
-                <span className="pr-8">Clear List</span>
+                <span className="pr-8 cursor-pointer" onClick={()=>clearCartAction()}>Clear List</span>
                 <span>Order list</span>
             </div>
             <div className="pt-[58px]">
@@ -60,47 +177,25 @@ const DesktopContent = () => {
                         </TableHead>
                         <TableBody>
                             {
-                                quickOrderList.map((item, index ) => 
-                                <TableRow
-                                    key = {index}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    className = 'text-base'
-                                >
-                                    <TableCell component="th" scope="row" className=' !py-6'>
-                                        <input value = {item.code} onChange = {handleCodeChange} className = 'border max-w-[160px]' />
-                                    </TableCell>
-                                    <TableCell align="left" className='!py-6 !font-bold w-[250px]'>
-                                        {item.name}
-                                    </TableCell>
-                                    <TableCell align="left" className='!py-6'>
-                                        <input value =  {item.quantity} onChange = {handleQuantityChange} className = 'border max-w-[56px] ' /> 
-                                        {item.code ? <span className = "text-[#ACAEB2]" >Unit</span> : null}
-                                        
-                                    </TableCell>
-                                    <TableCell align="left" className='!py-6'>
-                                        {item.unitPrice ? "€ " + item.unitPrice: null}
-                                    </TableCell>
-                                    <TableCell align="left" className='!py-6'>
-                                          {item.total ? "€ " + item.total: null}
-                                    </TableCell>
-                                    <TableCell align="left" className='!py-6'>
-                                        {
-                                            item.code?
-                                            <span className="underline font-bold">
-                                                X
-                                            </span> : null
-                                        }
-                                        
-                                    </TableCell>
-                                </TableRow>
+                               
+                                Object.keys(cartProductList).map((key, index) => 
+                                    <CartItem feature="row" key={Math.random()} item = {cartProductList[key]} handleCodeChange={handleCodeChange} handleQuantityChange={handleQuantityChange}/>
                                 )
                             }
+                            {
+                                Object.keys(cartProductList).length === 0?
+                                    <TableRow >
+                                        <TableCell colSpan = {6} align="center"  className='font-inter !font-bold text-[14px]'>Empty Cart List</TableCell>
+                                    </TableRow>: ""
+                            }
+                            {/* Add Cart Row */}
+                            <CartItem feature="action" key="add" item={addList} handleCodeChange={setCode} handleQuantityChange={setQuantity}/>
                         </TableBody>
                     </Table>
                 </TableContainer>
             </div>
             <div className="float-right pt-12">
-                <button className="quickorder-add-to-cart-btn" >ADD TO CART</button>  <br />
+                <button className="quickorder-add-to-cart-btn" onClick={addCartProduct}>ADD TO CART</button>  <br />
                 <button className="quickorder-add-to-quote-btn">ADD TO QUOTE</button>             
             </div>
             

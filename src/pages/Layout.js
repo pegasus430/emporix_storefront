@@ -11,12 +11,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { categoryLoadingSelector, GetCategory, categoryDataSelector } from "../redux/slices/categoryReducer"
 import {availabilityLoadingSelector, GetAvailability} from '../redux/slices/availabilityReducer'
 import {putShopItems} from "../redux/slices/pageReducer"
-import tenant_lists from "../tenant.config"
+import {tenantListSelector} from '../redux/slices/pageReducer'
 import InvalidTenant from './InvalidTenant'
 import {tenantSelector, setTenant, accessTokenSelector, setAccessToken} from '../redux/slices/authReducer'
 import AccessToken from '../services/user/accessToken'
-
-import { useTheme } from "@emotion/react"
 
 const Layout = ({children, title}) => {
     const [showCart, setShowCart] = useState(false)
@@ -27,7 +25,8 @@ const Layout = ({children, title}) => {
     const {tenant} = useParams()
     const userTenant = useSelector(tenantSelector)
     const accessToken_ = useSelector(accessTokenSelector)
-
+    const tenant_lists = useSelector(tenantListSelector)
+    
     useEffect(() => {
         dispatch(setTenant(tenant))
     }, []);
@@ -35,7 +34,10 @@ const Layout = ({children, title}) => {
     useEffect(() => {
         const getAccessToken = async() => {
             if(userTenant === "") return
+            if(tenant_lists[tenant] === undefined) return
+            console.log(userTenant)
             const token = await AccessToken(userTenant)
+            console.log(token)
             dispatch(setAccessToken(token))
         }
         getAccessToken()

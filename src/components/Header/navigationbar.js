@@ -1,8 +1,9 @@
-import React, { useState, useContext} from 'react'
+import React, { useState, useContext, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineMenu,AiOutlineClose, AiOutlineSearch , AiOutlineMail, AiOutlineShoppingCart } from 'react-icons/ai'
 import { useSelector } from "react-redux"
 import logo from '../../assets/atom.png'
+import Badge from '@mui/material/Badge';
 import AccountMenu from './accountmenu'
 import { HiOutlineUserCircle } from "react-icons/hi"
 import { ChevronRightIcon , ChevronLeftIcon } from '@heroicons/react/solid'
@@ -11,6 +12,7 @@ import { LargePrimaryButton } from '../Utilities/button'
 import {pageMenuSelector} from "../../redux/slices/pageReducer"
 import { tenantSelector } from '../../redux/slices/authReducer'
 import {login_url, home_url, add_tenant_to_url} from '../../services/service.config'
+import {cartProductSelector} from '../../redux/slices/cartReducer'
 
 const Navbar = () => {
 	
@@ -174,7 +176,20 @@ const Navbar = () => {
         setOpen(false)
     }
 	// ServiceAccessToken()
-	
+	const cartProduct = useSelector(cartProductSelector)
+  const [cartTotal, setCartTotal] = useState(0)
+  const [cartTotalPrice, setCartTotalPrice] = useState(0)
+
+  useEffect(()=>{
+    setCartTotal(Object.keys(cartProduct).length)
+    let total_price = 0
+    Object.keys(cartProduct).map(key => {
+      total_price += cartProduct[key]['price'] * cartProduct[key]['buy_count']
+    })
+    total_price = Math.trunc(total_price * 100) / 100
+    setCartTotalPrice(total_price)
+  }, [cartProduct])
+
   return (
     <header className='header'>
         {/* Dektop language and currency selection */}
@@ -213,9 +228,17 @@ const Navbar = () => {
               <ul className='flex'>
                 <li className='px-4'><AiOutlineMail size={20} /></li> |
                 <li className='px-4 flex'>
-                  <AiOutlineShoppingCart size = {20} onClick={handleOpenCart}/>
+                  {
+                    cartTotal!==0?
+                    <Badge badgeContent={cartTotal} color="warning">
+                      <AiOutlineShoppingCart size = {20} onClick={handleOpenCart}/>
+                    </Badge>:
+                    <AiOutlineShoppingCart size = {20} onClick={handleOpenCart}/>
+                  }
+                    
+                    
                   <div className='pl-[17.5px] text-white flex'>
-                      &euro; 768.47
+                      &euro; {cartTotalPrice}
                   </div>
                 </li> |
                 <li className='px-4 flex'>

@@ -16,10 +16,12 @@ import hp_laser_printer from "../../assets/products/hp_laser_printer.png"
 import comfort_chair from "../../assets/products/comfort_chair.png"
 import pc_stand from "../../assets/products/pc_stand.png"
 import stapler from "../../assets/products/stapler.png"
-import HandleProductAddToCart from './HandleProductAddToCart'
+// import HandleProductAddToCart from './HandleProductAddToCart'
 import LayoutContext from '../context'
 import CategoryService from '../../services/product/category.service'
 import {product_url} from '../../services/service.config'
+import { useDispatch } from 'react-redux';
+import { putCartProduct } from '../../redux/slices/cartReducer';
 
 const ProductContext = createContext()
 
@@ -165,12 +167,12 @@ const DropdownComponent = ({options}) => (
         </>
     )}/>
   )
-const ProductFormantAndWarranty = () => {
+const ProductFormantAndWarranty = ({product}) => {
     const format_options = [
-        {value: "Paper A4", label: "Paper A4"}
+        // {value: "Paper A4", label: "Paper A4"}
     ]
     const warranty_options = [
-        {value: "1 year - extandable", label: "1 year - extandable"}
+        // {value: "1 year - extandable", label: "1 year - extandable"}
     ]
     return (
         <div className="product-format-and-warranty py-12">
@@ -184,6 +186,14 @@ const PrdouctAddToCart = () => {
     const product = useContext(ProductContext)
     const {showCart, setShowCart} = useContext(LayoutContext)
     const [quantitiy, setQuantity] = useState(1)
+    const dispatch = useDispatch()
+
+    const HandleProductAddToCart1 = (product, action, quantitiy) => {
+        let new_produt = {...product}
+        new_produt.buy_count = quantitiy
+        dispatch(putCartProduct(new_produt))
+        action(true)
+    }
 
     return (
         <div className="product-add-to-cart-wrapper py-12">
@@ -192,7 +202,7 @@ const PrdouctAddToCart = () => {
                 <Quantity value={quantitiy} action={setQuantity} />
             </div>
             <div className="">
-                <button className="product-add-to-cart-btn" onClick={()=> HandleProductAddToCart(product,setShowCart, quantitiy)}>ADD TO CART</button>
+                <button className="product-add-to-cart-btn" onClick={()=> HandleProductAddToCart1(product,setShowCart, quantitiy)}>ADD TO CART</button>
             </div>
         </div>
     )
@@ -226,7 +236,7 @@ const ProductInfo = ({product}) => {
     return (
         <>
             <ProductBasicInfo product={product}/>
-            <ProductFormantAndWarranty />
+            {/* <ProductFormantAndWarranty product={product}/> */}
             <PrdouctAddToCart /> 
             <ProductDiscount />
         </>
@@ -294,37 +304,37 @@ function TabPanel(props) {
 
 
   const ProductDetailsTabContent = ({product}) => {
-    const design_items = [
-        {"property": "Product colour", "value": "Grey"},
-        {"property": "CompatibilityHP", "value": "HP LaserJet 500"},
-        {"property": "HP segment", "value": "Business, Enterprise"}
-    ]
-    const dimension_items = [
-        {"property": "Width", "value": "678.2 mm"},
-        {"property": "Depth", "value": "772.2 mm"},
-        {"property": "Height", "value": "426.7 mm"},
-        {"property": "Weight", "value": "19.2 kg"},
-        {"property": "Dimensions (WxDxH)", "value": "678.2 x 772.2 x 426.7 mm"}
-    ]
-    const packaging_items = [
-        {"property": "Package dimensions (WxDxH)", "value": "630 x 600 x 553 mm"},
-        {"property": "Package width", "value": "630 mm"},
-        {"property": "Package depth", "value": "600 mm"},
-        {"property": "Package height", "value": "553 mm"},
-        {"property": "Package Weight", "value": "24.4 Kg"}
-    ]
-    const technical_details_items = [
-        {"property": "Package dimensions (WxDxH)", "value": "630 x 600 x 553 mm"}
-    ]
-    const techincal_dimension_items = [
-        {"property": "Pallet dimensions (W x D x H) (imperial)", "value": '1201.4 x 800.1 x 2362.2 mm (47.3 x 31.5 x 93")'},
-        {"property": "Pallet dimensions (W x D x H)", "value": '1200 x 800 x 2362 mm'},
-        {"property": "Pallet weight (imperial)", "value": "205.2 kg (452.4 lbs)"},
-        {"property": "Products per pallet", "value": "8 pc(s)"},
-        {"property": "Master (outer) cases per pallet", "value": "2 pc(s)"},
-        {"property": "Layers per pallet", "value": "4 pc(s)"},
-        {"property": "Pallet gross weight", "value": "205.7 g"}
-    ]
+    // const design_items = [
+    //     {"property": "Product colour", "value": "Grey"},
+    //     {"property": "CompatibilityHP", "value": "HP LaserJet 500"},
+    //     {"property": "HP segment", "value": "Business, Enterprise"}
+    // ]
+    // const dimension_items = [
+    //     {"property": "Width", "value": "678.2 mm"},
+    //     {"property": "Depth", "value": "772.2 mm"},
+    //     {"property": "Height", "value": "426.7 mm"},
+    //     {"property": "Weight", "value": "19.2 kg"},
+    //     {"property": "Dimensions (WxDxH)", "value": "678.2 x 772.2 x 426.7 mm"}
+    // ]
+    // const packaging_items = [
+    //     {"property": "Package dimensions (WxDxH)", "value": "630 x 600 x 553 mm"},
+    //     {"property": "Package width", "value": "630 mm"},
+    //     {"property": "Package depth", "value": "600 mm"},
+    //     {"property": "Package height", "value": "553 mm"},
+    //     {"property": "Package Weight", "value": "24.4 Kg"}
+    // ]
+    // const technical_details_items = [
+    //     {"property": "Package dimensions (WxDxH)", "value": "630 x 600 x 553 mm"}
+    // ]
+    // const techincal_dimension_items = [
+    //     {"property": "Pallet dimensions (W x D x H) (imperial)", "value": '1201.4 x 800.1 x 2362.2 mm (47.3 x 31.5 x 93")'},
+    //     {"property": "Pallet dimensions (W x D x H)", "value": '1200 x 800 x 2362 mm'},
+    //     {"property": "Pallet weight (imperial)", "value": "205.2 kg (452.4 lbs)"},
+    //     {"property": "Products per pallet", "value": "8 pc(s)"},
+    //     {"property": "Master (outer) cases per pallet", "value": "2 pc(s)"},
+    //     {"property": "Layers per pallet", "value": "4 pc(s)"},
+    //     {"property": "Pallet gross weight", "value": "205.7 g"}
+    // ]
     const getFeatureName = (str) => {
         let loop = 0
         let res = ""
@@ -365,7 +375,6 @@ function TabPanel(props) {
                 {
                     
                     Object.keys(product.mixins).map((key) => {
-                        
                         return (
                             <ProductInfoPortal key={key} caption={getFeatureName(key)} items={getAttributes(product.mixins[key])}/>
                         ) 
@@ -442,7 +451,7 @@ const ProductInfoPortal = ({caption, items}) => {
             </div>
             <div className="information-content grid grid-cols-1 gap-[6px]">
                 {items.map((row,index) => (
-                    <div className="grid grid-cols-2 gap-2">
+                    <div key = {index} className="grid grid-cols-2 gap-2">
                         <div className="information-properties pl-6 grid grid-cols-1">
                             <span key={index}>{row.property}</span>
                         </div>

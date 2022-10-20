@@ -16,6 +16,9 @@
 .text-bold-9{
     @apply text-[12px] leading-[20px] font-medium
 }
+.text-bold-10{
+    @apply text-[24px] leading-[40px] font-medium
+}
 .text-regular-3{
     @apply text-[16px] leading-[22px] font-normal
 }
@@ -55,6 +58,15 @@
 }
 .text-regular-7{
     @apply text-[14px] leading-[16px] font-normal
+}
+.text-regular-8{
+    @apply text-[20px] leading-[30px] font-normal
+}
+.text-bold-11{
+    @apply text-[20px] leading-[30px] font-bold
+}
+.text-bold-12{
+    @apply text-[20px] leading-[32px] font-bold
 }
 .text-bold-6{
     @apply text-[12px] leading-[16px] font-bold
