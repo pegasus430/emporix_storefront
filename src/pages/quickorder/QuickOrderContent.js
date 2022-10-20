@@ -133,7 +133,7 @@ const DesktopContent = () => {
         res.buy_count = quantity
         
         let stock, stockLevel = 0
-        if(availability['k'+res.id] === undefined) stock = "Ouf Of"
+        if(availability['k'+res.id] === undefined) stock = "Out Of"
         else{
             stockLevel = parseInt(availability['k'+res.id]['stockLevel'])
             if(stockLevel < min_product_in_stock_count) stock = "Low"

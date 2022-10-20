@@ -234,7 +234,7 @@ const ProductListItems = ({products, auth, displayType, product_list_count, page
 
             imgsrc = item.media[0]==undefined?"":item.media[0]['url']
             console.log(item.id)
-            if(availability['k'+item.id] == undefined) stock = "Ouf Of"
+            if(availability['k'+item.id] == undefined) stock = "Out Of"
             else if(availability['k'+item.id]['stockLevel'] < min_product_in_stock_count) stock = "Low"
             else stock = "In"
 
@@ -325,7 +325,7 @@ const ProductListItems = ({products, auth, displayType, product_list_count, page
 
          products.map((item, i) => {
             imgsrc = item.media[0]==undefined?"":item.media[0]['url']
-            if(availability[item.id] == undefined) stock = "Ouf Of"
+            if(availability[item.id] == undefined) stock = "Out Of"
             else if(availability[item.id] < min_product_in_stock_count) stock = "Low"
             else stock = "In"
 
