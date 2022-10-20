@@ -62,7 +62,7 @@ export const ProductDetails = () => {
             res.src = (res.media[0]==undefined?"":res.media[0]['url'])
             
             let stock, stockLevel = 0
-            if(availability['k'+res.id] === undefined) stock = "Ouf Of"
+            if(availability['k'+res.id] === undefined) stock = "Out Of"
             else{
                 stockLevel = parseInt(availability['k'+res.id]['stockLevel'])
                 if(stockLevel < min_product_in_stock_count) stock = "Low"
