@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './cart.css'
 import '../index.css'
 import { Link } from 'react-router-dom'
 import {LayoutBetween, GridLayout} from '../Utilities/common'
 import Quantity from '../Utilities/quantity/quantity'
 import {cart_url, checkout_url} from '../../services/service.config'
-import { cart_product_key } from '../../constants/localstorage'
+import Badge from '@mui/material/Badge';
+import { useDispatch, useSelector } from 'react-redux'
+import {deleteCart, cartProductSelector} from '../../redux/slices/cartReducer'
 
 const CartProductContent = ({children}) => {
     return (
@@ -148,16 +150,37 @@ const CartProductInfo = ({product}) => {
         </div>
     )
 }
-const CartProductItem = ({product}) => {
+const CartProductItem = ({product, onMouseEnter,onMouseLeave }) => {
    
     return (
-        <div className="cart-product-item">
+        <div className="cart-product-item p-2" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             <CartProductImageAndQuantitiy image_url={product.src} count={product.buy_count}/>
             <CartProductInfo product={product}/>
         </div>
     )
 }
-
+const CartProductWrapper = ({product}) => {
+    const [isHover, setIsHover] = useState(false)
+    const dispatch = useDispatch()
+    const removeCart = (e, code) => {
+        if ((e.target).nodeName === "SPAN" && (e.target).outerText === "X") {
+          dispatch(deleteCart(code))
+        }
+      };
+    return (
+        <>
+            {isHover?
+                <div className="hover:shadow-inner" onMouseLeave={()=> setIsHover(false)} onMouseEnter={()=> setIsHover(true)}>
+                    <Badge badgeContent='X' color="warning" onClick={(e) => removeCart(e,product.code)}>
+                        <CartProductItem product={product} />
+                  </Badge>
+                </div> :
+                <CartProductItem product={product} onMouseEnter={()=> setIsHover(true)} onMouseLeave={()=> setIsHover(false)}/>
+            }
+            
+        </>
+    )
+}
 const CartActionRow = ({children}) => {
     return (
         <div className="cart-action-row">
@@ -321,9 +344,7 @@ const Cart = () => {
 
     // ]
 
-    let CartProductList = localStorage.getItem(cart_product_key)
-
-    CartProductList = CartProductList === null? {}: JSON.parse(CartProductList)
+    const CartProductList = useSelector(cartProductSelector)
 
     const products = Object.values(CartProductList)
 
@@ -338,7 +359,9 @@ const Cart = () => {
             <CartProductContent>
                 <GridLayout className="gap-4">
                     {products.map((product, index) => (
-                        <CartProductItem product={product} key={index} />
+                        
+                        <CartProductWrapper product={product} key={index} />
+
                     ))}
                 </GridLayout>
             </CartProductContent>
