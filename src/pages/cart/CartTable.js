@@ -8,6 +8,9 @@ import TableRow from '@mui/material/TableRow';
 import Quantity from '../../components/Utilities/quantity/quantity'
 import {CartProductImage
     , CartProductBasicInfo, PriceExcludeVAT} from '../../components/Cart/cart'
+import { useDispatch} from 'react-redux'
+import {deleteCart} from '../../redux/slices/cartReducer'
+
 import './cart.css'
 
 const CartProductInfo = ({product}) => {
@@ -23,8 +26,11 @@ const CartProductInfo = ({product}) => {
     )
 }
 const CartTable = ({products}) => {
+    const dispatch = useDispatch()
+    const removeCart = (e, code) => {
 
-    
+        dispatch(deleteCart(code))
+      };
     return (
         <TableContainer>
             <Table sx={{ minWidth: 650 }}  >
@@ -73,7 +79,7 @@ const CartTable = ({products}) => {
                             </TableCell>
 
                             <TableCell className='cart-row-item'>
-                                <span className="underline underline-offset-4 cursor-pointer">X</span>
+                                <span onClick={(e) => removeCart(e,row.code)} className="underline underline-offset-4 cursor-pointer">X</span>
                             </TableCell>
                         </TableRow>
                     ))}
