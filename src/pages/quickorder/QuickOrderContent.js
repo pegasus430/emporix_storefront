@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import {TextInputOnlyWithEnterKey, TextInputOnly} from '../../components/Utilities/input'
-import {cartProductSelector, putCartProduct, clearCart} from '../../redux/slices/cartReducer'
+import {cartProductSelector, putCartProduct, clearCart, cartAccountSelector} from '../../redux/slices/cartReducer'
 import {messageSelector, setMessage} from '../../redux/slices/messageReducer'
 import {availabilityDataSelector} from '../../redux/slices/availabilityReducer'
 import productService from "../../services/product/product.service";
@@ -91,6 +91,7 @@ const DesktopContent = () => {
     const [quantity, setQuantity] = useState(1)
     const [openNotification , setOpenNotification] = useState(false)
     const message = useSelector(messageSelector);
+    const cartAccount = useSelector(cartAccountSelector)
     const dispatch = useDispatch()
     const handleClose = () => {
         setOpenNotification(false);
@@ -115,7 +116,7 @@ const DesktopContent = () => {
     const handleQuantityChange = (value, item) => {
         let new_item = {...item}
         new_item['buy_count'] = value
-        dispatch(putCartProduct(new_item))
+        dispatch(putCartProduct(cartAccount.id,new_item))
     }
     const addCartProduct = async () => {
         let res = await productService.getProductsWithIds([code])
@@ -144,7 +145,7 @@ const DesktopContent = () => {
         res.product_count = stockLevel
         res.rating = 4
 
-        dispatch(putCartProduct(res))
+        dispatch(putCartProduct(cartAccount.id, res))
     }
     return (
         <div className="desktop_only">
@@ -170,7 +171,7 @@ const DesktopContent = () => {
                                 <TableCell align="left" className='font-inter !font-bold text-[14px]'>Code</TableCell>
                                 <TableCell align="left" className='font-inter !font-bold text-[14px]'>Item</TableCell>
                                 <TableCell align="left" className='font-inter !font-bold text-[14px]'>Quantity</TableCell>
-                                <TableCell align="left" className='font-inter !font-bold text-[14px]'>Unite Price</TableCell>
+                                <TableCell align="left" className='font-inter !font-bold text-[14px]'>Unit Price</TableCell>
                                 <TableCell align="left" className='font-inter !font-bold text-[14px]'>Total</TableCell>
                                 <TableCell align="left" ></TableCell>
                             </TableRow>

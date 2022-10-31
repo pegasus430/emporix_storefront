@@ -4,13 +4,13 @@ import {
     customer_token_expires_in_key,
     customer_token_key,
     tenant_key,
-    acess_token_key
+    acess_token_key,
+    session_id_key
 } from '../../constants/localstorage'
 
 import {getTenantLists} from '../../tenant.config'
 import {anonymous_token_api} from '../service.config'
 import ApiRequest  from '..'
-import {v4 as uuidv4} from 'uuid'
 
 const AccessToken = async (tenant) => {
     let now = Date.now()
@@ -32,11 +32,11 @@ const AccessToken = async (tenant) => {
             localStorage.setItem(acess_token_key, localStorage.getItem(anonymous_token_key))
             return localStorage.getItem(anonymous_token_key)
         }
-            
+        
     }
     // save tenant
     localStorage.setItem(tenant_key, tenant)
-    const session_id = uuidv4()
+    const session_id = localStorage.getItem(session_id_key)
     const tenantLists = getTenantLists()
     const params = {
         'client_id': tenantLists[tenant]['storefront_client_id'],
