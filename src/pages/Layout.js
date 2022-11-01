@@ -13,8 +13,9 @@ import {availabilityLoadingSelector, GetAvailability} from '../redux/slices/avai
 import {putShopItems} from "../redux/slices/pageReducer"
 import {tenantListSelector} from '../redux/slices/pageReducer'
 import InvalidTenant from './InvalidTenant'
-import {tenantSelector, setTenant, accessTokenSelector, setAccessToken} from '../redux/slices/authReducer'
+import {tenantSelector, setTenant, sessionIdSelector, isLoggedInSelector, accessTokenSelector, setAccessToken} from '../redux/slices/authReducer'
 import AccessToken from '../services/user/accessToken'
+import {getCartAccount, cartAccountSelector, getCartProductIDs, cartProductIdsSelector, getCartProducts} from '../redux/slices/cartReducer'
 
 const Layout = ({children, title}) => {
     const [showCart, setShowCart] = useState(false)
@@ -26,33 +27,49 @@ const Layout = ({children, title}) => {
     const userTenant = useSelector(tenantSelector)
     const accessToken_ = useSelector(accessTokenSelector)
     const tenant_lists = useSelector(tenantListSelector)
-    
+    const isLoggedIn = useSelector(isLoggedInSelector)
+    const sessionId = useSelector(sessionIdSelector)
+    const cartAccount = useSelector(cartAccountSelector)
+    const cartProductIds = useSelector(cartProductIdsSelector)
+
+    // First set tenant name.
     useEffect(() => {
         dispatch(setTenant(tenant))
     }, []);
-
+    // Get Access Token and Cart Account
     useEffect(() => {
         const getAccessToken = async() => {
             if(userTenant === "") return
             if(tenant_lists[tenant] === undefined) return
-            console.log(userTenant)
             const token = await AccessToken(userTenant)
-            console.log(token)
             dispatch(setAccessToken(token))
+            dispatch(getCartAccount(sessionId))
         }
         getAccessToken()
     }, [userTenant])
+    // Get Cart Product IDs
+    useEffect(()=> {
+        if(Object.keys(cartAccount).length !== 0){
+            dispatch(getCartProductIDs(cartAccount.id))
+        }
+    }, [cartAccount])
+    // Get Cart Products
+    useEffect(()=> {
+        dispatch(getCartProducts(cartProductIds))
+    },[cartProductIds])
+    // Get Categories and Resources.
     useEffect(()=> {
         const layout_init = async () => {
             if(accessToken_ === "") return
             dispatch(GetCategory())
             dispatch(GetAvailability())
+
             console.log('Layout initialized.')
         }
         layout_init()
 	},[accessToken_])
     
-    
+    // Ready.
     useEffect(() => {
         if(loading == false) dispatch(putShopItems(categoryData))
     }, [loading])

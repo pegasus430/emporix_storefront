@@ -75,7 +75,6 @@ const ProductPage = () =>  {
     const [filterItems, setFilterItems] = useState([])
     
     const setFilterItemFunc = data => {
-        console.log("data" ,data)
         setFilterItems(data)
     };
     

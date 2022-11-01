@@ -18,10 +18,9 @@ import pc_stand from "../../assets/products/pc_stand.png"
 import stapler from "../../assets/products/stapler.png"
 // import HandleProductAddToCart from './HandleProductAddToCart'
 import LayoutContext from '../context'
-import CategoryService from '../../services/product/category.service'
 import {product_url} from '../../services/service.config'
-import { useDispatch } from 'react-redux';
-import { putCartProduct } from '../../redux/slices/cartReducer';
+import { useDispatch, useSelector} from 'react-redux';
+import { cartAccountSelector, putCartProduct } from '../../redux/slices/cartReducer';
 
 const ProductContext = createContext()
 
@@ -187,11 +186,11 @@ const PrdouctAddToCart = () => {
     const {showCart, setShowCart} = useContext(LayoutContext)
     const [quantitiy, setQuantity] = useState(1)
     const dispatch = useDispatch()
-
+    const cartAccount = useSelector(cartAccountSelector)
     const HandleProductAddToCart1 = (product, action, quantitiy) => {
         let new_produt = {...product}
         new_produt.buy_count = quantitiy
-        dispatch(putCartProduct(new_produt))
+        dispatch(putCartProduct(cartAccount.id, new_produt))
         action(true)
     }
 

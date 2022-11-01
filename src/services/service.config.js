@@ -37,10 +37,15 @@ export const retriev_resource_api = (categoryId) => {
 export const availability_api = () => {
     return `${API_URL}/availability/${get_tenant()}/availability`
 }
+export const product_api_with_yrn = `${API_URL}/product/${get_tenant()}/search`
+
 export const anonymous_token_api = `${API_URL}/customerlogin/auth/anonymous/login`
 export const brand_api = `${API_URL}/brand/brands`
 export const resource_reference_api = `${API_URL}/category/${get_tenant()}/assignments/references`
 export const parent_categories_api = `${API_URL}/category/${get_tenant()}/categories`
+export const get_cart_account_api = `${API_URL}/cart/${get_tenant()}/carts`
+export const cart_item_api = `${API_URL}/cart/${get_tenant()}/carts`
+export const cart_products_api = `${API_URL}/cart/${get_tenant()}/carts`
 // URLS
 export const add_location_url = `/${get_tenant()}/my-account/locations/add`
 export const my_account_location_url = `/${get_tenant()}/my-account/locations`

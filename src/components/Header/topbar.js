@@ -74,11 +74,11 @@ const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
 							</div>
 							
 						</div>
-						<div className="h-full w-[76%] grid grid-cols-4" onMouseOver={() => setShowMegaMenuRightContent(true)}>
+						<div className="h-full w-[76%] grid grid-cols-4 overflow-y-auto gap-4 pl-[72px] pt-[72px] max-h-full" onMouseOver={() => setShowMegaMenuRightContent(true)}>
 							{
 								showMegaMenuRightContent ?
 								subMenuMegaContent.map((item, index) => 
-									<div key = {index} className='pl-[72px] pt-[72px]'>
+									<div key = {index} className=''>
 										<ul className=' text-black text-base'>
 											<Link to={add_tenant_to_url(item.url)}>
 												<li className='mega_content_sub_cat_li font-bold'>{item.title}</li>

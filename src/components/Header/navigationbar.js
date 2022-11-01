@@ -221,6 +221,18 @@ const Navbar = () => {
               (!currentUser)?
             
               <ul className='flex'>
+                <li className='px-4 flex'>
+                  {
+                    cartTotal!==0?
+                    <Badge badgeContent={cartTotal} color="warning">
+                      <AiOutlineShoppingCart size = {20} onClick={handleOpenCart}/>
+                    </Badge>:
+                    <AiOutlineShoppingCart size = {20} onClick={handleOpenCart}/>
+                  }
+                  <div className='pl-3 text-white flex'>
+                      &euro; {cartTotalPrice}
+                  </div>
+                </li>
                 <li className='px-2'><a className='hover:text-[#FBB13C]' href={`/${tenant}/login`}>Login</a></li> |
                 <li className='px-2'><a className='hover:text-[#FBB13C]' href={`/${tenant}/signup`}>Sign Up</a></li>
               </ul>
