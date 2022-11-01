@@ -89,6 +89,21 @@ const DesktopContent = () => {
     const cartProductList = useSelector(cartProductSelector)
     const [code, setCode] = useState("")
     const [quantity, setQuantity] = useState(1)
+    const [addProduct, setAddProduct ]=  useState({
+        yrn : '' ,
+        code : code,
+        name : '',
+        src : '',
+        buy_count : quantity,
+        unitPrice: '',
+        price : '' ,
+        total : '' , 
+        stock : '',
+        estimated_delivery : "",
+        product_count : '',
+        rating : ''
+    })
+
     const [openNotification , setOpenNotification] = useState(false)
     const message = useSelector(messageSelector);
     const cartAccount = useSelector(cartAccountSelector)
@@ -98,13 +113,7 @@ const DesktopContent = () => {
     };
     const availability = useSelector(availabilityDataSelector)
 
-    const addList =  {
-        code : code,
-        name : '',
-        buy_count : quantity,
-        unitPrice: '',
-        total : ''
-    }
+    
     const clearCartAction = () => {
         dispatch(clearCart())
         dispatch(setMessage(`All carts are removed succesfully.`))
@@ -113,13 +122,13 @@ const DesktopContent = () => {
     const handleCodeChange = () => {
 
     }
-    const handleQuantityChange = (value, item) => {
-        let new_item = {...item}
-        new_item['buy_count'] = value
-        dispatch(putCartProduct(cartAccount.id,new_item))
-    }
-    const addCartProduct = async () => {
-        let res = await productService.getProductsWithIds([code])
+
+    
+
+    const AddQuickCodeChange = async (value) => {
+        setCode(value)
+
+        let res = await productService.getProductsWithCode([value])
 
         if(res.data.length === 0){
             dispatch(setMessage(`The product is not existed.`))
@@ -128,10 +137,12 @@ const DesktopContent = () => {
         }
         // Get first product
         res = res.data[0]
-        res.src = (res.media[0]==undefined?"":res.media[0]['url'])
-        res.price = "149.99"
-        res.list_price = "149.99"
-        res.buy_count = quantity
+        let src = (res.media[0]==undefined?"":res.media[0]['url'])
+        // let price = res.price
+        // let unitPrice = res.list_price
+        let price = "123.22"
+        let unitPrice = "123.44"
+        let buy_count = quantity
         
         let stock, stockLevel = 0
         if(availability['k'+res.id] === undefined) stock = "Out Of"
@@ -140,12 +151,37 @@ const DesktopContent = () => {
             if(stockLevel < min_product_in_stock_count) stock = "Low"
             else stock = "In"
         }
-        res.stock = stock
-        res.estimated_delivery = "23.05.2022"
-        res.product_count = stockLevel
-        res.rating = 4
+        stock = stock
+        let estimated_delivery = "23.05.2022"
+        let product_count = stockLevel
+        let rating = 4
 
-        dispatch(putCartProduct(cartAccount.id, res))
+        setAddProduct({
+            yrn : res.yrn,
+            code : value,
+            name : res.name,
+            src : src,
+            buy_count : quantity,
+            unitPrice: unitPrice,
+            price : price ,
+            total : '' , 
+            stock : stock,
+            estimated_delivery : estimated_delivery,
+            product_count : product_count,
+            rating : rating
+        })
+
+    }
+
+    const handleQuantityChange = (value, item) => {
+        let new_item = {...item}
+        new_item['buy_count'] = value
+        dispatch(putCartProduct(cartAccount.id,new_item))
+    }
+    const addCartProduct =  () => {
+        console.log("add cart product")
+        console.log(addProduct)
+        dispatch(putCartProduct(cartAccount.id, addProduct))
     }
     return (
         <div className="desktop_only">
@@ -190,7 +226,7 @@ const DesktopContent = () => {
                                     </TableRow>: ""
                             }
                             {/* Add Cart Row */}
-                            <CartItem feature="action" key="add" item={addList} handleCodeChange={setCode} handleQuantityChange={setQuantity}/>
+                            <CartItem feature="action" key="add" item={addProduct} handleCodeChange={AddQuickCodeChange} handleQuantityChange={setQuantity}/>
                         </TableBody>
                     </Table>
                 </TableContainer>
