@@ -2,53 +2,54 @@ import React, { useState }  from 'react'
 import AccountLayout from './AccountLayout'
 import { Link } from 'react-router-dom'
 import {add_location_url} from '../../services/service.config'
-
-const locationList = [
-  {
-    Location : 'Head Office',
-    Name : 'Company Name' ,
-    Address : {
-      street : 'Barer Str.27',
-      city : '80333 Munchen' ,
-      country : 'Germany'
-    },
-    Shipping : true,
-    Billing : true
-  } ,
-  {
-    Location : 'Stuttgart Office',
-    Name : 'Company Name' ,
-    Address : {
-      street : 'Schobpl.',
-      city : '70173 Stuttgart' ,
-      country : 'Germany'
-    },
-    Shipping : true,
-    Billing : true
-  } ,
-  {
-    Location : 'Munich Warehouse',
-    Name : 'Company Name' ,
-    Address : {
-      street : 'Spiridon-Louis-Ring 21',
-      city : '80809 Munchen' ,
-      country : 'Germany'
-    },
-    Shipping : true,
-    Billing : false
-  } ,
-  {
-    Location : 'Stuttgart Warehouse',
-    Name : 'Company Name' ,
-    Address : {
-      street : 'FriedhofstraBe 44',
-      city : '70191 Stuttgart' ,
-      country : 'Germany'
-    },
-    Shipping : true,
-    Billing : false
-  } ,
-]
+import LocationService from 'services/location.service'
+import { useEffect } from 'react'
+// const locationList = [
+//   {
+//     Location : 'Head Office',
+//     Name : 'Company Name' ,
+//     Address : {
+//       street : 'Barer Str.27',
+//       city : '80333 Munchen' ,
+//       country : 'Germany'
+//     },
+//     Shipping : true,
+//     Billing : true
+//   } ,
+//   {
+//     Location : 'Stuttgart Office',
+//     Name : 'Company Name' ,
+//     Address : {
+//       street : 'Schobpl.',
+//       city : '70173 Stuttgart' ,
+//       country : 'Germany'
+//     },
+//     Shipping : true,
+//     Billing : true
+//   } ,
+//   {
+//     Location : 'Munich Warehouse',
+//     Name : 'Company Name' ,
+//     Address : {
+//       street : 'Spiridon-Louis-Ring 21',
+//       city : '80809 Munchen' ,
+//       country : 'Germany'
+//     },
+//     Shipping : true,
+//     Billing : false
+//   } ,
+//   {
+//     Location : 'Stuttgart Warehouse',
+//     Name : 'Company Name' ,
+//     Address : {
+//       street : 'FriedhofstraBe 44',
+//       city : '70191 Stuttgart' ,
+//       country : 'Germany'
+//     },
+//     Shipping : true,
+//     Billing : false
+//   } ,
+// ]
 
 const AddButton = () => {
   return (
@@ -60,7 +61,7 @@ const AddButton = () => {
   )
 }
 
-const LocationItem = ({Location, Name, street, city, country , Shipping  , Billing }) => {
+const LocationItem = ({location, name, street, city, countryCode , shipping , postcode, billing }) => {
   return (
     <div className='location_item'>
         <div className='flex-auto md:w-1/5 justify-between flex md:block w-full'>
@@ -68,10 +69,10 @@ const LocationItem = ({Location, Name, street, city, country , Shipping  , Billi
                 Location
             </div>
             <div className='location-data font-bold'>
-                {Location}
+                {location}
             </div>
             <div className='mobile_only  underline text-sm font-semibold'>
-            Edit Address
+              Edit Address
           </div>
         </div>
 
@@ -80,7 +81,7 @@ const LocationItem = ({Location, Name, street, city, country , Shipping  , Billi
                 Name
             </div>
             <div className='location-data'>
-                {Name}
+                {name}
             </div>
         </div>
 
@@ -90,18 +91,18 @@ const LocationItem = ({Location, Name, street, city, country , Shipping  , Billi
             </div>
             <div className='location-data'>
                 {street}<br />
-                {city} <br />
-                {country}
+                {`${postcode} ${city}`} <br />
+                {countryCode}
             </div>
         </div>
 
         <div className='flex-auto '>
             <div className=' md:flex md:float-right'>
               <div  className="pt-6 md:pt-0">
-                <input type="checkbox" checked = {Shipping} readOnly/> Shipping
+                <input type="checkbox" checked = {shipping} readOnly/> Shipping
               </div>
               <div className="pt-6 md:pl-6 md:pt-0" >
-                <input type="checkbox" checked = {Billing} readOnly/> Billing
+                <input type="checkbox" checked = {billing} readOnly/> Billing
               </div>
             </div>
             <div className='desktop_only  mt-[70px] underline text-sm font-semibold float-right ml-[57%] '>
@@ -113,6 +114,10 @@ const LocationItem = ({Location, Name, street, city, country , Shipping  , Billi
 }
 
 const Locations = () => {
+  const [locationList, setLocationList] = useState([])
+  useEffect(() => {
+    setLocationList(LocationService.getLocationList())
+  }, [])
   return (
     <>
       <AddButton />
@@ -120,8 +125,8 @@ const Locations = () => {
         {
           locationList.map((item, index) => 
             <LocationItem 
-              key = {index} Location = {item.Location} Name = {item.Name} street = {item.Address.street}
-              city = {item.Address.city} country = {item.Address.country} Shipping = {item.Shipping} Billing = {item.Billing}
+              key = {index} location = {item.location} name = {item.address.address2} street = {item.address.address1}
+              city = {item.address.city} countryCode = {item.address.countryCode} shipping = {item.shipping} billing = {item.billing}
             />
           )
         }

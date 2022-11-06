@@ -1,10 +1,10 @@
 import ApiRequest from '../index'
-import {acess_token_key} from '../../constants/localstorage'
+import {accessTokenKey} from '../../constants/localstorage'
 import {brand_api} from '../service.config'
 
 const BrandService = () => {
     const getBrands = async () => {
-        const access_token = localStorage.getItem(acess_token_key)
+        const access_token = localStorage.getItem(accessTokenKey)
         const headers = {
             "X-Version": 'v2',
             "Authorization": `Bearer ${access_token}`,

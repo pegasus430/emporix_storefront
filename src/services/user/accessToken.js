@@ -1,11 +1,11 @@
 import {
-    anonymous_token_key, 
-    anonymous_token_expires_in_key,
-    customer_token_expires_in_key,
-    customer_token_key,
-    tenant_key,
-    acess_token_key,
-    session_id_key
+    anonymousTokenKey, 
+    anonymousTokenExpiresInKey,
+    customerTokenExpiresInKey,
+    customerTokenKey,
+    tenantKey,
+    accessTokenKey,
+    sessionIdKey
 } from '../../constants/localstorage'
 
 import {getTenantLists} from '../../tenant.config'
@@ -14,29 +14,29 @@ import ApiRequest  from '..'
 
 const AccessToken = async (tenant) => {
     let now = Date.now()
-    let old_tenant = localStorage.getItem(tenant_key)
+    let old_tenant = localStorage.getItem(tenantKey)
 
     if(tenant === old_tenant){
         // about customer token
-        const customer_token_expires_in = localStorage.getItem(customer_token_expires_in_key)
+        const customer_token_expires_in = localStorage.getItem(customerTokenExpiresInKey)
         // if customer token is not expired yet, get it from localstorage.
         if(customer_token_expires_in !== undefined && now < parseInt(customer_token_expires_in)){
-            localStorage.setItem(acess_token_key, localStorage.getItem(customer_token_key))
-            return localStorage.getItem(customer_token_key)
+            localStorage.setItem(accessTokenKey, localStorage.getItem(customerTokenKey))
+            return localStorage.getItem(customerTokenKey)
         }
             
         // about anonymous token
-        const anonymous_token_expires_in = localStorage.getItem(anonymous_token_expires_in_key)
+        const anonymous_token_expires_in = localStorage.getItem(anonymousTokenExpiresInKey)
         // if customer token is not expired yet, get it from localstorage.
         if(anonymous_token_expires_in !== undefined && now < parseInt(anonymous_token_expires_in)){
-            localStorage.setItem(acess_token_key, localStorage.getItem(anonymous_token_key))
-            return localStorage.getItem(anonymous_token_key)
+            localStorage.setItem(accessTokenKey, localStorage.getItem(anonymousTokenKey))
+            return localStorage.getItem(anonymousTokenKey)
         }
         
     }
     // save tenant
-    localStorage.setItem(tenant_key, tenant)
-    const session_id = localStorage.getItem(session_id_key)
+    localStorage.setItem(tenantKey, tenant)
+    const session_id = localStorage.getItem(sessionIdKey)
     const tenantLists = getTenantLists()
     const params = {
         'client_id': tenantLists[tenant]['storefront_client_id'],
@@ -45,10 +45,10 @@ const AccessToken = async (tenant) => {
     }
     
     const res = await ApiRequest(anonymous_token_api, 'get', {}, {}, params)
-    localStorage.setItem(anonymous_token_key, res['data']['access_token'])
-    localStorage.setItem(anonymous_token_expires_in_key, now + res['data']['expires_in'] * 1000)
+    localStorage.setItem(anonymousTokenKey, res['data']['access_token'])
+    localStorage.setItem(anonymousTokenExpiresInKey, now + res['data']['expires_in'] * 1000)
 
-    localStorage.setItem(acess_token_key, res['data']['access_token'])
+    localStorage.setItem(accessTokenKey, res['data']['access_token'])
     return res['data']['access_token']
 }
 export default AccessToken

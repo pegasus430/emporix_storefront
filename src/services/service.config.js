@@ -1,5 +1,5 @@
 import {getTenantLists} from '../tenant.config'
-import { tenant_key } from '../constants/localstorage'
+import { tenantKey } from '../constants/localstorage'
 export const grant_type = "client_credentials"
 
 const API_URL = process.env.REACT_APP_API_URL_STAGE
@@ -8,7 +8,7 @@ const default_client_secret = process.env.REACT_APP_EMPORIX_SECRET_STAGE
 
 
 const get_tenant = () => {
-    return localStorage.getItem(tenant_key)
+    return localStorage.getItem(tenantKey)
 }
 export const client_id = () => {
     const user_tenant = get_tenant()
@@ -46,6 +46,8 @@ export const parent_categories_api = `${API_URL}/category/${get_tenant()}/catego
 export const get_cart_account_api = `${API_URL}/cart/${get_tenant()}/carts`
 export const cart_item_api = `${API_URL}/cart/${get_tenant()}/carts`
 export const cart_products_api = `${API_URL}/cart/${get_tenant()}/carts`
+export const cart_remove_api = `${API_URL}/cart/${get_tenant()}/carts`
+export const price_api = `${API_URL}/price/${get_tenant()}/match-prices-by-context`
 // URLS
 export const add_location_url = `/${get_tenant()}/my-account/locations/add`
 export const my_account_location_url = `/${get_tenant()}/my-account/locations`

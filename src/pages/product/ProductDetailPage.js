@@ -20,7 +20,8 @@ import stapler from "../../assets/products/stapler.png"
 import LayoutContext from '../context'
 import {product_url} from '../../services/service.config'
 import { useDispatch, useSelector} from 'react-redux';
-import { cartAccountSelector, putCartProduct } from '../../redux/slices/cartReducer';
+import { cartAccountSelector, cartListSelector, putCartProduct } from '../../redux/slices/cartReducer';
+import {LargePrimaryButton} from '../../components/Utilities/button'
 
 const ProductContext = createContext()
 
@@ -117,12 +118,29 @@ const ProductTitle = ({name}) => {
 const ProductPriceAndAmount = ({price, list_price, product_count, estimated_delivery}) => {
     return (
         <div className="product-price-and-amount-wrapper mt-12 ">
+        
             <div className="product-price-wrapper flex space-x-4 items-center">
-                <div className="product-price h-12">&euro; {price}</div>
-                <div className="vat-caption">VAT excluded</div>
-                <div className="list-price desktop-sm">List Price &euro; <del>{list_price}</del></div>
-            </div>  
-            <div className="mobile-sm mt-2 list-price">List Price &euro; <del>{list_price}</del></div>
+                { price !== ""?
+                    <>
+                        <div className="product-price h-12">
+                            &euro; {price}
+                        </div>
+                        <div className="vat-caption">VAT excluded</div>
+                    </>: <></>
+                }
+                { list_price !== ""?
+                    <div className="list-price desktop-sm">List Price &euro; <del>{list_price}</del></div>:
+                    <span className='desktop-sm text-xs  text-[#F30303] font-bold'>No Price</span>
+                } 
+                
+            </div>
+            { list_price !== ""?
+                <div className="mobile-sm mt-2 list-price">
+                    List Price &euro; <del>{list_price}</del>
+                </div>:
+                <span className='mobile-sm text-xs  text-[#F30303] font-bold'>No Price</span>
+            } 
+            
             <div className="product-amount-wrapper flex mt-6 space-x-6 items-center">
                 <span className="product-number">{product_count} in Stock</span>
                 <span className="delivery-date">Estimated Delivery {estimated_delivery}</span>
@@ -131,11 +149,20 @@ const ProductPriceAndAmount = ({price, list_price, product_count, estimated_deli
     )
 }
 const ProductBasicInfo = ({product}) => {
+    let price = "", list_price = "";
+    if(product.price !== undefined){
+        list_price = Math.trunc(product.price.totalValue * 100) / 100
+        price = list_price
+        if(product.price.priceModel !== undefined && product.price.priceModel.includesTax === false){
+            price = Math.trunc(price * 10000 / (100 + product.price.tax.taxRate)) / 100
+        }
+    }
+
     return (
         <div className="product-basic-info-wrapper hidden lg:block">
             <ProductSkuAndReview product={product}/>
             <ProductTitle name={product.name} />
-            <ProductPriceAndAmount price={product.price} list_price={product.list_price} product_count={product.product_count} estimated_delivery={product.estimated_delivery}/>
+            <ProductPriceAndAmount price={price} list_price={list_price} product_count={product.product_count} estimated_delivery={product.estimated_delivery}/>
         </div>
     )
 } 
@@ -187,10 +214,11 @@ const PrdouctAddToCart = () => {
     const [quantitiy, setQuantity] = useState(1)
     const dispatch = useDispatch()
     const cartAccount = useSelector(cartAccountSelector)
+    const cartList = useSelector(cartListSelector)
     const HandleProductAddToCart1 = (product, action, quantitiy) => {
         let new_produt = {...product}
-        new_produt.buy_count = quantitiy
-        dispatch(putCartProduct(cartAccount.id, new_produt))
+        new_produt.quantity = quantitiy
+        dispatch(putCartProduct(new_produt,cartAccount.id,cartList))
         action(true)
     }
 
@@ -201,7 +229,7 @@ const PrdouctAddToCart = () => {
                 <Quantity value={quantitiy} action={setQuantity} />
             </div>
             <div className="">
-                <button className="product-add-to-cart-btn" onClick={()=> HandleProductAddToCart1(product,setShowCart, quantitiy)}>ADD TO CART</button>
+                <LargePrimaryButton  disabled={product.price!==undefined?"false":"true"} className="product-add-to-cart-btn" onClick={()=> HandleProductAddToCart1(product,setShowCart, quantitiy)} title="ADD TO CART"></LargePrimaryButton>
             </div>
         </div>
     )
@@ -258,7 +286,15 @@ const ProductContent = ({product}) => {
     //     estimated_delivery: "23.05.2022",
     //     sub_images: ["/img/products/hp_printer_sub1.png", "/img/products/hp_printer_sub2.png", "/img/products/hp_printer_sub3.png"]
     // }
+    let price = "", list_price = "";
 
+    if(product.price !== undefined){
+        list_price = Math.trunc(product.price.totalValue * 100) / 100
+        price = list_price
+        if(product.price.priceModel !== undefined && product.price.priceModel.includesTax === false){
+            price = Math.trunc(price * 10000 / (100 + product.price.tax.taxRate)) / 100
+        }
+    }
     return (
         <ProductContext.Provider value={product}>
             <div className="product-content-wrapper">
@@ -270,7 +306,7 @@ const ProductContent = ({product}) => {
                     <ProductImage product={product}/>
                 </div>
                 <div className="mobile-price-and-amount-wrapper">
-                    <ProductPriceAndAmount price={product.price} list_price={product.list_price} product_count={product.product_count} estimated_delivery={product.estimated_delivery}/>
+                    <ProductPriceAndAmount price={price} list_price={list_price} product_count={product.product_count} estimated_delivery={product.estimated_delivery}/>
                 </div>
                 <div className="product-info-wrapper">
                     <ProductInfo product={product}/>

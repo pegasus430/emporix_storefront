@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import {TextInputOnlyWithEnterKey, TextInputOnly} from '../../components/Utilities/input'
-import {cartProductSelector, putCartProduct, clearCart, cartAccountSelector} from '../../redux/slices/cartReducer'
+import {cartListSelector, putCartProduct, clearCart, cartAccountSelector} from '../../redux/slices/cartReducer'
 import {messageSelector, setMessage} from '../../redux/slices/messageReducer'
 import {availabilityDataSelector} from '../../redux/slices/availabilityReducer'
 import productService from "../../services/product/product.service";
@@ -86,7 +86,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const DesktopContent = () => {
    
-    const cartProductList = useSelector(cartProductSelector)
+    const cartProductList = useSelector(cartListSelector)
     const [code, setCode] = useState("")
     const [quantity, setQuantity] = useState(1)
     const [openNotification , setOpenNotification] = useState(false)
@@ -115,37 +115,37 @@ const DesktopContent = () => {
     }
     const handleQuantityChange = (value, item) => {
         let new_item = {...item}
-        new_item['buy_count'] = value
-        dispatch(putCartProduct(cartAccount.id,new_item))
+        new_item.quantity = value
+        dispatch(putCartProduct(new_item, cartAccount.id))
     }
     const addCartProduct = async () => {
-        let res = await productService.getProductsWithIds([code])
+        let product = await productService.getProductsWithIds([code])
 
-        if(res.data.length === 0){
+        if(product.length === 0){
             dispatch(setMessage(`The product is not existed.`))
             setOpenNotification(true);
             return
         }
         // Get first product
-        res = res.data[0]
-        res.src = (res.media[0]==undefined?"":res.media[0]['url'])
-        res.price = "149.99"
-        res.list_price = "149.99"
-        res.buy_count = quantity
+        product = product[0]
+        product.src = (product.media[0]==undefined?"":product.media[0]['url'])
+        product.price = "149.99"
+        product.list_price = "149.99"
+        product.quantity = quantity
         
         let stock, stockLevel = 0
-        if(availability['k'+res.id] === undefined) stock = "Out Of"
+        if(availability['k'+product.id] === undefined) stock = "Out Of"
         else{
-            stockLevel = parseInt(availability['k'+res.id]['stockLevel'])
+            stockLevel = parseInt(availability['k'+product.id]['stockLevel'])
             if(stockLevel < min_product_in_stock_count) stock = "Low"
             else stock = "In"
         }
-        res.stock = stock
-        res.estimated_delivery = "23.05.2022"
-        res.product_count = stockLevel
-        res.rating = 4
+        product.stock = stock
+        product.estimated_delivery = "23.05.2022"
+        product.product_count = stockLevel
+        product.rating = 4
 
-        dispatch(putCartProduct(cartAccount.id, res))
+        dispatch(putCartProduct(product, cartAccount.id))
     }
     return (
         <div className="desktop_only">

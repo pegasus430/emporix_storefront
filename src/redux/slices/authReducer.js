@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import AuthService from "../../services/user/auth.service";
 import { setMessage } from './messageReducer';
-import {session_id_key} from "../../constants/localstorage"
+import {sessionIdKey} from "../../constants/localstorage"
 import {v4 as uuidv4} from 'uuid'
 
 const user = JSON.parse(localStorage.getItem("user"));
-if(localStorage.getItem(session_id_key) === null)
-  localStorage.setItem(session_id_key, uuidv4())
+if(localStorage.getItem(sessionIdKey) === null)
+  localStorage.setItem(sessionIdKey, uuidv4())
 
-const sessionId = localStorage.getItem(session_id_key)
+const sessionId = localStorage.getItem(sessionIdKey)
 export const initialState = user? 
                 { isLoggedIn: true, user, tenant: "", accessToken: "", sessionId: sessionId} : 
                 { isLoggedIn: false, user: null, tenant: "", accessToken: "", sessionId: sessionId};

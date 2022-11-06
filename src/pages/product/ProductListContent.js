@@ -16,10 +16,10 @@ import {max_product_description_length, min_product_in_stock_count} from '../../
 import {availabilityDataSelector} from '../../redux/slices/availabilityReducer'
 
 import parse from 'html-react-parser'
-import { tenant_key } from "../../constants/localstorage"
+import { tenantKey } from "../../constants/localstorage"
 
 const EachProduct = (props) => {
-    const tenant = localStorage.getItem(tenant_key)
+    const tenant = localStorage.getItem(tenantKey)
     const navigate = useNavigate();
     const HandleProductDetail = () => {
         navigate(`/${tenant}/product/details/${props.item_id}`)
@@ -63,21 +63,32 @@ const EachProduct = (props) => {
                     props.auth ? (
                         <>
                             <div className='text-xs text-[#ACAEB2] w-[117px] text-left'>
-                                List Price &euro; <del>{props.list_price} </del>
+                                { props.list_price !== ""?
+                                    <>List Price &euro; <del>{props.list_price} </del></>:
+                                    <span className='text-xs  text-[#F30303] font-bold'>No Price</span>  
+                                } 
+                                
                             </div>
                             <div className='flex'>
-                                <img src = {pen} className="w-4 h-4 mt-1" />
-                                <div className='text-base lg:text-xl leading-[24px] font-bold ml-1'>
-                                    &euro; {props.price}  
-                                    <span className='text-xs font-normal text-[#ACAEB2] ml-4'>(Excl. VAT)</span>
-                                </div>
+                                { props.price !== ""?
+                                    <>
+                                        <img src = {pen} className="w-4 h-4 mt-1" />
+                                        <div className='text-base lg:text-xl leading-[24px] font-bold ml-1'>
+                                            <>&euro; {props.price} <span className='text-xs font-normal text-[#ACAEB2] ml-4'>(Excl. VAT)</span></>
+                                        </div>
+                                    </>:
+                                    <></>
+                                }     
                             </div>
                         </>
                         
                     ):
                     (
                         <div className='text-base  pt-4'>
-                           &euro; {props.price} <span className='text-xs font-normal text-[#ACAEB2]'>(Incl. VAT)</span>
+                            { props.list_price !== ""?
+                                <>&euro; {props.list_price} <span className='text-xs font-normal text-[#ACAEB2]'>(Incl. VAT)</span></>:
+                                <span className='text-xs  text-[#F30303] font-bold'>No Price</span>   
+                            } 
                         </div>
                     )
                 }
@@ -129,7 +140,7 @@ const EachProductRow = (props) => {
                         ):
                         (
                             <div className='text-base  pt-4'>
-                                &#163; {props.price} <span className='text-[12px] font-normal text-[#ACAEB2]'>(Incl. VAT)</span>
+                                &#163; {props.list_price} <span className='text-[12px] font-normal text-[#ACAEB2]'>(Incl. VAT)</span>
                             </div>
                         )
                     }
@@ -233,31 +244,38 @@ const ProductListItems = ({products, auth, displayType, product_list_count, page
         products.map((item, i) => {
 
             imgsrc = item.media[0]==undefined?"":item.media[0]['url']
-            console.log(item.id)
             if(availability['k'+item.id] == undefined) stock = "Out Of"
             else if(availability['k'+item.id]['stockLevel'] < min_product_in_stock_count) stock = "Low"
             else stock = "In"
 
+            let price = "", list_price = "";
+            if(item.price !== undefined){
+                list_price = Math.trunc(item.price.totalValue * 100) / 100
+                price = list_price
+                if(item.price.priceModel !== undefined && item.price.priceModel.includesTax === false){
+                    price = Math.trunc(price * 10000 / (100 + item.price.tax.taxRate)) / 100
+                }
+            }
             switch((i + 1) % 3){
                 case 1:
                     subItemArr.push(<div key={i} className="w-1/3 p-6 ">
                         <EachProduct item_id={item.id} key={i} auth={auth} stock={stock}  rating={4} total_count={8} src = {imgsrc}
                             code =  {item.code} name={item.name} 
-                            price = {100} list_price = {120}  />
+                            price = {price} list_price = {list_price}  />
                     </div>)
                     break
                 case 2:
                     subItemArr.push(<div key={i}  className="w-1/3  p-6 border-l border-[#DFE1E5] border-solid">
                         <EachProduct item_id={item.id} key={i} auth={auth} stock={stock}  rating={4} total_count={8} src = {imgsrc}
                             code =  {item.code} name={item.name} 
-                            price = {100} list_price = {120}  />
+                            price = {price} list_price = {list_price}  />
                     </div>)
                     break
                 default:
                     subItemArr.push(<div key={i}  className="w-1/3 p-6 border-l border-[#DFE1E5] border-solid">
                         <EachProduct item_id={item.id} key={i} auth={auth} stock={stock}  rating={4} total_count={8} src = {imgsrc}
                             code =  {item.code} name={item.name} 
-                            price = {100} list_price = {120}  />
+                            price = {price} list_price = {list_price}  />
                     </div>)
                     itemArr.push(
                         <div key={'row'+i.toString()} className="list-row flex lg:my-12 my-6">
@@ -284,19 +302,28 @@ const ProductListItems = ({products, auth, displayType, product_list_count, page
         
         products.map((item, i) => {
 
+            let price = "", list_price = "";
+            if(item.price !== undefined){
+                list_price = Math.trunc(item.price.totalValue * 100) / 100
+                price = list_price
+                if(item.price.priceModel !== undefined && item.price.priceModel.includesTax === false){
+                    price = Math.trunc(price * 10000 / (100 + item.price.tax.taxRate)) / 100
+                }
+            }
+
             switch((i + 1) % 2){
                 case 1:
                     subItemArr.push(<div key={i} className="w-1/2 p-2">
                         <EachProduct item_id={item.id} key={i} auth={auth} stock={stock}  rating={4} total_count={8} src = {item.src}
                             code = {item.code} name={item.name} 
-                            price = {100} list_price = {120}  />
+                            price = {price} list_price = {list_price}  />
                     </div>)
                     break
                 default:
                     subItemArr.push(<div key={i}  className="w-1/2  p-2 border-l border-[#DFE1E5] border-solid">
                         <EachProduct item_id={item.id} key={i} auth={auth} stock={stock}  rating={4} total_count={8} src = {item.src}
                             code = {item.code} name={item.name} 
-                            price = {100} list_price = {120}  />
+                            price = {price} list_price = {list_price}  />
                     </div>)
                     ItemArrOnMobile.push(
                         <div key={'rowMobile'+i.toString()} className="list-row flex lg:my-12 my-6">
@@ -329,11 +356,19 @@ const ProductListItems = ({products, auth, displayType, product_list_count, page
             else if(availability[item.id] < min_product_in_stock_count) stock = "Low"
             else stock = "In"
 
+            let price = "", list_price = "";
+            if(item.price !== undefined){
+                list_price = Math.trunc(item.price.totalValue * 100) / 100
+                price = list_price
+                if(item.price.priceModel !== undefined && item.price.priceModel.includesTax === false){
+                    price = Math.trunc(price * 10000 / (100 + item.price.tax.taxRate)) / 100
+                }
+            }
             itemArr.push(
                 <div key={i} className="w-full h-[215px] lg:my-12 my-6 items-center">
                     <EachProductRow key={i} auth={auth} stock={stock}  rating={4} total_count={8} src = {imgsrc}
                                 code = {item.code} name={item.name} description = {item.description}
-                                price = {100} list_price = {120}  />
+                                price = {price} list_price = {list_price}  />
                 </div>
             )
             if(i != products.length - 1)

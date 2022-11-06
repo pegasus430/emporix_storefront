@@ -1,8 +1,14 @@
 import './button.css'
 
-export const LargePrimaryButton = ({title, onClick, className}) => {
+export const LargePrimaryButton = ({title, onClick, className, disabled}) => {
     return (
-        <button className={"large-primary-btn " + (className?className:"")} onClick={onClick}>{title}</button>
+        <>
+            {disabled === "true"?
+                <button disabled className={"large-primary-btn " + (className?className:"")} onClick={onClick}>{title}</button>:
+                <button className={"large-primary-btn " + (className?className:"")} onClick={onClick}>{title}</button>
+            }
+        </>
+        
     )   
 }
 

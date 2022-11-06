@@ -1,10 +1,10 @@
-import {get_cart_account_api, cart_products_api} from './service.config'
+import {get_cart_account_api, cart_products_api, cart_remove_api} from './service.config'
 import ApiRequest from './index'
-import {acess_token_key} from '../constants/localstorage'
+import {accessTokenKey} from '../constants/localstorage'
 
 const CartService = (sessionId) => {
     const getCartAccount = async () => {
-        const access_token = localStorage.getItem(acess_token_key)
+        const access_token = localStorage.getItem(accessTokenKey)
         const headers = {
             "X-Version": 'v2',
             "Authorization": `Bearer ${access_token}`,
@@ -18,8 +18,8 @@ const CartService = (sessionId) => {
         const res = await ApiRequest(get_cart_account_api, 'get', {},headers, params)
         return res
     }
-    const getCartProducts = async (cartAccountId) => {
-        const access_token = localStorage.getItem(acess_token_key)
+    const getCartList = async (cartAccountId) => {
+        const access_token = localStorage.getItem(accessTokenKey)
         const headers = {
             "X-Version": 'v2',
             "Authorization": `Bearer ${access_token}`,
@@ -29,23 +29,35 @@ const CartService = (sessionId) => {
         const res = await ApiRequest(`${cart_products_api}/${cartAccountId}/items`, 'get', {}, headers)
         return res.data
     }
+    const removeCart = async (cartAccountId, cartItemId) => {
+        const access_token = localStorage.getItem(accessTokenKey)
+        const headers = {
+            "X-Version": 'v2',
+            "Authorization": `Bearer ${access_token}`,
+            "Accept-Language": "en",
+            "Content-Type": "application/json"
+        }
+        const api = `${cart_remove_api}/${cartAccountId}/items/${cartItemId}`
+        const res = await ApiRequest(api, 'delete', {}, headers)
+        return res
+    }
     const addProuctToCart = async (cartAccountId, product) => {
         const add_product_to_cart_api = `${cart_products_api}/${cartAccountId}/items`
-        const access_token = localStorage.getItem(acess_token_key)
+        const access_token = localStorage.getItem(accessTokenKey)
         const headers = {
             "X-Version": 'v2',
             "Authorization": `Bearer ${access_token}`,
             "Accept-Language": "en"
         }
         const data = {
-            "itemYrn": `${product.yrn}`,
+            "itemYrn": product.yrn,
             "price": {
-                "priceId": "4565",
-                "effectiveAmount": 0.3582,
-                "originalAmount": 0.3582,
-                "currency": "EUR"
+                "priceId": product.price.priceId,
+                "effectiveAmount": product.price.effectiveValue,
+                "originalAmount": product.price.originalValue,
+                "currency": product.price.currency
             },
-            "quantity": 6
+            "quantity": product.quantity
         }
         const params = {
             'siteCode': 'main'
@@ -55,8 +67,9 @@ const CartService = (sessionId) => {
     }
     return {
         getCartAccount,
-        getCartProducts,
-        addProuctToCart
+        getCartList,
+        addProuctToCart,
+        removeCart
     }
 }
 export default CartService()

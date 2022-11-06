@@ -15,7 +15,7 @@ import {tenantListSelector} from '../redux/slices/pageReducer'
 import InvalidTenant from './InvalidTenant'
 import {tenantSelector, setTenant, sessionIdSelector, isLoggedInSelector, accessTokenSelector, setAccessToken} from '../redux/slices/authReducer'
 import AccessToken from '../services/user/accessToken'
-import {getCartAccount, cartAccountSelector, getCartProductIDs, cartProductIdsSelector, getCartProducts} from '../redux/slices/cartReducer'
+import {getCartAccount, cartAccountSelector, getCartList} from '../redux/slices/cartReducer'
 
 const Layout = ({children, title}) => {
     const [showCart, setShowCart] = useState(false)
@@ -30,7 +30,6 @@ const Layout = ({children, title}) => {
     const isLoggedIn = useSelector(isLoggedInSelector)
     const sessionId = useSelector(sessionIdSelector)
     const cartAccount = useSelector(cartAccountSelector)
-    const cartProductIds = useSelector(cartProductIdsSelector)
 
     // First set tenant name.
     useEffect(() => {
@@ -47,27 +46,24 @@ const Layout = ({children, title}) => {
         }
         getAccessToken()
     }, [userTenant])
-    // Get Cart Product IDs
+    // Get Cart List
     useEffect(()=> {
-        if(Object.keys(cartAccount).length !== 0){
-            dispatch(getCartProductIDs(cartAccount.id))
+        if(Object.keys(cartAccount).length){
+            dispatch(getCartList(cartAccount.id))
         }
     }, [cartAccount])
-    // Get Cart Products
-    useEffect(()=> {
-        dispatch(getCartProducts(cartProductIds))
-    },[cartProductIds])
+    
     // Get Categories and Resources.
     useEffect(()=> {
         const layout_init = async () => {
-            if(accessToken_ === "") return
+            if(accessToken_ === "" || !Object.keys(cartAccount).length) return
             dispatch(GetCategory())
             dispatch(GetAvailability())
 
             console.log('Layout initialized.')
         }
         layout_init()
-	},[accessToken_])
+	},[accessToken_, cartAccount])
     
     // Ready.
     useEffect(() => {

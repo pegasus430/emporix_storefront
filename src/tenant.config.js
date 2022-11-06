@@ -1,4 +1,4 @@
-import {tenant_list_key} from './constants/localstorage'
+import {tenantListKey} from './constants/localstorage'
 
 const tenant_lists = {
     indritstage: {
@@ -10,7 +10,7 @@ const tenant_lists = {
 
 
 export const getTenantLists = () =>  {
-    let tenantListFromLocalStorage = localStorage.getItem(tenant_list_key)
+    let tenantListFromLocalStorage = localStorage.getItem(tenantListKey)
     tenantListFromLocalStorage = (tenantListFromLocalStorage === null? {}: JSON.parse(tenantListFromLocalStorage))
 
     return {

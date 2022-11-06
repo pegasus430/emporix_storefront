@@ -6,7 +6,7 @@ import { HiOutlineUserCircle } from "react-icons/hi";
 import { logout } from "../../redux/slices/authReducer";
 
 import { useDispatch, useSelector } from "react-redux";
-import { tenant_key } from '../../constants/localstorage';
+import { tenantKey } from '../../constants/localstorage';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -16,7 +16,7 @@ export default function AccountMenu( props ) {
   const logOut = () => {
 		dispatch(logout());
 	};
-  const tenant = localStorage.getItem(tenant_key)
+  const tenant = localStorage.getItem(tenantKey)
   return (
     <Menu as="div" className="relative inline-block text-left">
       

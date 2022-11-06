@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import tenant_lists from '../../tenant.config'
-import {tenant_list_key} from '../../constants/localstorage'
+import {tenantListKey} from '../../constants/localstorage'
 
-let tenantListFromLocalStorage = localStorage.getItem(tenant_list_key)
+let tenantListFromLocalStorage = localStorage.getItem(tenantListKey)
 tenantListFromLocalStorage = (tenantListFromLocalStorage === null? {}: JSON.parse(tenantListFromLocalStorage))
 
 const tenantLists = {

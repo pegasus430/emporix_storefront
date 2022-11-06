@@ -13,19 +13,19 @@ import {deleteCart} from '../../redux/slices/cartReducer'
 
 import './cart.css'
 
-const CartProductInfo = ({product}) => {
+const CartProductInfo = ({cart}) => {
     return (
         <div className="cart-product-info-wrapper flex gap-6">
             <div className="w-[52px]">
-                <CartProductImage className="table-cart-product-image" src={product.src} />
+                <CartProductImage className="table-cart-product-image" src={cart.src} />
             </div>
             <div>
-               <CartProductBasicInfo product={product}/> 
+               <CartProductBasicInfo cart={cart}/> 
             </div>
         </div>
     )
 }
-const CartTable = ({products}) => {
+const CartTable = ({cartList}) => {
     const dispatch = useDispatch()
     const removeCart = (e, code) => {
 
@@ -47,23 +47,23 @@ const CartTable = ({products}) => {
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                    {products.map((row,index) => (
+                    {cartList.map((cart,index) => (
                         <TableRow
                             key={index}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell sx={{width:'356px'}}>
-                                <CartProductInfo product={row}/>
+                                <CartProductInfo cart={cart}/>
                             </TableCell>
                             <TableCell className='cart-row-item'>
-                                <PriceExcludeVAT price={row.price}/>
+                                <PriceExcludeVAT price={cart.product.price.effectiveValue}/>
                             </TableCell>
                             <TableCell align="center">
-                                <div className="quantity-wrapper"><Quantity value={row.buy_count}/></div>
+                                <div className="quantity-wrapper"><Quantity value={cart.quantity}/></div>
                             </TableCell>
                             
                             <TableCell className='cart-row-item'>
-                                <PriceExcludeVAT price={Math.trunc(row.price * row.product_count * 100 ) / 100}/>
+                                <PriceExcludeVAT price={Math.trunc(cart.product.price.originalValue * cart.quantity * 100 ) / 100}/>
                             </TableCell>
                             
                             <TableCell className='cart-row-item'>
@@ -71,15 +71,15 @@ const CartTable = ({products}) => {
                             </TableCell>
 
                             <TableCell className='cart-row-item'>
-                                <PriceExcludeVAT price={Math.trunc(row.price * 0.2 * 100) / 100} caption='20%'/>
+                                <PriceExcludeVAT price={Math.trunc(cart.product.price.originalValue * 0.2 * 100) / 100} caption='20%'/>
                             </TableCell>
 
                             <TableCell className='cart-row-item'>
-                                <PriceExcludeVAT price={Math.trunc(row.product_count * row.price * 1.2 * 100) / 100} caption='incl. VAT'/>
+                                <PriceExcludeVAT price={Math.trunc(cart.product.price.originalValue * cart.quantity * 1.2 * 100) / 100} caption='incl. VAT'/>
                             </TableCell>
 
                             <TableCell className='cart-row-item'>
-                                <span onClick={(e) => removeCart(e,row.code)} className="underline underline-offset-4 cursor-pointer">X</span>
+                                <span onClick={(e) => removeCart(e,cart.id)} className="underline underline-offset-4 cursor-pointer">X</span>
                             </TableCell>
                         </TableRow>
                     ))}
