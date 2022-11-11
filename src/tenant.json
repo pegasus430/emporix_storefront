@@ -6,5 +6,9 @@
 	"ensargroupstage": {
 		"tenant": "ensargroupstage",
 		"storefront_client_id": "mDq5Cc8aK5BrVcXzq5WviC8uG31dUQvj"
+	},
+	"test111stage": {
+		"tenant": "test111stage",
+		"storefront_client_id": "ArGeaw4TIiqnmGVG9V1tkJHucbuYCxcS"
 	}
 }
