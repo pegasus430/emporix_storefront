@@ -1,13 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import tenant_lists from '../../tenant.config'
 import {tenantListKey} from '../../constants/localstorage'
+import automationTenant from '../../tenant.json'
 
 let tenantListFromLocalStorage = localStorage.getItem(tenantListKey)
 tenantListFromLocalStorage = (tenantListFromLocalStorage === null? {}: JSON.parse(tenantListFromLocalStorage))
 
 const tenantLists = {
     ...tenantListFromLocalStorage,
-    ...tenant_lists
+    ...tenant_lists,
+    ...automationTenant
 }
 export const initialState = {
     menu: [

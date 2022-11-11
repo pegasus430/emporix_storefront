@@ -9,7 +9,6 @@ const tenant_lists = {
      
 }
 
-
 export const getTenantLists = () =>  {
     let tenantListFromLocalStorage = localStorage.getItem(tenantListKey)
     tenantListFromLocalStorage = (tenantListFromLocalStorage === null? {}: JSON.parse(tenantListFromLocalStorage))
