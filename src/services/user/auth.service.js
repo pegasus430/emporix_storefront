@@ -1,12 +1,12 @@
 import axios from "axios";
 import ApiRequest from "..";
-import { anonymous_token_key, customer_token_expires_in_key, customer_token_key } from "../../constants/localstorage";
+import { anonymousTokenKey, customerTokenExpiresInKey, customerTokenKey } from "../../constants/localstorage";
 
 const API_URL = process.env.REACT_APP_API_URL_STAGE
 
 const register = async (email, password , firstName , lastName, tenantName , company , phoneNumber) => {
 	let response
-	const anonymous_token = localStorage.getItem(anonymous_token_key)
+	const anonymous_token = localStorage.getItem(anonymousTokenKey)
 	
 	let headers = {
 		'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const register = async (email, password , firstName , lastName, tenantName , com
 const  login = async (username, password, userTenant) => {
 	let response_data = null
 	let user_tenant = userTenant
-	const anonymous_token = localStorage.getItem(anonymous_token_key)
+	const anonymous_token = localStorage.getItem(anonymousTokenKey)
 
 	await axios.post(API_URL + `/customer/${user_tenant}/login`, 
 		{
@@ -57,8 +57,8 @@ const  login = async (username, password, userTenant) => {
 			let now = Date.now()
 
 			localStorage.setItem("customer_accesstoken", JSON.stringify(response.data.accessToken));
-			localStorage.setItem(customer_token_key, response.data.accessToken)
-			localStorage.setItem(customer_token_expires_in_key, now + response.data.expiresIn * 1000)
+			localStorage.setItem(customerTokenKey, response.data.accessToken)
+			localStorage.setItem(customerTokenExpiresInKey, now + response.data.expiresIn * 1000)
 
 			let customer_accesstoken = response.data.accessToken
 			
@@ -97,8 +97,8 @@ const  login = async (username, password, userTenant) => {
 const logout = () => {
   
 	localStorage.removeItem("user");
-  	localStorage.removeItem(customer_token_key)
-  	localStorage.removeItem(customer_token_expires_in_key)
+  	localStorage.removeItem(customerTokenKey)
+  	localStorage.removeItem(customerTokenExpiresInKey)
 
 };
 const auth_services = {

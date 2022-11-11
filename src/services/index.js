@@ -8,6 +8,10 @@ const ApiRequest = async (url, type, data, headers, params={}) => {
         case 'get':
             Request = axios.get; 
             return await Request(url, {headers, params})
+        case 'delete':
+            Request = axios.delete;
+            return await Request(url, {headers})
+            break;
         default:
             Request =  axios.put; break;
     }

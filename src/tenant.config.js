@@ -1,21 +1,22 @@
-import {tenant_list_key} from './constants/localstorage'
+import {tenantListKey} from './constants/localstorage'
+import automationTenant from './tenant.json'
 
 const tenant_lists = {
     indritstage: {
         tenant: "indritstage",
         storefront_client_id: "HRUvHjClGa1QXSptPPvWIUkTsjpvmKTK",
     }
-    
+     
 }
 
-
 export const getTenantLists = () =>  {
-    let tenantListFromLocalStorage = localStorage.getItem(tenant_list_key)
+    let tenantListFromLocalStorage = localStorage.getItem(tenantListKey)
     tenantListFromLocalStorage = (tenantListFromLocalStorage === null? {}: JSON.parse(tenantListFromLocalStorage))
 
     return {
         ...tenantListFromLocalStorage,
-        ...tenant_lists
+        ...tenant_lists,
+        ...automationTenant
     }
 }
 

@@ -1,33 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {cart_product_key} from '../../constants/localstorage'
+import CartService from 'services/cart.service'
+import productService from 'services/product/product.service'
+import priceService from 'services/product/price.service'
 
-let cartProductList = localStorage.getItem(cart_product_key)
-cartProductList = (cartProductList === null? {}: JSON.parse(cartProductList))
 export const initialState = {
-    cartProductList: cartProductList,
+    cartList: [],
+    cartAccount: {}
 }
 
 const cartSlicer = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addCartProduct: (state, action) => {
-            const obj = {}
-            obj[`Cart${action.payload.code}`] = action.payload
-            state.cartProductList = {
-                ...state.cartProductList,
-                ...obj
-            }
-            console.log(state.cartProductList)
-            localStorage.setItem(cart_product_key, JSON.stringify(state.cartProductList))
+        setCartList: (state, action) => {
+            state.cartList = action.payload;
         },
-        removeCartProduct: (state, action) => {
-            delete(state.cartProductList[`Cart${action.payload}`])
-            localStorage.setItem(cart_product_key, JSON.stringify(state.cartProductList))
+        setCartAccount: (state, action) => {
+            state.cartAccount = action.payload
+        },
+        removeCart: (state, action) => {
+            state.cartList = state.cartList.filter(cart => cart.id !== action.payload)
+        },
+        addCart: (state, action) => {
+            
         },
         clearCart: (state) => {
-            state.cartProductList = {}
-            localStorage.setItem(cart_product_key, JSON.stringify(state.cartProductList))
+            state.cartList = []
+            
         }
     }
 })
@@ -35,16 +34,73 @@ const cartSlicer = createSlice({
 export default cartSlicer.reducer
 // The Cart Actions.
 export const {
-    addCartProduct,
+    setCartList,
+    addCart,
+    removeCart,
     clearCart,
-    removeCartProduct
+    setCartAccount
 } = cartSlicer.actions
 
-export const putCartProduct = (product) => async (dispatch) => {
-    dispatch(addCartProduct(product))
+// Get Cart Acccount Information
+export const getCartAccount = (sessionId) => async (dispatch) => {
+    const cart = await CartService.getCartAccount(sessionId)
+    dispatch(setCartAccount(cart.data))
 }
-export const deleteCart = (code) => async (dispatch) => {
-    dispatch(removeCartProduct(code))
+// Get Cart List
+export const getCartList = (cartAccountId) => async (dispatch) => {
+    // Get cart list without product's detail information.
+    const cartList = await CartService.getCartList(cartAccountId)
+    // Put product's detail information
+    const productYrns = cartList.map((cart) => cart.itemYrn)
+    const products = await productService.getProductsWithYrns(productYrns)
+    // Get price of cart Product
+    const productIds = products.map(product => product.id)
+    const prices = await priceService.getPriceWithProductIds(productIds)
+
+    const productsWithPrice = products.map(product => {
+        const matchPrice = prices.filter(price => price.itemId.id === product.id)
+        if(matchPrice.length)  
+            return {
+                ...product,
+                price: matchPrice[0]
+            }
+        return product
+    })
+    const cartListWithProduct = cartList.map(cart => {
+        const matchProduct = productsWithPrice.filter(product => product.yrn === cart.itemYrn)
+        if(matchProduct.length) 
+            return {
+                ...cart,
+                product: matchProduct[0]
+            }
+        return cart
+    })
+    dispatch(setCartList(cartListWithProduct))
 }
+
+
+export const putCartProduct = (product, cartAccountId,cartList) => async (dispatch) => {
+    // Check if the product is existed at cart.
+    const matchCart = cartList.filter(cart => {
+        return cart.itemYrn === product.itemYrn
+    })
+    // Not existed case.
+    if(matchCart.length === 0){
+        const res = await CartService.addProuctToCart(cartAccountId,product)
+        dispatch(addCart({
+            ...res,
+            product: product
+        }))
+    }else{
+        
+    }
+        
+}
+export const deleteCart = (cartAccountId,cartItemId) => async (dispatch) => {
+    await CartService.removeCart(cartAccountId, cartItemId)
+    dispatch(removeCart(cartItemId))
+}
+
 // The Cart Selector
-export const cartProductSelector = (state) => state.cart.cartProductList
+export const cartListSelector = (state) => state.cart.cartList
+export const cartAccountSelector = (state) => state.cart.cartAccount

@@ -2,7 +2,7 @@ import React, { useState }  from 'react'
 import {CartActionPanel} from '../../components/Cart/cart'
 import { LargePrimaryButton } from '../../components/Utilities/button'
 import { GridLayout, DesktopMDContainer, MobileMDContainer} from '../../components/Utilities/common'
-import {cart_product_key} from '../../constants/localstorage'
+import {cartProductKey} from '../../constants/localstorage'
 import './checkout.css'
 
 const ShippingAction = ({action}) => {
@@ -49,7 +49,7 @@ const ReviewOrderAction = ({action}) => {
 
 
 const CheckoutActionPanel = ({setStatus,status, setFinal}) => {
-    let CartProductList = localStorage.getItem(cart_product_key)
+    let CartProductList = localStorage.getItem(cartProductKey)
     CartProductList = CartProductList == null? {}: JSON.parse(CartProductList)
     const products = Object.values(CartProductList)
     const subtotalWithoutVat = products.length? products.map(product => product.price * product.buy_count).reduce((a,b)=> a + b): 0

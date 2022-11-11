@@ -3,7 +3,7 @@ import {Heading4} from '../components/Utilities/typography'
 import {TextInput} from '../components/Utilities/input'
 import {LargePrimaryButton} from '../components/Utilities/button'
 import { useState } from "react"
-import {tenant_list_key} from '../constants/localstorage'
+import {tenantListKey} from '../constants/localstorage'
 import {setTenantList} from '../redux/slices/pageReducer'
 import { setTenant } from "../redux/slices/authReducer"
 import { useDispatch } from "react-redux"
@@ -16,11 +16,11 @@ const InvalidTenant = () => {
     const navigate = useNavigate()
 
     const saveTenantAndClientID = () => {
-        let tenant_lists = localStorage.getItem(tenant_list_key)
+        let tenant_lists = localStorage.getItem(tenantListKey)
         tenant_lists = (tenant_lists=== null?  {}: JSON.parse(tenant_lists))
         tenant_lists[userTenant] = {'tenant': userTenant, 'storefront_client_id': clientId}
         tenant_lists = JSON.stringify(tenant_lists)
-        localStorage.setItem(tenant_list_key, tenant_lists)
+        localStorage.setItem(tenantListKey, tenant_lists)
         dispatch(setTenantList({'tenant': userTenant, 'storefront_client_id': clientId}))
         dispatch(setTenant(userTenant))
         navigate(`/${userTenant}`)

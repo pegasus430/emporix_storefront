@@ -6,6 +6,7 @@ import Layout from "../Layout";
 import {LoadingCircleProgress1} from '../../components/Utilities/progress'
 // import products from './products'
 import productService from '../../services/product/product.service'
+import priceService from '../../services/product/price.service'
 import {availabilityDataSelector} from '../../redux/slices/availabilityReducer'
 import {useSelector} from 'react-redux'
 import {min_product_in_stock_count} from '../../constants/page'
@@ -33,6 +34,8 @@ export const ProductDetails = () => {
         const getProduct = async (product_id) => {
             let res = await productService.getProductsWithIds([product_id])
             
+            // Get Product's Price.
+            let prices = await priceService.getPriceWithProductIds([product_id])
             /* Add Category Infromation */
             const category= await categoryService.getRetrieveAllCategoriesWithResoureceId(product_id)
             
@@ -58,7 +61,7 @@ export const ProductDetails = () => {
                 loop++
             }
 
-            res = res.data[0]
+            res = res[0]
             res.src = (res.media[0]==undefined?"":res.media[0]['url'])
             
             let stock, stockLevel = 0
@@ -68,12 +71,12 @@ export const ProductDetails = () => {
                 if(stockLevel < min_product_in_stock_count) stock = "Low"
                 else stock = "In"
             }
-                
+            // Set price...
+            if(prices.length > 0) res.price = prices[0]
+
             res.category = product_category
             res.stock = stock
             res.estimated_delivery = "23.05.2022"
-            res.price = "127.50"
-            res.list_price = "149.99"
             res.sub_images = []
             res.rating = 4
             res.count = 4

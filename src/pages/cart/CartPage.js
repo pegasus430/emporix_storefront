@@ -5,23 +5,22 @@ import CartTable from './CartTable'
 import CartMobileContent from './CartMobileContent'
 import {CartActionPanel} from '../../components/Cart/cart'
 import {useSelector } from 'react-redux'
-import {cartProductSelector} from '../../redux/slices/cartReducer'
+import {cartListSelector} from '../../redux/slices/cartReducer'
 
 const CartPage = () => {
-    const CartProductList = useSelector(cartProductSelector)
-    const products = Object.values(CartProductList)
-    const subtotalWithoutVat = products.length? products.map(product => product.price * product.buy_count).reduce((a,b)=> a + b): 0
+    const cartList = useSelector(cartListSelector)
+    const subtotalWithoutVat = cartList.length? cartList.map(cart => cart.product.price.originalValue * cart.quantity).reduce((a,b)=> a + b): 0
     
     return (
         <div className="cart-page-wrapper ">
             <div className="cart-page-content">
                 <CartActionBar view={true}/>
                 <div className="lg:block hidden">
-                    <CartTable products={products}/>
+                    <CartTable cartList={cartList}/>
                 </div>
 
                 <div className="lg:hidden">
-                    <CartMobileContent products={products}/>
+                    <CartMobileContent cartList={cartList}/>
                 </div>
     
                 <div className="float-right">

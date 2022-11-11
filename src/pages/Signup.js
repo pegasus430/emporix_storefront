@@ -11,7 +11,7 @@ import PhoneField from "../components/Utilities/phoneinput/PhoneField";
 import { GridLayout, Container } from "../components/Utilities/common";
 import { Heading2, Heading4 } from "../components/Utilities/typography";
 import  Box  from "@mui/material/Box";
-import { tenant_key } from "../constants/localstorage";
+import { tenantKey } from "../constants/localstorage";
 import {home_url} from '../services/service.config'
 
 const Signup = (props) => {
@@ -45,7 +45,7 @@ const Signup = (props) => {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
-  const tenant = localStorage.getItem(tenant_key)
+  const tenant = localStorage.getItem(tenantKey)
   const onChangeUserEmail = (e) => {
     if (!isValidEmail(e.target.value)){
         setEmailMessage("Email is invalid")

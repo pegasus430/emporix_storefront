@@ -12,7 +12,7 @@ import { LargePrimaryButton } from '../Utilities/button'
 import {pageMenuSelector} from "../../redux/slices/pageReducer"
 import { tenantSelector } from '../../redux/slices/authReducer'
 import {login_url, home_url, add_tenant_to_url} from '../../services/service.config'
-import {cartProductSelector} from '../../redux/slices/cartReducer'
+import {cartListSelector} from '../../redux/slices/cartReducer'
 
 const Navbar = () => {
 	
@@ -175,20 +175,19 @@ const Navbar = () => {
     const handleNavClose = () =>{
         setOpen(false)
     }
-	// ServiceAccessToken()
-	const cartProduct = useSelector(cartProductSelector)
+	const cartList = useSelector(cartListSelector)
   const [cartTotal, setCartTotal] = useState(0)
   const [cartTotalPrice, setCartTotalPrice] = useState(0)
 
   useEffect(()=>{
-    setCartTotal(Object.keys(cartProduct).length)
+    setCartTotal(cartList.length)
     let total_price = 0
-    Object.keys(cartProduct).map(key => {
-      total_price += cartProduct[key]['price'] * cartProduct[key]['buy_count']
+    cartList.map(cart => {
+      total_price += cart.product.price * cart.quantity
     })
     total_price = Math.trunc(total_price * 100) / 100
     setCartTotalPrice(total_price)
-  }, [cartProduct])
+  }, [cartList])
 
   return (
     <header className='header'>
@@ -221,6 +220,18 @@ const Navbar = () => {
               (!currentUser)?
             
               <ul className='flex'>
+                <li className='px-4 flex'>
+                  {
+                    cartTotal!==0?
+                    <Badge badgeContent={cartTotal} color="warning">
+                      <AiOutlineShoppingCart size = {20} onClick={handleOpenCart}/>
+                    </Badge>:
+                    <AiOutlineShoppingCart size = {20} onClick={handleOpenCart}/>
+                  }
+                  <div className='pl-3 text-white flex'>
+                      &euro; {cartTotalPrice}
+                  </div>
+                </li>
                 <li className='px-2'><a className='hover:text-[#FBB13C]' href={`/${tenant}/login`}>Login</a></li> |
                 <li className='px-2'><a className='hover:text-[#FBB13C]' href={`/${tenant}/signup`}>Sign Up</a></li>
               </ul>

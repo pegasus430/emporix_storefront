@@ -1,6 +1,7 @@
 
 import { createSlice } from '@reduxjs/toolkit'
 import products from '../../pages/product/products'
+import priceService from '../../services/product/price.service'
 import productService from '../../services/product/product.service'
 
 export const initialState = {
@@ -37,9 +38,21 @@ export const {
 } = ProductReducer.actions
 
 export const getProductData = (productIds, total, pageNumber, itemsPerPage) => async (dispatch) => {
-    const products = await productService.getProductsWithIds(productIds.slice(itemsPerPage * (pageNumber - 1), itemsPerPage * pageNumber))
-    
-    dispatch(setProductDataSuccess({products: products.data, total: total}))
+    const ids = productIds.slice(itemsPerPage * (pageNumber - 1), itemsPerPage * pageNumber)
+    let products = await productService.getProductsWithIds(ids)
+    // Get Product's Price.
+    let prices = await priceService.getPriceWithProductIds(ids)
+    let prices_obj = {}
+    prices.map((p) => {
+        prices_obj[`p${p.itemId.id}`] = p
+    })
+    let price_id;
+    for(let i = 0; i < products.length; i++){
+        price_id = `p${products[i]['id']}`
+        if(prices_obj[price_id] !== undefined)
+            products[i]['price'] = prices_obj[price_id]
+    }
+    dispatch(setProductDataSuccess({products: products, total: total}))
 }
 export const setProductIds = (productIds) => (dispatch) => {
     dispatch(setProductIdsSucess(productIds))

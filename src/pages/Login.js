@@ -10,7 +10,7 @@ import { LayoutBetween , GridLayout, Container } from "../components/Utilities/c
 import { Heading2, Heading4 } from "../components/Utilities/typography";
 import  Box  from "@mui/material/Box";
 import {home_url, signup_url} from '../services/service.config'
-import {tenant_key} from '../constants/localstorage'
+import {tenantKey} from '../constants/localstorage'
 
 const Login = (props) => {
   const [loading, setLoading] = useState(false)
@@ -51,7 +51,7 @@ const Login = (props) => {
     const password = e.target.value;
     setPassword(password);
   };
-  const userTenant = localStorage.getItem(tenant_key)
+  const userTenant = localStorage.getItem(tenantKey)
 
   const handleLogin = (e) => {
     e.preventDefault();

@@ -13,6 +13,9 @@ const AddLocations = () => {
         {'value':'Office','label':'Office'},
         {'value':'Warehouse','label':'Warehouse'}
     ]
+    const addLocation = () => {
+        
+    }
     return (
       <GridLayout className="mt-12 justify-center gap-12">
             <GridLayout className="md:w-[65%] w-full gap-2 m-auto">

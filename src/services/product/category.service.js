@@ -1,6 +1,6 @@
 import {category_api, retriev_resource_api, resource_reference_api, parent_categories_api} from '../service.config'
 import ApiRequest from '../index'
-import {product_category_trees_key, acess_token_key} from '../../constants/localstorage'
+import {productCategoryTreesKey, accessTokenKey} from '../../constants/localstorage'
 import {max_category_resource_batch_count} from '../../constants/service'
 
 const CategoryService = () => {
@@ -32,10 +32,10 @@ const CategoryService = () => {
     }
     const getProductCategoryTrees = async () => {
 
-        const access_token = localStorage.getItem(acess_token_key)
+        const access_token = localStorage.getItem(accessTokenKey)
         const categories = (await getAllCategories(access_token)).data
         const categorytrees = getCategoryTree(categories, 1)
-        localStorage.setItem(product_category_trees_key, JSON.stringify(categorytrees))
+        localStorage.setItem(productCategoryTreesKey, JSON.stringify(categorytrees))
         return categorytrees
     }
     let putProductCount = (category) => {
@@ -56,7 +56,7 @@ const CategoryService = () => {
         return category
     }   
     const getProductCategoryDetail = async (main_category_key, sub_category_key, category_key) => {
-        const category_trees = JSON.parse(localStorage.getItem(product_category_trees_key))
+        const category_trees = JSON.parse(localStorage.getItem(productCategoryTreesKey))
 
         let match_main_category = category_trees.filter(category=> category.key === main_category_key)
         match_main_category = match_main_category.length > 0? match_main_category[0]:[]
@@ -115,7 +115,7 @@ const CategoryService = () => {
     
     const retrievResourceAssignedToCategory = async (categoryId) => {
         
-        const access_token = localStorage.getItem(acess_token_key)
+        const access_token = localStorage.getItem(accessTokenKey)
 
         const headers = {
             "X-Version": 'v2',
@@ -128,7 +128,7 @@ const CategoryService = () => {
         return resources.data
     }
     const getRetrieveAllCategoriesWithResoureceId = async (resourceId) => {
-        const access_token = localStorage.getItem(acess_token_key)
+        const access_token = localStorage.getItem(accessTokenKey)
 
         const headers = {
             "X-Version": "v2",
@@ -144,7 +144,7 @@ const CategoryService = () => {
     }
 
     const getAllParentCategories = async (categoryId) => {
-        const access_token = localStorage.getItem(acess_token_key)
+        const access_token = localStorage.getItem(accessTokenKey)
 
         const headers = {
             "X-Version": "v2",

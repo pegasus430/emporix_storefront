@@ -4,12 +4,12 @@ import {CartProductCaption, CartMobileItem} from '../../components/Cart/cart'
 import './cart.css'
 
 
-const CartMobileContent = ({products}) => {
+const CartMobileContent = ({cartList}) => {
     return (
         <GridLayout className="gap-6">
             <CartProductCaption />
-            {products.map((product,index) => (
-                <CartMobileItem product={product} key={index} />
+            {cartList.map((cart,index) => (
+                <CartMobileItem cart={cart} key={index} />
             ))}
         </GridLayout>
     )
