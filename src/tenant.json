@@ -1,10 +1,10 @@
 {
 	"indritstage": {
 		"tenant": "indritstage",
-		"clientId": "HRUvHjClGa1QXSptPPvWIUkTsjpvmKTK"
+		"storefront_client_id": "HRUvHjClGa1QXSptPPvWIUkTsjpvmKTK"
 	},
 	"ensargroupstage": {
 		"tenant": "ensargroupstage",
-		"clientId": "mDq5Cc8aK5BrVcXzq5WviC8uG31dUQvj"
+		"storefront_client_id": "mDq5Cc8aK5BrVcXzq5WviC8uG31dUQvj"
 	}
 }
