@@ -16,6 +16,19 @@ const ProductService = () => {
         const res = await ApiRequest(product_api(), 'get', {},headers, params)
         return res.data
     }
+    const getProductsWithCode = async (ids = []) => {
+        const access_token = localStorage.getItem(acess_token_key)
+        const headers = {
+            "X-Version": 'v2',
+            "Authorization": `Bearer ${access_token}`,
+            "Accept-Language": "en"
+        }
+        const params = {
+            'q': 'code:(' + (ids.join(','))+')'
+        }
+        const res = await ApiRequest(product_api(), 'get', {},headers, params)
+        return res
+    }
     const getProductsWithYrns = async (yrns = []) => {
         const access_token = localStorage.getItem(accessTokenKey)
         const headers = {
@@ -38,6 +51,7 @@ const ProductService = () => {
     }
     return {
         getProductsWithIds,
+        getProductsWithCode,
         getProductsWithYrns
     }
 }

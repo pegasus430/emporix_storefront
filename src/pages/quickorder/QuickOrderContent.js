@@ -85,68 +85,28 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 const DesktopContent = () => {
-   
-    const cartProductList = useSelector(cartListSelector)
-    const [code, setCode] = useState("")
-    const [quantity, setQuantity] = useState(1)
+    // Add Product state
+    const [addProduct, setAddProduct] = useState({
+        product: {
+            code: "",
+            quantity: 1,
+            price: {
+                
+            }
+        }
+    })
+    // Tempo product list to add cart.
+    const [tempoProductList, setTempoProductList] = useState([])
+    // Notification message
     const [openNotification , setOpenNotification] = useState(false)
     const message = useSelector(messageSelector);
-    const cartAccount = useSelector(cartAccountSelector)
+    // Dispatch function
     const dispatch = useDispatch()
+    // Notification handle close
     const handleClose = () => {
         setOpenNotification(false);
     };
-    const availability = useSelector(availabilityDataSelector)
 
-    const addList =  {
-        code : code,
-        name : '',
-        buy_count : quantity,
-        unitPrice: '',
-        total : ''
-    }
-    const clearCartAction = () => {
-        dispatch(clearCart())
-        dispatch(setMessage(`All carts are removed succesfully.`))
-        setOpenNotification(true);
-    }
-    const handleCodeChange = () => {
-
-    }
-    const handleQuantityChange = (value, item) => {
-        let new_item = {...item}
-        new_item.quantity = value
-        dispatch(putCartProduct(new_item, cartAccount.id))
-    }
-    const addCartProduct = async () => {
-        let product = await productService.getProductsWithIds([code])
-
-        if(product.length === 0){
-            dispatch(setMessage(`The product is not existed.`))
-            setOpenNotification(true);
-            return
-        }
-        // Get first product
-        product = product[0]
-        product.src = (product.media[0]==undefined?"":product.media[0]['url'])
-        product.price = "149.99"
-        product.list_price = "149.99"
-        product.quantity = quantity
-        
-        let stock, stockLevel = 0
-        if(availability['k'+product.id] === undefined) stock = "Out Of"
-        else{
-            stockLevel = parseInt(availability['k'+product.id]['stockLevel'])
-            if(stockLevel < min_product_in_stock_count) stock = "Low"
-            else stock = "In"
-        }
-        product.stock = stock
-        product.estimated_delivery = "23.05.2022"
-        product.product_count = stockLevel
-        product.rating = 4
-
-        dispatch(putCartProduct(product, cartAccount.id))
-    }
     return (
         <div className="desktop_only">
             <Snackbar
@@ -160,7 +120,7 @@ const DesktopContent = () => {
                 </Alert>
             </Snackbar>
             <div className="float-right underline text-base font-medium text-[#377395]">
-                <span className="pr-8 cursor-pointer" onClick={()=>clearCartAction()}>Clear List</span>
+                <span className="pr-8 cursor-pointer">Clear List</span>
                 <span>Order list</span>
             </div>
             <div className="pt-[58px]">
@@ -177,26 +137,23 @@ const DesktopContent = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {
-                               
-                                Object.keys(cartProductList).map((key, index) => 
-                                    <CartItem feature="row" key={Math.random()} item = {cartProductList[key]} handleCodeChange={handleCodeChange} handleQuantityChange={handleQuantityChange}/>
+                            {tempoProductList.map((tempoProduct) => 
+                                    <CartItem feature="row" key={Math.random()} item = {tempoProduct} />
                                 )
                             }
-                            {
-                                Object.keys(cartProductList).length === 0?
-                                    <TableRow >
-                                        <TableCell colSpan = {6} align="center"  className='font-inter !font-bold text-[14px]'>Empty Cart List</TableCell>
-                                    </TableRow>: ""
+                            {tempoProductList.length === 0?
+                                <TableRow >
+                                    <TableCell colSpan = {6} align="center"  className='font-inter !font-bold text-[14px]'>Empty Cart List</TableCell>
+                                </TableRow>: ""
                             }
                             {/* Add Cart Row */}
-                            <CartItem feature="action" key="add" item={addList} handleCodeChange={setCode} handleQuantityChange={setQuantity}/>
+                            <CartItem feature="action" key="add" />
                         </TableBody>
                     </Table>
                 </TableContainer>
             </div>
             <div className="float-right pt-12">
-                <button className="quickorder-add-to-cart-btn" onClick={addCartProduct}>ADD TO CART</button>  <br />
+                <button className="quickorder-add-to-cart-btn">ADD TO CART</button> <br />
                 <button className="quickorder-add-to-quote-btn">ADD TO QUOTE</button>             
             </div>
             
