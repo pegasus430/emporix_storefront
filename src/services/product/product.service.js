@@ -17,10 +17,10 @@ const ProductService = () => {
         return res.data
     }
     const getProductsWithCode = async (ids = []) => {
-        const access_token = localStorage.getItem(acess_token_key)
+        const accessToken = localStorage.getItem(accessTokenKey)
         const headers = {
             "X-Version": 'v2',
-            "Authorization": `Bearer ${access_token}`,
+            "Authorization": `Bearer ${accessToken}`,
             "Accept-Language": "en"
         }
         const params = {
