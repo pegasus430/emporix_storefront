@@ -18,5 +18,9 @@
 	"test333stage": {
 		"tenant": "test333stage",
 		"storefront_client_id": "HQwgrpF3PCF0omALBMChskzyduqAOVg5"
+	},
+	"test444stage": {
+		"tenant": "test444stage",
+		"storefront_client_id": "spHBv7M5ZjSAdHCxDGddvX7dRJKCfA6L"
 	}
 }
