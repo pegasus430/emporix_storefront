@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React  from 'react'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -29,10 +29,8 @@ const CartProductInfo = ({cart}) => {
     )
 }
 const CartTable = ({cartList}) => {
-    console.log(cartList)
     const dispatch = useDispatch()
     const removeCart = (e, code) => {
-
         dispatch(deleteCart(code))
       };
     return (
