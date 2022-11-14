@@ -5,20 +5,18 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import {TextInputOnlyWithEnterKey, TextInputOnly} from '../../components/Utilities/input'
+import {TextInputOnly} from '../../components/Utilities/input'
 import {getCartList, cartAccountSelector} from '../../redux/slices/cartReducer'
-import {messageSelector, setMessage} from '../../redux/slices/messageReducer'
-import {availabilityDataSelector} from '../../redux/slices/availabilityReducer'
+import {messageSelector} from '../../redux/slices/messageReducer'
 import productService from "../../services/product/product.service";
 import cartService from "services/cart.service";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import {min_product_in_stock_count} from '../../constants/page'
-import './quickorder.css'
 import { useDispatch, useSelector } from "react-redux";
 import priceService from "services/product/price.service";
 import LayoutContext from 'pages/context'
-import { CgArrowsExpandDownLeft } from "react-icons/cg";
+import './quickorder.css'
+
 const list = [
     {
         code : '01-460-05860',
@@ -77,7 +75,7 @@ const CartItem = ({item, codeHandler, quantityHandler, feature, focusHanlder, bl
                         if(blurHandler !== undefined) blurHandler(item.code)
                     }}
                     className = 'border max-w-[56px] '
-                    autoFocus={activeFocusCode===item.code ? true: false}
+                    autoFocus={activeFocusCode === item.code ? true: false}
                 />
             </TableCell>
             <TableCell align="left" className='!py-6'>

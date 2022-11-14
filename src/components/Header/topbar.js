@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from 'react'
+import React, { useState} from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from './navigationbar'
 import logo from '../../assets/atom.png'
@@ -6,13 +6,11 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 import { useSelector } from "react-redux"
 import {pageMenuSelector} from "../../redux/slices/pageReducer"
 import "./topbar.css"
-import { add_tenant_to_url, home_url } from '../../services/service.config'
-
+import { addTenantToUrl, homeUrl } from '../../services/service.config'
 
 const Logo = ({onMouseOver}) => {
-	
 	return (
-		<Link to={home_url()} className="flex" onMouseOver={onMouseOver}>
+		<Link to={homeUrl()} className="flex" onMouseOver={onMouseOver}>
 			<div className='w-[37px]'><img src={logo} alt={"Logo"} className="w-[37px]" /></div>
 			<div className='px-4 text-white text-[25px] font-medium items-center'><span>atom</span></div>			
 		</Link>
@@ -36,12 +34,10 @@ const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
 	
 	return (
 		<div className="dropdown flex text-base" >
-
 			{
 				menuList.map((item, index) => 
 				<button key = {index} className="mega_menu_dropbtn"   onMouseOver={() => item.items.length !== 0?  overMenuItem(item.items) : hideMegaMenuContent() }  > 
-					{/* onMouseOut={() => {setSubMenuMegaContent([]); setShowMegaMenuContent(false)}} */}
-					<Link to={!item.items.length? add_tenant_to_url(item.url) : home_url}>
+					<Link to={!item.items.length? addTenantToUrl(item.url) : homeUrl}>
 
 						<div>{item.title}</div>
 					</Link>
@@ -52,27 +48,21 @@ const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
 			}
 			{
 				showMegaMenuContent ?
-			
 				<div className="header-mega_dropdown-content" onMouseEnter={onShowMegaMenu} onClick={() => setShowMegaMenuContent(false)} >
-					{/* onMouseLeave={() => setShowMegaMenuContent(false)} */}
 					<div className="row w-full h-full flex">
 						<div className="h-full w-[24%] mega_content_bg">
 							<div className='pl-[72px] pt-[72px] overflow-y-auto max-h-full'>
 								<ul className=' text-white text-base font-bold'>
-
-								{
-									subMenuItems.map((item, index) => 
-										<Link onClick={() => console.log('clicked')} replace key = {index} to={add_tenant_to_url(item.url)} >
-											<li className='mega_content_category_li' onMouseOver = {() => {setSubMenuMegaContent(item.items); setShowMegaMenuRightContent(true)}} onMouseLeave = {() => {  setShowMegaMenuRightContent(false)} }>{item.title}</li>
-										</Link>
-											
-									)
-								}
-
-									
+									{
+										subMenuItems.map((item, index) => 
+											<Link onClick={() => console.log('clicked')} replace key = {index} to={addTenantToUrl(item.url)} >
+												<li className='mega_content_category_li' onMouseOver = {() => {setSubMenuMegaContent(item.items); setShowMegaMenuRightContent(true)}} onMouseLeave = {() => {  setShowMegaMenuRightContent(false)} }>{item.title}</li>
+											</Link>
+												
+										)
+									}
 								</ul>
 							</div>
-							
 						</div>
 						<div className="h-full w-[76%] grid grid-cols-4 overflow-y-auto gap-4 pl-[72px] pt-[72px] max-h-full" onMouseOver={() => setShowMegaMenuRightContent(true)}>
 							{
@@ -80,12 +70,12 @@ const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
 								subMenuMegaContent.map((item, index) => 
 									<div key = {index} className=''>
 										<ul className=' text-black text-base'>
-											<Link to={add_tenant_to_url(item.url)}>
+											<Link to={addTenantToUrl(item.url)}>
 												<li className='mega_content_sub_cat_li font-bold'>{item.title}</li>
 											</Link>
 											{
 												item.items.map((eachItem, index) => 
-													<Link key={index} to={add_tenant_to_url(eachItem.url)}>
+													<Link key={index} to={addTenantToUrl(eachItem.url)}>
 														<li  className='mega_content_sub_cat_li'>{eachItem.title}</li>
 													</Link>	
 												)
@@ -96,7 +86,6 @@ const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
 								): null
 
 							}
-						
 						</div>
 					</div>
 				</div> : null
@@ -106,7 +95,7 @@ const MegaNav = ({showMegaMenuContent, setShowMegaMenuContent}) => {
 }
 
 const TopNav = ({title}) => {
-	const nav_title_condition = title !=="" && title !== "home" ? true : false
+	const nav_title_condition = title !== '' && title !== 'home' ? true : false
 	const [showMegaMenuContent, setShowMegaMenuContent] = useState(false)
 
 	return (
@@ -140,7 +129,6 @@ const TopNav = ({title}) => {
 }
 
 const Topbar = ({title}) => {
-	
   	return (
 		<>
 			<Navbar />

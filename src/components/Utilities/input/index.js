@@ -47,7 +47,6 @@ export const TextInputOnlyWithEnterKey = ({value, placeholder, action, className
         <input value={inputValue} onChange={(e)=>{setInputValue(e.target.value);}} onKeyDown = {
             (e) => {
                 if(e.key!=='Enter') return
-                
                 if(action !== undefined) action(e.target.value)
             }}  placeholder={placeholder} className={"text-input-normal " + (className!==undefined?className:"")}/>
     )

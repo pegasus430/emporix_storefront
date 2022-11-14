@@ -8,7 +8,6 @@ export const LargePrimaryButton = ({title, onClick, className, disabled}) => {
                 <button className={"large-primary-btn " + (className?className:"")} onClick={onClick}>{title}</button>
             }
         </>
-        
     )   
 }
 

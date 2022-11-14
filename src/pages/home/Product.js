@@ -16,7 +16,7 @@ const EachProduct = (props) => {
     return (
         <div>
             <div className='w-full h-3 flex justify-between'>
-                <div className={props.stock == "Low" ? "text-[#FFA800] font-inter font-bold text-[12px] pt-[6px]" : "text-[#4BCB67] font-inter font-bold text-[12px] pt-[6px]"}>
+                <div className={props.stock === "Low" ? "text-[#FFA800] font-inter font-bold text-[12px] pt-[6px]" : "text-[#4BCB67] font-inter font-bold text-[12px] pt-[6px]"}>
                     {props.stock} Stock
                 </div>
                 <div className='flex h-5'>
@@ -130,12 +130,9 @@ const Product = () => {
 
   	return (
     	<div className = "home_product">
-			
             <ProductTitle auth =  {currentUser ? true: false} />
-            
             {/* for mobile panel */}
             <div className='pt-12 mobile_only px-6 w-full  text-black max-w-md mx-auto'>
-                
                 <Slider className="slider-wrapper">
                     {products.map((item, index) => (
                         <div key={index} className="slider-content" >
@@ -174,7 +171,6 @@ const Product = () => {
                                                 </div>
                                             </div>
                                         </>
-                                        
                                     ):
                                     (
                                         <div className='text-base  pt-4'>
@@ -186,23 +182,20 @@ const Product = () => {
                         </div>
                     ))} 
                 </Slider>
-                
             </div>
-
             {/* for desktop panel */}
             <div className='desktop_only md:pt-9 max-w-screen-2xl mx-auto md:px-[5%] lg:px-[10%] w-full md:h-[456px] md:grid md:grid-cols-4 md:gap-x-6 text-black'>
                 {
                     products.map((item, index) => (
-                            <EachProduct key={index} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
-                                category = {item.category} name={item.name} 
-                                price = {item.price} list_price = {item.list_price} />
+                        <EachProduct key={index} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
+                            category = {item.category} name={item.name} 
+                            price = {item.price} list_price = {item.list_price} />
                         )
                     )
                 }
                 
             </div>
     	</div>
-    
   	)
 }
 

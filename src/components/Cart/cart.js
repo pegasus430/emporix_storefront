@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import './cart.css'
 import '../index.css'
 import { Link } from 'react-router-dom'
-import {LayoutBetween, GridLayout} from '../Utilities/common'
-import Quantity from '../Utilities/quantity/quantity'
-import {cart_url, checkout_url} from '../../services/service.config'
+import {LayoutBetween, GridLayout} from 'components/Utilities/common'
+import Quantity from 'components/Utilities/quantity/quantity'
+import {cartUrl, checkoutUrl} from 'services/service.config'
 import Badge from '@mui/material/Badge';
-import { useDispatch, useSelector } from 'react-redux'
-import {deleteCart, cartListSelector, cartAccountSelector} from '../../redux/slices/cartReducer'
+import {useDispatch, useSelector } from 'react-redux'
+import {deleteCart, cartListSelector, cartAccountSelector} from 'redux/slices/cartReducer'
 
 const CartProductContent = ({children}) => {
     return (
@@ -28,8 +28,6 @@ export const CartProductImage = ({src, className}) => {
         <img src={src} className={"cart-product-image " + (className? className: "")}/>
     )
 }
-
-
 export const PriceExcludeVAT = ({price, caption}) => {
     return (
         <div className="price-exclude-vat">
@@ -140,9 +138,9 @@ const CartProductPriceExcludeVat = ({price}) => {
     )
 }
 const CartProductInfo = ({cart}) => {
-    let list_price, price
-    list_price = Math.trunc(cart.product.price.totalValue * 100) / 100
-    price = list_price
+    let listPrice, price
+    listPrice = Math.trunc(cart.product.price.totalValue * 100) / 100
+    price = listPrice
     if(cart.product.price.priceModel !== undefined && cart.product.price.priceModel.includesTax === false){
         price = Math.trunc(price * 10000 / (100 + cart.product.price.tax.taxRate)) / 100
     }
@@ -247,14 +245,14 @@ const CartTotalPrice = ({value}) => {
 const CartGoCheckout = () => {
    
     return (
-        <Link to={checkout_url()} className="w-full">
+        <Link to={checkoutUrl()} className="w-full">
             <button className="cart-go-checkout-btn">GO TO CHECKOUT</button>
         </Link>
     )
 }
 const CartOpenCart = () => {
     return (
-        <Link to={cart_url()} className="w-full">
+        <Link to={cartUrl()} className="w-full">
             <button className="cart-open-cart-btn">
                 OPEN CART
             </button>

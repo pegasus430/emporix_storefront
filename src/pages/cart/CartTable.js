@@ -6,8 +6,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Quantity from '../../components/Utilities/quantity/quantity'
-import {CartProductImage
-    , CartProductBasicInfo, PriceExcludeVAT} from '../../components/Cart/cart'
+import {
+    CartProductImage,
+    CartProductBasicInfo, 
+    PriceExcludeVAT
+} from '../../components/Cart/cart'
 import { useDispatch} from 'react-redux'
 import {deleteCart} from '../../redux/slices/cartReducer'
 
@@ -26,6 +29,7 @@ const CartProductInfo = ({cart}) => {
     )
 }
 const CartTable = ({cartList}) => {
+    console.log(cartList)
     const dispatch = useDispatch()
     const removeCart = (e, code) => {
 

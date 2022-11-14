@@ -4,7 +4,7 @@ import desk from '../../assets/category/desk.png'
 import seating from '../../assets/category/seating.png'
 import storage from '../../assets/category/storage.png'
 import printer from '../../assets/category/printer.png'
-import { add_tenant_to_url } from '../../services/service.config'
+import { addTenantToUrl } from '../../services/service.config'
 
 const EachCategory = (props) => {
     return (
@@ -31,23 +31,20 @@ const Category = () => {
                 Browse our catalogue and find the right product for you
             </div>
             <div className='home_cat_content' >
-                <Link to={add_tenant_to_url(`product/domestic_appliances`)}>
+                <Link to={addTenantToUrl(`product/domestic_appliances`)}>
                     <EachCategory src = {seating} title="Seating" content = "Tellus ornare at consequat ipsum,non lobortis" />
                 </Link>
-                <Link to={add_tenant_to_url(`product/domestic_appliances`)}>
+                <Link to={addTenantToUrl(`product/domestic_appliances`)}>
                     <EachCategory src = {desk} title="Desk and Workspaces" content = "Tellus ornare at consequat ipsum,non lobortis" />
                 </Link>
-                <Link to={add_tenant_to_url(`product/entertainment_&_hobby`)}>
+                <Link to={addTenantToUrl(`product/entertainment_&_hobby`)}>
                     <EachCategory src = {storage} title="Storage" content = "Tellus ornare at consequat ipsum,non lobortis" />
                 </Link>
-                <Link to={add_tenant_to_url(`product/toys`)}>
+                <Link to={addTenantToUrl(`product/toys`)}>
                     <EachCategory src = {printer} title="Printers, Ink and Toner" content = "Tellus ornare at consequat ipsum,non lobortis" />
                 </Link>
-                
             </div>
-
     	</div>
-    
   	)
 }
 

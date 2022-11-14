@@ -1,4 +1,4 @@
-import React, { useState, useContext}  from 'react'
+import React, { useContext}  from 'react'
 import {RadioItem} from '../Utilities/radio'
 import { RadioContext } from '../Utilities/radio'
 import { Container, GridLayout } from '../Utilities/common'
@@ -14,7 +14,7 @@ const PaymentInvoiceItem = ({radioKey, title}) =>{
         value: "7870465653469", label: "7870465653469"
     }]
     return (
-        <div className={"payment-method-item-wrapper "+(radioActive==radioKey?"active":"")}>
+        <div className={"payment-method-item-wrapper " + (radioActive === radioKey? "active" : "")}>
             <GridLayout className="gap-4">
                 <Container className="gap-4 items-center">
                     <RadioItem radioKey={radioKey} />
@@ -24,7 +24,7 @@ const PaymentInvoiceItem = ({radioKey, title}) =>{
                 </Container>
                 <GridLayout className="gap-[2px]">
                     <TextRegular2>Enter your PO number</TextRegular2>
-                    <Dropdown1 placeholder="Please select" options={options} />
+                    <Dropdown1 placeholder="Please select" options = {options} />
                 </GridLayout> 
             </GridLayout>
                 

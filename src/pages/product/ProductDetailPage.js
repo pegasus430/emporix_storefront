@@ -16,16 +16,15 @@ import hp_laser_printer from "../../assets/products/hp_laser_printer.png"
 import comfort_chair from "../../assets/products/comfort_chair.png"
 import pc_stand from "../../assets/products/pc_stand.png"
 import stapler from "../../assets/products/stapler.png"
-// import HandleProductAddToCart from './HandleProductAddToCart'
 import LayoutContext from '../context'
-import {product_url} from '../../services/service.config'
-import { useDispatch, useSelector} from 'react-redux';
+import { productUrl } from '../../services/service.config'
+import { useDispatch, useSelector } from 'react-redux';
 import { cartAccountSelector, cartListSelector, putCartProduct } from '../../redux/slices/cartReducer';
-import {LargePrimaryButton} from '../../components/Utilities/button'
+import { LargePrimaryButton } from '../../components/Utilities/button'
 
 const ProductContext = createContext()
 
-const B = ({children}) => {
+const Bold = ({children}) => {
     return (
         <div className="font-bold">
             {children}
@@ -33,39 +32,38 @@ const B = ({children}) => {
     )
 }
 const ProductDetailCategoryCaptionBar = ({category}) => {
- 
-    const category_tree = [
-        {"caption": "Home", "link": product_url()}
+    const categoryTree = [
+        {"caption": "Home", "link": productUrl()}
     ]
-    let lnk = product_url()
+    let lnk = productUrl()
     for(let c in category){
         lnk = `${lnk}/${category[c].toLowerCase().replaceAll(' ', '_')}`
-        category_tree.push({"caption":category[c], "link":lnk})
+        categoryTree.push({"caption":category[c], "link":lnk})
     }
     return (
         <div className="product-detail-category-caption-bar">
             <Breadcrumbs className="lg:block hidden" separator="|" aria-label="breadcrumb">
-                { category_tree.map((row,index) => {
+                { categoryTree.map((row,index) => {
                     return row.link === "" ? 
                         <Typography key={index} className="breadcrumb-item" color="text.primary">{row.caption}</Typography>:
                         <Link key={index} className="breadcrumb-item" underline="hover" color="inherit" href={row.link}>
-                            {index!==category_tree.length - 1 ? row.caption:<B>{row.caption}</B>}
+                            {index!==categoryTree.length - 1 ? row.caption:<Bold>{row.caption}</Bold>}
                         </Link>
                 })}
             </Breadcrumbs>
             <Breadcrumbs className="lg:hidden md:block hidden" separator="|" aria-label="breadcrumb">
-                { category_tree.map((row,index) => {
+                { categoryTree.map((row,index) => {
                     return row.link === "" ? 
                         "":
-                        <Link key={index} className="breadcrumb-item" underline="hover" color={index === category_tree.length - 2 ?"text.primary": "inherit"} href="/">
+                        <Link key={index} className="breadcrumb-item" underline="hover" color={index === categoryTree.length - 2 ?"text.primary": "inherit"} href="/">
                             {row.caption}
                         </Link>
                 })}
             </Breadcrumbs>
             <Breadcrumbs className="md:hidden" separator="|" aria-label="breadcrumb">
-                { category_tree.map((row,index) => {
-                    return (category_tree.length - index > 1 && category_tree.length - index < 4)?
-                        <Link key={index} className="breadcrumb-item" underline="hover" color={index === category_tree.length - 1 ?"text.primary": "inherit"} href="/">
+                { categoryTree.map((row,index) => {
+                    return (categoryTree.length - index > 1 && categoryTree.length - index < 4)?
+                        <Link key={index} className="breadcrumb-item" underline="hover" color={index === categoryTree.length - 1 ?"text.primary": "inherit"} href="/">
                             {row.caption}
                         </Link>:
                         ""
@@ -83,7 +81,7 @@ const ProductImage = ({product}) => {
                 <img src={`${product.src}`} alt="product" className="w-full"/>
             </div>
             <div className="product-detail-sub-images">
-                {product.sub_images.map((link, index) => {
+                {product.subImages.map((link, index) => {
                     return <div key={index} className="rounded product-detail-sub-image-item flex items-center">
                                 <img src={`${link}`} alt="product_" className="w-full m-auto items-center"/>
                             </div>
@@ -115,7 +113,7 @@ const ProductTitle = ({name}) => {
         </div>
     )
 }
-const ProductPriceAndAmount = ({price, list_price, product_count, estimated_delivery}) => {
+const ProductPriceAndAmount = ({price, listPrice, product_count, estimated_delivery}) => {
     return (
         <div className="product-price-and-amount-wrapper mt-12 ">
         
@@ -128,15 +126,15 @@ const ProductPriceAndAmount = ({price, list_price, product_count, estimated_deli
                         <div className="vat-caption">VAT excluded</div>
                     </>: <></>
                 }
-                { list_price !== ""?
-                    <div className="list-price desktop-sm">List Price &euro; <del>{list_price}</del></div>:
+                { listPrice !== ""?
+                    <div className="list-price desktop-sm">List Price &euro; <del>{listPrice}</del></div>:
                     <span className='desktop-sm text-xs  text-[#F30303] font-bold'>No Price</span>
                 } 
                 
             </div>
-            { list_price !== ""?
+            { listPrice !== ""?
                 <div className="mobile-sm mt-2 list-price">
-                    List Price &euro; <del>{list_price}</del>
+                    List Price &euro; <del>{listPrice}</del>
                 </div>:
                 <span className='mobile-sm text-xs  text-[#F30303] font-bold'>No Price</span>
             } 
@@ -149,20 +147,24 @@ const ProductPriceAndAmount = ({price, list_price, product_count, estimated_deli
     )
 }
 const ProductBasicInfo = ({product}) => {
-    let price = "", list_price = "";
+    let price = "", listPrice = "";
     if(product.price !== undefined){
-        list_price = Math.trunc(product.price.totalValue * 100) / 100
-        price = list_price
+        listPrice = Math.trunc(product.price.totalValue * 100) / 100
+        price = listPrice
         if(product.price.priceModel !== undefined && product.price.priceModel.includesTax === false){
             price = Math.trunc(price * 10000 / (100 + product.price.tax.taxRate)) / 100
         }
     }
-
     return (
         <div className="product-basic-info-wrapper hidden lg:block">
             <ProductSkuAndReview product={product}/>
             <ProductTitle name={product.name} />
-            <ProductPriceAndAmount price={price} list_price={list_price} product_count={product.product_count} estimated_delivery={product.estimated_delivery}/>
+            <ProductPriceAndAmount 
+                price={price} 
+                listPrice={listPrice} 
+                product_count={product.product_count} 
+                estimated_delivery={product.estimated_delivery}
+            />
         </div>
     )
 } 
@@ -181,33 +183,32 @@ const ProductSelectComponent = ({label, options}) => {
 const DropdownComponent = ({options}) => (
     <Select options={options} searchable={true} placeholder="Please select" dropdownHandleRenderer={({state})=>(
         <>
-            {state.dropdown ?  <svg fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M13 7L7 1L1 7" stroke="#ACAEB2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                </svg>:
-                                <svg fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1 0.999999L7 7L13 1" stroke="#ACAEB2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                </svg>
-                           
-                            
+            {state.dropdown ?  
+                <svg fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 7L7 1L1 7" stroke="#ACAEB2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>:
+                <svg fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 0.999999L7 7L13 1" stroke="#ACAEB2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>            
             }
         </>
     )}/>
   )
-const ProductFormantAndWarranty = ({product}) => {
-    const format_options = [
-        // {value: "Paper A4", label: "Paper A4"}
-    ]
-    const warranty_options = [
-        // {value: "1 year - extandable", label: "1 year - extandable"}
-    ]
-    return (
-        <div className="product-format-and-warranty py-12">
+// const ProductFormantAndWarranty = ({product}) => {
+//     const format_options = [
+//         // {value: "Paper A4", label: "Paper A4"}
+//     ]
+//     const warranty_options = [
+//         // {value: "1 year - extandable", label: "1 year - extandable"}
+//     ]
+//     return (
+//         <div className="product-format-and-warranty py-12">
             
-            <ProductSelectComponent label="Format" options={format_options} />
-            <ProductSelectComponent label="Warranty" options={warranty_options} />
-        </div>
-    )
-}
+//             <ProductSelectComponent label="Format" options={format_options} />
+//             <ProductSelectComponent label="Warranty" options={warranty_options} />
+//         </div>
+//     )
+// }
 const PrdouctAddToCart = () => {
     const product = useContext(ProductContext)
     const {showCart, setShowCart} = useContext(LayoutContext)
@@ -272,25 +273,10 @@ const ProductInfo = ({product}) => {
 
 const ProductContent = ({product}) => {
     
-    // const product = {
-    //     stock : "Low", 
-    //     rating : 4, 
-    //     product_count: 16,
-    //     count : 8 ,
-    //     src : "/img/products/hp_printer.png" ,
-    //     category : "ICA-CT 073BK",
-    //     name : "HP LaserJet 500 color Series Printer Cabinet",
-    //     price : "93.50",
-    //     list_price : "109.99",
-    //     sku: "CF085A",
-    //     estimated_delivery: "23.05.2022",
-    //     sub_images: ["/img/products/hp_printer_sub1.png", "/img/products/hp_printer_sub2.png", "/img/products/hp_printer_sub3.png"]
-    // }
-    let price = "", list_price = "";
-
+    let price = "", listPrice = "";
     if(product.price !== undefined){
-        list_price = Math.trunc(product.price.totalValue * 100) / 100
-        price = list_price
+        listPrice = Math.trunc(product.price.totalValue * 100) / 100
+        price = listPrice
         if(product.price.priceModel !== undefined && product.price.priceModel.includesTax === false){
             price = Math.trunc(price * 10000 / (100 + product.price.tax.taxRate)) / 100
         }
@@ -306,7 +292,7 @@ const ProductContent = ({product}) => {
                     <ProductImage product={product}/>
                 </div>
                 <div className="mobile-price-and-amount-wrapper">
-                    <ProductPriceAndAmount price={price} list_price={list_price} product_count={product.product_count} estimated_delivery={product.estimated_delivery}/>
+                    <ProductPriceAndAmount price={price} listPrice={listPrice} product_count={product.product_count} estimated_delivery={product.estimated_delivery}/>
                 </div>
                 <div className="product-info-wrapper">
                     <ProductInfo product={product}/>
@@ -339,37 +325,7 @@ function TabPanel(props) {
 
 
   const ProductDetailsTabContent = ({product}) => {
-    // const design_items = [
-    //     {"property": "Product colour", "value": "Grey"},
-    //     {"property": "CompatibilityHP", "value": "HP LaserJet 500"},
-    //     {"property": "HP segment", "value": "Business, Enterprise"}
-    // ]
-    // const dimension_items = [
-    //     {"property": "Width", "value": "678.2 mm"},
-    //     {"property": "Depth", "value": "772.2 mm"},
-    //     {"property": "Height", "value": "426.7 mm"},
-    //     {"property": "Weight", "value": "19.2 kg"},
-    //     {"property": "Dimensions (WxDxH)", "value": "678.2 x 772.2 x 426.7 mm"}
-    // ]
-    // const packaging_items = [
-    //     {"property": "Package dimensions (WxDxH)", "value": "630 x 600 x 553 mm"},
-    //     {"property": "Package width", "value": "630 mm"},
-    //     {"property": "Package depth", "value": "600 mm"},
-    //     {"property": "Package height", "value": "553 mm"},
-    //     {"property": "Package Weight", "value": "24.4 Kg"}
-    // ]
-    // const technical_details_items = [
-    //     {"property": "Package dimensions (WxDxH)", "value": "630 x 600 x 553 mm"}
-    // ]
-    // const techincal_dimension_items = [
-    //     {"property": "Pallet dimensions (W x D x H) (imperial)", "value": '1201.4 x 800.1 x 2362.2 mm (47.3 x 31.5 x 93")'},
-    //     {"property": "Pallet dimensions (W x D x H)", "value": '1200 x 800 x 2362 mm'},
-    //     {"property": "Pallet weight (imperial)", "value": "205.2 kg (452.4 lbs)"},
-    //     {"property": "Products per pallet", "value": "8 pc(s)"},
-    //     {"property": "Master (outer) cases per pallet", "value": "2 pc(s)"},
-    //     {"property": "Layers per pallet", "value": "4 pc(s)"},
-    //     {"property": "Pallet gross weight", "value": "205.7 g"}
-    // ]
+
     const getFeatureName = (str) => {
         let loop = 0
         let res = ""
@@ -415,12 +371,6 @@ function TabPanel(props) {
                         ) 
                     })
                 }
-                
-                {/* <ProductInfoPortal key="1" caption="Design" items={design_items}/>
-                <ProductInfoPortal key="2" caption="Weight & dimensions" items={dimension_items}/>
-                <ProductInfoPortal key="3" caption="Packaging data" items={packaging_items}/>
-                <ProductInfoPortal key="4" caption="Technical details" items={technical_details_items}/>
-                <ProductInfoPortal key="5" caption="Weight & dimensions" items={techincal_dimension_items}/> */}
             </div>
         </div>
     )
@@ -501,7 +451,6 @@ const ProductInfoPortal = ({caption, items}) => {
         </div>
     )
 }
-    
 
 const ProductDetailInfo = ({product}) => {
     return (
@@ -538,7 +487,7 @@ const products = [
         code : "TY2-B#M74A",
         name : "HP LaserJet 1*500-sheet Paper Feeder and Cabinet",
         price : "341.89",
-        list_price : "389.50"
+        listPrice : "389.50"
     } ,
    
     {
@@ -549,7 +498,7 @@ const products = [
         code : "BB2-B3M987",
         name : "RP9 Retail Compact Stand Silver PC Multimedia stand",
         price : "84.89",
-        list_price : "94.10"
+        listPrice : "94.10"
     } ,
     {
         stock : "In", 
@@ -559,7 +508,7 @@ const products = [
         code : "BB2-B3M987",
         name : "Zenith Plier stapler 548/E Silver",
         price : "27.50",
-        list_price : "34.99"
+        listPrice : "34.99"
     } ,
     {
         stock : "Low", 
@@ -569,7 +518,7 @@ const products = [
         code : "TY2-B#M74A",
         name : "Comfort Ergo 2-Lever Operator Chairs",
         price : "53.59",
-        list_price : "59.99"
+        listPrice : "59.99"
     } ,
     {
         stock : "Low", 
@@ -579,7 +528,7 @@ const products = [
         code : "TY2-B#M74A",
         name : "Comfort Ergo 2-Lever Operator Chairs",
         price : "53.59",
-        list_price : "59.99"
+        listPrice : "59.99"
     } ,
 ]
 
@@ -595,7 +544,7 @@ const ProductMatchItems = () => {
                         products.map((item, index) => (
                                 <Product key={index} auth={auth} stock={item.stock}  rating={item.rating} total_count={item.count} src = {item.src}
                                     code = {item.code} name={item.name} 
-                                    price = {item.price} list_price = {item.list_price} />
+                                    price = {item.price} listPrice = {item.listPrice} />
                             )
                         )
                     }

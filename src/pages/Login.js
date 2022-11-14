@@ -1,4 +1,4 @@
-import React, { useState, useRef , useEffect, Fragment} from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate , Link } from 'react-router-dom';
 import login_atom from '../assets/login_atom.png'
@@ -9,7 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { LayoutBetween , GridLayout, Container } from "../components/Utilities/common";
 import { Heading2, Heading4 } from "../components/Utilities/typography";
 import  Box  from "@mui/material/Box";
-import {home_url, signup_url} from '../services/service.config'
+import {homeUrl, signupUrl} from '../services/service.config'
 import {tenantKey} from '../constants/localstorage'
 
 const Login = (props) => {
@@ -30,7 +30,6 @@ const Login = (props) => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpenNotification(false);
   };
   const Alert = React.forwardRef(function Alert(props, ref) {
@@ -42,7 +41,6 @@ const Login = (props) => {
     }
     else{
         setEmailMessage(null)
-        
     }
     setUserEmail(e.target.value);
     
@@ -78,7 +76,7 @@ const Login = (props) => {
 
 
   if (isLoggedIn) {
-    return <Navigate  to={home_url()} />;
+    return <Navigate  to={homeUrl()} />;
   }
 
   return (
@@ -96,7 +94,7 @@ const Login = (props) => {
             <GridLayout className="md:w-[540px] w-[95%] mx-auto h-[740px] md:pt-[138px] pt-10">
                 <Container className="w-full h-[110px] items-center  text-center text-white font-bold  text-7xl ">
                     <Container className="mx-auto">
-                        <Link to={home_url} className="flex">
+                        <Link to={homeUrl} className="flex">
                             <img src={login_atom} className="w-[78px] h-[86px] mr-5"  />
                             atom
                         </Link>
@@ -109,7 +107,6 @@ const Login = (props) => {
                         <Heading4 className="text-[#818385] pt-6" >Welcome back! Please enter your details</Heading4>
                     </GridLayout>
                     <form onSubmit={handleLogin} className="display: block m-0">
-                        
                         <Box className="!pt-12 text-black text-base">
                             <label className="pb-2">E-mail address</label><br />
                             <input placeholder="Placeholder" onChange={onChangeUserEmail} value={userEmail} type="email" required className="border w-full px-3 py-2"/>
@@ -130,14 +127,11 @@ const Login = (props) => {
                             </div>
                             <a className="underline text-[#214559] font-semibold">Forgot Password</a>
                         </LayoutBetween>
-                       
-
                         <Box className="w-full !pt-12">
                             <button className="w-full text-white bg-[#214559] h-12 hover:bg-[#377395]" type="submit">
                                 {
                                     loading ?  <CircularProgress color="secondary" /> : "LOG IN"
                                 }
-                                
                             </button>
                         </Box>
                     </form>
@@ -145,12 +139,10 @@ const Login = (props) => {
                     <GridLayout className="pt-12 w-full  items-center text-center text-base">
                         <Box className="mx-auto">
                             <span className="font-medium text-[#818385]">Don't have an account?</span>
-                            <Link to={signup_url()}>
+                            <Link to={signupUrl()}>
                                 <span className="pl-2 font-semibold text-[#0380F3] underline hover:cursor-pointer hover:text-[#44ec85]">Sign Up</span>
                             </Link>
-                            
                         </Box>
-                        
                     </GridLayout>
                 </GridLayout>
             </GridLayout>

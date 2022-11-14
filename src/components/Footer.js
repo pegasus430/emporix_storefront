@@ -86,11 +86,8 @@ const Footer = () => {
 		<div className = "footer">
 			<Mobile_footer />
 			<Dektop_footer />
-			
-
 		</div>
     
   	)
 }
-
 export default Footer

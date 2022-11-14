@@ -2,7 +2,7 @@ import React, { useState }  from 'react'
 import AccountLayout from './AccountLayout'
 import { useSelector } from "react-redux"
 import { Navigate } from 'react-router-dom'
-import { login_url } from '../../services/service.config'
+import { loginUrl } from '../../services/service.config'
 
 const CompanyInfoItem = ({caption,content}) => {
   return (
@@ -16,11 +16,9 @@ const CompanyInfoItem = ({caption,content}) => {
     </div>
   )
 }
+
 const CompanyDetails = ({value}) => {
   const [company, setCompany] = useState(value)
-  
-  
-  
   return (
     <>
       <div className="w-full md:py-12 py-5 md:flex md:justify-between border-bottom-gray">
@@ -47,15 +45,12 @@ const CompanyDetails = ({value}) => {
     </>
   )
 }
-
 const AccountCompanyDetails = () => {
     const { user: currentUser } = useSelector((state) => state.auth);
     if (!currentUser) {
-      return <Navigate  to={login_url()} />;
+      return <Navigate  to={loginUrl()} />;
   }
     return <AccountLayout page="Company Details"><CompanyDetails  value = {currentUser.company}/></AccountLayout>
 }
-
-
 export default AccountCompanyDetails
   

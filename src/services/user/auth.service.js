@@ -6,13 +6,11 @@ const API_URL = process.env.REACT_APP_API_URL_STAGE
 
 const register = async (email, password , firstName , lastName, tenantName , company , phoneNumber) => {
 	let response
-	const anonymous_token = localStorage.getItem(anonymousTokenKey)
-	
+	const anonymousToken = localStorage.getItem(anonymousTokenKey)
 	let headers = {
 		'Content-Type': 'application/json',
-		'Authorization': 'Bearer ' + anonymous_token
+		'Authorization': 'Bearer ' + anonymousToken
 	}
-
 	const payload = {
 		email : email,
 		password: password,
@@ -29,18 +27,16 @@ const register = async (email, password , firstName , lastName, tenantName , com
 			password : password
 		}
 	}
-	const signup_api = `${API_URL}/customer/${tenantName}/signup`
-	response = await ApiRequest(signup_api, 'post', payload, headers)
+	const signupApi = `${API_URL}/customer/${tenantName}/signup`
+	response = await ApiRequest(signupApi, 'post', payload, headers)
 
 	return response
 };
 
 const  login = async (username, password, userTenant) => {
 	let response_data = null
-	let user_tenant = userTenant
-	const anonymous_token = localStorage.getItem(anonymousTokenKey)
-
-	await axios.post(API_URL + `/customer/${user_tenant}/login`, 
+	const anonymousToken = localStorage.getItem(anonymousTokenKey)
+	await axios.post(API_URL + `/customer/${userTenant}/login`, 
 		{
 			"email" : username,
 			"password": password
@@ -49,7 +45,7 @@ const  login = async (username, password, userTenant) => {
 			headers:
 			{
 				'Content-Type': 'application/json', 
-				'Authorization': 'Bearer ' + anonymous_token
+				'Authorization': 'Bearer ' + anonymousToken
 			}
 		}
 	).then(async (response) =>  {
@@ -64,7 +60,7 @@ const  login = async (username, password, userTenant) => {
 			
 				await axios.get
 				(
-					API_URL + `/customer/${user_tenant}/me?expand=addresses`, 
+					API_URL + `/customer/${userTenant}/me?expand=addresses`, 
 					{
 						headers:
 						{
@@ -77,7 +73,6 @@ const  login = async (username, password, userTenant) => {
 				.then((response) => {
 					if(response.data.firstName)
 					{
-						
 						response_data = response.data
 					}
 				})

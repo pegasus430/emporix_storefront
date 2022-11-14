@@ -7,14 +7,13 @@ const Dropdown = ({options, placeholder}) => {
     return (
         <Select options={options} searchable={true} placeholder={placeholder!=undefined? placeholder:"Please select"} dropdownHandleRenderer={({state})=>(
             <>
-                {state.dropdown ?  <svg fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M13 7L7 1L1 7" stroke="#ACAEB2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                    </svg>:
-                                    <svg fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 0.999999L7 7L13 1" stroke="#ACAEB2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                    </svg>
-                               
-                                
+                {state.dropdown ?  
+                    <svg fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 7L7 1L1 7" stroke="#ACAEB2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>:
+                    <svg fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 0.999999L7 7L13 1" stroke="#ACAEB2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>      
                 }
             </>
         )}/>

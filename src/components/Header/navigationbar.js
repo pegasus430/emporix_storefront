@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import { AiOutlineMenu,AiOutlineClose, AiOutlineSearch , AiOutlineMail, AiOutlineShoppingCart } from 'react-icons/ai'
+import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch , AiOutlineMail, AiOutlineShoppingCart } from 'react-icons/ai'
 import { useSelector } from "react-redux"
 import logo from '../../assets/atom.png'
 import Badge from '@mui/material/Badge';
@@ -11,7 +11,7 @@ import LayoutContext from '../../pages/context'
 import { LargePrimaryButton } from '../Utilities/button'
 import {pageMenuSelector} from "../../redux/slices/pageReducer"
 import { tenantSelector } from '../../redux/slices/authReducer'
-import {login_url, home_url, add_tenant_to_url} from '../../services/service.config'
+import {loginUrl, homeUrl, addTenantToUrl} from '../../services/service.config'
 import {cartListSelector} from '../../redux/slices/cartReducer'
 
 const Navbar = () => {
@@ -45,7 +45,7 @@ const Navbar = () => {
                       : 
                       
                         <div className='bg-[#214559] w-full h-12 text-sm  text-center items-center text-white'>
-                            <Link to={login_url()}>
+                            <Link to={loginUrl()}>
 								<LargePrimaryButton className='' title = "LOGIN | REGISTER"></LargePrimaryButton>
 							</Link>
                         </div>
@@ -81,20 +81,15 @@ const Navbar = () => {
 
     const ParentMenu = (props) => {
       const item = props.item
-      
       return (
-        <>
-          <li 
-              key = {item.title} 
-              className=" flex justify-between py-6 border-b last:border-b-0 text-2xl hover:text-slate-400"
-              onClick = {() => parentMenuClicked(item.title, item.items)}
-          >
-             {item.title}
-             
-             <ChevronRightIcon className =  {item.items.length ? 'h-8 w-8' : 'hidden' } />
-          </li>
-    
-        </>
+        <li 
+            key = {item.title} 
+            className=" flex justify-between py-6 border-b last:border-b-0 text-2xl hover:text-slate-400"
+            onClick = {() => parentMenuClicked(item.title, item.items)}
+        >
+            {item.title}
+            <ChevronRightIcon className =  {item.items.length ? 'h-8 w-8' : 'hidden' } />
+        </li>
       )
     }
 
@@ -104,15 +99,13 @@ const Navbar = () => {
 			<>
       {
         !item.items.length? 
-        <Link to={add_tenant_to_url(item.url)}>
+        <Link to={addTenantToUrl(item.url)}>
           <li 
             key = {item.title} 
             className=" flex justify-between pb-4  text-base text-slate-400"
             onClick = {() => parentMenuClicked(item.title, item.items)}
           >
             {item.title}
-          
-       
           </li>
         </Link>:
           <li 
@@ -121,18 +114,14 @@ const Navbar = () => {
           onClick = {() => parentMenuClicked(item.title, item.items)}
           >
             {item.title}
-        
           <ChevronRightIcon className =  { 'h-8 w-8'  } />
           </li>
       }
-			  
-		
 			</>
 		  )
 	}
 
 	const SubBoard = () => {
-		
 		return (
 			<>
 				<div className='w-full flex text-center items-center border-b pt-[50px] pb-6 text-4' onClick={() => setDisplaySubItems(false)}>
@@ -153,17 +142,14 @@ const Navbar = () => {
 		)
 	}
 
-    const parentMenuClicked = (title, items) => {
-      
-      if (items.length){
-        setTitle(title)
-        setDisplaySubItems(true)
-        setSubMenuItems([...items])
-      }
-
+  const parentMenuClicked = (title, items) => {
+    if (items.length){
+      setTitle(title)
+      setDisplaySubItems(true)
+      setSubMenuItems([...items])
     }
+  }
 	const handleOpenCart = () => {
-		
 		setShowCart(true)
 	}
     // create a function for toggle mobile nav
@@ -171,10 +157,6 @@ const Navbar = () => {
         setOpen(!open)
     }
 
-    // create a function for toggle mobile nav
-    const handleNavClose = () =>{
-        setOpen(false)
-    }
 	const cartList = useSelector(cartListSelector)
   const [cartTotal, setCartTotal] = useState(0)
   const [cartTotalPrice, setCartTotalPrice] = useState(0)
@@ -271,7 +253,7 @@ const Navbar = () => {
             <div className={(!open) ? 'hidden' : ' text-black absolute top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto'}>
                <div className='h-10 justify-between flex' > 
                   <div className='flex'>
-                    <Link to={login_url()} className='flex' >
+                    <Link to={loginUrl()} className='flex' >
                       <img src={logo} className="w-[37px]"></img>
                       <div className='px-4 text-[25px] font-medium items-center'><span>atom</span></div>
                     </Link>
@@ -291,7 +273,7 @@ const Navbar = () => {
         </div>
 
         <div className='mobile_only_flex text-white'>
-            <Link to={home_url()} className='flex'>
+            <Link to={homeUrl()} className='flex'>
                 <img src={logo} ></img>
                 <p className='font-medium text-xl px-3 pt-1'>atom</p>
              </Link>

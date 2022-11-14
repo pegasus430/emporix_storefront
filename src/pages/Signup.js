@@ -12,7 +12,7 @@ import { GridLayout, Container } from "../components/Utilities/common";
 import { Heading2, Heading4 } from "../components/Utilities/typography";
 import  Box  from "@mui/material/Box";
 import { tenantKey } from "../constants/localstorage";
-import {home_url} from '../services/service.config'
+import {homeUrl} from '../services/service.config'
 
 const Signup = (props) => {
  
@@ -52,7 +52,6 @@ const Signup = (props) => {
     }
     else{
         setEmailMessage(null)
-        
     }
     setUserEmail(e.target.value);
     
@@ -74,11 +73,9 @@ const Signup = (props) => {
         {
             if( password === confirmPassword)
             {
-                
                 setLoading(true)
                 dispatch(register(userEmail, password , firstName , lastName , tenant , company, phoneNumber))
                 .then(() => {
-                    
                     dispatch(login(userEmail, password, tenant))
                         .then(() => {
                             props.history.push(`/${tenant}`);
@@ -106,14 +103,11 @@ const Signup = (props) => {
     
         }
     }
-   
-    
-    
   };
 
 
   if (isLoggedIn) {
-    return <Navigate  to={home_url()} />;
+    return <Navigate  to={homeUrl()} />;
   }
 
   return (
@@ -131,7 +125,7 @@ const Signup = (props) => {
             <GridLayout className="md:w-[540px] w-[95%] mx-auto h-[740px] md:pt-[138px] pt-10">
                 <Container className="w-full h-[110px] items-center  text-center text-white font-bold  text-7xl ">
                     <Container className="mx-auto">
-                        <Link to={home_url()} className="flex">
+                        <Link to={homeUrl()} className="flex">
                             <img src={login_atom} className="w-[78px] h-[86px] mr-5"  />
                             atom
                         </Link>
@@ -185,8 +179,6 @@ const Signup = (props) => {
                             />
                         </Box>
 
-                       
-                        
                         <Box className="w-full !pt-12">
                             <button className="w-full text-white bg-[#214559] h-12 hover:bg-[#377395]" type="submit">
                                 {

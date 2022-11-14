@@ -1,13 +1,13 @@
 import ApiRequest from '../index'
 import {accessTokenKey} from '../../constants/localstorage'
-import {price_api} from '../service.config'
+import {priceApi} from '../service.config'
 
 const PriceService = () => {
     const getPriceWithProductIds = async (product_ids = []) => {
-        const access_token = localStorage.getItem(accessTokenKey)
+        const accessToken = localStorage.getItem(accessTokenKey)
         const headers = {
             'X-Version': 'v2',
-            'Authorization': `Bearer ${access_token}`,
+            'Authorization': `Bearer ${accessToken}`,
             'Content-Type': 'application/json'
         }
         let data = {
@@ -25,7 +25,7 @@ const PriceService = () => {
                 }
             });
         })
-        const res = await ApiRequest(price_api(), 'post',data, headers)
+        const res = await ApiRequest(priceApi(), 'post',data, headers)
         return res.data
     }
     return {

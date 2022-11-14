@@ -128,11 +128,8 @@ const FilterItem = ({ item }) => {
           }
         >
           <div className="content">
-            
             {
-                
                 items.map(( title , index) => 
-                   
                     <SelectionFilterItem key={index}  title = {title} />
                 )
             }
@@ -149,14 +146,12 @@ const PriceRangeFilter = () => {
     const handleToggle = () => {
       setClicked((prev) => !prev);
     };
-  
     return (
       <li className={`accordion_item ${clicked ? "active" : ""}`}>
         <button className="button" onClick={handleToggle}>
           Price Range
           {clicked ? <ChevronDownIcon className='h-8'/> : <ChevronRightIcon className='h-8' />} 
         </button>
-  
         <div
           ref={contentEl}
           className="content_wrapper"
@@ -185,7 +180,6 @@ const PriceRangeFilter = () => {
 const RatingFilter = () => {
     const [clicked, setClicked] = useState(false);
     const contentEl = useRef();
-   
     const handleToggle = () => {
       setClicked((prev) => !prev);
     };
@@ -196,7 +190,6 @@ const RatingFilter = () => {
                 Rating
                 {clicked ? <ChevronDownIcon className='h-8'/> : <ChevronRightIcon className='h-8' />} 
             </button>
-    
             <div
                 ref={contentEl}
                 className="content_wrapper"
@@ -214,36 +207,28 @@ const RatingFilter = () => {
                     }
                 </div>
             </div>
-
-
         </li>
     );
 }
 
 const MobileFilterPanel= (props) => {
-
     return (
             <div className='lg:hidden min-w-[375px] text-black fixed top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto z-50' >
                 <div className='justify-between flex pb-12 border-b' > 
-                    
-                        
                     <div className='text-2xl leading-6 font-semibold items-center'>Filters</div>
-                    
                     <div className='flex text-center' onClick={props.closeNav}>
                         <span className = "pr-4">Close</span>              
                         <AiOutlineClose  size={25}/>
                     </div>
-                    
                 </div>
                 <div>
-                        <ul className="accordion">
-                            {filterList.map((item, index) => (
-                                <FilterItem key={index} item={item} />
-                            ))}
-                            <PriceRangeFilter />
-                            <RatingFilter />
-                        </ul>
-
+                    <ul className="accordion">
+                        {filterList.map((item, index) => (
+                            <FilterItem key={index} item={item} />
+                        ))}
+                        <PriceRangeFilter />
+                        <RatingFilter />
+                    </ul>
                 </div>
                 <div className='mt-12 font-inter font-bold'>
                     <div className="w-full h-12 bg-[#214559] text-white  flex items-center ">
@@ -252,11 +237,9 @@ const MobileFilterPanel= (props) => {
                     <div className="w-full h-12 bg-[#EFF0F2] text-white  flex items-center mt-6">
                             <span className='text-center text-[#214559] w-full'>CLEAR ALL </span>
                     </div>
-
                 </div>
             </div>
 
-        
     )
 }
 

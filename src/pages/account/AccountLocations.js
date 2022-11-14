@@ -1,59 +1,13 @@
 import React, { useState }  from 'react'
 import AccountLayout from './AccountLayout'
 import { Link } from 'react-router-dom'
-import {add_location_url} from '../../services/service.config'
+import {addLocationUrl} from '../../services/service.config'
 import LocationService from 'services/location.service'
 import { useEffect } from 'react'
-// const locationList = [
-//   {
-//     Location : 'Head Office',
-//     Name : 'Company Name' ,
-//     Address : {
-//       street : 'Barer Str.27',
-//       city : '80333 Munchen' ,
-//       country : 'Germany'
-//     },
-//     Shipping : true,
-//     Billing : true
-//   } ,
-//   {
-//     Location : 'Stuttgart Office',
-//     Name : 'Company Name' ,
-//     Address : {
-//       street : 'Schobpl.',
-//       city : '70173 Stuttgart' ,
-//       country : 'Germany'
-//     },
-//     Shipping : true,
-//     Billing : true
-//   } ,
-//   {
-//     Location : 'Munich Warehouse',
-//     Name : 'Company Name' ,
-//     Address : {
-//       street : 'Spiridon-Louis-Ring 21',
-//       city : '80809 Munchen' ,
-//       country : 'Germany'
-//     },
-//     Shipping : true,
-//     Billing : false
-//   } ,
-//   {
-//     Location : 'Stuttgart Warehouse',
-//     Name : 'Company Name' ,
-//     Address : {
-//       street : 'FriedhofstraBe 44',
-//       city : '70191 Stuttgart' ,
-//       country : 'Germany'
-//     },
-//     Shipping : true,
-//     Billing : false
-//   } ,
-// ]
 
 const AddButton = () => {
   return (
-    <Link to={add_location_url()}>
+    <Link to={addLocationUrl()}>
       <div className="w-full md:w-60 h-10 bg-[#214559] text-white  flex items-center mt-6 md:mt-12">
               <span className='text-center  w-full'>ADD NEW LOCATION </span>
       </div>

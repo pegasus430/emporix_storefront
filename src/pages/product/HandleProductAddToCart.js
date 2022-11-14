@@ -1,18 +1,18 @@
-import React, { useState, useContext}  from 'react'
 import { cartProductKey } from '../../constants/localstorage'
 
 const HandleProductAddToCart = (product, action, quantitiy) => {
-    let CartProductList = localStorage.getItem(cartProductKey)
-
-    CartProductList = CartProductList == null? {}: JSON.parse(CartProductList)
-    
+    let cartProductList = localStorage.getItem(cartProductKey)
+    cartProductList = cartProductList === null? {}: JSON.parse(cartProductList)
     const CartID = `Cart${product.id}`
-    product.buy_count = quantitiy
+    product.quantity = quantitiy
 
-    if(CartProductList[CartID] == undefined) CartProductList[CartID] = product
-    else CartProductList[CartID].buy_count += product.buy_count
-
-    localStorage.setItem(cartProductKey, JSON.stringify(CartProductList))
+    if(cartProductList[CartID] === undefined){
+        cartProductList[CartID] = product
+    }else{
+        cartProductList[CartID].quantity += product.quantity
+    }
+    
+    localStorage.setItem(cartProductKey, JSON.stringify(cartProductList))
     action(true)
 }
 export default HandleProductAddToCart

@@ -1,11 +1,11 @@
-import React, { useState }  from 'react'
+import React  from 'react'
 import { MediumPrimaryButton} from '../../components/Utilities/button';
 import { GridLayout, Container} from '../../components/Utilities/common';
 import AccountLayout from './AccountLayout'
 import { DropdownWithLabel } from '../../components/Utilities/dropdown';
 import { TextInput } from '../../components/Utilities/input';
 import { Link } from 'react-router-dom';
-import {my_account_location_url} from '../../services/service.config'
+import {myAccountLocationUrl} from '../../services/service.config'
 
 const AddLocations = () => {
     const locationTypeOptions = [
@@ -13,9 +13,6 @@ const AddLocations = () => {
         {'value':'Office','label':'Office'},
         {'value':'Warehouse','label':'Warehouse'}
     ]
-    const addLocation = () => {
-        
-    }
     return (
       <GridLayout className="mt-12 justify-center gap-12">
             <GridLayout className="md:w-[65%] w-full gap-2 m-auto">
@@ -32,10 +29,9 @@ const AddLocations = () => {
                 </div>
             </GridLayout>
             <Container className="text-center w-full">
-                <Link to={my_account_location_url()} className="w-60 m-auto">
+                <Link to={myAccountLocationUrl()} className="w-60 m-auto">
                     <MediumPrimaryButton title="SAVE NEW LOCATION" />
                 </Link>
-                    
             </Container>
       </GridLayout>
   )

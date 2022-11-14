@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Link } from 'react-router-dom';
-import {add_replenishment_orders_url, edit_replenishment_orders_url} from '../../services/service.config'
+import {addReplenishmentOrdersUrl, editReplenishmentOrdersUrl} from '../../services/service.config'
 
 const repleishmentOrdersList = [
   {
@@ -61,12 +61,9 @@ const RepleOrderItem = ({order_number, po, start_on , frequency , next_order_dat
         <div className='pt-2'>
           <span className='font-bold mr-2'>Next Order Date</span> {next_order_date} 
         </div>
-        
         <div className=' pt-2'>
           <span className='font-bold mr-2'>Total</span>  &euro; {total}
         </div>
-
-        
     </div>
   )
 }
@@ -74,7 +71,7 @@ const RepleOrderItem = ({order_number, po, start_on , frequency , next_order_dat
 const ReplenishmentOrders = () => {
   return (
     <div>
-        <Link to={add_replenishment_orders_url()}>
+        <Link to={addReplenishmentOrdersUrl()}>
           <div className="w-[278px]  h-12 bg-[#214559] text-white  flex items-center my-12 md:mx-0 mx-auto">
               <span className='text-center  w-full'>NEW REPLENISHMENT ORDER</span>
           </div>
@@ -112,7 +109,7 @@ const ReplenishmentOrders = () => {
                   <TableCell align="left" className='!py-6'>
                     
                       <div className='flex'>
-                          <Link to={edit_replenishment_orders_url()}>
+                          <Link to={editReplenishmentOrdersUrl()}>
                             <div className='font-inter font-semibold text-[14px] underline'>
                                 Edit
                             </div>
@@ -121,14 +118,12 @@ const ReplenishmentOrders = () => {
                               Cancel
                           </div>
                       </div>
-                    
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
       </TableContainer>
-
       <div className='mobile_only'>
           {
              repleishmentOrdersList.map((rows, index) => 

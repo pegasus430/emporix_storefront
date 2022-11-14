@@ -33,28 +33,21 @@ const myOdersList = [
     created : '19 Jan. 2022'
   },
 ]
-
-
 const OrderItem = ({order_number, status, created,  total}) => {
   return (
     <div className='py-6 border-b border-[#D7DADE]'>
         <div className='flex justify-between'>
-          
           <div className=''>
             {order_number} 
           </div>
             <Status width={108} height = {24} title = {status} color={ status == "SHIPPED" ?'#FFA800' : '#4BCB67'} />
         </div>
-        
-        
         <div className='font-inter pt-4 flex justify-between'>
           <div className=''>&euro; {total}</div>
           <div className=''>
             {created}
           </div>
         </div>
-
-        
     </div>
   )
 }
@@ -88,7 +81,6 @@ export const MyOrders = ({actions}) => {
                   <TableCell align="left" className='!py-6'>&euro; {row.total}</TableCell>
                   <TableCell align="left" className='!py-6'>{row.created}</TableCell>
                   <TableCell align="left" className='!py-6'>
-                    
                       <div className='flex'>
                           {actions.map((row_,index) => (
                             <div key={index} className={index > 0 ? 'font-inter font-semibold text-[14px] underline ml-6':'font-inter font-semibold text-[14px] underline'}>
@@ -98,14 +90,12 @@ export const MyOrders = ({actions}) => {
 
                           }
                       </div>
-                    
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
       </TableContainer>
-
       <div className='mobile_only'>
           {
             myOdersList.map((rows, index) => 
@@ -121,13 +111,11 @@ export const Status = ({width, height, color, title}) => {
     return (
       <div style = {{width : `${width}px` , height : `${height}px` ,  fontSize:'10px', backgroundColor : classNames(title =="SHIPPED" ? `rgba(255, 168 , 0, 0.2)` : `rgba(75, 203, 103, 0.2)`) ,  color: `${color}`  , padding: '8px 16px' , fontWeight: 'bold' , borderRadius: '24px' , display: 'flex' , alignItems:'center' }}>
           <div style={{ width: "8px" , height: '8px' , marginRight : '8px',  backgroundColor: `${color}` , borderRadius: '50px' }}>
-             
           </div>
           {title}
       </div>
     )
   }
-
   const savedCartsList = [
     {
       date : '11/05/2022' ,
@@ -180,8 +168,6 @@ export const Status = ({width, height, color, title}) => {
                 {date}
               </div>
             </div>
-            
-            
         </div>
       )
   }

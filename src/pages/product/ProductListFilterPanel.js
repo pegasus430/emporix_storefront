@@ -2,32 +2,12 @@ import React, { useState , useRef, useEffect } from 'react'
 import adjust               from '../../assets/adjust-2.png'
 import deleteFilter         from '../../assets/del_filter.png'
 import { ChevronUpIcon , ChevronDownIcon } from '@heroicons/react/solid'
-import { CAccordionBody } from '@coreui/react'
 import {useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import {LoadingCircleProgress1} from '../../components/Utilities/progress'
-import { categoryLoadingSelector, categoryDataSelector} from "../../redux/slices/categoryReducer"
+import { categoryLoadingSelector} from "../../redux/slices/categoryReducer"
 import CategoryService from '../../services/product/category.service'
 import {setProductIds, setLoadingStatus} from '../../redux/slices/productReducer'
-
-const filterItems = [
-    {
-        category : 'Material' ,
-        val : 'Leather'
-    } ,
-    {
-        category : 'Material' ,
-        val : 'Mesh'
-    } ,
-    {
-        category : 'Material' ,
-        val : 'Black'
-    } ,
-    {
-        category : 'Price' ,
-        val : ' \u20AC100 - \u20AC200'
-    } ,
-]
 
 const SelectedFilter = ({title, val}) => {
     return (
@@ -44,13 +24,11 @@ const SelectionField = ({title, total}) => {
     return (
         <div className='flex justify-between pb-4 font-inter font-medium text-base'>
             <div>
-                
                 <label > {title}</label>
             </div>
             <div className=' pr-2'>
                 {total}
             </div>
-            
         </div>
     )
 }
@@ -70,7 +48,6 @@ const Category = ({ item }) => {
           {title}
           {clicked ? <ChevronDownIcon className='h-4'/> : <ChevronUpIcon className='h-4' />} 
         </button>
-  
         <div
           ref={contentEl}
           className="content_wrapper"
@@ -81,11 +58,8 @@ const Category = ({ item }) => {
           }
         >
           <div className="content">
-            
             {
-                
                 items.map(( item , index) => 
-                   
                     <SelectionField key={index}  title = {item.title} total = {item.total} />
                 )
             }
@@ -112,11 +86,10 @@ const FilterListPanel = ({filterItems , handleSideFilterContent}) => {
             </div>
             <div className='pt-6 pb-2 border-b'>
                 {
-                filterItems.map((item , index) => (
-                        <SelectedFilter title={item.category} val={item.val} key={index} />
+                    filterItems.map((item , index) => (
+                            <SelectedFilter title={item.category} val={item.val} key={index} />
+                        )
                     )
-                )
-                    
                 }
             </div>
         </div>
@@ -135,17 +108,14 @@ const CategoryPanel = () => {
 
     const newUrl = `${maincategory}/${subcategory}/${category}`
     const [url, setUrl] = useState(newUrl)    
-    // get new url.
-    
     const dispatch = useDispatch()
 
     const getCategory = async () => {
         if(loading) return  
         
         dispatch(setLoadingStatus(true))
-        const {title, categories,category_id, productIds} = await CategoryService.getProductCategoryDetail(maincategory, subcategory, category)
+        const {title, categories,categoryId, productIds} = await CategoryService.getProductCategoryDetail(maincategory, subcategory, category)
         dispatch(setProductIds(productIds))
-        
         // set category data and already loaded.
         setCategoryList({
             loading: false,
@@ -158,7 +128,7 @@ const CategoryPanel = () => {
     }, [loading])
 
     useEffect(() => {
-        if(newUrl != url){
+        if(newUrl !== url){
             // set category loading status  
             setUrl(newUrl)
             setCategoryList({

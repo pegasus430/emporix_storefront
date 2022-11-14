@@ -8,29 +8,25 @@ import {Link} from 'react-router-dom'
 import {DropdownWithLabel} from '../../components/Utilities/dropdown'
 import {TextInput} from '../../components/Utilities/input'
 import {frequencyOptions} from './config'
-import {my_account_replenishment_orders_url} from '../../services/service.config'
+import {myAccountReplenishmentOrdersUrl} from '../../services/service.config'
 
 const ReplenishmentEditOrders = () => {
     const product = [
         {
-            "id": 1,
-            "stock": "Low",
-            "rating": 4,
-            "count": 8,
-            "product_count": 1,
-            "src": "/img/products/chair1.png",
-            "category": "ICA-CT 073BK",
-            "name": "Jysk Office Chair SKODSBORG",
-            "price": "93.50",
-            "list_price": "109.99",
-            "sku": "CF085A",
-            "estimated_delivery": "23.05.2022",
-            "sub_images": [
-            "/img/products/hp_printer_sub1.png",
-            "/img/products/hp_printer_sub2.png",
-            "/img/products/hp_printer_sub3.png"
-            ],
-            "buy_count": 1
+            'id': 1,
+            'product': {
+               'name': 'Philips GC027/00 fabric shaver',
+               'code': '19881197',
+               'id': '19881197',
+               'src': 'https://res.cloudinary.com/saas-ag/image/upload/icecatimgstage/products/19881197_0540845491.jpeg',
+               'price': {
+                    'effectiveValue': 2.4,
+                    'originalValue': 2.4,
+                    'includesTax': false,
+                    'totalValue': 2.4
+               }
+            },
+            'quantity': 1
         }
     ]
     
@@ -49,25 +45,20 @@ const ReplenishmentEditOrders = () => {
                         <DropdownWithLabel label="Delivery Day" placeholder="First working day" options={[{value:'First working day', label:'First working day'}]}/>
                     </Item>   
                     <Item className="lg:w-1/4 w-full">
-                        <Link to={my_account_replenishment_orders_url}>
+                        <Link to={myAccountReplenishmentOrdersUrl}>
                             <MediumPrimaryButton title="Add"/>
                         </Link>
                     </Item>
-                        
-                </div>
-                
-                    
+                </div>         
             </GridLayout>
             <div className="pb-6 border-b border-[#D2D2D2]">
                 <div className="lg:block hidden">
-                    <CartTable products={product}/>
+                    <CartTable cartList={product}/>
                 </div>
-
                 <div className="lg:hidden">
-                    <CartMobileContent products={product}/>
+                    <CartMobileContent cartList={product}/>
                 </div>
             </div>
-            
         </GridLayout>
     )
 };

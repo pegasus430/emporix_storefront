@@ -6,18 +6,16 @@ import { useState, createContext, useContext } from 'react';
 export const RadioContext = createContext()
 
 export const RadioGroup = ({children, active}) => {
-    const [radioActive,setRadioActive] = useState(active)
+    const [radioActive, setRadioActive] = useState(active)
 
     return (
       <div className="radio-group-wrapper">
-        <RadioContext.Provider value={{radioActive, setRadioActive}}>
+        <RadioContext.Provider value = {{radioActive, setRadioActive}}>
               {children}
         </RadioContext.Provider>
       </div>
     )
 }
-
-
 const RadioIcon = styled('span')(({ theme }) => ({
   borderRadius: '50%',
   width: 24,

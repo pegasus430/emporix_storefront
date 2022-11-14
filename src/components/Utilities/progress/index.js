@@ -15,18 +15,18 @@ export const LoadingCircleProgress = () => {
         </Box>
         
     );
-  }
+}
 
 export const LoadingCircleProgress1 = () => {
-return (
-    <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="20vh"
-    >
-        <CircularProgress/>
-    </Box>
-    
-);
+    return (
+        <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="20vh"
+        >
+            <CircularProgress/>
+        </Box>
+        
+    );
 }

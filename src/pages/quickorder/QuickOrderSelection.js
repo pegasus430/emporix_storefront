@@ -1,8 +1,7 @@
-import React , { useState, createContext, useContext} from "react";
-
+import React  from "react";
 import './quickorder.css'
-const QuickOrderSelection = () => {
 
+const QuickOrderSelection = () => {
     return (
         <div className='md:w-[30%] w-full md:pt-0 pt-10'>
             <div className="font-medium text-xl">
@@ -33,6 +32,5 @@ const QuickOrderSelection = () => {
         </div>
     )
 }
-
 
 export default QuickOrderSelection;
