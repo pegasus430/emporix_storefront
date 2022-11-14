@@ -29,6 +29,7 @@ const CartProductInfo = ({cart}) => {
     )
 }
 const CartTable = ({cartList}) => {
+    console.log(cartList)
     const dispatch = useDispatch()
     const removeCart = (e, code) => {
 

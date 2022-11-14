@@ -103,7 +103,7 @@ export const TextRegular4 = ({children, className}) => {
 }
 export const TextRegular5 = ({children, className}) => {
     return (
-        <div className= {"text-regular-4 " + (className? className: "")}>{children}</div>
+        <div className= {"text-regular-5 " + (className? className: "")}>{children}</div>
     )
 }
 export const TextRegular6 = ({children, className}) => {
