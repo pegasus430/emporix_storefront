@@ -45,7 +45,7 @@ const Navbar = () => {
                       : 
                       
                         <div className='bg-[#214559] w-full h-12 text-sm  text-center items-center text-white'>
-                            <Link to={login_url}>
+                            <Link to={login_url()}>
 								<LargePrimaryButton className='' title = "LOGIN | REGISTER"></LargePrimaryButton>
 							</Link>
                         </div>
@@ -181,12 +181,13 @@ const Navbar = () => {
 
   useEffect(()=>{
     setCartTotal(cartList.length)
-    let total_price = 0
+    let totalPrice = 0
+    
     cartList.map(cart => {
-      total_price += cart.product.price * cart.quantity
+      totalPrice += cart.product.price.totalValue * cart.quantity
     })
-    total_price = Math.trunc(total_price * 100) / 100
-    setCartTotalPrice(total_price)
+    totalPrice = Math.trunc(totalPrice * 100) / 100
+    setCartTotalPrice(totalPrice)
   }, [cartList])
 
   return (
@@ -270,7 +271,7 @@ const Navbar = () => {
             <div className={(!open) ? 'hidden' : ' text-black absolute top-0 left-0 w-full  h-screen bg-white px-6 py-12  text-center font-medium overflow-y-auto'}>
                <div className='h-10 justify-between flex' > 
                   <div className='flex'>
-                    <Link to={login_url} className='flex' >
+                    <Link to={login_url()} className='flex' >
                       <img src={logo} className="w-[37px]"></img>
                       <div className='px-4 text-[25px] font-medium items-center'><span>atom</span></div>
                     </Link>
@@ -290,7 +291,7 @@ const Navbar = () => {
         </div>
 
         <div className='mobile_only_flex text-white'>
-            <Link to={home_url} className='flex'>
+            <Link to={home_url()} className='flex'>
                 <img src={logo} ></img>
                 <p className='font-medium text-xl px-3 pt-1'>atom</p>
              </Link>

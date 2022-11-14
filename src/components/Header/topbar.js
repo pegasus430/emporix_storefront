@@ -12,7 +12,7 @@ import { add_tenant_to_url, home_url } from '../../services/service.config'
 const Logo = ({onMouseOver}) => {
 	
 	return (
-		<Link to={home_url} className="flex" onMouseOver={onMouseOver}>
+		<Link to={home_url()} className="flex" onMouseOver={onMouseOver}>
 			<div className='w-[37px]'><img src={logo} alt={"Logo"} className="w-[37px]" /></div>
 			<div className='px-4 text-white text-[25px] font-medium items-center'><span>atom</span></div>			
 		</Link>

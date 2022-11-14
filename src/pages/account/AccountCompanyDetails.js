@@ -51,7 +51,7 @@ const CompanyDetails = ({value}) => {
 const AccountCompanyDetails = () => {
     const { user: currentUser } = useSelector((state) => state.auth);
     if (!currentUser) {
-      return <Navigate  to={login_url} />;
+      return <Navigate  to={login_url()} />;
   }
     return <AccountLayout page="Company Details"><CompanyDetails  value = {currentUser.company}/></AccountLayout>
 }

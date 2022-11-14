@@ -138,7 +138,7 @@ const CategoryService = () => {
         const params = {
             "X-Total-Count": true
         }
-        const api = `${resource_reference_api}/${resourceId}`
+        const api = `${resource_reference_api()}/${resourceId}`
         const categories = await ApiRequest(api, 'get', {}, headers, params)
         return categories
     }
@@ -153,7 +153,7 @@ const CategoryService = () => {
             "X-Total-Count": true,
         }
         
-        const api = `${parent_categories_api}/${categoryId}/parents`
+        const api = `${parent_categories_api()}/${categoryId}/parents`
         const categories = await ApiRequest(api, 'get', {}, headers)
         return categories
     }

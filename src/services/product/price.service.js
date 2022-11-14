@@ -25,7 +25,7 @@ const PriceService = () => {
                 }
             });
         })
-        const res = await ApiRequest(price_api, 'post',data, headers)
+        const res = await ApiRequest(price_api(), 'post',data, headers)
         return res.data
     }
     return {

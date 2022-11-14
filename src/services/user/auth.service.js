@@ -86,7 +86,6 @@ const  login = async (username, password, userTenant) => {
 		
 	},
 		(error) =>{
-			console.log("error when login", error)
 			
 		}
 	);

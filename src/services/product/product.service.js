@@ -16,7 +16,7 @@ const ProductService = () => {
         const res = await ApiRequest(product_api(), 'get', {},headers, params)
         return res.data
     }
-    const getProductsWithCode = async (ids = []) => {
+    const getProductsWithCode = async (codes = []) => {
         const accessToken = localStorage.getItem(accessTokenKey)
         const headers = {
             "X-Version": 'v2',
@@ -24,10 +24,10 @@ const ProductService = () => {
             "Accept-Language": "en"
         }
         const params = {
-            'q': 'code:(' + (ids.join(','))+')'
+            'q': 'code:(' + (codes.join(','))+')'
         }
         const res = await ApiRequest(product_api(), 'get', {},headers, params)
-        return res
+        return res.data
     }
     const getProductsWithYrns = async (yrns = []) => {
         const access_token = localStorage.getItem(accessTokenKey)
@@ -40,7 +40,7 @@ const ProductService = () => {
         const data = {
             yrns: yrns
         }
-        const res = await ApiRequest(product_api_with_yrn, 'post', data,headers)
+        const res = await ApiRequest(product_api_with_yrn(), 'post', data,headers)
         const products = res.data.map(product => {
             return {
                 ...product,

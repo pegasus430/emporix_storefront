@@ -4,10 +4,6 @@ export const menu_list = [
        "items" : []
     },
     {
-      "title"  : "Services" ,
-      "items" : []
-    } ,
-    {
       "title"  : "Brands" ,
       "items" : []
     } ,

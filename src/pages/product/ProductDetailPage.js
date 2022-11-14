@@ -35,9 +35,9 @@ const B = ({children}) => {
 const ProductDetailCategoryCaptionBar = ({category}) => {
  
     const category_tree = [
-        {"caption": "Home", "link": product_url}
+        {"caption": "Home", "link": product_url()}
     ]
-    let lnk = product_url
+    let lnk = product_url()
     for(let c in category){
         lnk = `${lnk}/${category[c].toLowerCase().replaceAll(' ', '_')}`
         category_tree.push({"caption":category[c], "link":lnk})

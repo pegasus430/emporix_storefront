@@ -16,6 +16,7 @@ import InvalidTenant from './InvalidTenant'
 import {tenantSelector, setTenant, sessionIdSelector, isLoggedInSelector, accessTokenSelector, setAccessToken} from '../redux/slices/authReducer'
 import AccessToken from '../services/user/accessToken'
 import {getCartAccount, cartAccountSelector, getCartList} from '../redux/slices/cartReducer'
+import CurrencyService from "services/currency.service"
 
 const Layout = ({children, title}) => {
     const [showCart, setShowCart] = useState(false)
@@ -57,10 +58,9 @@ const Layout = ({children, title}) => {
     useEffect(()=> {
         const layout_init = async () => {
             if(accessToken_ === "" || !Object.keys(cartAccount).length) return
+            // const currencies = await CurrencyService.getAllCurrencies()
             dispatch(GetCategory())
             dispatch(GetAvailability())
-
-            console.log('Layout initialized.')
         }
         layout_init()
 	},[accessToken_, cartAccount])

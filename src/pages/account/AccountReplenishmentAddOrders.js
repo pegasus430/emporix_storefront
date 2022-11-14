@@ -60,7 +60,7 @@ const ReplenishmentAddOrders = () => {
 
                 </div>
                 <div className="w-60 p-2">
-                    <Link to={my_account_replenishment_orders_url}>
+                    <Link to={my_account_replenishment_orders_url()}>
                         <MediumPrimaryButton title="SAVE ORDER"/>
                     </Link>
                 </div>

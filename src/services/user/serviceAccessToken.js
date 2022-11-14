@@ -19,7 +19,7 @@ const GetServiceTokenFromServer = async () => {
     const service_token_expires_in = localStorage.getItem(servciceTokenExpiresInKey)
     if(now < parseInt(service_token_expires_in))
         return localStorage.getItem(serviceTokenKey)
-    const res = await ApiRequest(service_token_api, 'post', qs.stringify(payload), headers)
+    const res = await ApiRequest(service_token_api(), 'post', qs.stringify(payload), headers)
     const serviceToken = res['data']['access_token']
     const expires_in = res['data']['expires_in']
     localStorage.setItem(serviceTokenKey, serviceToken)
