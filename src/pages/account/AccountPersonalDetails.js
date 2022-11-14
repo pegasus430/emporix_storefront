@@ -94,9 +94,8 @@ const ActionDiscardButton = ({caption}) => {
 const PersonalDetails = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
   if (!currentUser) {
-      return <Navigate  to={login_url}/>;
+      return <Navigate  to={login_url()}/>;
   }
-console.log(currentUser)
   return (
     <>
       <PersonalInfo user={currentUser}/>

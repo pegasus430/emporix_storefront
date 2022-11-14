@@ -53,7 +53,7 @@ import { useEffect } from 'react'
 
 const AddButton = () => {
   return (
-    <Link to={add_location_url}>
+    <Link to={add_location_url()}>
       <div className="w-full md:w-60 h-10 bg-[#214559] text-white  flex items-center mt-6 md:mt-12">
               <span className='text-center  w-full'>ADD NEW LOCATION </span>
       </div>

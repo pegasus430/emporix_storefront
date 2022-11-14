@@ -1,4 +1,5 @@
-import React, { useState }  from 'react'
+import React from 'react'
+import {useSelector } from 'react-redux'
 import {GridLayout, LayoutBetween, DesktopMDContainer,MobileXLContainer, DesktopXLContainer,  MobileMDContainer, DesktopLGContainer, MobileLGContainer} from '../../components/Utilities/common'
 import {ProgressBar, ProgressBarItem} from '../../components/Utilities/progressbar'
 import  ShippingMethod  from '../../components/Checkout/shiping_method'
@@ -10,6 +11,7 @@ import { RadioGroup } from '../../components/Utilities/radio'
 import './checkout.css'
 import Checkbox from '../../components/Utilities/checkbox'
 import { Container } from '../../components/Utilities/common'
+import { cartAccountSelector, cartListSelector } from 'redux/slices/cartReducer'
 
 const ShipingContent = () => {
     const locations = [
@@ -176,39 +178,22 @@ const ShipmentContent = () => {
     )
 }
 const ProductContent = () => {
-    const products = [
-        {
-            id : 1,
-            stock : "Low", 
-            rating : 4, 
-            count : 8 ,
-            product_count: 1,
-            src : "/img/products/chair1.png" ,
-            category : "ICA-CT 073BK",
-            name : "Jysk Office Chair SKODSBORG",
-            price : "93.50",
-            list_price : "109.99",
-            sku: "CF085A",
-            estimated_delivery: "23.05.2022",
-            sub_images: ["/img/products/hp_printer_sub1.png", "/img/products/hp_printer_sub2.png", "/img/products/hp_printer_sub3.png"]
-        } ,
-        {
-            id : 2,
-            stock : "In", 
-            rating : 4, 
-            count : 8 ,
-            product_count: 4,
-            src : "/img/products/chair2.png" ,
-            category : "ICA-CT 073BK",
-            name : "Equip Mesh Office Chair",
-            price : "89.90",
-            list_price : "99.99",
-            sku: "CF085A",
-            estimated_delivery: "23.05.2022",
-            sub_images: ["/img/products/hp_printer_sub1.png", "/img/products/hp_printer_sub2.png", "/img/products/hp_printer_sub3.png"]
-        } 
-    ]
+    const cartAccount = useSelector(cartAccountSelector)
+    const cartList = useSelector(cartListSelector)
+    
+    const products = cartList.map(cart => {
 
+        return {
+            id: cart.product.id,
+            name: cart.product.name,
+            sku: cart.product.code,
+            estimated_delivery: '23.05.2022',
+            quantity: cart.quantity,
+            src: cart.product.media.length > 0 ? cart.product.media[0]['url']: '',
+            price: cart.product.price.totalValue
+        }
+    })
+    
     return (
         <GridLayout className="gap-6">
             <GridLayout className="gap-6 border-grey-bottom pb-6">
@@ -225,8 +210,8 @@ const ProductContent = () => {
                                 </Container>
                                 <LayoutBetween>
                                     <Container>
-                                        <TextBold6>Quantity::</TextBold6>
-                                        <TextRegular4>&nbsp;{product.product_count}</TextRegular4>
+                                        <TextBold6>Quantity:</TextBold6>
+                                        <TextRegular4>&nbsp;{product.quantity}</TextRegular4>
                                     </Container>
                                     <Heading5>&euro; {product.price}</Heading5>
                                 </LayoutBetween>
@@ -251,7 +236,7 @@ const ProductContent = () => {
                                 <LayoutBetween>
                                     <Container>
                                         <TextBold6>Quantity::</TextBold6>
-                                        <TextRegular4>&nbsp;{product.product_count}</TextRegular4>
+                                        <TextRegular4>&nbsp;{product.quantity}</TextRegular4>
                                     </Container>
                                     <Heading5>&euro; {product.price}</Heading5>
                                 </LayoutBetween>

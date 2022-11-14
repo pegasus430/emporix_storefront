@@ -63,7 +63,7 @@ const FinalCheckout = ({setFinal}) => {
             </div>
             <div className='pt-12 w-full'>
                 <div className=' mx-auto md:w-60  w-full'>
-                    <Link to= {home_url} >
+                    <Link to= {home_url()} >
                         <button onClick={()=> setFinal(false)} className='bg-[#214559] text-[white] px-6 py-0 h-12 file:text-[14px] leading-[14px] md:w-60 w-full'>BACK TO HOME PAGE</button>
                     </Link>
                 </div>

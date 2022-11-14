@@ -8,7 +8,6 @@ const  Quantity  = ({value, action}) => {
     const increment = (action) => {
       let newVal = val + 1
       setVal(newVal);
-      console.log(action)
       if(action!=undefined) action(newVal);
     }
     

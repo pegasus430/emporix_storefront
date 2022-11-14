@@ -247,14 +247,14 @@ const CartTotalPrice = ({value}) => {
 const CartGoCheckout = () => {
    
     return (
-        <Link to={checkout_url} className="w-full">
+        <Link to={checkout_url()} className="w-full">
             <button className="cart-go-checkout-btn">GO TO CHECKOUT</button>
         </Link>
     )
 }
 const CartOpenCart = () => {
     return (
-        <Link to={cart_url} className="w-full">
+        <Link to={cart_url()} className="w-full">
             <button className="cart-open-cart-btn">
                 OPEN CART
             </button>

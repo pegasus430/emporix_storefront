@@ -116,7 +116,7 @@ const PortalCaptionBar = ({title,action_title}) => {
   )
 }
 const RecentOrders = () => {
-  const actions = [{'title':'View', 'link': my_account_my_orders_view_url}]
+  const actions = [{'title':'View', 'link': my_account_my_orders_view_url()}]
   return (
     <div className="account-recent-orders-wrapper portal-wrapper">
       <PortalCaptionBar title="Recent Orders" action_title="View All"/>

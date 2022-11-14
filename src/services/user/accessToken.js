@@ -44,7 +44,7 @@ const AccessToken = async (tenant) => {
         'hybris-session-id': session_id
     }
     
-    const res = await ApiRequest(anonymous_token_api, 'get', {}, {}, params)
+    const res = await ApiRequest(anonymous_token_api(), 'get', {}, {}, params)
     localStorage.setItem(anonymousTokenKey, res['data']['access_token'])
     localStorage.setItem(anonymousTokenExpiresInKey, now + res['data']['expires_in'] * 1000)
 

@@ -78,7 +78,7 @@ const Login = (props) => {
 
 
   if (isLoggedIn) {
-    return <Navigate  to={home_url} />;
+    return <Navigate  to={home_url()} />;
   }
 
   return (
@@ -145,7 +145,7 @@ const Login = (props) => {
                     <GridLayout className="pt-12 w-full  items-center text-center text-base">
                         <Box className="mx-auto">
                             <span className="font-medium text-[#818385]">Don't have an account?</span>
-                            <Link to={signup_url}>
+                            <Link to={signup_url()}>
                                 <span className="pl-2 font-semibold text-[#0380F3] underline hover:cursor-pointer hover:text-[#44ec85]">Sign Up</span>
                             </Link>
                             

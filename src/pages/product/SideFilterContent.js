@@ -88,7 +88,6 @@ const SelectionFilterItem = ({category , title , handleItem}) => {
     const handleOnChange = (e) => {
         const val = e.target.value;
         const item = {'category' : category , 'val' : val }
-        // console.log("selected item", item)
         handleItem(item)
     }
     return (
@@ -181,11 +180,9 @@ const SideFilterContent = (props) => {
     const handleItem = (newItem) => {
 
         if(!filterItems.some(item => item.val == newItem.val)){
-            console.log("not included")
             setFilterItems(prev => [...prev, newItem])
         }
         else{
-            console.log("included")
             setFilterItems(filterItems.filter((item) => { return item.val != newItem.val}))
         }
  

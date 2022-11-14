@@ -45,10 +45,10 @@ const OrderItem = ({order_number, status, created,  total}) => {
           <Status width={108} height = {24} title = {status} color={ status == "SHIPPED" ?'#FFA800' : '#4BCB67'} />
             <div className='flex'>
                 <div className='font-inter font-semibold text-[14px] underline'>
-                  <Link to={`${my_account_my_orders_view_url}${order_number}`}>View</Link>
+                  <Link to={`${my_account_my_orders_view_url()}${order_number}`}>View</Link>
                 </div>
                 <div className='font-inter font-semibold text-[14px] underline ml-6'>
-                    <Link to={`${my_account_my_orders_invoice_url}${order_number}`}>Invoice</Link>
+                    <Link to={`${my_account_my_orders_invoice_url()}${order_number}`}>Invoice</Link>
                 </div>
             </div>
         </div>
@@ -99,10 +99,10 @@ export const MyOrders = () => {
                     
                       <div className='flex'>
                           <div className='font-inter font-semibold text-[14px] underline'>
-                            <Link to={`${my_account_my_orders_view_url}${row.order_number}`}>View</Link>
+                            <Link to={`${my_account_my_orders_view_url()}${row.order_number}`}>View</Link>
                           </div>
                           <div className='font-inter font-semibold text-[14px] underline ml-6'>
-                            <Link to={`${my_account_my_orders_invoice_url}${row.order_number}`}>Invoice</Link>
+                            <Link to={`${my_account_my_orders_invoice_url()}${row.order_number}`}>Invoice</Link>
                           </div>
                       </div>
                     

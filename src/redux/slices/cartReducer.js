@@ -87,10 +87,11 @@ export const putCartProduct = (product, cartAccountId,cartList) => async (dispat
     // Not existed case.
     if(matchCart.length === 0){
         const res = await CartService.addProuctToCart(cartAccountId,product)
-        dispatch(addCart({
-            ...res,
-            product: product
-        }))
+        // dispatch(addCart({
+        //     ...res,
+        //     product: product
+        // }))
+        dispatch(getCartList(cartAccountId))
     }else{
         
     }

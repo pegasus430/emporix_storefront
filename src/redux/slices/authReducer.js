@@ -67,8 +67,6 @@ export const register = (email, password , firstName , lastName, tenantName , co
       return Promise.resolve();
     },
     (error) => {
-      console.log("error", error.response.status)
-
       if(error.response.status == 409 ){
         dispatch(registerFail());
         dispatch(setMessage("This email alrady exists"));

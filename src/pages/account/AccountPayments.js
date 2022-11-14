@@ -45,7 +45,7 @@ const Payments = () => {
               <TextBold8 className="text-[#377395]"> Joe W</TextBold8>
             </Container>
             <TextBold9 className="justify-end flex">
-                <Link to={payment_edit_card_detail_url}>
+                <Link to={payment_edit_card_detail_url()}>
                   <Underline className="text-[#0380F3]">Edit Card Detail</Underline>
                 </Link>
               </TextBold9>

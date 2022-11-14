@@ -22,7 +22,7 @@ const PaymentsEditCardDetails = () => {
                 </div>
             </GridLayout>
             <Container className="text-center w-full">
-                <Link to={my_account_payment_url} className="w-60 m-auto">
+                <Link to={my_account_payment_url()} className="w-60 m-auto">
                     <MediumPrimaryButton title="SAVE NEW CARD DETAIL" />
                 </Link>
                     

@@ -1,4 +1,4 @@
-import React , { useState} from "react";
+import React , { useState, useRef, useContext} from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,15 +6,19 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import {TextInputOnlyWithEnterKey, TextInputOnly} from '../../components/Utilities/input'
-import {cartListSelector, putCartProduct, clearCart, cartAccountSelector} from '../../redux/slices/cartReducer'
+import {getCartList, cartAccountSelector} from '../../redux/slices/cartReducer'
 import {messageSelector, setMessage} from '../../redux/slices/messageReducer'
 import {availabilityDataSelector} from '../../redux/slices/availabilityReducer'
 import productService from "../../services/product/product.service";
+import cartService from "services/cart.service";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import {min_product_in_stock_count} from '../../constants/page'
 import './quickorder.css'
 import { useDispatch, useSelector } from "react-redux";
+import priceService from "services/product/price.service";
+import LayoutContext from 'pages/context'
+import { CgArrowsExpandDownLeft } from "react-icons/cg";
 const list = [
     {
         code : '01-460-05860',
@@ -38,37 +42,51 @@ const list = [
         total : ''
     }
 ]
-const CartItem = ({item, handleCodeChange, handleQuantityChange, feature}) => {
+const CartItem = ({item, codeHandler, quantityHandler, feature, focusHanlder, blurHandler, activeFocusCode, removeHandler}) => {
     return (
         <TableRow
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             className = 'text-base'
         >
-            <TableCell component="th" scope="row" className=' !py-6'>
-                {
-                    feature==="action"?
-                        <TextInputOnly value={item.code} action={handleCodeChange}  placeholder="Enter Code" className = 'border max-w-[160px]' />:
-                        <TextInputOnlyWithEnterKey value={item.code} action={handleCodeChange}  placeholder="Enter Code" className = 'border max-w-[160px]' />
+            <TableCell component="th" scope="row" className="!py-6">
+                { feature==='action'?
+                    <TextInputOnly 
+                        value={item.code} 
+                        action={codeHandler} 
+                        placeholder="Enter Code"
+                        className = 'border max-w-[160px]' 
+                    />:
+                    <TextInputOnly
+                        value={item.code}
+                        className = 'border max-w-[160px]' 
+                    />
                 }
+                
             </TableCell>
-            <TableCell align="left" className='!py-6 !font-bold w-[250px]'>
+            <TableCell align="left" className="!py-6 !font-bold w-[250px]">
                 {item.name}
             </TableCell>
             <TableCell align="left" className='!py-6'>
-                {
-                    feature==="action"?
-                        <TextInputOnly value =  {item.buy_count} action = {(value) => handleQuantityChange(value, item)} className = 'border max-w-[56px] ' />:
-                        <TextInputOnlyWithEnterKey value =  {item.buy_count} action = {(value) => handleQuantityChange(value, item)} className = 'border max-w-[56px] ' />
-                }
-                    
+                <TextInputOnly 
+                    value =  {item.quantity} 
+                    action = {(value) => quantityHandler(value, item.code, feature)}
+                    onFocus = {() => {
+                        if(focusHanlder !== undefined) focusHanlder(item.code)
+                    }}
+                    onBlur = {() => {
+                        if(blurHandler !== undefined) blurHandler(item.code)
+                    }}
+                    className = 'border max-w-[56px] '
+                    autoFocus={activeFocusCode===item.code ? true: false}
+                />
             </TableCell>
             <TableCell align="left" className='!py-6'>
-                {item.list_price ? "€ " + item.list_price: null}
+                {item.price.totalValue ? "€ " + item.price.totalValue: null}
             </TableCell>
             <TableCell align="left" className='!py-6'>
-                    {item.list_price ? "€ " + Math.trunc(item.list_price * item.buy_count * 100) / 100: null}
+                    {item.price.totalValue ? "€ " + Math.trunc(item.price.totalValue * item.quantity * 100) / 100: null}
             </TableCell>
-            <TableCell align="left" className='!py-6'>
+            <TableCell align="left" className='!py-6' onClick={()=>removeHandler(item.code)}>
                 {
                     item.code?
                     <span className="underline font-bold">
@@ -87,26 +105,101 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const DesktopContent = () => {
     // Add Product state
     const [addProduct, setAddProduct] = useState({
-        product: {
-            code: "",
-            quantity: 1,
-            price: {
-                
-            }
+        code: "",
+        name: "",
+        quantity: 1,
+        price: {
+            
         }
     })
+    const {setShowCart} = useContext(LayoutContext)
+    const isLoading = useRef(false)
+    const activeFocusCode = useRef(null)
     // Tempo product list to add cart.
     const [tempoProductList, setTempoProductList] = useState([])
     // Notification message
     const [openNotification , setOpenNotification] = useState(false)
     const message = useSelector(messageSelector);
+    const cartAccount = useSelector(cartAccountSelector)
     // Dispatch function
     const dispatch = useDispatch()
     // Notification handle close
     const handleClose = () => {
         setOpenNotification(false);
     };
+    // Handle Code Change
+    const handleCodeChange = async (code) => {
+        if(isLoading.current) return
+        const res = await productService.getProductsWithCode([code])
+        if(res.length > 0){
+            const price = await priceService.getPriceWithProductIds([res[0]['id']])
+            if(price.length){
+                setAddProduct({
+                    ...addProduct,
+                    name: res[0]['name'],
+                    price: price[0]
+                })
+                const matchProduct = tempoProductList.filter(product => product.code===code)
+                if(!matchProduct.length)
+                    setTempoProductList([
+                        ...tempoProductList,
+                        {
+                            ...addProduct,
+                            code: res[0]['id'],
+                            name: res[0]['name'],
+                            yrn: res[0]['yrn'],
+                            price: price[0]
+                        }
+                    ])
+            }
+        }else{
+            if(addProduct.name !== '')
+                setAddProduct({
+                    ...addProduct,
+                    name: '',
+                    price: {}
+                })
+        }
+    }
+    // Handle Quantity Change
+    const handleQuantityChange = (quantity, code, feature) => {
+        if(feature === 'action'){
+            setAddProduct({
+                ...addProduct,
+                quantity: quantity
+            })
+        }else{
+            const newTempoProductList = tempoProductList.map(product => {
+                if(product.code === code) {
+                    return {
+                        ...product,
+                        quantity: quantity
+                    }
+                }
+                return product
+            })
+            setTempoProductList(newTempoProductList)
+        }
+    }
+    const handleFocus = (code) => {
+        activeFocusCode.current = code
 
+    }
+    const handleBlur = () => {
+        activeFocusCode.current = null
+    }
+    const handleRemove = (code) => {
+        const newTempoProductList = tempoProductList.filter(product => product.code !== code)
+        setTempoProductList(newTempoProductList)
+    }
+    const clearProductList = () => {
+        setTempoProductList([])
+    }
+    const addProductsToCart = async () => {
+        const res = await cartService.addMultipleProductsToCart(cartAccount.id, tempoProductList)
+        dispatch(getCartList(cartAccount.id))
+        setShowCart(true)
+    }
     return (
         <div className="desktop_only">
             <Snackbar
@@ -120,7 +213,7 @@ const DesktopContent = () => {
                 </Alert>
             </Snackbar>
             <div className="float-right underline text-base font-medium text-[#377395]">
-                <span className="pr-8 cursor-pointer">Clear List</span>
+                <span className="pr-8 cursor-pointer" onClick={clearProductList}>Clear List</span>
                 <span>Order list</span>
             </div>
             <div className="pt-[58px]">
@@ -138,7 +231,16 @@ const DesktopContent = () => {
                         </TableHead>
                         <TableBody>
                             {tempoProductList.map((tempoProduct) => 
-                                    <CartItem feature="row" key={Math.random()} item = {tempoProduct} />
+                                    <CartItem 
+                                        feature="row" 
+                                        key={Math.random()} 
+                                        item = {tempoProduct} 
+                                        quantityHandler={handleQuantityChange} 
+                                        focusHanlder={handleFocus} 
+                                        blurHandler={handleBlur}
+                                        activeFocusCode={activeFocusCode.current}
+                                        removeHandler={handleRemove}
+                                    />
                                 )
                             }
                             {tempoProductList.length === 0?
@@ -147,13 +249,13 @@ const DesktopContent = () => {
                                 </TableRow>: ""
                             }
                             {/* Add Cart Row */}
-                            <CartItem feature="action" key="add" />
+                            <CartItem feature="action" key="add" item={addProduct} codeHandler={handleCodeChange} quantityHandler={handleQuantityChange}/>
                         </TableBody>
                     </Table>
                 </TableContainer>
             </div>
             <div className="float-right pt-12">
-                <button className="quickorder-add-to-cart-btn">ADD TO CART</button> <br />
+                <button className="quickorder-add-to-cart-btn" onClick={addProductsToCart}>ADD TO CART</button> <br />
                 <button className="quickorder-add-to-quote-btn">ADD TO QUOTE</button>             
             </div>
             
@@ -163,11 +265,11 @@ const DesktopContent = () => {
 
 const MobileContent = () => {
     const [quickOrderList , setQuickOrderList ] = useState(list)
-    const handleCodeChange = () => {
-
+    const handleCodeChange = (code) => {
+        
     }
     const handleQuantityChange = () => {
-
+           
     }
 
     const MobileQuickOrderCell = ({item}) => {

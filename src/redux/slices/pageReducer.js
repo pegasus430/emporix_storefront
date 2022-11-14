@@ -18,23 +18,19 @@ export const initialState = {
             "items" : []
         },
         {
-            "title"  : "Services" ,
-            "items" : []
-        } ,
-        {
             "title"  : "Brands" ,
             "items" : [],
             "url" : "brand"
         } ,
         {
-            "title"  : "About Us" ,
-            "items" : []
-        } ,
-        {
             "title"  : "Quick Order" ,
             "items" : [],
             "url" : "quick_order"
-        }
+        },
+        {
+            "title"  : "About Us" ,
+            "items" : []
+        } 
     ],
     tenantList: tenantLists
 }

@@ -17,7 +17,7 @@ const CartProductInfo = ({cart}) => {
     return (
         <div className="cart-product-info-wrapper flex gap-6">
             <div className="w-[52px]">
-                <CartProductImage className="table-cart-product-image" src={cart.src} />
+                <CartProductImage className="table-cart-product-image" src={cart.product.src} />
             </div>
             <div>
                <CartProductBasicInfo cart={cart}/> 

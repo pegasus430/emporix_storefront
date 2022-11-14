@@ -10,7 +10,7 @@ const BrandService = () => {
             "Authorization": `Bearer ${access_token}`,
             "Content-Type": "application/json"
         }
-        const res = await ApiRequest(brand_api, 'get', {},headers, {})
+        const res = await ApiRequest(brand_api(), 'get', {},headers, {})
         return res.data
     }
     return {
