@@ -1,60 +1,56 @@
 import {getTenantLists} from '../tenant.config'
 import { tenantKey } from '../constants/localstorage'
-export const grant_type = "client_credentials"
+export const grantType = "client_credentials"
 
 const API_URL = process.env.REACT_APP_API_URL_STAGE
-const default_client_id = process.env.REACT_APP_EMPORIX_CLIENT_ID_STAGE
-const default_client_secret = process.env.REACT_APP_EMPORIX_SECRET_STAGE
+const defaultClientId = process.env.REACT_APP_EMPORIX_CLIENT_ID_STAGE
+const defaultClientSecret = process.env.REACT_APP_EMPORIX_SECRET_STAGE
 
+const getTenant = () => localStorage.getItem(tenantKey)
 
-const get_tenant = () => localStorage.getItem(tenantKey)
-
-export const client_id = () => {
-    const user_tenant = get_tenant()
+export const clientId = () => {
+    const userTenant = getTenant()
     const tenantLists = getTenantLists()
-    if(tenantLists[user_tenant] === undefined) return default_client_id
-    return tenantLists[user_tenant]['emporix_client_id']
+    if(tenantLists[userTenant] === undefined) return defaultClientId
+    return tenantLists[userTenant]['emporix_client_id']
 }
-export const client_secret = () => {
-    const user_tenant = get_tenant()
+export const clientSecret = () => {
+    const userTenant = getTenant()
     const tenantLists = getTenantLists()
-    if(tenantLists[user_tenant] === undefined) return default_client_secret
-    return tenantLists[user_tenant]['emporix_secret']
+    if(tenantLists[userTenant] === undefined) return defaultClientSecret
+    return tenantLists[userTenant]['emporix_secret']
 }
 
-
-export const service_token_api = ()=> `${API_URL}/oauth/token`
-export const category_api = ()=> `${API_URL}/category/${get_tenant()}/category-trees`
-export const product_api = ()=>  `${API_URL}/product/${get_tenant()}/products`
-export const retriev_resource_api = (categoryId)=> `${API_URL}/category/${get_tenant()}/categories/${categoryId}/assignments`
-export const availability_api = ()=> `${API_URL}/availability/${get_tenant()}/availability`
-
-export const product_api_with_yrn = ()=> `${API_URL}/product/${get_tenant()}/search`
-
-export const anonymous_token_api = ()=> `${API_URL}/customerlogin/auth/anonymous/login`
-export const brand_api = ()=> `${API_URL}/brand/brands`
-export const resource_reference_api = ()=> `${API_URL}/category/${get_tenant()}/assignments/references`
-export const parent_categories_api = ()=> `${API_URL}/category/${get_tenant()}/categories`
-export const get_cart_account_api = ()=> `${API_URL}/cart/${get_tenant()}/carts`
-export const cart_item_api = ()=> `${API_URL}/cart/${get_tenant()}/carts`
-export const cart_products_api = ()=> `${API_URL}/cart/${get_tenant()}/carts`
-export const cart_remove_api = ()=> `${API_URL}/cart/${get_tenant()}/carts`
-export const price_api = ()=> `${API_URL}/price/${get_tenant()}/match-prices-by-context`
-export const currency_api = ()=> `${API_URL}/${get_tenant()}/currencies`
+export const serviceTokenApi = ()=> `${API_URL}/oauth/token`
+export const categoryApi = ()=> `${API_URL}/category/${getTenant()}/category-trees`
+export const productApi = ()=>  `${API_URL}/product/${getTenant()}/products`
+export const retrievResourceApi = (categoryId)=> `${API_URL}/category/${getTenant()}/categories/${categoryId}/assignments`
+export const availabilityApi = ()=> `${API_URL}/availability/${getTenant()}/availability`
+export const productApiWithYrn = ()=> `${API_URL}/product/${getTenant()}/search`
+export const anonymousTokenApi = ()=> `${API_URL}/customerlogin/auth/anonymous/login`
+export const brandApi = ()=> `${API_URL}/brand/brands`
+export const resourceReferenceApi = ()=> `${API_URL}/category/${getTenant()}/assignments/references`
+export const parentCategoriesApi = ()=> `${API_URL}/category/${getTenant()}/categories`
+export const getCartAccountApi = ()=> `${API_URL}/cart/${getTenant()}/carts`
+export const cartItemApi = ()=> `${API_URL}/cart/${getTenant()}/carts`
+export const cartProductsApi = ()=> `${API_URL}/cart/${getTenant()}/carts`
+export const cartRemoveApi = ()=> `${API_URL}/cart/${getTenant()}/carts`
+export const priceApi = ()=> `${API_URL}/price/${getTenant()}/match-prices-by-context`
+export const currencyApi = ()=> `${API_URL}/currency/${getTenant()}/currencies`
 // URLS
-export const add_location_url = ()=> `/${get_tenant()}/my-account/locations/add`
-export const my_account_location_url = ()=> `/${get_tenant()}/my-account/locations`
-export const payment_edit_card_detail_url = ()=> `/${get_tenant()}/my-account/payments/edit_card_details`
-export const my_account_payment_url = ()=> `/${get_tenant()}/my-account/payments`
-export const my_account_replenishment_orders_url = ()=> `/${get_tenant()}/my-account/replenishment-orders`
-export const add_replenishment_orders_url = ()=> `/${get_tenant()}/my-account/replenishment-orders/add`
-export const edit_replenishment_orders_url = ()=> `/${get_tenant()}/my-account/replenishment-orders/edit`
-export const my_account_my_orders_view_url = ()=> `/${get_tenant()}/my-account/my-orders/view/`
-export const my_account_my_orders_invoice_url = ()=> `/${get_tenant()}/my-account/my-orders/invoice/`
-export const checkout_url = ()=> `/${get_tenant()}/checkout`
-export const cart_url = ()=> `/${get_tenant()}/cart`
-export const login_url = ()=> `/${get_tenant()}/login`
-export const home_url = ()=> `/${get_tenant()}`
-export const signup_url = ()=> `/${get_tenant()}/signup`
-export const product_url = ()=> `/${get_tenant()}/product`
-export const add_tenant_to_url = (url)=> `/${get_tenant()}/${url}`
+export const addLocationUrl = ()=> `/${getTenant()}/my-account/locations/add`
+export const myAccountLocationUrl = ()=> `/${getTenant()}/my-account/locations`
+export const paymentEditCardDetailUrl = ()=> `/${getTenant()}/my-account/payments/edit_card_details`
+export const myAccountPaymentUrl = ()=> `/${getTenant()}/my-account/payments`
+export const myAccountReplenishmentOrdersUrl = ()=> `/${getTenant()}/my-account/replenishment-orders`
+export const addReplenishmentOrdersUrl = ()=> `/${getTenant()}/my-account/replenishment-orders/add`
+export const editReplenishmentOrdersUrl = ()=> `/${getTenant()}/my-account/replenishment-orders/edit`
+export const myAccountMyOrdersViewUrl = ()=> `/${getTenant()}/my-account/my-orders/view/`
+export const myAccountMyOrdersInvoiceUrl = ()=> `/${getTenant()}/my-account/my-orders/invoice/`
+export const checkoutUrl = ()=> `/${getTenant()}/checkout`
+export const cartUrl = ()=> `/${getTenant()}/cart`
+export const loginUrl = ()=> `/${getTenant()}/login`
+export const homeUrl = ()=> `/${getTenant()}`
+export const signupUrl = ()=> `/${getTenant()}/signup`
+export const productUrl = ()=> `/${getTenant()}/product`
+export const addTenantToUrl = (url)=> `/${getTenant()}/${url}`

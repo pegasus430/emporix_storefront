@@ -54,28 +54,12 @@ const SliderComponent = ({children}) => {
                 }
               }
         ],
-        // variableWidth: false,
         prevArrow: <PrevArrow />,
         nextArrow: <NextArrow />
     }
     return (
         <div className="scroller-wrapper">
             <Slider {...settings}>
-                {/* <div>
-                    <h3  style={{height:'100px',backgroundColor:'red', marginLeft:'10px',marginRight:'10px'}}>1</h3>
-                </div>
-                 <div>
-                    <h3  style={{height:'100px', backgroundColor:'red', marginLeft:'10px',marginRight:'10px'}}>2</h3>
-                </div>
-                <div>
-                    <h3  style={{height:'100px', backgroundColor:'red', marginLeft:'10px',marginRight:'10px'}}>3</h3>
-                </div>
-                <div >
-                    <h3 style={{height:'100px', backgroundColor:'red', marginLeft:'10px',marginRight:'10px'}}>4</h3>
-                </div>
-                <div>
-                    <h3 style={{height:'100px', backgroundColor:'red', marginLeft:'10px',marginRight:'10px'}}>5</h3>
-                </div> */}
                 {children}
             </Slider>
         </div>

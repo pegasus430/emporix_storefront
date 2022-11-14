@@ -1,4 +1,4 @@
-import React, { useState , useRef } from 'react'
+import React, { useState  } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import MultiRangeSlider from "../../components/MultiRangeSlider/";
 import ReactStars from 'react-stars'
@@ -66,10 +66,8 @@ const ratingFilterList = [
 ]
 
 const FilterItem = ({item , handleItem}) => {
-
     const title = item.title
     const selectItems = item.items
-
     return (
         <div>
             <div className='font-inter font-medium pt-4 pb-6'> {item.title} </div>
@@ -78,13 +76,11 @@ const FilterItem = ({item , handleItem}) => {
                     <SelectionFilterItem category = {title} title = {item} key = {index} handleItem = {handleItem} />
                 )
             }
-
         </div>
     )
 }
 
 const SelectionFilterItem = ({category , title , handleItem}) => {
-  
     const handleOnChange = (e) => {
         const val = e.target.value;
         const item = {'category' : category , 'val' : val }
@@ -109,7 +105,6 @@ const RatingFilterItem = ({rating, total}) => {
         <div className='flex justify-between pb-4'>
             <div className='flex w-3/5 items-left'>
                 <input type='checkbox'  />
-
                 <label className='pl-2'> 
                         <ReactStars size={30} value = {rating} color2 = {'#FBB13C'} edit = {false} />
                 </label>
@@ -117,22 +112,17 @@ const RatingFilterItem = ({rating, total}) => {
             <div className='font-inter font-medium text-base text-[#D7DADE] pt-4'>
                 {total}
             </div>
-            
-
         </div>
         
     )
 }
 
 const PriceRangeFilter = () => {
-   
     return (
         <div className="pt-6" >
-
             <div className='font-inter font-medium pb-8'>
                 Price Range
             </div>
-          
             <div className="content">
                 <div className='flex justify-between text-black'>
                     <input className='w-[45%] border border-[#D7DADE] h-8' type="text" placeholder='From' />
@@ -143,9 +133,6 @@ const PriceRangeFilter = () => {
                     <MultiRangeSlider min={0} max={1000} onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)} />
                 </div>
             </div>
-            
-
-
         </div>
     );
 }
@@ -154,31 +141,23 @@ const RatingFilter = () => {
    
     return (
         <div className="pt-6" >
-
             <div className='font-inter font-medium pb-8'>
                 Filters Group
             </div>
-          
             <div className="content">
                 {
-                        ratingFilterList.map((item, index) => 
-                            <RatingFilterItem key = {index} rating = {item.rating} total = {item.total}   />
-                        )
+                    ratingFilterList.map((item, index) => 
+                        <RatingFilterItem key = {index} rating = {item.rating} total = {item.total}   />
+                    )
                 }
             </div>
-            
-
-
         </div>
     );
 }
 
 const SideFilterContent = (props) => {
-    
     const [filterItems, setFilterItems] = useState([])
-
     const handleItem = (newItem) => {
-
         if(!filterItems.some(item => item.val == newItem.val)){
             setFilterItems(prev => [...prev, newItem])
         }
@@ -187,9 +166,6 @@ const SideFilterContent = (props) => {
         }
  
     }
-
-    
-    
     const sidebarClass = props.isOpen ? "sidebarFilter open " : 'sidebarFilter'
     return (
         <div className={sidebarClass}>
@@ -208,15 +184,12 @@ const SideFilterContent = (props) => {
 
             <div className='mt-12 font-inter font-bold'>
                 <div className="w-full h-12 bg-[#214559] text-white  flex items-center " onClick = { () => {props.setFilterItemFunc(filterItems); props.toggleSidebar()}}>
-                        <span className='text-center w-full'>DONE </span>
+                    <span className='text-center w-full'>DONE </span>
                 </div>
                 <div className="w-full h-12 bg-[#EFF0F2] text-white  flex items-center mt-6">
                         <span className='text-center text-[#214559] w-full'>CLEAR ALL </span>
                 </div>
-
             </div>
-            
-
         </div>
     )
 }

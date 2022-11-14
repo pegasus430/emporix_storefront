@@ -9,26 +9,26 @@ import {
 } from '../../constants/localstorage'
 
 import {getTenantLists} from '../../tenant.config'
-import {anonymous_token_api} from '../service.config'
+import {anonymousTokenApi} from '../service.config'
 import ApiRequest  from '..'
 
 const AccessToken = async (tenant) => {
     let now = Date.now()
-    let old_tenant = localStorage.getItem(tenantKey)
+    let oldTenant = localStorage.getItem(tenantKey)
 
-    if(tenant === old_tenant){
+    if(tenant === oldTenant){
         // about customer token
-        const customer_token_expires_in = localStorage.getItem(customerTokenExpiresInKey)
+        const customerTokenExpiresIn = localStorage.getItem(customerTokenExpiresInKey)
         // if customer token is not expired yet, get it from localstorage.
-        if(customer_token_expires_in !== undefined && now < parseInt(customer_token_expires_in)){
+        if(customerTokenExpiresIn !== undefined && now < parseInt(customerTokenExpiresIn)){
             localStorage.setItem(accessTokenKey, localStorage.getItem(customerTokenKey))
             return localStorage.getItem(customerTokenKey)
         }
             
         // about anonymous token
-        const anonymous_token_expires_in = localStorage.getItem(anonymousTokenExpiresInKey)
+        const anonymousTokenExpiresIn = localStorage.getItem(anonymousTokenExpiresInKey)
         // if customer token is not expired yet, get it from localstorage.
-        if(anonymous_token_expires_in !== undefined && now < parseInt(anonymous_token_expires_in)){
+        if(anonymousTokenExpiresIn !== undefined && now < parseInt(anonymousTokenExpiresIn)){
             localStorage.setItem(accessTokenKey, localStorage.getItem(anonymousTokenKey))
             return localStorage.getItem(anonymousTokenKey)
         }
@@ -36,15 +36,15 @@ const AccessToken = async (tenant) => {
     }
     // save tenant
     localStorage.setItem(tenantKey, tenant)
-    const session_id = localStorage.getItem(sessionIdKey)
+    const sessionId = localStorage.getItem(sessionIdKey)
     const tenantLists = getTenantLists()
     const params = {
         'client_id': tenantLists[tenant]['storefront_client_id'],
         'hybris-tenant': tenant,
-        'hybris-session-id': session_id
+        'hybris-session-id': sessionId
     }
     
-    const res = await ApiRequest(anonymous_token_api(), 'get', {}, {}, params)
+    const res = await ApiRequest(anonymousTokenApi(), 'get', {}, {}, params)
     localStorage.setItem(anonymousTokenKey, res['data']['access_token'])
     localStorage.setItem(anonymousTokenExpiresInKey, now + res['data']['expires_in'] * 1000)
 

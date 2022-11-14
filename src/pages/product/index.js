@@ -4,16 +4,14 @@ import ProductPage from "./ProductPage";
 import ProductDetailPage from './ProductDetailPage';
 import Layout from "../Layout";
 import {LoadingCircleProgress1} from '../../components/Utilities/progress'
-// import products from './products'
 import productService from '../../services/product/product.service'
 import priceService from '../../services/product/price.service'
 import {availabilityDataSelector} from '../../redux/slices/availabilityReducer'
 import {useSelector} from 'react-redux'
-import {min_product_in_stock_count} from '../../constants/page'
+import {minProductInStockCount} from '../../constants/page'
 import categoryService from "../../services/product/category.service";
 
 const ProductList = () => {
-    
     return (
         <Layout title='Product' >
             <ProductPage />
@@ -22,7 +20,7 @@ const ProductList = () => {
 }
 
 export const ProductDetails = () => {
-    const {product_id} = useParams()
+    const {productId} = useParams()
     const [product, setProduct] = useState({
         loading: true,
         data: {}
@@ -30,60 +28,59 @@ export const ProductDetails = () => {
     const availability = useSelector(availabilityDataSelector)
 
     useEffect(()=> {
-        
-        const getProduct = async (product_id) => {
-            let res = await productService.getProductsWithIds([product_id])
-            
+        const getProduct = async (productId) => {
+            let res = await productService.getProductsWithIds([productId])
             // Get Product's Price.
-            let prices = await priceService.getPriceWithProductIds([product_id])
+            let prices = await priceService.getPriceWithProductIds([productId])
             /* Add Category Infromation */
-            const category= await categoryService.getRetrieveAllCategoriesWithResoureceId(product_id)
-            
+            const category= await categoryService.getRetrieveAllCategoriesWithResoureceId(productId)
             let categoies = await categoryService.getAllParentCategories(category.data[0]['id'])
             categoies = categoies.data
             categoies.push(category.data[0])
-            let root_category, sub_category
-            let child_categories = {}
+            let rootCategory, subCategory
+            let childCategories = {}
             
             for(let c in categoies){
-                if(categoies[c].parentId === undefined) root_category = categoies[c]
-                else child_categories[categoies[c].parentId] = categoies[c]
+                if(categoies[c].parentId === undefined) rootCategory = categoies[c]
+                else childCategories[categoies[c].parentId] = categoies[c]
             }
-            let product_category = []
-            product_category.push(root_category.name)
+
+            let productCategory = []
+            productCategory.push(rootCategory.name)
             
             let loop = 0
             while(loop < 2){
-                sub_category = child_categories[root_category.id]
-                if(sub_category === undefined) break
-                root_category = sub_category
-                product_category.push(sub_category.name)
+                subCategory = childCategories[rootCategory.id]
+                if(subCategory === undefined) break
+                rootCategory = subCategory
+                productCategory.push(subCategory.name)
                 loop++
             }
 
             res = res[0]
-            res.src = (res.media[0]==undefined?"":res.media[0]['url'])
-            
+            res.src = (res.media[0] === undefined? '':res.media[0]['url'])
             let stock, stockLevel = 0
+
             if(availability['k'+res.id] === undefined) stock = "Out Of"
             else{
                 stockLevel = parseInt(availability['k'+res.id]['stockLevel'])
-                if(stockLevel < min_product_in_stock_count) stock = "Low"
+                if(stockLevel < minProductInStockCount) stock = "Low"
                 else stock = "In"
             }
+
             // Set price...
             if(prices.length > 0) res.price = prices[0]
 
-            res.category = product_category
+            res.category = productCategory
             res.stock = stock
-            res.estimated_delivery = "23.05.2022"
-            res.sub_images = []
+            res.estimatedDelivery = "23.05.2022"
+            res.subImages = []
             res.rating = 4
             res.count = 4
-            res.product_count = stockLevel
+            res.productCount = stockLevel
             res.media.map((row,index) => {
                 if(!index) return
-                res.sub_images.push(row['url'])
+                res.subImages.push(row['url'])
                 return
             })
             
@@ -93,7 +90,7 @@ export const ProductDetails = () => {
             })
             
         }
-        getProduct(product_id)
+        getProduct(productId)
     },[])
     
     return(
@@ -102,7 +99,6 @@ export const ProductDetails = () => {
                 <LoadingCircleProgress1 />:
                 <ProductDetailPage product={product.data}/>
             }
-            
         </Layout>
     )
 }

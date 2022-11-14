@@ -1,17 +1,17 @@
 import ApiRequest from './index'
 import {accessTokenKey} from 'constants/localstorage'
-import {currency_api} from 'services/service.config'
+import {currencyApi} from 'services/service.config'
 
 const CurrencyService = () => {
     const getAllCurrencies = async () => {
-        const access_token = localStorage.getItem(accessTokenKey)
+        const accessToken = localStorage.getItem(accessTokenKey)
         const headers = {
             "X-Version": 'v2',
-            "Authorization": `Bearer ${access_token}`,
+            "Authorization": `Bearer ${accessToken}`,
             "Accept-Language": "*",
             "Content-Type": "application/json"
         }
-        const res = await ApiRequest(currency_api(), 'get', {},headers)
+        const res = await ApiRequest(currencyApi(), 'get', {},headers)
         return res
     }
     return {

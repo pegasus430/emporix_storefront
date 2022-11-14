@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ReactStars from 'react-stars'
 import pen from "../../assets/products/pencil.png"
 
 const Product = (props) => {
-    
     return (
         <div className="mx-3">
             <div className='w-full h-3 flex justify-between '>

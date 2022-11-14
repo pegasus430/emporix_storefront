@@ -1,4 +1,4 @@
-import React, { useState, useContext}  from 'react'
+import React, {useContext}  from 'react'
 import {RadioItem} from '../Utilities/radio'
 import { RadioContext } from '../Utilities/radio'
 import './checkout.css'

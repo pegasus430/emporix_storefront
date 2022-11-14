@@ -11,10 +11,8 @@ const styles = theme => ({
   },
 });
 
-
 function PhoneField(props) {
-  const { value, defaultCountry, onChange, classes } = props;
-
+  const { value, defaultCountry, onChange, classes } = props
   return (
     <React.Fragment>
 
@@ -22,7 +20,6 @@ function PhoneField(props) {
       <ReactPhoneInput
         value={value}
         onChange={onChange}
-        
         defaultCountry="no" 
         excludeCountries={["us", "ca"]}
         component={TextField}
@@ -30,5 +27,4 @@ function PhoneField(props) {
     </React.Fragment>
   );
 }
-
 export default withStyles(styles)(PhoneField);

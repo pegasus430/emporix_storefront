@@ -1,30 +1,30 @@
-import {category_api, retriev_resource_api, resource_reference_api, parent_categories_api} from '../service.config'
+import {categoryApi, retrievResourceApi, resourceReferenceApi, parentCategoriesApi} from '../service.config'
 import ApiRequest from '../index'
 import {productCategoryTreesKey, accessTokenKey} from '../../constants/localstorage'
-import {max_category_resource_batch_count} from '../../constants/service'
+import {maxCategoryResourceBatchCount} from '../../constants/service'
 
 const CategoryService = () => {
-    let product_counts = {}
+    let productCounts = {}
     const getAllCategories = async (token) => {
         const headers = {
             "X-Version": 'v2',
             "Authorization": `Bearer ${token}`,
             "Accept-Language": "en"
         }
-        const res = await ApiRequest(category_api(), 'get', {},headers)
+        const res = await ApiRequest(categoryApi(), 'get', {},headers)
         return res
     }
     const getCategoryTree = (categories, layer, parenturl='product') => {
         return categories.map((category) => {
-            const category_key = category.name.toLowerCase().replaceAll(' ', '_')
-            const url = `${parenturl}/${category_key}`
+            const categoryKey = category.name.toLowerCase().replaceAll(' ', '_')
+            const url = `${parenturl}/${categoryKey}`
             const items = category.subcategories !== undefined? getCategoryTree(category.subcategories, layer+1, url): []
 
             return {
                 title: category.name,
                 items: items,
-                key: category_key,
-                category_id: category.id,
+                key: categoryKey,
+                categoryId: category.id,
                 url: url,
                 total: 0
             }
@@ -32,8 +32,8 @@ const CategoryService = () => {
     }
     const getProductCategoryTrees = async () => {
 
-        const access_token = localStorage.getItem(accessTokenKey)
-        const categories = (await getAllCategories(access_token)).data
+        const accessToken = localStorage.getItem(accessTokenKey)
+        const categories = (await getAllCategories(accessToken)).data
         const categorytrees = getCategoryTree(categories, 1)
         localStorage.setItem(productCategoryTreesKey, JSON.stringify(categorytrees))
         return categorytrees
@@ -41,123 +41,120 @@ const CategoryService = () => {
     let putProductCount = (category) => {
 
         if(category.items.length === 0){
-            category.total = product_counts[category.category_id] === undefined? 0: product_counts[category.category_id]
+            category.total = productCounts[category.categoryId] === undefined? 0: productCounts[category.categoryId]
             
         }  else{
             category.total = 0
             category.items.map((c) => {
-                const updated_category = putProductCount(c)
+                const updatedCategory = putProductCount(c)
 
-                category.total += updated_category.total
+                category.total += updatedCategory.total
                 return {}
             })
-            category.total += product_counts[category.category_id] === undefined? 0: product_counts[category.category_id]
+            category.total += productCounts[category.categoryId] === undefined? 0: productCounts[category.categoryId]
         }
         return category
     }   
-    const getProductCategoryDetail = async (main_category_key, sub_category_key, category_key) => {
-        const category_trees = JSON.parse(localStorage.getItem(productCategoryTreesKey))
+    const getProductCategoryDetail = async (mainCategoryKey, sub_categoryKey, categoryKey) => {
+        const categoryTrees = JSON.parse(localStorage.getItem(productCategoryTreesKey))
 
-        let match_main_category = category_trees.filter(category=> category.key === main_category_key)
-        match_main_category = match_main_category.length > 0? match_main_category[0]:[]
+        let matchMainCategory = categoryTrees.filter(category=> category.key === mainCategoryKey)
+        matchMainCategory = matchMainCategory.length > 0? matchMainCategory[0]:[]
 
-        const resources = await retrievResourceAssignedToCategory(match_main_category.category_id)
-        product_counts = {}
+        const resources = await retrievResourceAssignedToCategory(matchMainCategory.categoryId)
+        productCounts = {}
         
         resources.map((res)=> {
             if(res.ref.type === "product") 
-                product_counts[res.categoryId] = (product_counts[res.categoryId] === undefined? 1: product_counts[res.categoryId] + 1)
+                productCounts[res.categoryId] = (productCounts[res.categoryId] === undefined? 1: productCounts[res.categoryId] + 1)
             return []
         })
-        match_main_category = putProductCount(match_main_category)
+        matchMainCategory = putProductCount(matchMainCategory)
         
-        let res_title, res_categories, res_category_id
+        let resTitle, resCategories, resCategoryId
         let products = []
 
-        if(sub_category_key === undefined){
-            res_title = match_main_category.title
-            res_categories = match_main_category.items
-            res_category_id = match_main_category.category_id 
+        if(sub_categoryKey === undefined){
+            resTitle = matchMainCategory.title
+            resCategories = matchMainCategory.items
+            resCategoryId = matchMainCategory.categoryId 
         }else{
-            let match_sub_category = match_main_category.items.filter(category => category.key === sub_category_key)
-            match_sub_category = match_sub_category.length > 0? match_sub_category[0]:[]
+            let matchSubCategory = matchMainCategory.items.filter(category => category.key === sub_categoryKey)
+            matchSubCategory = matchSubCategory.length > 0? matchSubCategory[0]:[]
 
-            if(category_key === undefined) {
-                res_title = match_sub_category.title
-                res_categories = match_main_category.items
-                res_category_id = match_sub_category.category_id
+            if(categoryKey === undefined) {
+                resTitle = matchSubCategory.title
+                resCategories = matchMainCategory.items
+                resCategoryId = matchSubCategory.categoryId
 
             }else{
-                let match_category = match_sub_category.items.filter(category => category.key === category_key)
-                match_category = match_category.length > 0? match_category[0]:[]
+                let matchCategory = matchSubCategory.items.filter(category => category.key === categoryKey)
+                matchCategory = matchCategory.length > 0? matchCategory[0]:[]
 
-                res_title = match_category.title
-                res_categories = match_main_category.items
-                res_category_id = match_category.category_id
+                resTitle = matchCategory.title
+                resCategories = matchMainCategory.items
+                resCategoryId = matchCategory.categoryId
 
             }
             
         }
 
-        const product_resources = await retrievResourceAssignedToCategory(res_category_id)
-        product_resources.map((res)=> {
+        const productResources = await retrievResourceAssignedToCategory(resCategoryId)
+        productResources.map((res)=> {
             if(res.ref.type === "product") products.push(res.ref.id)
             return []
         })
 
         return {
-            title: res_title,
-            categories: res_categories,
+            title: resTitle,
+            categories: resCategories,
             productIds: products,
-            category_id: res_category_id
+            categoryId: resCategoryId
         }
     }
     
     const retrievResourceAssignedToCategory = async (categoryId) => {
         
-        const access_token = localStorage.getItem(accessTokenKey)
+        const accessToken = localStorage.getItem(accessTokenKey)
 
         const headers = {
             "X-Version": 'v2',
-            "Authorization": `Bearer ${access_token}`,
+            "Authorization": `Bearer ${accessToken}`,
             "X-Total-Count": true,
             "Accept-Language": "en"
         }
-        const resource_api = `${retriev_resource_api(categoryId)}?withSubcategories=true&pageSize=${max_category_resource_batch_count}`
+        const resource_api = `${retrievResourceApi(categoryId)}?withSubcategories=true&pageSize=${maxCategoryResourceBatchCount}`
         const resources = await ApiRequest(resource_api, 'get', {}, headers)
         return resources.data
     }
     const getRetrieveAllCategoriesWithResoureceId = async (resourceId) => {
-        const access_token = localStorage.getItem(accessTokenKey)
+        const accessToken = localStorage.getItem(accessTokenKey)
 
         const headers = {
             "X-Version": "v2",
-            "Authorization": `Bearer ${access_token}`,
+            "Authorization": `Bearer ${accessToken}`,
             "Accept-Language": "en"
         }
         const params = {
             "X-Total-Count": true
         }
-        const api = `${resource_reference_api()}/${resourceId}`
+        const api = `${resourceReferenceApi()}/${resourceId}`
         const categories = await ApiRequest(api, 'get', {}, headers, params)
         return categories
     }
 
     const getAllParentCategories = async (categoryId) => {
-        const access_token = localStorage.getItem(accessTokenKey)
-
+        const accessToken = localStorage.getItem(accessTokenKey)
         const headers = {
             "X-Version": "v2",
-            "Authorization": `Bearer ${access_token}`,
+            "Authorization": `Bearer ${accessToken}`,
             "Accept-Language": "en",
             "X-Total-Count": true,
         }
-        
-        const api = `${parent_categories_api()}/${categoryId}/parents`
+        const api = `${parentCategoriesApi()}/${categoryId}/parents`
         const categories = await ApiRequest(api, 'get', {}, headers)
         return categories
     }
-
     return {
         getAllCategories,
         getProductCategoryTrees,

@@ -18,7 +18,6 @@ const ShipingContent = () => {
         {value: "Munich Office", label: "Munich Office"},
         {value: "Head Office", label: "Head Office"}
     ]
-
     return (
         <>
             <GridLayout className="gap-6">
@@ -178,11 +177,9 @@ const ShipmentContent = () => {
     )
 }
 const ProductContent = () => {
-    const cartAccount = useSelector(cartAccountSelector)
     const cartList = useSelector(cartListSelector)
     
     const products = cartList.map(cart => {
-
         return {
             id: cart.product.id,
             name: cart.product.name,

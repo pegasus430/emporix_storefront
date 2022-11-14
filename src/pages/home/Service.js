@@ -15,24 +15,14 @@ const EachService = (props) => {
 		</div>
 	)
 }
-
 const Service = () => {
-  
-	
   	return (
 		<div className = "home_service">
-			
-		
 			<EachService src = {Shipping} title="Free Shipping" content = "Free delivery on qualifying orders of &#163;50+" />
-		
 			<EachService src = {Delivery} title="Fast Delivery" content = "Magna massa acet turca tratto at fames." />
-		
 			<EachService src = {Gift} title="Loyalty Reward" content = "Tellus ornare at consequat ipsum, non labortis." />
-		
 			<EachService src = {Warranty} title="Extend Warranty" content = "Extend your warranty on selected items." />
-		
 		</div>
-    
   	)
 }
 

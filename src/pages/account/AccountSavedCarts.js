@@ -95,7 +95,6 @@ export const SavedCarts = () => {
                   <TableCell align="left" className='!py-6'>{row.items}</TableCell>
                   <TableCell align="left" className='!py-6'>&euro; {row.total}</TableCell>
                   <TableCell align="left" className='!py-6'>
-                    
                       <div className='flex'>
                           <div className='font-inter font-semibold text-[14px] underline'>
                               Edit
@@ -104,14 +103,12 @@ export const SavedCarts = () => {
                               Cancel
                           </div>
                       </div>
-                    
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
       </TableContainer>
-
       <div className='mobile_only'>
           {
             savedCartsList.map((rows, index) => 

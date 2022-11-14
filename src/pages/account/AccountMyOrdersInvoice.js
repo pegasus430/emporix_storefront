@@ -64,7 +64,6 @@ const orderDetails = [
   ]
 
 const MyOrdersInvoice = () => {
-    
     return (
         <GridLayout className="mt-12 border border-[#D7DADE] py-6 px-3 gap-10">
             <InvoiceHeader>
@@ -83,7 +82,6 @@ const MyOrdersInvoice = () => {
                                 <TextRegular>80333 München</TextRegular>
                                 <TextRegular>Germany</TextRegular>
                             </GridLayout>
-                            
                         </GridLayout>
                         <GridLayout className="gap-6">
                             <TextBold3>Shipping Location</TextBold3>

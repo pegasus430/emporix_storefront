@@ -40,8 +40,6 @@ export const Right = ({children, className}) => {
     )
 }
 
-
-
 export const Container = ({children, className}) => {
     return (
         <div className={'flex ' + (className? className: "")}>

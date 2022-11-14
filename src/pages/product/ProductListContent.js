@@ -9,12 +9,10 @@ import ReactStars from 'react-stars'
 import pen from "../../assets/products/pencil.png"
 import Quantity from "../../components/Utilities/quantity/quantity"
 import { useNavigate } from "react-router-dom";
-// import products from './products'
 import {productLoadingSelector, productIdsSelector, setLoadingStatus, getProductData, productDataSelector} from '../../redux/slices/productReducer'
 import {LoadingCircleProgress1} from '../../components/Utilities/progress'
-import {max_product_description_length, min_product_in_stock_count} from '../../constants/page'
+import {maxProductDescriptionLength, minProductInStockCount} from '../../constants/page'
 import {availabilityDataSelector} from '../../redux/slices/availabilityReducer'
-
 import parse from 'html-react-parser'
 import { tenantKey } from "../../constants/localstorage"
 
@@ -27,22 +25,22 @@ const EachProduct = (props) => {
     return (
         <div className="" onClick={HandleProductDetail}>
             <div className='w-full h-3  justify-between hidden lg:flex'>
-                <div className={props.stock == "Low" ? "text-[#FFA800] float-right lg:float-none font-inter font-bold text-xs pt-[6px]" : props.stock == "In" ? "text-[#4BCB67] font-inter font-bold text-xs pt-[6px] float-right lg:float-none" : "text-[#F30303] font-inter font-bold text-xs pt-[6px] float-right lg:float-none"}>
+                <div className={props.stock === "Low" ? "text-[#FFA800] float-right lg:float-none font-inter font-bold text-xs pt-[6px]" : props.stock == "In" ? "text-[#4BCB67] font-inter font-bold text-xs pt-[6px] float-right lg:float-none" : "text-[#F30303] font-inter font-bold text-xs pt-[6px] float-right lg:float-none"}>
                     {props.stock} Stock
                 </div>
                 <div className='flex h-5 float-right lg:float-none'>
                     <ReactStars size={16} value = {props.rating} color2 = {'#FBB13C'}/>
-                    ({props.total_count})
+                    ({props.productCount})
                 </div>
             </div>
 
             <div className=' block float-right lg:hidden'>
                 <div className=' flex h-5  float-right'>
                     <ReactStars size={16} value = {props.rating} color2 = {'#FBB13C'}/>
-                    ({props.total_count})
+                    ({props.productCount})
                 </div> 
                 <br />
-                <div className={props.stock == "Low" ? "text-[#FFA800] font-inter font-bold text-xs pt-[6px] float-right " : props.stock == "In" ? "text-[#4BCB67] font-inter font-bold text-xs pt-[6px] float-right " : "text-[#F30303] font-inter font-bold text-xs pt-[6px] float-right "}>
+                <div className={props.stock === "Low" ? "text-[#FFA800] font-inter font-bold text-xs pt-[6px] float-right " : props.stock == "In" ? "text-[#4BCB67] font-inter font-bold text-xs pt-[6px] float-right " : "text-[#F30303] font-inter font-bold text-xs pt-[6px] float-right "}>
                     {props.stock} Stock
                 </div>
             </div>
@@ -63,8 +61,8 @@ const EachProduct = (props) => {
                     props.auth ? (
                         <>
                             <div className='text-xs text-[#ACAEB2] w-[117px] text-left'>
-                                { props.list_price !== ""?
-                                    <>List Price &euro; <del>{props.list_price} </del></>:
+                                { props.listPrice !== ""?
+                                    <>List Price &euro; <del>{props.listPrice} </del></>:
                                     <span className='text-xs  text-[#F30303] font-bold'>No Price</span>  
                                 } 
                                 
@@ -85,8 +83,8 @@ const EachProduct = (props) => {
                     ):
                     (
                         <div className='text-base  pt-4'>
-                            { props.list_price !== ""?
-                                <>&euro; {props.list_price} <span className='text-xs font-normal text-[#ACAEB2]'>(Incl. VAT)</span></>:
+                            { props.listPrice !== ""?
+                                <>&euro; {props.listPrice} <span className='text-xs font-normal text-[#ACAEB2]'>(Incl. VAT)</span></>:
                                 <span className='text-xs  text-[#F30303] font-bold'>No Price</span>   
                             } 
                         </div>
@@ -98,7 +96,7 @@ const EachProduct = (props) => {
 }
 
 const EachProductRow = (props) => {
-    const description = props.description.length > max_product_description_length ? `${props.description.substr(0,max_product_description_length)} ...`:props.description
+    const description = props.description.length > maxProductDescriptionLength ? `${props.description.substr(0,maxProductDescriptionLength)} ...`:props.description
     return(
         <div className="flex h-full font-inter ">
             <div className="flex-auto w-[15%]">
@@ -113,10 +111,9 @@ const EachProductRow = (props) => {
                 </div>
                 <div className="text-sm mt-4  text-black flex">
                     <ReactStars size={16} value = {props.rating} color2 = {'#FBB13C'}/>
-                    ({props.total_count})
+                    ({props.productCount})
                 </div>
                 <div className="text-sm mt-4  text-[#ACAEB2] text-normal">
-                     {/* Nibh orci nunc mi aliquam, pulvinar justo, pellentesque dignissim proin. Adipiscing consectetur quis gravida dolor sit est, diam. */}
                     {parse(`<span>${description}</span>`)}
                 </div>
             </div>
@@ -126,7 +123,7 @@ const EachProductRow = (props) => {
                         props.auth ? (
                             <>
                                 <div className='text-[12px] text-[#ACAEB2] w-[117px] text-left'>
-                                    List Price &euro; <del>{props.list_price} </del>
+                                    List Price &euro; <del>{props.listPrice} </del>
                                 </div>
                                 <div className='flex'>
                                     <img src = {pen} className="w-4 h-4 mt-1" />
@@ -140,7 +137,7 @@ const EachProductRow = (props) => {
                         ):
                         (
                             <div className='text-base  pt-4'>
-                                &#163; {props.list_price} <span className='text-[12px] font-normal text-[#ACAEB2]'>(Incl. VAT)</span>
+                                &#163; {props.listPrice} <span className='text-[12px] font-normal text-[#ACAEB2]'>(Incl. VAT)</span>
                             </div>
                         )
                     }
@@ -150,17 +147,13 @@ const EachProductRow = (props) => {
                     {props.stock} Stock
                 </div>
                
-                
-
                 <div className="mt-6 lg:flex w-full float-right">
                     <div >
                       <Quantity />
                     </div>
                     <div className="ml-6 h-10 w-40 bg-[#214559] text-white flex items-center" >
                         <div className='mx-auto flex'>
-                           
                             <span className='px-4'>  ADD TO CART</span>
-                            
                         </div>
                       
                     </div>
@@ -170,7 +163,7 @@ const EachProductRow = (props) => {
     )
 }
 
-const ProductListViewSettingBar = ({changeDisplayType, product_list_count, product_list_counts_per_page, changePerPageCount, displayType}) => {
+const ProductListViewSettingBar = ({changeDisplayType, productListCount, productListCountsPerPage, changePerPageCount, displayType}) => {
     return (
         <div className="view-setting-wrapper  h-8 mb-12">
             <div className="view-setting-bar gap-6">
@@ -196,14 +189,14 @@ const ProductListViewSettingBar = ({changeDisplayType, product_list_count, produ
                                 </div>
                             </div>
                         </li>
-                        <li className="product-result-caption hidden lg:block">Products found: {product_list_count}</li>
-                        <li className="product-result-caption  lg:hidden">{product_list_count} Products</li>
+                        <li className="product-result-caption hidden lg:block">Products found: {productListCount}</li>
+                        <li className="product-result-caption  lg:hidden">{productListCount} Products</li>
                         
                         <li className="per-page hidden xl:block">
                             <div>
                                 Per Page:&nbsp;
                                 <select className='bg-[white] font-bold' onChange={changePerPageCount}>
-                                    {product_list_counts_per_page.map(cnt =>(
+                                    {productListCountsPerPage.map(cnt =>(
                                         <option key={cnt} value = {cnt}>{cnt}</option>
                                     ))}
                                 </select>
@@ -232,26 +225,25 @@ const ProductListViewSettingBar = ({changeDisplayType, product_list_count, produ
     )
 }
 
-const ProductListItems = ({products, auth, displayType, product_list_count, pageNumber, countPerPage}) => {
+const ProductListItems = ({products, auth, displayType}) => {
     const availability = useSelector(availabilityDataSelector)
     
     let itemArr = []
     let subItemArr = []
     let ItemArrOnMobile = []
     let imgsrc, stock
-    if(displayType==true){
+    if(displayType){
         
         products.map((item, i) => {
-
-            imgsrc = item.media[0]==undefined?"":item.media[0]['url']
-            if(availability['k'+item.id] == undefined) stock = "Out Of"
-            else if(availability['k'+item.id]['stockLevel'] < min_product_in_stock_count) stock = "Low"
+            imgsrc = item.media[0] === undefined?"":item.media[0]['url']
+            if(availability['k'+item.id] === undefined) stock = "Out Of"
+            else if(availability['k'+item.id]['stockLevel'] < minProductInStockCount) stock = "Low"
             else stock = "In"
 
-            let price = "", list_price = "";
+            let price = "", listPrice = "";
             if(item.price !== undefined){
-                list_price = Math.trunc(item.price.totalValue * 100) / 100
-                price = list_price
+                listPrice = Math.trunc(item.price.totalValue * 100) / 100
+                price = listPrice
                 if(item.price.priceModel !== undefined && item.price.priceModel.includesTax === false){
                     price = Math.trunc(price * 10000 / (100 + item.price.tax.taxRate)) / 100
                 }
@@ -259,23 +251,50 @@ const ProductListItems = ({products, auth, displayType, product_list_count, page
             switch((i + 1) % 3){
                 case 1:
                     subItemArr.push(<div key={i} className="w-1/3 p-6 ">
-                        <EachProduct item_id={item.id} key={i} auth={auth} stock={stock}  rating={4} total_count={8} src = {imgsrc}
-                            code =  {item.code} name={item.name} 
-                            price = {price} list_price = {list_price}  />
+                        <EachProduct 
+                            item_id={item.id} 
+                            key={i} 
+                            auth={auth} 
+                            stock={stock}  
+                            rating={4} 
+                            productCount={8} 
+                            src = {imgsrc}
+                            code =  {item.code} 
+                            name={item.name} 
+                            price = {price} 
+                            listPrice = {listPrice}  />
                     </div>)
                     break
                 case 2:
                     subItemArr.push(<div key={i}  className="w-1/3  p-6 border-l border-[#DFE1E5] border-solid">
-                        <EachProduct item_id={item.id} key={i} auth={auth} stock={stock}  rating={4} total_count={8} src = {imgsrc}
-                            code =  {item.code} name={item.name} 
-                            price = {price} list_price = {list_price}  />
+                        <EachProduct 
+                            item_id={item.id} 
+                            key={i} 
+                            auth={auth} 
+                            stock={stock}  
+                            rating={4} 
+                            productCount={8} 
+                            src = {imgsrc}
+                            code =  {item.code} 
+                            name={item.name} 
+                            price = {price} 
+                            listPrice = {listPrice}  
+                        />
                     </div>)
                     break
                 default:
                     subItemArr.push(<div key={i}  className="w-1/3 p-6 border-l border-[#DFE1E5] border-solid">
-                        <EachProduct item_id={item.id} key={i} auth={auth} stock={stock}  rating={4} total_count={8} src = {imgsrc}
-                            code =  {item.code} name={item.name} 
-                            price = {price} list_price = {list_price}  />
+                        <EachProduct item_id={item.id} 
+                            key={i} 
+                            auth={auth} 
+                            stock={stock}  
+                            rating={4} 
+                            productCount={8} 
+                            src = {imgsrc}
+                            code =  {item.code} 
+                            name={item.name} 
+                            price = {price} 
+                            listPrice = {listPrice}  />
                     </div>)
                     itemArr.push(
                         <div key={'row'+i.toString()} className="list-row flex lg:my-12 my-6">
@@ -302,10 +321,10 @@ const ProductListItems = ({products, auth, displayType, product_list_count, page
         
         products.map((item, i) => {
 
-            let price = "", list_price = "";
+            let price = "", listPrice = "";
             if(item.price !== undefined){
-                list_price = Math.trunc(item.price.totalValue * 100) / 100
-                price = list_price
+                listPrice = Math.trunc(item.price.totalValue * 100) / 100
+                price = listPrice
                 if(item.price.priceModel !== undefined && item.price.priceModel.includesTax === false){
                     price = Math.trunc(price * 10000 / (100 + item.price.tax.taxRate)) / 100
                 }
@@ -314,16 +333,35 @@ const ProductListItems = ({products, auth, displayType, product_list_count, page
             switch((i + 1) % 2){
                 case 1:
                     subItemArr.push(<div key={i} className="w-1/2 p-2">
-                        <EachProduct item_id={item.id} key={i} auth={auth} stock={stock}  rating={4} total_count={8} src = {item.src}
-                            code = {item.code} name={item.name} 
-                            price = {price} list_price = {list_price}  />
+                        <EachProduct 
+                            item_id={item.id} 
+                            key={i} 
+                            auth={auth} 
+                            stock={stock}  
+                            rating={4} 
+                            productCount={8} 
+                            src = {item.src}
+                            code = {item.code} 
+                            name={item.name} 
+                            price = {price} 
+                            listPrice = {listPrice}  
+                        />
                     </div>)
                     break
                 default:
                     subItemArr.push(<div key={i}  className="w-1/2  p-2 border-l border-[#DFE1E5] border-solid">
-                        <EachProduct item_id={item.id} key={i} auth={auth} stock={stock}  rating={4} total_count={8} src = {item.src}
-                            code = {item.code} name={item.name} 
-                            price = {price} list_price = {list_price}  />
+                        <EachProduct 
+                            item_id={item.id} 
+                            key={i} 
+                            auth={auth} 
+                            stock={stock}  
+                            rating={4} 
+                            productCount={8} 
+                            src = {item.src}
+                            code = {item.code} 
+                            name={item.name} 
+                            price = {price} 
+                            listPrice = {listPrice}  />
                     </div>)
                     ItemArrOnMobile.push(
                         <div key={'rowMobile'+i.toString()} className="list-row flex lg:my-12 my-6">
@@ -351,27 +389,37 @@ const ProductListItems = ({products, auth, displayType, product_list_count, page
     }else{
 
          products.map((item, i) => {
-            imgsrc = item.media[0]==undefined?"":item.media[0]['url']
-            if(availability[item.id] == undefined) stock = "Out Of"
-            else if(availability[item.id] < min_product_in_stock_count) stock = "Low"
+            imgsrc = item.media[0] === undefined?"":item.media[0]['url']
+            if(availability[item.id] === undefined) stock = "Out Of"
+            else if(availability[item.id] < minProductInStockCount) stock = "Low"
             else stock = "In"
 
-            let price = "", list_price = "";
+            let price = "", listPrice = "";
             if(item.price !== undefined){
-                list_price = Math.trunc(item.price.totalValue * 100) / 100
-                price = list_price
+                listPrice = Math.trunc(item.price.totalValue * 100) / 100
+                price = listPrice
                 if(item.price.priceModel !== undefined && item.price.priceModel.includesTax === false){
                     price = Math.trunc(price * 10000 / (100 + item.price.tax.taxRate)) / 100
                 }
             }
             itemArr.push(
                 <div key={i} className="w-full h-[215px] lg:my-12 my-6 items-center">
-                    <EachProductRow key={i} auth={auth} stock={stock}  rating={4} total_count={8} src = {imgsrc}
-                                code = {item.code} name={item.name} description = {item.description}
-                                price = {price} list_price = {list_price}  />
+                    <EachProductRow 
+                        key={i} 
+                        auth={auth} 
+                        stock={stock}  
+                        rating={4} 
+                        productCount={8} 
+                        src = {imgsrc}
+                        code = {item.code}
+                        name={item.name} 
+                        description = {item.description}
+                        price = {price} 
+                        listPrice = {listPrice}  
+                    />
                 </div>
             )
-            if(i != products.length - 1)
+            if(i !== products.length - 1)
                 itemArr.push(
                     <div key={'line'+i.toString()} className="lg:my-12 my-6 split-line h-0 border-b border-[#DFE1E5] border-solid"></div>
                 )
@@ -386,15 +434,15 @@ const ProductListItems = ({products, auth, displayType, product_list_count, page
     )
 }
 
-const ProductListPagination = ({changePageNumber, countPerPage, product_list_count, pageNumber}) => {
-    let totalPage = Math.round(product_list_count/countPerPage)
-    let previous_page_items = []
+const ProductListPagination = ({changePageNumber, countPerPage, productListCount, pageNumber}) => {
+    let totalPage = Math.round(productListCount/countPerPage)
+    let previousPageitems = []
     let next_page_items = []
 
     if(totalPage < pageNumber) pageNumber = 1
 
     for(let i = pageNumber - 1; i > 1 && i > pageNumber - 3; i--)
-        previous_page_items.unshift( <li key={i} className="cursor-pointer" onClick={()=>changePageNumber(i)}>{i}</li>)
+        previousPageitems.unshift( <li key={i} className="cursor-pointer" onClick={()=>changePageNumber(i)}>{i}</li>)
     
     for(let i = pageNumber + 1; i < totalPage && i < pageNumber + 3; i++)
         next_page_items.push( <li key={i} className="cursor-pointer" onClick={()=>changePageNumber(i)}>{i}</li>)
@@ -405,9 +453,7 @@ const ProductListPagination = ({changePageNumber, countPerPage, product_list_cou
                 <ul className="select-none gap-6 mx-auto items-center flex text-[18px] leading-[26px] font-inter text-[#ACAEB2]">
                     <li className="cursor-pointer">
                         <IconContext.Provider value={{ size: 24, color: pageNumber==1? "#ACAEB2": "black"}}>
-                            
                                 <HiOutlineArrowLeft />
-                           
                         </IconContext.Provider>
                     </li>
                     {pageNumber !== 1 &&
@@ -416,20 +462,18 @@ const ProductListPagination = ({changePageNumber, countPerPage, product_list_cou
                     {pageNumber > 4 &&
                         <li>...</li>
                     }
-                    {previous_page_items}
+                    {previousPageitems}
                     <li className="font-bold text-black">{pageNumber}</li>
                     {next_page_items}
                     {pageNumber+3 < totalPage &&
                         <li>...</li>
                     }
-                    {(pageNumber !== totalPage && totalPage != 0) &&
+                    {(pageNumber !== totalPage && totalPage !== 0) &&
                         <li className="cursor-pointer" onClick={()=>changePageNumber(totalPage)}>{totalPage}</li>
                     }
                     <li className="cursor-pointer">
-                        <IconContext.Provider value={{ size: 24, color: pageNumber==totalPage || totalPage == 0? "#ACAEB2": "black"}}>
-                            
-                                <HiOutlineArrowRight />
-                           
+                        <IconContext.Provider value={{ size: 24, color: pageNumber === totalPage || totalPage === 0? "#ACAEB2": "black"}}>
+                            <HiOutlineArrowRight />
                         </IconContext.Provider>
                     </li>
                 </ul>
@@ -440,10 +484,10 @@ const ProductListPagination = ({changePageNumber, countPerPage, product_list_cou
 
 const ProductListContent = (props) => {
     const { user: currentUser } = useSelector((state) => state.auth);
-    const product_list_counts_per_page = [6,9,15]
+    const productListCountsPerPage = [6,9,15]
     const [displayType, SetDisplayType] = useState(true)
     const [pageNumber, setPageNumber] = useState(1)
-    const [countPerPage, setCountPerPage] = useState(product_list_counts_per_page[0])
+    const [countPerPage, setCountPerPage] = useState(productListCountsPerPage[0])
     
     const loading = useSelector(productLoadingSelector)
     const productIds = useSelector(productIdsSelector)
@@ -472,12 +516,30 @@ const ProductListContent = (props) => {
 
     return (
         <>
-            <ProductListViewSettingBar displayType={displayType} changePerPageCount={changePerPageCount} changeDisplayType={changeDisplayType} product_list_count={productIds.length} product_list_counts_per_page={product_list_counts_per_page} />
+            <ProductListViewSettingBar 
+                displayType={displayType} 
+                changePerPageCount={changePerPageCount} 
+                changeDisplayType={changeDisplayType} 
+                productListCount={productIds.length} 
+                productListCountsPerPage={productListCountsPerPage} 
+            />
             {loading?
                 <LoadingCircleProgress1 />:
                 <>
-                    <ProductListItems products = {products} auth = {currentUser ? true : false} displayType={displayType} product_list_count={productIds.length} pageNumber={pageNumber} countPerPage={countPerPage} />
-                    <ProductListPagination changePageNumber={changePageNumber} countPerPage={countPerPage} product_list_count={productIds.length} pageNumber={pageNumber}  />
+                    <ProductListItems 
+                        products = {products} 
+                        auth = {currentUser ? true : false} 
+                        displayType={displayType} 
+                        productListCount={productIds.length} 
+                        pageNumber={pageNumber} 
+                        countPerPage={countPerPage} 
+                    />
+                    <ProductListPagination 
+                        changePageNumber={changePageNumber} 
+                        countPerPage={countPerPage} 
+                        productListCount={productIds.length}
+                        pageNumber={pageNumber}  
+                    />
                 </>
             }
         </>

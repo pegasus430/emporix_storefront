@@ -8,7 +8,7 @@ import './checkout.css'
 const PaymentMethodItem = ({radioKey, title}) =>{
     const {radioActive,setRadioActive} = useContext(RadioContext)
     return (
-        <div className={"payment-method-item-wrapper "+(radioActive==radioKey?"active":"")}>
+        <div className={"payment-method-item-wrapper " + (radioActive===radioKey?"active":"")}>
             <Container className="gap-4 items-center">
                 <RadioItem radioKey={radioKey} />
                 <div className="brand-blue">

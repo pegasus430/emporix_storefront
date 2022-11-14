@@ -3,12 +3,12 @@ import './quantity.css'
 
 const  Quantity  = ({value, action}) => {
     
-    const [val, setVal] = useState(value==undefined?1:value)
+    const [val, setVal] = useState(value === undefined? 1 : value)
 
     const increment = (action) => {
       let newVal = val + 1
       setVal(newVal);
-      if(action!=undefined) action(newVal);
+      if(action !== undefined) action(newVal);
     }
     
     const decrement = (action) => {
@@ -22,7 +22,7 @@ const  Quantity  = ({value, action}) => {
        
       setVal(newVal);
       
-      if(action!=undefined) action(newVal);
+      if(action !== undefined) action(newVal);
     }
 
     return (
@@ -39,14 +39,12 @@ const  Quantity  = ({value, action}) => {
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.89205 9.37717V0.00216675H5.48295V9.37717H3.89205ZM0 5.48512V3.89421H9.375V5.48512H0Z" fill="#818385"/>
             </svg>
-
           </button>  
       </div>  
     
-    );
-    
-  }
+    ); 
+}
 
-  export default Quantity;
+export default Quantity;
   
  

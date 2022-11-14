@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link} from 'react-router-dom'
-import { add_tenant_to_url } from '../../services/service.config'
+import { addTenantToUrl } from '../../services/service.config'
 
 const AccountMenu = ({page}) => {
     const items = [
@@ -27,7 +27,6 @@ const AccountMenu = ({page}) => {
         "locations",
         "payments"
     ]
-
     return (
         <ul className="">
             {   items.map((value,index) => (
@@ -35,18 +34,17 @@ const AccountMenu = ({page}) => {
                         index === 0 ?
                                 page === "Index"?
                                     <li key={index} className="index-item-active first-item">
-                                        <Link to={add_tenant_to_url(`my-account/${items_link[index]}`)}>{value}</Link>
+                                        <Link to={addTenantToUrl(`my-account/${items_link[index]}`)}>{value}</Link>
                                     </li>:
                                     <li key={index} className={value===page? "item-active first-item": "first-item"}>
-                                        <Link to={add_tenant_to_url(`my-account/${items_link[index]}`)}>{value}</Link>
+                                        <Link to={addTenantToUrl(`my-account/${items_link[index]}`)}>{value}</Link>
                                     </li>:
                             <li key={index} className={value===page? "item-active item": "item"}>
-                                <Link to={add_tenant_to_url(`my-account/${items_link[index]}`)}>{value}</Link>
+                                <Link to={addTenantToUrl(`my-account/${items_link[index]}`)}>{value}</Link>
                             </li>:
                         <li key={index} className="item-divide-line" />
                 ))
             }
-            
         </ul>
     )
 }

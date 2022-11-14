@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Status from './common'
-import {my_account_my_orders_view_url, my_account_my_orders_invoice_url} from '../../services/service.config'
+import {myAccountMyOrdersViewUrl, myAccountMyOrdersInvoiceUrl} from '../../services/service.config'
 import { Link } from 'react-router-dom';
 
 const myOdersList = [
@@ -37,7 +37,6 @@ const myOdersList = [
     },
 ]
 
-
 const OrderItem = ({order_number, status, created,  total}) => {
   return (
     <div className='py-6 border-t border-[#D7DADE]'>
@@ -45,10 +44,10 @@ const OrderItem = ({order_number, status, created,  total}) => {
           <Status width={108} height = {24} title = {status} color={ status == "SHIPPED" ?'#FFA800' : '#4BCB67'} />
             <div className='flex'>
                 <div className='font-inter font-semibold text-[14px] underline'>
-                  <Link to={`${my_account_my_orders_view_url()}${order_number}`}>View</Link>
+                  <Link to={`${myAccountMyOrdersViewUrl()}${order_number}`}>View</Link>
                 </div>
                 <div className='font-inter font-semibold text-[14px] underline ml-6'>
-                    <Link to={`${my_account_my_orders_invoice_url()}${order_number}`}>Invoice</Link>
+                    <Link to={`${myAccountMyOrdersInvoiceUrl()}${order_number}`}>Invoice</Link>
                 </div>
             </div>
         </div>
@@ -96,16 +95,14 @@ export const MyOrders = () => {
                   <TableCell align="left" className='!py-6'>&euro; {row.total}</TableCell>
                   <TableCell align="left" className='!py-6'>{row.created}</TableCell>
                   <TableCell align="left" className='!py-6'>
-                    
                       <div className='flex'>
                           <div className='font-inter font-semibold text-[14px] underline'>
-                            <Link to={`${my_account_my_orders_view_url()}${row.order_number}`}>View</Link>
+                            <Link to={`${myAccountMyOrdersViewUrl()}${row.order_number}`}>View</Link>
                           </div>
                           <div className='font-inter font-semibold text-[14px] underline ml-6'>
-                            <Link to={`${my_account_my_orders_invoice_url()}${row.order_number}`}>Invoice</Link>
+                            <Link to={`${myAccountMyOrdersInvoiceUrl()}${row.order_number}`}>Invoice</Link>
                           </div>
                       </div>
-                    
                   </TableCell>
                 </TableRow>
               ))}

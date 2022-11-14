@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Home from "./pages/home";
@@ -28,23 +28,21 @@ import AccountReviews from './pages/account/AccountReviews'
 import AccountPaymentsEditCardDetails from './pages/account/AccountPaymentsEditCardDetails'
 import NoPage from './pages/NoPage'
 import { history } from "./helpers/history";
-
 import { logout } from "./redux/slices/authReducer";
 import { clearMessage } from "./redux/slices/messageReducer";
 import InvalidTenant from './pages/InvalidTenant'
 
 function App() {
-
 	const dispatch = useDispatch();
 	useEffect(() => {
 		history.listen((location) => {
-		  dispatch(clearMessage()); // clear message when changing location
+		  dispatch(clearMessage()); 
 		});
 	  }, [dispatch]);
 
-	  const logOut = () => {
+	const logOut = () => {
 		dispatch(logout());
-	  };
+	};
 
 	return (
 		<Router>
@@ -54,7 +52,7 @@ function App() {
 					<Route path="product/:maincategory" exact  element={<ProductList />} />
 					<Route path="product/:maincategory/:subcategory/" exact element={<ProductList />} />
 					<Route path="product/:maincategory/:subcategory/:category" exact element={<ProductList />} />
-					<Route path="product/details/:product_id" element={<ProductDetails />} />
+					<Route path="product/details/:productId" element={<ProductDetails />} />
 					<Route path="login" exact element={<Login />} />
 					<Route path="signup" exact element={<Signup />} />
 					<Route path="brand" exact element={<Brand />} />
@@ -76,13 +74,9 @@ function App() {
 						<Route path="locations/add" exact element={<AccountAddLocations />} />
 						<Route path="payments" exact element={<AccountPayments />} />
 						<Route path="payments/edit_card_details" element={<AccountPaymentsEditCardDetails />} />
-						
 						<Route path="reviews" element={<AccountReviews />} />
-						
 					</Route>
 					<Route path='quick_order' element = {<QuickOrder />} />
-					
-					{/* <Route path="contact" element={<Contact />} /> */}
 					<Route path="*" element={<NoPage />} /> 
 				</Route>
 				<Route path="*" element={<InvalidTenant />} /> 

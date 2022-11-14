@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom'
 import {DropdownWithLabel} from '../../components/Utilities/dropdown'
 import {TextInput} from '../../components/Utilities/input'
 import {frequencyOptions} from './config'
-import {my_account_replenishment_orders_url} from '../../services/service.config'
+import {myAccountReplenishmentOrdersUrl} from '../../services/service.config'
 
 const ReplenishmentAddOrders = () => {
     const product = [
@@ -57,14 +57,12 @@ const ReplenishmentAddOrders = () => {
                     <Item className="lg:w-1/4 w-full">
                         <DropdownWithLabel label="Delivery Day" placeholder="First working day" options={[{value:'First working day', label:'First working day'}]}/>
                     </Item>   
-
                 </div>
                 <div className="w-60 p-2">
-                    <Link to={my_account_replenishment_orders_url()}>
+                    <Link to={myAccountReplenishmentOrdersUrl()}>
                         <MediumPrimaryButton title="SAVE ORDER"/>
                     </Link>
                 </div>
-                    
             </GridLayout>
         </GridLayout>
     )

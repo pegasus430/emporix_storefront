@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 
 import './checkout.css'
 
-import { home_url } from '../../services/service.config'
+import { homeUrl } from '../../services/service.config'
 
 const FinalCheckout = ({setFinal}) => {
     return (
@@ -22,7 +22,6 @@ const FinalCheckout = ({setFinal}) => {
                 <div className='pt-12 text-base'>
                     <span className='font-bold'>
                         Thank you for your purchase!
-                        
                     </span><br />
                     <span>
                         Your order number is: 
@@ -63,11 +62,10 @@ const FinalCheckout = ({setFinal}) => {
             </div>
             <div className='pt-12 w-full'>
                 <div className=' mx-auto md:w-60  w-full'>
-                    <Link to= {home_url()} >
+                    <Link to= {homeUrl()} >
                         <button onClick={()=> setFinal(false)} className='bg-[#214559] text-[white] px-6 py-0 h-12 file:text-[14px] leading-[14px] md:w-60 w-full'>BACK TO HOME PAGE</button>
                     </Link>
                 </div>
-                
             </div>
         </div>
     )
@@ -87,10 +85,8 @@ const CheckoutPage = () => {
                             <CheckoutActionPanel status={status} setStatus={setStatus} setFinal={setFinal}/>
                         </>:
                         <FinalCheckout setFinal={setFinal}/>
-                    }
-                        
+                    }    
                 </div>
-
             </div>
         </div>
     )

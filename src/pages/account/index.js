@@ -3,7 +3,7 @@ import AccountPage from "./AccountPage"
 import { useSelector } from "react-redux"
 import { Navigate } from 'react-router-dom'
 import Layout from "../Layout";
-import { login_url } from "../../services/service.config";
+import { loginUrl } from "../../services/service.config";
 
 const MobileAccountBar = ({title}) => {
     return (
@@ -18,11 +18,9 @@ const Account = () => {
 
     const { user: currentUser } = useSelector((state) => state.auth);
     if (!currentUser) {
-        return <Navigate  to={login_url} />;
+        return <Navigate  to={ loginUrl } />;
     }
-
     const title = "Welcome Back, " + currentUser.username
-    
     return (
         <Layout title={title}>
             <MobileAccountBar title = {title} />

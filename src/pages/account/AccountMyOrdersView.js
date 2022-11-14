@@ -27,7 +27,6 @@ const MyOrdersView = () => {
             "buy_count": 1
         }
     ]
-    
     return (
         <GridLayout className="mt-12 gap-12">
             <div className="pb-6 border-b border-[#D2D2D2]">

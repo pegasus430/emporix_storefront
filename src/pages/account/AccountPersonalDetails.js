@@ -3,7 +3,7 @@ import {Navigate} from 'react-router-dom'
 import { useSelector } from "react-redux"
 import AccountLayout from './AccountLayout'
 import photo from '../../assets/photo.png'
-import { login_url } from '../../services/service.config'
+import { loginUrl } from '../../services/service.config'
 
 const FromInputItem = ({label, value}) => {
   const [val, setVal] = useState(value)
@@ -32,9 +32,7 @@ const PersonalInfo =({user}) => {
             </div>
           </div>
         </div>
-          
         <div className="personal-info-content mt-6 sm:mt-0">
-         
           <div className="personal-info-content-wrapper grid grid-cols-1 gap-4">
             <FromInputItem label="Name" value={user.username}/>
             <FromInputItem label="Last Name" value={user.lastName}/>
@@ -58,12 +56,10 @@ const ChangePasswordContent =() => {
           </div>
         </div>
         <div className="change-password-info-content mt-6 sm:mt-0">
-         
           <div className="change-password-content-wrapper grid grid-cols-1 gap-4">
             <FromInputItem label="Your Current Password"/>
             <FromInputItem label="New Password" />
             <FromInputItem label="Confirm Password"/>
-            
           </div>
         </div>
       </div>
@@ -94,7 +90,7 @@ const ActionDiscardButton = ({caption}) => {
 const PersonalDetails = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
   if (!currentUser) {
-      return <Navigate  to={login_url()}/>;
+      return <Navigate  to={loginUrl()}/>;
   }
   return (
     <>
@@ -108,7 +104,6 @@ const PersonalDetails = () => {
 const AccountPersonalDetails = () => {
     return <AccountLayout page="Personal Details"> <PersonalDetails /> </AccountLayout>;
 };
-
 
 export default AccountPersonalDetails;
   

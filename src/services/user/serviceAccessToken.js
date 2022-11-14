@@ -1,4 +1,4 @@
-import {service_token_api, grant_type, client_secret, client_id} from '../service.config'
+import {serviceTokenApi, grantType, clientSecret, clientId} from '../service.config'
 import ApiRequest  from '..'
 import {serviceTokenKey, servciceTokenExpiresInKey} from '../../constants/localstorage'
 import qs from 'qs';
@@ -9,21 +9,21 @@ const headers = {
     'Content-Type': 'application/x-www-form-urlencoded'
 }
 const payload = {
-    'grant_type': grant_type,
-    'client_id': client_id(),
-    'client_secret': client_secret(),
+    'grant_type': grantType,
+    'client_id': clientId(),
+    'client_secret': clientSecret(),
     'scope': scope
 }
 const GetServiceTokenFromServer = async () => {
     let now = Date.now()
-    const service_token_expires_in = localStorage.getItem(servciceTokenExpiresInKey)
-    if(now < parseInt(service_token_expires_in))
+    const serviceTokenExpiresIn = localStorage.getItem(servciceTokenExpiresInKey)
+    if(now < parseInt(serviceTokenExpiresIn))
         return localStorage.getItem(serviceTokenKey)
-    const res = await ApiRequest(service_token_api(), 'post', qs.stringify(payload), headers)
+    const res = await ApiRequest(serviceTokenApi(), 'post', qs.stringify(payload), headers)
     const serviceToken = res['data']['access_token']
-    const expires_in = res['data']['expires_in']
+    const expiresIn = res['data']['expires_in']
     localStorage.setItem(serviceTokenKey, serviceToken)
-    localStorage.setItem(servciceTokenExpiresInKey, now + expires_in * 1000)
+    localStorage.setItem(servciceTokenExpiresInKey, now + expiresIn * 1000)
     return serviceToken
 }
 const ServiceAccessToken = async () => {
