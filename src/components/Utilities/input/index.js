@@ -1,7 +1,8 @@
 import {GridLayout} from '../common'
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import { TextRegular1 } from "../typography";
 import './input.css'
+
 
 export const TextInput = ({label, value, placeholder, action, className}) => {
     const [inputValue, setInputValue] = useState(value)

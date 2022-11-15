@@ -16,6 +16,7 @@ const CartService = (sessionId) => {
         }
         params['sessionId'] = sessionId
         const res = await ApiRequest(getCartAccountApi(), 'get', {},headers, params)
+        console.log(res)
         return res
     }
     const getCartList = async (cartAccountId) => {
@@ -56,7 +57,8 @@ const CartService = (sessionId) => {
                     "priceId": product.price.priceId,
                     "effectiveAmount": product.price.effectiveValue,
                     "originalAmount": product.price.originalValue,
-                    "currency": product.price.currency,
+                    // "currency": product.price.currency,
+                    "currency": 'EUR',
                     "measurementUnit": {
                         "quantity": product.quantity,
                         "unitCode": "PC"
