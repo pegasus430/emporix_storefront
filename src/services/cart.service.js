@@ -16,7 +16,6 @@ const CartService = (sessionId) => {
         }
         params['sessionId'] = sessionId
         const res = await ApiRequest(getCartAccountApi(), 'get', {},headers, params)
-        console.log(res)
         return res
     }
     const getCartList = async (cartAccountId) => {
