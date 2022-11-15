@@ -106,6 +106,7 @@ const DesktopContent = () => {
         code: "",
         name: "",
         quantity: 1,
+        id: Math.random(),
         price: {
             
         }
@@ -134,8 +135,9 @@ const DesktopContent = () => {
             if(price.length){
                 setAddProduct({
                     ...addProduct,
-                    name: res[0]['name'],
-                    price: price[0]
+                    quantity: 1,
+                    name: '',
+                    id: Math.random()
                 })
                 const matchProduct = tempoProductList.filter(product => product.code===code)
                 if(!matchProduct.length)
@@ -194,7 +196,7 @@ const DesktopContent = () => {
         setTempoProductList([])
     }
     const addProductsToCart = async () => {
-        const res = await cartService.addMultipleProductsToCart(cartAccount.id, tempoProductList)
+        await cartService.addMultipleProductsToCart(cartAccount.id, tempoProductList)
         dispatch(getCartList(cartAccount.id))
         setShowCart(true)
     }
@@ -247,7 +249,7 @@ const DesktopContent = () => {
                                 </TableRow>: ""
                             }
                             {/* Add Cart Row */}
-                            <CartItem feature="action" key="add" item={addProduct} codeHandler={handleCodeChange} quantityHandler={handleQuantityChange}/>
+                            <CartItem key={addProduct.id} feature="action"  item={addProduct} codeHandler={handleCodeChange} quantityHandler={handleQuantityChange}/>
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -266,9 +268,9 @@ const MobileContent = () => {
     const handleCodeChange = (code) => {
         
     }
-    const handleQuantityChange = () => {
+    // const handleQuantityChange = () => {
            
-    }
+    // }
 
     const MobileQuickOrderCell = ({item}) => {
         return (

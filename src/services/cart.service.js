@@ -56,7 +56,8 @@ const CartService = (sessionId) => {
                     "priceId": product.price.priceId,
                     "effectiveAmount": product.price.effectiveValue,
                     "originalAmount": product.price.originalValue,
-                    "currency": product.price.currency,
+                    // "currency": product.price.currency,
+                    "currency": 'EUR',
                     "measurementUnit": {
                         "quantity": product.quantity,
                         "unitCode": "PC"

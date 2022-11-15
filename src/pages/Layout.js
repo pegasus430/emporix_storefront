@@ -1,21 +1,21 @@
 import React, { useState, useEffect} from "react"
 import {useParams} from 'react-router-dom'
-import Topbar from "../components/Header/topbar"
-import Footer from "../components/Footer"
-import Drawer from "../components/Utilities/drawer/drawer"
-import Cart from "../components/Cart/cart"
+import Topbar from "components/Header/topbar"
+import Footer from "components/Footer"
+import Drawer from "components/Utilities/drawer/drawer"
+import Cart from "components/Cart/cart"
 import LayoutContext from "./context"
-import {LoadingCircleProgress} from '../components/Utilities/progress'
-import { GridLayout } from "../components/Utilities/common"
+import {LoadingCircleProgress} from 'components/Utilities/progress'
+import { GridLayout } from "components/Utilities/common"
 import { useDispatch, useSelector } from "react-redux"
-import { categoryLoadingSelector, GetCategory, categoryDataSelector } from "../redux/slices/categoryReducer"
-import {availabilityLoadingSelector, GetAvailability} from '../redux/slices/availabilityReducer'
-import {putShopItems} from "../redux/slices/pageReducer"
-import {tenantListSelector} from '../redux/slices/pageReducer'
+import { categoryLoadingSelector, GetCategory, categoryDataSelector } from "redux/slices/categoryReducer"
+import {availabilityLoadingSelector, GetAvailability} from 'redux/slices/availabilityReducer'
+import {putShopItems} from "redux/slices/pageReducer"
+import {tenantListSelector} from 'redux/slices/pageReducer'
 import InvalidTenant from './InvalidTenant'
 import {tenantSelector, setTenant, sessionIdSelector, isLoggedInSelector, accessTokenSelector, setAccessToken} from '../redux/slices/authReducer'
-import AccessToken from '../services/user/accessToken'
-import {getCartAccount, cartAccountSelector, getCartList} from '../redux/slices/cartReducer'
+import AccessToken from 'services/user/accessToken'
+import {getCartAccount, cartAccountSelector, getCartList} from 'redux/slices/cartReducer'
 import CurrencyService from "services/currency.service"
 
 const Layout = ({children, title}) => {

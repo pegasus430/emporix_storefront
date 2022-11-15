@@ -2,10 +2,6 @@ import React, { useState }  from 'react'
 import adjust               from '../../assets/adjust.png'
 import MobileFilterpanel    from './MobileFilterPanel'
 import SideFilterContent    from './SideFilterContent'
-import hp_laser_printer     from "../../assets/products/hp_laser_printer.png"
-import comfort_chair        from "../../assets/products/comfort_chair.png"
-import pc_stand             from "../../assets/products/pc_stand.png"
-import stapler              from "../../assets/products/stapler.png"
 import ProductList          from './ProductList'
 import './product.css'
 
