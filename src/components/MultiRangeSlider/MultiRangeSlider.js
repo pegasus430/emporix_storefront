@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
+import { CurrencyBeforeValue } from "components/Utilities/common";
 import "./multiRangeSlider.css";
 
 const MultiRangeSlider = ({ min, max, onChange }) => {
@@ -83,8 +84,8 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
       <div className="slider_pan">
         <div className="slider__track" />
         <div ref={range} className="slider__range" />
-        <div className="slider__left-value">&euro; {minVal}</div>
-        <div className="slider__right-value">&euro; {maxVal}</div>
+        <div className="slider__left-value">{ CurrencyBeforeValue(minVal) }</div>
+        <div className="slider__right-value">{ CurrencyBeforeValue(maxVal) }</div>
       </div>
     </div>
   );

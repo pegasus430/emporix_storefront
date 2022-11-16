@@ -12,7 +12,7 @@ const CurrencyService = () => {
             "Content-Type": "application/json"
         }
         const res = await ApiRequest(currencyApi(), 'get', {},headers)
-        return res
+        return res.data
     }
     return {
         getAllCurrencies

@@ -12,3 +12,4 @@ export const tenantListKey = "tenantList"
 export const cartProductKey = "cartProductList"
 export const sessionIdKey = "sessionId"
 export const locationListKey = 'locationList'
+export const currencyCodeKey = 'currency'

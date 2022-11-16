@@ -8,6 +8,7 @@ import {cartUrl, checkoutUrl} from 'services/service.config'
 import Badge from '@mui/material/Badge';
 import {useDispatch, useSelector } from 'react-redux'
 import {deleteCart, cartListSelector, cartAccountSelector} from 'redux/slices/cartReducer'
+import { CurrencyBeforeValue, CurrencyAfterValue } from 'components/Utilities/common'
 
 const CartProductContent = ({children}) => {
     return (
@@ -31,7 +32,7 @@ export const CartProductImage = ({src, className}) => {
 export const PriceExcludeVAT = ({price, caption}) => {
     return (
         <div className="price-exclude-vat">
-            <div className="">&euro; {price}</div>
+            <div className="">{ CurrencyBeforeValue(price) }</div>
             <div className="caption">{caption==undefined? 'ex. VAT': caption}</div>
         </div>
     )
@@ -40,7 +41,7 @@ export const PriceExcludeVAT = ({price, caption}) => {
 export const PriceExcludeVAT1 = ({price, caption}) => {
     return (
         <div className="price-exclude-vat1">
-            <div className="price">&euro; {price}</div>
+            <div className="price">{ CurrencyBeforeValue(price) }</div>
             <div className="caption">{caption==undefined? 'ex. VAT': caption}</div>
         </div>
     )
@@ -68,10 +69,10 @@ export const CartMobileItem = ({cart}) => {
                         </div>
                     </LayoutBetween>
                     <GridLayout className="gap-2 mt-4">
-                        <span className="cart-product-mobile-info-wrapper"><span className="font-bold">Unit Price: </span>{cart.product.price.effectiveValue} &euro;</span>
-                        <span className="cart-product-mobile-info-wrapper"><span className="font-bold">Subtotal: : </span>{cart.product.price.effectiveValue * cart.quantity} &euro;</span>
-                        <span className="cart-product-mobile-info-wrapper"><span className="font-bold">Discount: </span>{0.00}  &euro;</span>
-                        <span className="cart-product-mobile-info-wrapper"><span className="font-bold">VAT: </span>{Math.trunc(cart.product.price.originalValue * 0.2 * 100) / 100} &euro;</span>
+                        <span className="cart-product-mobile-info-wrapper"><span className="font-bold">Unit Price: </span>{ CurrencyAfterValue(cart.product.price.effectiveValue) }</span>
+                        <span className="cart-product-mobile-info-wrapper"><span className="font-bold">Subtotal: : </span>{ CurrencyAfterValue(cart.product.price.effectiveValue * cart.quantity) }</span>
+                        <span className="cart-product-mobile-info-wrapper"><span className="font-bold">Discount: </span>{ CurrencyAfterValue(0.00) }</span>
+                        <span className="cart-product-mobile-info-wrapper"><span className="font-bold">VAT: </span>{ CurrencyAfterValue(Math.trunc(cart.product.price.originalValue * 0.2 * 100) / 100) }</span>
                     </GridLayout>
                 </div>
             </div>
@@ -130,7 +131,7 @@ const CartProductPriceExcludeVat = ({price}) => {
     return (
         <div className="text-right">
             <GridLayout>
-                <div className="cart-product-price-except-vat"> &euro; {price}</div>
+                <div className="cart-product-price-except-vat"> { CurrencyBeforeValue(price) }</div>
                 <div >exclu. VAT</div>
             </GridLayout>
            
@@ -198,7 +199,7 @@ const CartSubTotalExcludeVat = ({value}) => {
     return (
         <>
             <span className="font-semibold">Subtotal without VAT</span>
-            <span className="font-semibold">&euro; {value}</span>
+            <span className="font-semibold">{ CurrencyBeforeValue(value) }</span>
         </>
     )
 }
@@ -206,23 +207,23 @@ const CartSubTotalIncludeVat = ({value}) => {
     return (
         <>
             <span className="font-semibold">Subtotal with VAT</span>
-            <span className="font-semibold">&euro; {Math.trunc(value * 1.2 * 100) / 100}</span>
+            <span className="font-semibold">{ CurrencyBeforeValue(Math.trunc(value * 1.2 * 100) / 100) }</span>
         </>
     )
 }
 const CartVat0 = () => {
     return (
         <>
-            <span>VAT 0% of € 00.00</span>
-            <span>€ 0.00</span>
+            <span>VAT 0% of { CurrencyBeforeValue('00.00') }</span>
+            <span>{ CurrencyBeforeValue('00.00') }</span>
         </>
     )
 }
 const CartVat20 = ({value}) => {
     return (
         <>
-            <span>VAT 20% of € {value}</span>
-            <span>€ {Math.trunc(value * 0.2 * 100) / 100}</span>
+            <span>VAT 20% of { CurrencyBeforeValue(value) }</span>
+            <span> { CurrencyBeforeValue(Math.trunc(value * 0.2 * 100) / 100) }</span>
         </>
     )
 }
@@ -238,7 +239,7 @@ const CartTotalPrice = ({value}) => {
     return (
         <>
             <span className="font-bold ">Total Price</span>
-            <span className="font-bold">&euro; {Math.trunc(value * 1.2 * 100) / 100}</span>
+            <span className="font-bold">{ CurrencyBeforeValue(Math.trunc(value * 1.2 * 100) / 100) }</span>
         </>
     )
 }

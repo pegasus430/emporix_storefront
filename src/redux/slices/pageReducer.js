@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import tenant_lists from '../../tenant.config'
-import {tenantListKey} from '../../constants/localstorage'
+import {currencyCodeKey, tenantListKey} from '../../constants/localstorage'
 import automationTenant from '../../tenant.json'
 
 let tenantListFromLocalStorage = localStorage.getItem(tenantListKey)
@@ -32,7 +32,9 @@ export const initialState = {
             "items" : []
         } 
     ],
-    tenantList: tenantLists
+    tenantList: tenantLists,
+    currencyList: [],
+    activeCurrency: {}
 }
 
 const pageSlice = createSlice({
@@ -44,6 +46,13 @@ const pageSlice = createSlice({
         },
         setTenantList: (state, action) => {
             state.tenantList[action.payload.tenant] = action.payload.tenant
+        },
+        setCurrencyList: (state, action) => {
+            state.currencyList = action.payload
+        },
+        setActiveCurrency: (state, action) => {
+            state.activeCurrency = action.payload
+            localStorage.setItem(currencyCodeKey, action.payload.code)
         }
     }
 })
@@ -52,7 +61,9 @@ export default pageSlice.reducer
 // The Page Actions.
 export const {
     setShopItems,
-    setTenantList
+    setTenantList,
+    setCurrencyList,
+    setActiveCurrency
 } = pageSlice.actions
 
 export const putShopItems = (items) => async (dispatch) => {
@@ -61,3 +72,5 @@ export const putShopItems = (items) => async (dispatch) => {
 // The Page Selector
 export const pageMenuSelector = (state) => state.page.menu
 export const tenantListSelector = (state) => state.page.tenantList
+export const currencyListSelector = (state) => state.page.currencyList
+export const activeCurrencySelector = (state) => state.page.activeCurrency

@@ -1,4 +1,6 @@
-import React, { useState }  from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { activeCurrencySelector } from 'redux/slices/pageReducer'
 import './common.css'
 
 export const LayoutBetween = ({children, className}) => {
@@ -79,3 +81,24 @@ export const DesktopXLContainer = ({children}) => {
         <div className="xl:block hidden">{children}</div>
     )
 }
+
+export const CurrencyBeforeValue = ((value) => {
+    const activeCurrency = useSelector(activeCurrencySelector)
+    return (
+        <>{activeCurrency.symbol} {value}</>
+    )
+})
+
+export const CurrencyAfterValue = ((value) => {
+    const activeCurrency = useSelector(activeCurrencySelector)
+    return (
+        <>{value} {activeCurrency.symbol}</>
+    )
+})
+
+export const CurrencyBeforeComponent = ((children) => {
+    const activeCurrency = useSelector(activeCurrencySelector)
+    return (
+        <> {activeCurrency.symbol}</>
+    )
+})

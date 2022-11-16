@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Status from './common'
 import {myAccountMyOrdersViewUrl, myAccountMyOrdersInvoiceUrl} from '../../services/service.config'
 import { Link } from 'react-router-dom';
+import { CurrencyBeforeValue } from "components/Utilities/common";
 
 const myOdersList = [
     {
@@ -56,7 +57,7 @@ const OrderItem = ({order_number, status, created,  total}) => {
         </div>
         
         <div className='font-inter pt-2'>
-          &euro; {total}
+          { CurrencyBeforeValue(total) }
         </div>
 
         <div className='pt-2'>
@@ -92,7 +93,7 @@ export const MyOrders = () => {
                   <TableCell align="left" className='!py-6'>
                     <Status width={108} height = {36} title = {row.status} color={ row.status == "SHIPPED" ?'#FFA800' : '#4BCB67'} />
                   </TableCell>
-                  <TableCell align="left" className='!py-6'>&euro; {row.total}</TableCell>
+                  <TableCell align="left" className='!py-6'> { CurrencyBeforeValue(row.total) }</TableCell>
                   <TableCell align="left" className='!py-6'>{row.created}</TableCell>
                   <TableCell align="left" className='!py-6'>
                       <div className='flex'>

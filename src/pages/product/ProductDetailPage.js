@@ -21,6 +21,7 @@ import { productUrl } from '../../services/service.config'
 import { useDispatch, useSelector } from 'react-redux';
 import { cartAccountSelector, cartListSelector, putCartProduct } from '../../redux/slices/cartReducer';
 import { LargePrimaryButton } from '../../components/Utilities/button'
+import { CurrencyBeforeComponent, CurrencyBeforeValue} from 'components/Utilities/common';
 
 const ProductContext = createContext()
 
@@ -121,20 +122,23 @@ const ProductPriceAndAmount = ({price, listPrice, product_count, estimated_deliv
                 { price !== ""?
                     <>
                         <div className="product-price h-12">
-                            &euro; {price}
+                            { CurrencyBeforeValue(price) }
                         </div>
                         <div className="vat-caption">VAT excluded</div>
                     </>: <></>
                 }
                 { listPrice !== ""?
-                    <div className="list-price desktop-sm">List Price &euro; <del>{listPrice}</del></div>:
+                    <div className="list-price desktop-sm">List Price <CurrencyBeforeComponent><del>{listPrice}</del></CurrencyBeforeComponent></div>:
                     <span className='desktop-sm text-xs  text-[#F30303] font-bold'>No Price</span>
                 } 
                 
             </div>
             { listPrice !== ""?
                 <div className="mobile-sm mt-2 list-price">
-                    List Price &euro; <del>{listPrice}</del>
+                    List Price 
+                    <CurrencyBeforeComponent>
+                        <del>{listPrice}</del>
+                    </CurrencyBeforeComponent>
                 </div>:
                 <span className='mobile-sm text-xs  text-[#F30303] font-bold'>No Price</span>
             } 
@@ -219,6 +223,7 @@ const PrdouctAddToCart = () => {
     const HandleProductAddToCart1 = (product, action, quantitiy) => {
         let new_produt = {...product}
         new_produt.quantity = quantitiy
+        new_produt.price.currency = 'EUR'
         dispatch(putCartProduct(new_produt,cartAccount.id,cartList))
         action(true)
     }
@@ -253,9 +258,9 @@ const ProductDiscount = () => {
             </div>
             <div className="discount-row">
                 <div className="discount-first-col discount-col">Unit Price</div>
-                <div className="discount-col">€ 299.00</div>
-                <div className="discount-col">€ 279.99</div>
-                <div className="discount-col">€ 259.99</div>
+                <div className="discount-col">{ CurrencyBeforeValue('299.00') }</div>
+                <div className="discount-col">{ CurrencyBeforeValue('279.99') }</div>
+                <div className="discount-col">{ CurrencyBeforeValue('259.99') }</div>
             </div>
         </div>
     )

@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Link } from 'react-router-dom';
 import {addReplenishmentOrdersUrl, editReplenishmentOrdersUrl} from '../../services/service.config'
+import { CurrencyBeforeValue } from "components/Utilities/common";
 
 const repleishmentOrdersList = [
   {
@@ -62,7 +63,7 @@ const RepleOrderItem = ({order_number, po, start_on , frequency , next_order_dat
           <span className='font-bold mr-2'>Next Order Date</span> {next_order_date} 
         </div>
         <div className=' pt-2'>
-          <span className='font-bold mr-2'>Total</span>  &euro; {total}
+          <span className='font-bold mr-2'>Total</span>  { total}
         </div>
     </div>
   )
@@ -104,7 +105,7 @@ const ReplenishmentOrders = () => {
                   <TableCell align="left" className='!py-6'> {row.start_on}</TableCell>
                   <TableCell align="left" className='!py-6'>{row.frequency}</TableCell>
                   <TableCell align="left" className='!py-6'>{row.next_order_date}</TableCell>
-                  <TableCell align="left" className='!py-6'>&euro; {row.total}</TableCell>
+                  <TableCell align="left" className='!py-6'>{ CurrencyBeforeValue(row.total) }</TableCell>
                   
                   <TableCell align="left" className='!py-6'>
                     

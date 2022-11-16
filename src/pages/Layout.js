@@ -7,16 +7,18 @@ import Cart from "components/Cart/cart"
 import LayoutContext from "./context"
 import {LoadingCircleProgress} from 'components/Utilities/progress'
 import { GridLayout } from "components/Utilities/common"
+import getSymbolFromCurrency from 'currency-symbol-map'
 import { useDispatch, useSelector } from "react-redux"
 import { categoryLoadingSelector, GetCategory, categoryDataSelector } from "redux/slices/categoryReducer"
 import {availabilityLoadingSelector, GetAvailability} from 'redux/slices/availabilityReducer'
 import {putShopItems} from "redux/slices/pageReducer"
-import {tenantListSelector} from 'redux/slices/pageReducer'
+import {tenantListSelector, setActiveCurrency, setCurrencyList} from 'redux/slices/pageReducer'
 import InvalidTenant from './InvalidTenant'
 import {tenantSelector, setTenant, sessionIdSelector, isLoggedInSelector, accessTokenSelector, setAccessToken} from '../redux/slices/authReducer'
 import AccessToken from 'services/user/accessToken'
 import {getCartAccount, cartAccountSelector, getCartList} from 'redux/slices/cartReducer'
 import CurrencyService from "services/currency.service"
+import { currencyCodeKey } from "constants/localstorage"
 
 const Layout = ({children, title}) => {
     const [showCart, setShowCart] = useState(false)
@@ -58,7 +60,42 @@ const Layout = ({children, title}) => {
     useEffect(()=> {
         const layout_init = async () => {
             if(accessToken_ === "" || !Object.keys(cartAccount).length) return
-            // const currencies = await CurrencyService.getAllCurrencies()
+            const currencies = await CurrencyService.getAllCurrencies()
+            
+            const currencyListWithSymbol = currencies.map(c => {
+                return {
+                    'code': c.code,
+                    'symbol': getSymbolFromCurrency(c.code)
+                }
+            })
+            dispatch(setCurrencyList(currencyListWithSymbol))
+
+            if(currencyListWithSymbol.length > 0){
+                const currencyCode = localStorage.getItem(currencyCodeKey)
+                let activeCurrency = currencyListWithSymbol[0]
+
+                if(currencyCode !== null && currencyCode !== undefined){
+                    const matchCurreny = currencyListWithSymbol.filter(currency => currency.code === currencyCode)
+                    
+                    if(matchCurreny.length > 0){
+                        activeCurrency = {
+                            'code': matchCurreny[0]['code'],
+                            'symbol': matchCurreny[0]['symbol']
+                        }
+                    }
+                }
+                dispatch(setActiveCurrency(activeCurrency))
+            }else{
+                dispatch(setCurrencyList([{
+                    'code': 'EUR',
+                    'symbol': getSymbolFromCurrency('EUR')
+                }]))
+                dispatch(setActiveCurrency({
+                    'code': 'EUR',
+                    'symbol': getSymbolFromCurrency('EUR')
+                }))
+            }
+
             dispatch(GetCategory())
             dispatch(GetAvailability())
         }

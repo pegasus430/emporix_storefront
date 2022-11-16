@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch , AiOutlineMail, AiOutlineShoppingCart } from 'react-icons/ai'
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import logo from '../../assets/atom.png'
 import Badge from '@mui/material/Badge';
 import AccountMenu from './accountmenu'
@@ -9,10 +9,12 @@ import { HiOutlineUserCircle } from "react-icons/hi"
 import { ChevronRightIcon , ChevronLeftIcon } from '@heroicons/react/solid'
 import LayoutContext from '../../pages/context'
 import { LargePrimaryButton } from '../Utilities/button'
-import {pageMenuSelector} from "../../redux/slices/pageReducer"
+import {activeCurrencySelector, currencyListSelector, pageMenuSelector, setActiveCurrency} from "../../redux/slices/pageReducer"
 import { tenantSelector } from '../../redux/slices/authReducer'
 import {loginUrl, homeUrl, addTenantToUrl} from '../../services/service.config'
 import {cartListSelector} from '../../redux/slices/cartReducer'
+import getSymbolFromCurrency from 'currency-symbol-map'
+import {CurrencyBeforeValue} from 'components/Utilities/common'
 
 const Navbar = () => {
 	
@@ -26,7 +28,16 @@ const Navbar = () => {
 	const {setShowCart} = useContext(LayoutContext)
   const menuList = useSelector(pageMenuSelector)
   const tenant = useSelector(tenantSelector)
-
+  const currencyList = useSelector(currencyListSelector)
+  const activeCurrency = useSelector(activeCurrencySelector)
+  const dispatch = useDispatch()
+  
+  const currencyChangeHandler = (value) => {
+    dispatch(setActiveCurrency({
+      'code': value,
+      'symbol': getSymbolFromCurrency(value)
+    }))
+  }
     const ParentBoard = () =>{
       	return (
           	<>
@@ -70,9 +81,16 @@ const Navbar = () => {
               </div>
               <div className='w-full h-[59px] border-y flex justify-between items-center'>
                   Currency
-                  <select className='text-[#214559] appearance-none'>
-                    <option value = "Euro">&euro;</option>
-                    <option value = "Dollar">&#36;</option>
+                  <select value = {activeCurrency.code !== undefined ? activeCurrency.code: ''} onChange={(e) => currencyChangeHandler(e.target.value)} className='text-[#214559] appearance-none'>
+                    { 
+                      currencyList.map(currency => {
+                        return (
+                          <option key={currency.code} value={currency.code}>
+                            {currency.symbol}
+                          </option>
+                        )
+                      })
+                    }
                   </select>
               </div>
         	</>   
@@ -187,11 +205,16 @@ const Navbar = () => {
             </div>
             <div className='ml-[22px]'>
                 Currency: 
-                <select className='bg-[#214559]'>
-                    <option value = "Euro">&euro;</option>
-                    <option value = "Dollar">&#36;</option>
-                    
-                    
+                <select value = {activeCurrency.code !== undefined ? activeCurrency.code: ''} onChange={(e) => currencyChangeHandler(e.target.value)} className='bg-[#214559]'>
+                  { 
+                      currencyList.map(currency => {
+                        return (
+                          <option key={currency.code} value={currency.code}>
+                            {currency.symbol}
+                          </option>
+                        )
+                      })
+                    }
                 </select>
             </div>
             
@@ -212,7 +235,7 @@ const Navbar = () => {
                     <AiOutlineShoppingCart size = {20} onClick={handleOpenCart}/>
                   }
                   <div className='pl-3 text-white flex'>
-                      &euro; {cartTotalPrice}
+                      { CurrencyBeforeValue(cartTotalPrice) }
                   </div>
                 </li>
                 <li className='px-2'><a className='hover:text-[#FBB13C]' href={`/${tenant}/login`}>Login</a></li> |
@@ -232,7 +255,7 @@ const Navbar = () => {
                     
                     
                   <div className='pl-[17.5px] text-white flex'>
-                      &euro; {cartTotalPrice}
+                    { CurrencyBeforeValue(cartTotalPrice) }
                   </div>
                 </li> |
                 <li className='px-4 flex'>

@@ -6,6 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { CurrencyBeforeValue } from "components/Utilities/common";
 
 const savedCartsList = [
   {
@@ -61,7 +62,7 @@ const MobileCartItem = ({date, name, items , total}) => {
             {date}
           </div>
           <div className='font-inter font-bold pt-2'>
-            &euro; {total}
+            {total}
           </div>
       </div>
     )
@@ -93,7 +94,7 @@ export const SavedCarts = () => {
                   </TableCell>
                   <TableCell align="left" className='!py-6'>{row.name}</TableCell>
                   <TableCell align="left" className='!py-6'>{row.items}</TableCell>
-                  <TableCell align="left" className='!py-6'>&euro; {row.total}</TableCell>
+                  <TableCell align="left" className='!py-6'>{ CurrencyBeforeValue(row.total) }</TableCell>
                   <TableCell align="left" className='!py-6'>
                       <div className='flex'>
                           <div className='font-inter font-semibold text-[14px] underline'>

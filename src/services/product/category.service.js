@@ -35,6 +35,7 @@ const CategoryService = () => {
         const accessToken = localStorage.getItem(accessTokenKey)
         const categories = (await getAllCategories(accessToken)).data
         const categorytrees = getCategoryTree(categories, 1)
+        categorytrees.sort((a, b) => a.key.localeCompare(b.key))
         localStorage.setItem(productCategoryTreesKey, JSON.stringify(categorytrees))
         return categorytrees
     }
