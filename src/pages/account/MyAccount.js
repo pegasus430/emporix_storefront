@@ -1,5 +1,4 @@
-import React, { useState }  from 'react'
-import { Link, Outlet, useParams} from 'react-router-dom'
+import React  from 'react'
 import AccountLayout from './AccountLayout'
 import photo from '../../assets/photo.png'
 import {MyOrders} from './common'
@@ -7,6 +6,8 @@ import {SavedCarts} from './common'
 import { useSelector } from "react-redux"
 import { Navigate } from 'react-router-dom'
 import { myAccountMyOrdersViewUrl } from '../../services/service.config'
+import {CurrencyBeforeValue} from 'components/Utilities/common'
+
 const AccountPersonalInfo = () => {
     const { user: currentUser } = useSelector((state) => state.auth);
     if (!currentUser) {
@@ -55,13 +56,13 @@ const PaymentStatus = () => {
     return (
         <ul className="flex flex-col gap-4">
             <li className="payment-title">Total spent in April</li>
-            <li className="spent-amount">€ 2,540.28</li>
+            <li className="spent-amount">{ CurrencyBeforeValue('2,540.28') }</li>
             <li className="limit-bar-wrapper flex flex-col gap-2">
                 <div className="limit-bar">
                     <PaymentProgressBar />
                 </div>
                 <div className="limit-status-text text-right">
-                    Your monthly limit: € 10,000.00
+                    Your monthly limit: { CurrencyBeforeValue('10,000.00') }
                 </div>
             </li>
         </ul>
@@ -73,12 +74,12 @@ const PaymentInfoDetails = () => {
         <div className="flex">
             <div className="oustanding flex gap-4 flex-col">
                 <div className="payment-title">Oustanding</div>
-                <div className="price">€ 1912.21</div>
+                <div className="price"> { CurrencyBeforeValue('1912.21') }</div>
                 
             </div>
             <div className="refunds flex gap-4 flex-col">
                 <div className="payment-title">Refunds</div>
-                <div className="price">€ 841.96</div>
+                <div className="price"> { CurrencyBeforeValue('841.96')}</div>
                 
             </div>
         </div>

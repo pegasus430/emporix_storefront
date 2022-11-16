@@ -15,6 +15,7 @@ import {maxProductDescriptionLength, minProductInStockCount} from '../../constan
 import {availabilityDataSelector} from '../../redux/slices/availabilityReducer'
 import parse from 'html-react-parser'
 import { tenantKey } from "../../constants/localstorage"
+import { CurrencyBeforeComponent, CurrencyBeforeValue } from "components/Utilities/common"
 
 const EachProduct = (props) => {
     const tenant = localStorage.getItem(tenantKey)
@@ -62,7 +63,11 @@ const EachProduct = (props) => {
                         <>
                             <div className='text-xs text-[#ACAEB2] w-[117px] text-left'>
                                 { props.listPrice !== ""?
-                                    <>List Price &euro; <del>{props.listPrice} </del></>:
+                                    <>List Price 
+                                        <CurrencyBeforeComponent>
+                                            <del>{props.listPrice} </del>
+                                        </CurrencyBeforeComponent>
+                                    </>:
                                     <span className='text-xs  text-[#F30303] font-bold'>No Price</span>  
                                 } 
                                 
@@ -72,7 +77,7 @@ const EachProduct = (props) => {
                                     <>
                                         <img src = {pen} className="w-4 h-4 mt-1" />
                                         <div className='text-base lg:text-xl leading-[24px] font-bold ml-1'>
-                                            <>&euro; {props.price} <span className='text-xs font-normal text-[#ACAEB2] ml-4'>(Excl. VAT)</span></>
+                                            <>{ CurrencyBeforeValue(props.price) } <span className='text-xs font-normal text-[#ACAEB2] ml-4'>(Excl. VAT)</span></>
                                         </div>
                                     </>:
                                     <></>
@@ -84,7 +89,8 @@ const EachProduct = (props) => {
                     (
                         <div className='text-base  pt-4'>
                             { props.listPrice !== ""?
-                                <>&euro; {props.listPrice} <span className='text-xs font-normal text-[#ACAEB2]'>(Incl. VAT)</span></>:
+                            
+                                <>{ CurrencyBeforeValue(props.listPrice) } <span className='text-xs font-normal text-[#ACAEB2]'>(Incl. VAT)</span></>:
                                 <span className='text-xs  text-[#F30303] font-bold'>No Price</span>   
                             } 
                         </div>
@@ -123,12 +129,15 @@ const EachProductRow = (props) => {
                         props.auth ? (
                             <>
                                 <div className='text-[12px] text-[#ACAEB2] w-[117px] text-left'>
-                                    List Price &euro; <del>{props.listPrice} </del>
+                                    List Price 
+                                    <CurrencyBeforeComponent>
+                                        <del>{props.listPrice} </del>
+                                    </CurrencyBeforeComponent>
                                 </div>
                                 <div className='flex'>
                                     <img src = {pen} className="w-4 h-4 mt-1" />
                                     <div className='text-[20px] leading-[24px] font-bold ml-1'>
-                                        &euro; {props.price}  <br />
+                                        { CurrencyBeforeValue(props.price) }  <br />
                                         <span className='text-[12px] font-normal text-[#ACAEB2]'>(Excl. VAT)</span>
                                     </div>
                                 </div>

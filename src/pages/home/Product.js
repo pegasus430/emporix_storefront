@@ -7,6 +7,7 @@ import hp_laser_printer from "../../assets/products/hp_laser_printer.png"
 import comfort_chair from "../../assets/products/comfort_chair.png"
 import pc_stand from "../../assets/products/pc_stand.png"
 import stapler from "../../assets/products/stapler.png"
+import { CurrencyBeforeValue, CurrencyBeforeComponent } from 'components/Utilities/common'
 import "react-animated-slider/build/horizontal.css";
 import './slider-animation.css'
 import './product.css'
@@ -40,12 +41,15 @@ const EachProduct = (props) => {
                     props.auth ? (
                         <>
                             <div className='text-[12px] text-[#ACAEB2] w-[117px] text-left'>
-                                List Price &euro; <del>{props.list_price} </del>
+                                List Price 
+                                <CurrencyBeforeComponent>
+                                    <del>{props.list_price} </del>
+                                </CurrencyBeforeComponent>
                             </div>
                             <div className='flex'>
                                 <img src = {pen} className="w-4 h-4 mt-1" />
                                 <div className='text-[20px] leading-[24px] font-bold ml-1'>
-                                    &euro; {props.price}  <br />
+                                    { CurrencyBeforeValue(props.price) }  <br />
                                     <span className='text-[12px] font-normal text-[#ACAEB2]'>(Incl. VAT)</span>
                                 </div>
                             </div>
@@ -54,7 +58,7 @@ const EachProduct = (props) => {
                     ):
                     (
                         <div className='text-base  pt-4'>
-                            &#163; {props.price} <span className='text-[12px] font-normal text-[#ACAEB2]'>(Incl. VAT)</span>
+                            { CurrencyBeforeValue(props.price) } <span className='text-[12px] font-normal text-[#ACAEB2]'>(Incl. VAT)</span>
                         </div>
                     )
                 }
@@ -161,12 +165,12 @@ const Product = () => {
                                     auth ? (
                                         <>
                                             <div className='text-[12px] text-[#ACAEB2] w-[117px] text-left'>
-                                                List Price <del>&euro; {item.list_price} </del>
+                                                List Price <del>{ CurrencyBeforeValue(item.list_price) } </del>
                                             </div>
                                             <div className='flex'>
                                                 <img src = {pen} className="w-4 h-4 mt-1" />
                                                 <div className='text-[20px] leading-[24px] font-bold ml-1'>
-                                                    &euro; {item.price}  <br />
+                                                    { (item.price) }  <br />
                                                     <span className='text-[12px] font-normal text-[#ACAEB2]'>(Incl. VAT)</span>
                                                 </div>
                                             </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactStars from 'react-stars'
 import pen from "../../assets/products/pencil.png"
+import { CurrencyBeforeValue, CurrencyBeforeComponent } from "components/Utilities/common";
 
 const Product = (props) => {
     return (
@@ -30,12 +31,15 @@ const Product = (props) => {
                     props.auth ? (
                         <>
                             <div className='text-[12px] text-[#ACAEB2] w-[117px] text-left'>
-                                List Price &euro; <del>{props.list_price} </del>
+                                List Price
+                                <CurrencyBeforeComponent>
+                                    <del>{props.list_price}</del>
+                                </CurrencyBeforeComponent>
                             </div>
                             <div className='flex'>
                                 <img src = {pen} className="w-4 h-4 mt-1" />
                                 <div className='text-[20px] leading-[24px] font-bold ml-1'>
-                                    &euro; {props.price}  <br />
+                                    { CurrencyBeforeValue(props.price) }  <br />
                                     <span className='text-[12px] font-normal text-[#ACAEB2]'>(Incl. VAT)</span>
                                 </div>
                             </div>

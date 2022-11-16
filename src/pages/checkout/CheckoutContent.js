@@ -11,7 +11,8 @@ import { RadioGroup } from '../../components/Utilities/radio'
 import './checkout.css'
 import Checkbox from '../../components/Utilities/checkbox'
 import { Container } from '../../components/Utilities/common'
-import { cartAccountSelector, cartListSelector } from 'redux/slices/cartReducer'
+import { cartListSelector } from 'redux/slices/cartReducer'
+import { CurrencyBeforeValue } from 'components/Utilities/common'
 
 const ShipingContent = () => {
     const locations = [
@@ -53,8 +54,8 @@ const ShipingContent = () => {
                 </MobileMDContainer>
                 <RadioGroup active="radio1">
                     <ShippingMethod radioKey="radio1" shippingmode="Standard Shipping" date="Monday, June 6 - Tuesday June 7" price = "Free" />
-                    <ShippingMethod radioKey="radio2" shippingmode="Freight Carrier: LTL" date="Friday , June 3" price = "€ 124.90" />
-                    <ShippingMethod radioKey="radio3" shippingmode="Freight Carrier : FTL" date="Friday , June 3" price = "€ 349.90" />
+                    <ShippingMethod radioKey="radio2" shippingmode="Freight Carrier: LTL" date="Friday , June 3" price = { CurrencyBeforeValue('124.90') } />
+                    <ShippingMethod radioKey="radio3" shippingmode="Freight Carrier : FTL" date="Friday , June 3" price = { CurrencyBeforeValue('349.90') } />
                 </RadioGroup>
             </GridLayout>
         </>
@@ -210,7 +211,7 @@ const ProductContent = () => {
                                         <TextBold6>Quantity:</TextBold6>
                                         <TextRegular4>&nbsp;{product.quantity}</TextRegular4>
                                     </Container>
-                                    <Heading5>&euro; {product.price}</Heading5>
+                                    <Heading5>{ CurrencyBeforeValue(product.price) }</Heading5>
                                 </LayoutBetween>
                             </GridLayout>
 
@@ -235,7 +236,7 @@ const ProductContent = () => {
                                         <TextBold6>Quantity::</TextBold6>
                                         <TextRegular4>&nbsp;{product.quantity}</TextRegular4>
                                     </Container>
-                                    <Heading5>&euro; {product.price}</Heading5>
+                                    <Heading5>{ CurrencyBeforeValue(product.price) }</Heading5>
                                 </LayoutBetween>
                             </GridLayout>
 

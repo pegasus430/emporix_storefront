@@ -1,6 +1,6 @@
 import React from 'react'
 import AccountLayout from './AccountLayout'
-import {Container, GridLayout, LayoutBetween, Right} from '../../components/Utilities/common'
+import {Container, CurrencyBeforeValue, GridLayout, LayoutBetween, Right} from '../../components/Utilities/common'
 import { Heading3, TextRegular8, TextRegular, TextBold10, Heading4, TextBold3, TextBold11, TextBold12} from '../../components/Utilities/typography'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -44,22 +44,22 @@ const orderDetails = [
       ordered : '2' ,
       item_number : 'ICA-CT 073BK',
       description : 'Jysk Office Chair SKODSBORG' ,
-      unit_price : '€ 109.99',
-      total: '€ 219.98'
+      unit_price : '109.99',
+      total: '219.98'
     } ,
     {
         ordered : '1' ,
         item_number : 'ICA-CT 073BK',
         description : 'Equip Ergonomic Executive Office Chair' ,
-        unit_price : '€ 149.99',
-        total: '€ 149.99'
+        unit_price : '149.99',
+        total: '149.99'
     } ,
     {
         ordered : '4' ,
         item_number : 'ICA-CT 073BK',
         description : 'Kenson 7010 office/computer chair Padded seat' ,
-        unit_price : '€ 92.00',
-        total: '€ 368.00'
+        unit_price : '92.00',
+        total: '368.00'
     } 
   ]
 
@@ -123,8 +123,8 @@ const MyOrdersInvoice = () => {
                                     </TableCell>
                                     <TableCell align="left" className='!py-6'>{row.item_number}</TableCell>
                                     <TableCell align="left" className='!py-6'>{row.description}</TableCell>
-                                    <TableCell align="left" className='!py-6'>{row.unit_price}</TableCell>
-                                    <TableCell align="left" className='!py-6'>{row.total}</TableCell>
+                                    <TableCell align="left" className='!py-6'>{ CurrencyBeforeValue(row.unit_price) }</TableCell>
+                                    <TableCell align="left" className='!py-6'>{ CurrencyBeforeValue(row.total) }</TableCell>
                                     
                                 </TableRow>
                             ))}
@@ -140,22 +140,22 @@ const MyOrdersInvoice = () => {
                     </Right>
                     <LayoutBetween className="h-[30px] border-b border-[#D7DADE]">
                         <TextBold11>Subtotal without VAT</TextBold11>
-                        <TextBold11>€ 737.97</TextBold11>
+                        <TextBold11>{ CurrencyBeforeValue('737.97') }</TextBold11>
                     </LayoutBetween>
                     <GridLayout className="gap-1">
                         <TextBold12>VAT Details</TextBold12>
                         <Container className="gap-2">
-                            <TextRegular>VAT 20% of € 737.97</TextRegular>
-                            <TextRegular>€ 147.594</TextRegular>
+                            <TextRegular>VAT 20% of { CurrencyBeforeValue('737.97') } </TextRegular>
+                            <TextRegular>{ CurrencyBeforeValue('147.594') } </TextRegular>
                         </Container>
                         <Container className="gap-2">
-                            <TextRegular>VAT 0% of € 00.00</TextRegular>
-                            <TextRegular>€0.00</TextRegular>
+                            <TextRegular>VAT 0% of { CurrencyBeforeValue('0.00') }</TextRegular>
+                            <TextRegular>{ CurrencyBeforeValue('0.00') }</TextRegular>
                         </Container>
                     </GridLayout>
                     <LayoutBetween>
                         <TextBold11>Total</TextBold11>
-                        <TextBold12>€ 885.294</TextBold12>
+                        <TextBold12>{ CurrencyBeforeValue('885.294') }</TextBold12>
                     </LayoutBetween>
                 </GridLayout>
             </InvoiceDetailItem>

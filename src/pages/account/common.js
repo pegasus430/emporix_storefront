@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Link } from 'react-router-dom';
+import { CurrencyBeforeValue } from 'components/Utilities/common'
 
 const myOdersList = [
   {
@@ -43,7 +44,7 @@ const OrderItem = ({order_number, status, created,  total}) => {
             <Status width={108} height = {24} title = {status} color={ status == "SHIPPED" ?'#FFA800' : '#4BCB67'} />
         </div>
         <div className='font-inter pt-4 flex justify-between'>
-          <div className=''>&euro; {total}</div>
+          <div className=''>{ CurrencyBeforeValue(total) }</div>
           <div className=''>
             {created}
           </div>
@@ -78,7 +79,7 @@ export const MyOrders = ({actions}) => {
                   <TableCell align="left" className='!py-6'>
                     <Status width={108} height = {36} title = {row.status} color={ row.status == "SHIPPED" ?'#FFA800' : '#4BCB67'} />
                   </TableCell>
-                  <TableCell align="left" className='!py-6'>&euro; {row.total}</TableCell>
+                  <TableCell align="left" className='!py-6'>{ CurrencyBeforeValue(row.total) }</TableCell>
                   <TableCell align="left" className='!py-6'>{row.created}</TableCell>
                   <TableCell align="left" className='!py-6'>
                       <div className='flex'>
@@ -162,7 +163,7 @@ export const Status = ({width, height, color, title}) => {
             </div>
             <div className='flex justify-between pt-2'>
               <div className='font-inter font-bold'>
-                &euro; {total}
+                { CurrencyBeforeValue(total) }
               </div>
               <div className=''>
                 {date}
@@ -198,7 +199,7 @@ export const Status = ({width, height, color, title}) => {
                     </TableCell>
                     <TableCell align="left" className='!py-6'>{row.name}</TableCell>
                     <TableCell align="left" className='!py-6'>{row.items}</TableCell>
-                    <TableCell align="left" className='!py-6'>&euro; {row.total}</TableCell>
+                    <TableCell align="left" className='!py-6'>{ CurrencyBeforeValue(row.total) }</TableCell>
                     <TableCell align="left" className='!py-6'>
                       
                       <div className='flex'>

@@ -15,6 +15,7 @@ import MuiAlert from '@mui/material/Alert';
 import { useDispatch, useSelector } from "react-redux";
 import priceService from "services/product/price.service";
 import LayoutContext from 'pages/context'
+import { CurrencyBeforeValue } from "components/Utilities/common";
 import './quickorder.css'
 
 const list = [
@@ -79,10 +80,10 @@ const CartItem = ({item, codeHandler, quantityHandler, feature, focusHanlder, bl
                 />
             </TableCell>
             <TableCell align="left" className='!py-6'>
-                {item.price.totalValue ? "€ " + item.price.totalValue: null}
+                {item.price.totalValue ? CurrencyBeforeValue(item.price.totalValue): null}
             </TableCell>
             <TableCell align="left" className='!py-6'>
-                    {item.price.totalValue ? "€ " + Math.trunc(item.price.totalValue * item.quantity * 100) / 100: null}
+                    {item.price.totalValue ? CurrencyBeforeValue(Math.trunc(item.price.totalValue * item.quantity * 100) / 100): null}
             </TableCell>
             <TableCell align="left" className='!py-6' onClick={()=>removeHandler(item.code)}>
                 {
@@ -292,7 +293,7 @@ const MobileContent = () => {
                                         Unit Price
                                     </span><br />
                                     <span className="tex-sm">
-                                        &euro; {item.unitPrice}
+                                        { CurrencyBeforeValue(item.unitPrice) }
                                     </span>
                                 </div>
                                 <div className="pl-6">
@@ -300,7 +301,7 @@ const MobileContent = () => {
                                         Total Price
                                     </span><br />
                                     <span className=" tex-sm">
-                                        &euro; {item.total}
+                                        { CurrencyBeforeValue(item.total) }
                                     </span>
                                 </div>
                                 
