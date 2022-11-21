@@ -14,5 +14,9 @@
 	"lstypkastage": {
 		"tenant": "lstypkastage",
 		"storefront_client_id": "49FOCAc4erxFL3sFoGQbEuPLTgEti6gQ"
+	},
+	"alexteststage": {
+		"tenant": "alexteststage",
+		"storefront_client_id": "eWtt8JddTBoydGywxccYEWDpc8awdLPL"
 	}
 }
