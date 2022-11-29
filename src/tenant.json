@@ -22,5 +22,9 @@
 	"icecatstage": {
 		"tenant": "icecatstage",
 		"storefront_client_id": "2k3m5GelUxOtrL7YCVIZuol76gCAiuMv"
+	},
+	"test333stage": {
+		"tenant": "test333stage",
+		"storefront_client_id": "HQwgrpF3PCF0omALBMChskzyduqAOVg5"
 	}
 }
